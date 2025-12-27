@@ -564,6 +564,7 @@ header {
     transition: all 0.3s ease;
 }
 
+/* NON MI PIACE L'HOVER DELLE ATTIVITA' */
 .activity-item:hover {
     background-color: #CCE2DC;
     transform: scale(1.02); 
@@ -578,9 +579,11 @@ header {
 }
 
 .activity-icon img {
-    width: 80px; /* Regola questa dimensione a tuo piacimento */
+    width: 80px; 
     height: auto;  /* Mantiene le proporzioni originali */
     display: block;
+    mix-blend-mode: multiply; /* Rende il bianco trasparente rispetto allo sfondo sotto */
+    /* RESPIRO HA LO SFONDO TROPPO SCURO NON SO COME RISOLVERE */
 }
 
 .activity-item p {
@@ -618,5 +621,5 @@ header {
 
 .primary-btn:hover,
 .secondary-btn:hover {
-    background: #4d7d72;
+    background: #679882;
 }
