@@ -251,8 +251,6 @@ header {
 -------------------HOME------------------
 ----------------------------------------- */
 
-
-
 /* Contenitore principale per centrare la pagina e definire la larghezza massima */
 .home-page {
     display: flex;
@@ -363,12 +361,18 @@ header {
 /* ---- TIMER CARD (Pomodoro) ---- */
 
 .timer-card {
+    width: 90%;          /* Occupa quasi tutto lo spazio su mobile */
+    max-width: 800px;    /* Impedisce che diventi troppo gigante su PC */
     padding: 0 20px 20px 20px;
     text-align: center;
-    margin-top: 30px;
+    margin: 30px auto;   /* Versione abbreviata per top:30px e auto ai lati */
+    display: flex;       /* Aiuta a gestire i figli */
+    flex-direction: column;
+    align-items: center;
 }
 
 .timer-background {
+    width: 100%; 
     position: relative;
     min-height: 450px; /* Altezza per contenere l'immagine e il timer */
     background-image: url('../img/timer.jpg'); 
@@ -525,12 +529,13 @@ header {
 /* ---- ATTIVITÀ CONSIGLIATE ---- */
 
 .activity-section {
+    /*width: 90%;
+    max-width: 800px; SE NON VUOI CHE SI ALLARGHI*/
     background-color: #ECE7D9; 
     padding: 20px;
     text-align: center;
     border-radius: 10px;
     margin: 30px 20px;
-    margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -542,9 +547,13 @@ header {
 }
 
 .activity-grid {
+    /*width: 90%;
+    max-width: 800px; SE NON VUOI CHE SI ALLARGHI*/
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Due colonne */
     gap: 35px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 25px;
 }
 
