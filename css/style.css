@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,16 +14,6 @@ body {
     justify-content: space-between; /* Spinge header e footer alle estremità */
 }
 
-.header-logo {
-    max-height: 80px; 
-    width: auto;
-    margin-left: 20px; 
-}
-
-/* -------------------------------------- 
----------LOGIN e REGISTRAZIONE-----------
------------------------------------------ */
-
 header {
     width: 100%;
     background-color: #69A297;
@@ -34,6 +23,17 @@ header {
     align-items: center; /* Allineamento verticale (centrato) */
     justify-content: flex-start; /* Allineamento orizzontale (a sinistra, come nell'immagine) */
 }
+
+.header-logo {
+    max-height: 80px; 
+    width: auto;
+    margin-left: 20px; 
+}
+
+
+/* -------------------------------------- 
+---------LOGIN e REGISTRAZIONE-----------
+----------------------------------------- */
 
 .login-page label,
 .register-page label {
@@ -85,7 +85,7 @@ header {
     width: 100%; 
     background-color: #69A297;
     color: white;
-    padding: 18px 0; 
+    padding: 20px 0; 
     text-align: left;
     font-size: 12px;
 }
@@ -185,7 +185,6 @@ header {
 }
 
 
-
 /* -------------------------------------- 
 --------------REGISTRAZIONE--------------
 ----------------------------------------- */
@@ -247,18 +246,17 @@ header {
     text-decoration: underline;
 }
 
+
 /* -------------------------------------- 
 -------------------HOME------------------
 ----------------------------------------- */
 
-/* Contenitore principale per centrare la pagina e definire la larghezza massima */
 .home-page {
     display: flex;
     flex-direction: column;
     justify-content: center; /* centra verticalmente il contenuto */
     flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
     width: 100%;
-    /* max-width: 450px;  UTILE SOLO PER LA PROGETTAZIONE VISIVA POI è DA TOGLIERE */
     min-height: auto;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -276,7 +274,6 @@ header {
 .home-page footer {
     display: flex;
     width: 100%; 
-    /* max-width: 450px; DA TOGLIERE CON maxwidth in home-page*/
     height: auto;
     background-image: url('../img/footer.jpg');
     color: white;
@@ -296,7 +293,7 @@ header {
 }
 
 .home-page .footer-link {
-    color: #CCE2DC; /* Verde chiaro per i link inattivi */
+    color: #CCE2DC;
     text-decoration: none;
     margin-left: 10px;
     margin-bottom: 5px;
@@ -312,15 +309,14 @@ header {
     .home-page footer { 
         background-image: url('../img/footer2.jpg');
         /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
-        background-repeat: repeat !important; 
+        background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
         
         /* Opzionale: assicura che l'immagine mantenga la sua dimensione originale senza stirarsi */
         background-size: auto !important;
-        background-color: #69A297; /* Colore solido per l'header/footer */
     }
 
     .home-page .footer-link {
-        color: #034231; /* Verde chiaro per i link inattivi */
+        color: #034231;
         font-weight: 500;
     }
 
@@ -331,7 +327,7 @@ header {
 }
 
 .home-page .hero-section {
-    background-color: #ECE7D9; /* Sfondo beige chiaro (come l'header) */
+    background-color: #ECE7D9; 
     padding: 20px 20px 0 20px;
     text-align: left;
     margin: 30px 20px 10px 20px;
@@ -341,7 +337,7 @@ header {
 }
 
 .home-page .hero-section:hover {
-    transform: scale(1.02); /* Ingrandisce la sezione del 2% */
+    transform: scale(1.02); 
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
 }
 
@@ -361,12 +357,12 @@ header {
 /* ---- TIMER CARD (Pomodoro) ---- */
 
 .timer-card {
-    width: 90%;          /* Occupa quasi tutto lo spazio su mobile */
-    max-width: 800px;    /* Impedisce che diventi troppo gigante su PC */
+    width: 90%; /* Occupa quasi tutto lo spazio su mobile */
+    max-width: 800px; /* Impedisce che diventi troppo gigante su PC */
     padding: 0 20px 20px 20px;
     text-align: center;
-    margin: 30px auto;   /* Versione abbreviata per top:30px e auto ai lati */
-    display: flex;       /* Aiuta a gestire i figli */
+    margin: 30px auto; /* Versione abbreviata per top:30px e auto ai lati */
+    display: flex; /* Aiuta a gestire i figli */
     flex-direction: column;
     align-items: center;
 }
@@ -405,7 +401,7 @@ header {
     width: 210px;
     height: 200px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.9); /* Sfondo semi-trasparente */
+    background-color: rgba(255, 255, 255, 0.9); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -414,7 +410,7 @@ header {
     overflow: hidden;
 }
 
-#timer-time {
+#timer-time { /* SPECIFICO per l'elemento (selettore di ID) */
     font-size: 3.5em;
     font-weight: 700;
     color: #4D7D72; 
@@ -535,7 +531,7 @@ header {
     padding: 20px;
     text-align: center;
     border-radius: 10px;
-    margin: 30px 20px;
+    margin: 35px 20px 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -575,8 +571,16 @@ header {
 }
 
 .activity-icon {
-    font-size: 2em; /* Per placeholder */
     margin-bottom: 5px;
+    display: flex; /* Centra l'immagine se il div è più grande */
+    justify-content: center;
+    align-items: center;
+}
+
+.activity-icon img {
+    width: 80px; /* Regola questa dimensione a tuo piacimento */
+    height: auto;  /* Mantiene le proporzioni originali */
+    display: block;
 }
 
 .activity-item p {
@@ -606,20 +610,13 @@ header {
     margin: 10px
 }
 
-.primary-btn {
-    background: #5a9185; 
+.primary-btn,
+.secondary-btn {
+    background: #84B59F; 
     color: white;
 }
 
-.primary-btn:hover {
-    background: #4d7d72;
-}
-
-.secondary-btn {
-    background: #5a9185; /* Verde chiaro */
-    color: white; /* Verde scuro */
-}
-
+.primary-btn:hover,
 .secondary-btn:hover {
     background: #4d7d72;
 }
