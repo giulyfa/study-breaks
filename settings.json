@@ -1,0 +1,13 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "redhat.telemetry.enabled": true,
+    "editor.minimap.enabled": false,
+    "terminal.integrated.commandsToSkipShell": [
+        ""
+    ],
+    "jdk.jdkhome": "c:\\Program Files\\Java\\OpenJDK-23",
+    "python.defaultInterpreterPath": "C:\\Users\\giuly\\AppData\\Local\\Microsoft\\WindowsApps\\python3.11.exe",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "files.autoSave": "afterDelay",
+    "php.validate.executablePath": ""
+}

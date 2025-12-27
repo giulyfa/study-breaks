@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Registrazione - Study Breaks</title>
+</head>
+<body>
+    <div class="register-page">
+    <header>
+        <a href="index.html" title="Torna alla Home Page">
+            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+        </a>
+    </header>
+
+    <div class="content">
+            <h2>Registrazione</h2>
+            
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cognome">Cognome</label>
+                    <input type="text" id="cognome" name="cognome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required 
+                           autocomplete="new-password" minlength="8"> 
+                </div>
+                
+                <div class="form-group">
+                    <label for="ripeti_password">Ripeti password</label>
+                    <input type="password" id="ripeti_password" name="ripeti_password" required
+                           autocomplete="new-password" minlength="8">
+                </div>
+                
+                <button type="submit" class="btn">REGISTRATI</button>
+            </form>
+            
+            <div class="login-link">
+                Hai già un account? <a href="login.php">Accedi</a>
+            </div>
+        </div>
+    
+    <footer>
+        <p>© 2025 - Study Breaks. Tutti i diritti riservati.</p>
+    </footer>
+    </div>
+</body>
+</html>

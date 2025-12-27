@@ -1,0 +1,587 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: space-between; /* Spinge header e footer alle estremità */
+}
+
+.header-logo {
+    max-height: 80px; 
+    width: auto;
+    margin-left: 20px; 
+}
+
+
+
+/* -------------------------------------- 
+---------LOGIN e REGISTRAZIONE-----------
+----------------------------------------- */
+
+header {
+    width: 100%;
+    background-color: #69A297;
+    padding: 20px;
+    height: 100px;
+    display: flex;
+    align-items: center; /* Allineamento verticale (centrato) */
+    justify-content: flex-start; /* Allineamento orizzontale (a sinistra, come nell'immagine) */
+    
+}
+
+.login-page label,
+.register-page label {
+    display: block;
+    color: #555;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.login-page input, 
+.register-page input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    background: #f5f3ed;
+}
+
+.login-page input:focus, 
+.register-page input:focus {
+    outline: none;
+    border-color: #7db5a6;
+}
+
+.login-page .btn, 
+.register-page .btn {
+    width: 100%;
+    padding: 14px;
+    background: #5a9185;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 25px;
+}
+
+.login-page .btn:hover,
+.register-page .btn:hover {
+    background: #4d7d72;
+}
+
+.login-page footer,
+.register-page footer {
+    width: 100%; 
+    background-color: #69A297;
+    color: white;
+    padding: 18px 0; 
+    text-align: left;
+    font-size: 12px;
+}
+
+f.login-page p, 
+.register-page p {
+    margin: 0 20px; 
+}
+
+
+/* -------------------------------------- 
+------------------LOGIN------------------
+----------------------------------------- */
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* centra orizzontalmente il div */
+    justify-content: center; /* centra verticalmente il contenuto */
+    flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
+    width: 100%; 
+    padding: 50px 0; 
+}
+
+.login-page .content {
+    flex-grow: 1; /* Permette al contenuto di occupare lo spazio centrale */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.login-page main {
+    max-width: 350px;
+    width: 90%;
+    text-align: center;
+    padding: 10px;
+    margin-top: -40px;
+}
+
+.login-page .user-icon {
+    width: 100px;
+    height: 100px;
+    color: #888; /* Colore grigio per l'icona */
+    margin: 0;
+}
+
+.login-page .user-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: #888; /* Riempi l'icona con il grigio */
+}
+
+.login-page h2 {
+    color: #333;
+    font-weight: 400;
+    font-size: 2em;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.login-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spazio tra i gruppi di form */
+    margin-bottom: 20px;
+}
+
+.login-page .form-group {
+    text-align: left;
+}
+
+.login-page .register-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+.login-page .register-link a {
+    color: #5a9185;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-page .register-link a:hover {
+    text-decoration: underline;
+}
+
+.login-page .tagline {
+    font-family: 'Nothing You Could Do', cursive;
+    text-align: center;
+    color: #5a9185;
+    font-style: italic;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+
+
+/* -------------------------------------- 
+--------------REGISTRAZIONE--------------
+----------------------------------------- */
+
+.register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* centra orizzontalmente il div */
+    justify-content: center; /* centra verticalmente il contenuto */
+    flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
+    width: 100%; 
+    padding: 50px 0; 
+}
+
+.register-page .content {
+    flex-grow: 1; /* Permette al contenuto di occupare lo spazio centrale */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.register-page .content h2 {
+    color: #333;
+    font-weight: 400;
+    font-size: 2em;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.register-page form {
+    max-width: 350px; 
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    margin-bottom: 20px;
+}
+
+.register-page .form-group {
+    text-align: left;
+}
+
+.register-page .login-link {
+    text-align: center;
+    margin-top: 10px;
+    color: #666;
+}
+
+.register-page .login-link a {
+    color: #5a9185;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-page .login-link a:hover {
+    text-decoration: underline;
+}
+
+/* -------------------------------------- 
+-------------------HOME------------------
+----------------------------------------- */
+
+/* Contenitore principale per centrare la pagina e definire la larghezza massima */
+.home-page {
+    width: 100%;
+    max-width: 450px; /* Larghezza tipica per un'app mobile */
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #274c43; 
+    cursor: pointer;
+    padding: 5px;
+}
+
+footer {
+    display: flex;
+    width: 100%; 
+    max-width: 450px; 
+    height: auto;
+    background-image: url('../img/footer.jpg');
+    color: white;
+    padding: 10px 0 20px 0; 
+    bottom: 0;
+    z-index: 10;
+
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column; /* I link sono incolonnati a sinistra */
+    padding: 5px 20px;
+    font-size: 16px;
+}
+
+.footer-link {
+    color: #CCE2DC; /* Verde chiaro per i link inattivi */
+    text-decoration: none;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: white;
+    font-weight: bold;
+}
+
+.hero-section {
+    background-color: #ECE7D9; /* Sfondo beige chiaro (come l'header) */
+    padding: 20px 20px 0 20px;
+    text-align: left;
+    margin: 30px 20px 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-section:hover {
+    transform: scale(1.02); /* Ingrandisce la sezione del 2% */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
+}
+
+.hero-section h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #4D7D72; 
+    margin-bottom: 5px;
+}
+
+.hero-section p {
+    font-size: 0.9em;
+    color: #888;
+    padding-bottom: 20px;
+}
+
+/* ---- TIMER CARD (Pomodoro) ---- */
+
+.timer-card {
+    padding: 0 20px 20px 20px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.timer-background {
+    position: relative;
+    height: 450px; /* Altezza per contenere l'immagine e il timer */
+    background-image: url('../img/timer.jpg'); 
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: space-between; 
+    margin-bottom: 15px;
+}
+
+.settings-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5em;
+    z-index: 10;
+}
+
+.settings-icon a {
+    text-decoration: none;
+    color: white; 
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+}
+
+.timer-circle {
+    width: 210px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9); /* Sfondo semi-trasparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+#timer-time {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: #4D7D72; 
+}
+
+.timer-status-selector {
+    display: flex;
+    justify-content: center;
+    position: absolute; 
+    top: 55%; 
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.mode-btn {
+    background: white;
+    color: #4D7D72; 
+    border: none;
+    padding: 8px 18px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 20px;
+    margin: 0 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.mode-btn:hover {
+    background: #ECE7D9; 
+}
+
+/* CONTROLLI Start/Stop/Restart */
+
+.timer-controls-bottom {
+    display: flex;
+    justify-content: center;
+    width: 260px;
+    position: absolute;
+    align-items: center;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, 220%);
+    background-color: #69A297; 
+    border-radius: 10px;
+    padding: 8px 0;
+    overflow: hidden;
+}
+
+.control-btn {
+    background: none; 
+    color: white;
+    border: none;
+    padding: 5px;
+    flex-grow: 1;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.next-break {
+    font-size: 0.8em;
+    color: #000000;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ---- STATS CONTAINER ---- */
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    margin: auto 20px;
+    gap: 15px;
+}
+
+.stat-box {
+    background-color: #CCE2DC; 
+    color: #4D7D72; 
+    padding: 15px 5px;
+    border-radius: 8px;
+    flex-grow: 1;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+    
+.stat-box:hover {
+    transform: scale(1.02); /* Ingrandisce la sezione del 2% */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.stat-box p {
+    font-size: 0.7em;
+    margin-bottom: 5px;
+}
+
+.stat-number {
+    font-size: 1.5em;
+}
+
+/* ---- ATTIVITÀ CONSIGLIATE ---- */
+
+.activity-section {
+    background-color: #ECE7D9; 
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 30px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.activity-section h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #4D7D72;
+    margin-bottom: 30px;
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Due colonne */
+    gap: 35px;
+    margin-bottom: 25px;
+}
+
+.activity-item {
+    background-color: white;
+    border: 1px solid #C5D6CF;
+    border-radius: 10px;
+    padding: 15px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #4D7D72;
+    transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+    background-color: #CCE2DC;
+    transform: scale(1.02); 
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.activity-icon {
+    font-size: 2em; /* Per placeholder */
+    margin-bottom: 5px;
+}
+
+.activity-item p {
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* ---- PLAYLIST SECTION ---- */
+
+.playlist-section {
+    padding: 0 20px 120px 20px; /* Spazio extra per compensare il footer fisso */
+    text-align: center;
+}
+
+.btn {
+    width: 70%;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 600;
+    text-decoration: none; /* Per i tag <a> come i bottoni in Home */
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 10px
+}
+
+.primary-btn {
+    background: #5a9185; 
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #4d7d72;
+}
+
+.secondary-btn {
+    background: #5a9185; /* Verde chiaro */
+    color: white; /* Verde scuro */
+}
+
+.secondary-btn:hover {
+    background: #4d7d72;
+}
