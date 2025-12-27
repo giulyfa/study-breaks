@@ -8,7 +8,6 @@
 body {
     font-family: 'Quicksand', sans-serif;
     background-color: white;
-    color: black;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -22,8 +21,6 @@ body {
     margin-left: 20px; 
 }
 
-
-
 /* -------------------------------------- 
 ---------LOGIN e REGISTRAZIONE-----------
 ----------------------------------------- */
@@ -36,7 +33,6 @@ header {
     display: flex;
     align-items: center; /* Allineamento verticale (centrato) */
     justify-content: flex-start; /* Allineamento orizzontale (a sinistra, come nell'immagine) */
-    
 }
 
 .login-page label,
@@ -83,8 +79,8 @@ header {
     background: #4d7d72;
 }
 
-.login-page footer,
-.register-page footer {
+.login-footer,
+.register-footer{
     width: 100%; 
     background-color: #69A297;
     color: white;
@@ -93,8 +89,8 @@ header {
     font-size: 12px;
 }
 
-f.login-page p, 
-.register-page p {
+.login-footer p, 
+.register-footer p {
     margin: 0 20px; 
 }
 
@@ -272,7 +268,7 @@ f.login-page p,
     padding: 5px;
 }
 
-footer {
+.home-page footer {
     display: flex;
     width: 100%; 
     max-width: 450px; 
@@ -285,26 +281,26 @@ footer {
 
 }
 
-.footer-links {
+.home-page .footer-links {
     display: flex;
     flex-direction: column; /* I link sono incolonnati a sinistra */
     padding: 5px 20px;
     font-size: 16px;
 }
 
-.footer-link {
+.home-page .footer-link {
     color: #CCE2DC; /* Verde chiaro per i link inattivi */
     text-decoration: none;
     margin-bottom: 5px;
     display: inline-block;
 }
 
-.footer-link:hover {
+.home-page .footer-link:hover {
     color: white;
     font-weight: bold;
 }
 
-.hero-section {
+.home-page .hero-section {
     background-color: #ECE7D9; /* Sfondo beige chiaro (come l'header) */
     padding: 20px 20px 0 20px;
     text-align: left;
@@ -314,19 +310,19 @@ footer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hero-section:hover {
+.home-page .hero-section:hover {
     transform: scale(1.02); /* Ingrandisce la sezione del 2% */
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
 }
 
-.hero-section h1 {
+.home-page .hero-section h1 {
     font-size: 1.5em;
     font-weight: 700;
     color: #4D7D72; 
     margin-bottom: 5px;
 }
 
-.hero-section p {
+.home-page .hero-section p {
     font-size: 0.9em;
     color: #888;
     padding-bottom: 20px;
