@@ -71,7 +71,8 @@ header {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 25px;
+    margin: 25px 0 0 0;
+    font-weight: 400;
 }
 
 .login-page .btn:hover,
