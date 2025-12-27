@@ -120,8 +120,7 @@ header {
 }
 
 .login-page main {
-    max-width: 350px;
-    width: 90%;
+    width: 100%;
     text-align: center;
     padding: 10px;
     margin-top: -40px;
@@ -261,7 +260,7 @@ header {
     justify-content: center; /* centra verticalmente il contenuto */
     flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
     width: 100%;
-    max-width: 450px; /* Larghezza tipica per un'app mobile */
+    /* max-width: 450px;  UTILE SOLO PER LA PROGETTAZIONE VISIVA POI è DA TOGLIERE */
     min-height: auto;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -279,13 +278,15 @@ header {
 .home-page footer {
     display: flex;
     width: 100%; 
-    max-width: 450px; 
+    /* max-width: 450px; DA TOGLIERE CON maxwidth in home-page*/
     height: auto;
     background-image: url('../img/footer.jpg');
     color: white;
     padding: 10px 0 20px 0; 
     bottom: 0;
     z-index: 10;
+    background-size: cover; /* L'immagine si ingrandisce per coprire tutto */
+    background-position: center; /* Resta centrata */
 
 }
 
@@ -299,6 +300,7 @@ header {
 .home-page .footer-link {
     color: #CCE2DC; /* Verde chiaro per i link inattivi */
     text-decoration: none;
+    margin-left: 10px;
     margin-bottom: 5px;
     display: inline-block;
 }
@@ -306,6 +308,28 @@ header {
 .home-page .footer-link:hover {
     color: white;
     font-weight: bold;
+}
+
+@media (min-width: 900px) {
+    .home-page footer { 
+        background-image: url('../img/footer2.jpg');
+        /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
+        background-repeat: repeat !important; 
+        
+        /* Opzionale: assicura che l'immagine mantenga la sua dimensione originale senza stirarsi */
+        background-size: auto !important;
+        background-color: #69A297; /* Colore solido per l'header/footer */
+    }
+
+    .home-page .footer-link {
+        color: #034231; /* Verde chiaro per i link inattivi */
+        font-weight: 500;
+    }
+
+    .home-page .footer-link:hover {
+        color: #034231;
+        font-weight: bold;
+    }
 }
 
 .home-page .hero-section {
