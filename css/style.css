@@ -252,10 +252,17 @@ header {
 -------------------HOME------------------
 ----------------------------------------- */
 
+
+
 /* Contenitore principale per centrare la pagina e definire la larghezza massima */
 .home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centra verticalmente il contenuto */
+    flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
     width: 100%;
     max-width: 450px; /* Larghezza tipica per un'app mobile */
+    min-height: auto;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -339,7 +346,7 @@ header {
 
 .timer-background {
     position: relative;
-    height: 450px; /* Altezza per contenere l'immagine e il timer */
+    min-height: 450px; /* Altezza per contenere l'immagine e il timer */
     background-image: url('../img/timer.jpg'); 
     background-size: cover;
     background-position: center;
@@ -349,7 +356,7 @@ header {
     flex-direction: column; 
     align-items: center;
     justify-content: space-between; 
-    margin-bottom: 15px;
+    padding: 20px;
 }
 
 .settings-icon {
@@ -389,8 +396,9 @@ header {
     display: flex;
     justify-content: center;
     position: absolute; 
-    top: 55%; 
+    top: 65%; 
     left: 50%;
+    z-index: 2;
     transform: translate(-50%, 0);
 }
 
@@ -417,10 +425,10 @@ header {
 .timer-controls-bottom {
     display: flex;
     justify-content: center;
-    width: 260px;
+    min-width: 260px;
     position: absolute;
     align-items: center;
-    top: 50%; 
+    top: 55%; 
     left: 50%;
     transform: translate(-50%, 220%);
     background-color: #69A297; 
