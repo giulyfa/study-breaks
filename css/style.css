@@ -875,6 +875,7 @@ header {
     display: flex;
     align-items: center;
     text-align: left;
+    cursor: pointer;
 }
 
 .activity-page .spotify-icon {
@@ -886,6 +887,7 @@ header {
 }
 
 /* GIULIA DEVI FINIRE LA PARTE SPOTIFY (foto background + media query x computer)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
 
 
 /* -------------------------------------- 
