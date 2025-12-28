@@ -361,7 +361,7 @@ header {
     max-width: 800px; /* Impedisce che diventi troppo gigante su PC */
     padding: 0 20px 20px 20px;
     text-align: center;
-    margin: 30px auto; /* Versione abbreviata per top:30px e auto ai lati */
+    margin: 30px auto 5px auto; /* Versione abbreviata per top:30px e auto ai lati */
     display: flex; /* Aiuta a gestire i figli */
     flex-direction: column;
     align-items: center;
@@ -379,8 +379,14 @@ header {
     display: flex;
     flex-direction: column; 
     align-items: center;
-    justify-content: space-between; 
     padding: 20px;
+}
+
+.timer-background h1 {
+    color: white;
+    font-size: 1.0em;
+    font-weight: 700;
+    margin-bottom: 40px;
 }
 
 .settings-icon {
@@ -406,7 +412,7 @@ header {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    margin-top: 50px;
+    margin-top: 0;
     overflow: hidden;
 }
 
@@ -416,6 +422,7 @@ header {
     color: #4D7D72; 
 }
 
+/* CONTROLLI Studio/Pausa */
 .timer-status-selector {
     display: flex;
     justify-content: center;
@@ -427,16 +434,17 @@ header {
 }
 
 .mode-btn {
+    font-family: 'Quicksand', sans-serif;
     background: white;
     color: #4D7D72; 
     border: none;
     padding: 8px 18px;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     border-radius: 20px;
-    margin: 0 5px;
+    margin: 8px 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -458,16 +466,18 @@ header {
     background-color: #69A297; 
     border-radius: 10px;
     padding: 8px 0;
+    margin-top: 8px;
     overflow: hidden;
 }
 
 .control-btn {
+    font-family: 'Quicksand', sans-serif;
     background: none; 
     color: white;
     border: none;
     padding: 5px;
     flex-grow: 1;
-    font-size: 1.1em;
+    font-size: 1.0em;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -480,7 +490,7 @@ header {
 .next-break {
     font-size: 0.8em;
     color: #000000;
-    margin-top: 10px;
+    margin-top: 20px;
     width: 100%;
     text-align: center;
 }
@@ -491,7 +501,7 @@ header {
     display: flex;
     justify-content: space-around;
     padding: 10px;
-    margin: auto 20px;
+    margin: auto 20px 20px;
     gap: 15px;
 }
 
@@ -536,8 +546,8 @@ header {
 }
 
 .activity-section h2 {
-    font-size: 1.5em;
-    font-weight: 600;
+    font-size: 1.8em;
+    font-weight: 700;
     color: #4D7D72;
     margin-bottom: 30px;
 }
