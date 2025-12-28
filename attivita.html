@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Attività - Study Breaks</title>
+</head>
+<body>
+    <div class="activity-page">
+        <header>
+            <button class="menu-btn">&#9776;</button>
+            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn">Tutte</button>
+            <button class="filter-btn">1 min</button>
+            <button class="filter-btn">2 min</button>
+            <button class="filter-btn">5 min</button>
+        </div>
+
+        <section class="activity-section">
+            <div class="section-header">
+            <h2>Attività</h2>
+            <span class="star-icon">☆</span>
+            </div>
+            <div class="activity-grid">
+                <a href="activity_detail.html?name=Snake" class="activity-item">
+                    <div class="activity-icon"><img src="img/snake.jpg" alt="Snake Icon"></div>
+                    <p>Snake - 5 min</p>
+                </a>
+                
+                <a href="activity_detail.html?name=Quiz" class="activity-item">
+                    <div class="activity-icon"><img src="img/quiz.jpg" alt="Quiz Icon"></div>
+                    <p>Quiz mentale - 3 min</p>
+                </a>
+                
+                <a href="activity_detail.html?name=Yoga" class="activity-item">
+                    <div class="activity-icon"><img src="img/yoga.jpg" alt="Yoga Icon"></div>
+                    <p>Yoga - 5 min</p>
+                </a>
+                
+                <a href="activity_detail.html?name=Respiro" class="activity-item">
+                    <div class="activity-icon"><img src="img/respiro.jpg" alt="Respiro Icon"></div>
+                    <p>Respiro - 2 min</p>
+                </a>
+            </div>
+
+            <div class="suggestion-section">
+                <p>Hai un'idea per una nuova attività?</p>
+                <p class="small-text">Proponi la tua micro-attività e sarà valutata dall'admin</p>
+                <button class="propose-btn">Proponi nuova attività</button>
+                <p class="help">Aiutaci a migliorare!</p>
+            </div>
+        </section>
+
+        <section class="playlist-section">
+            <p class="playlist-intro">Oppure...</p>
+            <h3>Rilassati con una playlist!</h3>
+            
+            <div class="spotify-container">
+                <div class="spotify-card">
+                    <div class="spotify-icon"></div>
+                    <span>Lo-Fi Focus</span>
+                </div>
+                <div class="spotify-card">
+                    <div class="spotify-icon"></div>
+                    <span>Calm Vibes</span>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+                <nav class="footer-links">
+                    <a href="home.php" class="footer-link">Home</a>
+                    <a href="activities.php" class="footer-link">Attività</a>
+                    <a href="playlist.php" class="footer-link">Playlist</a>
+                    <a href="profile.php" class="footer-link">Profilo</a><br>
+                    <a href="about.php" class="footer-link about-link">Chi siamo?</a>
+                </nav>
+        </footer>
+
+    </div>
+</body>
+</html>

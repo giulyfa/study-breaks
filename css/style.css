@@ -30,6 +30,15 @@ header {
     margin-left: 20px; 
 }
 
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #274c43; 
+    cursor: pointer;
+    padding: 5px;
+}
+
 
 /* -------------------------------------- 
 ---------LOGIN e REGISTRAZIONE-----------
@@ -262,16 +271,8 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.menu-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #274c43; 
-    cursor: pointer;
-    padding: 5px;
-}
-
-.home-page footer {
+.home-page footer,
+.activity-page footer {
     display: flex;
     width: 100%; 
     height: auto;
@@ -285,14 +286,16 @@ header {
 
 }
 
-.home-page .footer-links {
+.home-page .footer-links, 
+.activity-page .footer-links {
     display: flex;
     flex-direction: column; /* I link sono incolonnati a sinistra */
     padding: 5px 20px;
     font-size: 16px;
 }
 
-.home-page .footer-link {
+.home-page .footer-link,
+.activity-page .footer-link {
     color: #CCE2DC;
     text-decoration: none;
     margin-left: 10px;
@@ -300,13 +303,15 @@ header {
     display: inline-block;
 }
 
-.home-page .footer-link:hover {
+.home-page .footer-link:hover,
+.activity-page .footer-link:hover {
     color: white;
     font-weight: bold;
 }
 
 @media (min-width: 900px) {
-    .home-page footer { 
+    .home-page footer,
+    .activity-page footer { 
         background-image: url('../img/footer2.jpg');
         /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
         background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
@@ -315,12 +320,14 @@ header {
         background-size: auto !important;
     }
 
-    .home-page .footer-link {
+    .home-page .footer-link,
+    .activity-page .footer-link {
         color: #034231;
         font-weight: 500;
     }
 
-    .home-page .footer-link:hover {
+    .home-page .footer-link:hover,
+    .activity-page .footer-link:hover {
         color: #034231;
         font-weight: bold;
     }
@@ -356,7 +363,7 @@ header {
 
 /* ---- TIMER CARD (Pomodoro) ---- */
 
-.timer-card {
+.home-page .timer-card {
     width: 90%; /* Occupa quasi tutto lo spazio su mobile */
     max-width: 800px; /* Impedisce che diventi troppo gigante su PC */
     padding: 0 20px 20px 20px;
@@ -367,7 +374,7 @@ header {
     align-items: center;
 }
 
-.timer-background {
+.home-page .timer-background {
     width: 100%; 
     position: relative;
     min-height: 450px; /* Altezza per contenere l'immagine e il timer */
@@ -382,14 +389,14 @@ header {
     padding: 20px;
 }
 
-.timer-background h1 {
+.home-page .timer-background h1 {
     color: white;
     font-size: 1.0em;
     font-weight: 700;
     margin-bottom: 40px;
 }
 
-.settings-icon {
+.home-page .settings-icon {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -397,13 +404,13 @@ header {
     z-index: 10;
 }
 
-.settings-icon a {
+.home-page .settings-icon a {
     text-decoration: none;
     color: white; 
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
 }
 
-.timer-circle {
+.home-page .timer-circle {
     width: 210px;
     height: 200px;
     border-radius: 50%;
@@ -423,7 +430,7 @@ header {
 }
 
 /* CONTROLLI Studio/Pausa */
-.timer-status-selector {
+.home-page .timer-status-selector {
     display: flex;
     justify-content: center;
     position: absolute; 
@@ -433,7 +440,7 @@ header {
     transform: translate(-50%, 0);
 }
 
-.mode-btn {
+.home-page .mode-btn {
     font-family: 'Quicksand', sans-serif;
     background: white;
     color: #4D7D72; 
@@ -448,13 +455,13 @@ header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.mode-btn:hover {
+.home-page .mode-btn:hover {
     background: #ECE7D9; 
 }
 
 /* CONTROLLI Start/Stop/Restart */
 
-.timer-controls-bottom {
+.home-page .timer-controls-bottom {
     display: flex;
     justify-content: center;
     min-width: 260px;
@@ -470,7 +477,7 @@ header {
     overflow: hidden;
 }
 
-.control-btn {
+.home-page .control-btn {
     font-family: 'Quicksand', sans-serif;
     background: none; 
     color: white;
@@ -483,11 +490,11 @@ header {
     transition: background-color 0.3s;
 }
 
-.control-btn:hover {
+.home-page .control-btn:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.next-break {
+.home-page .next-break {
     font-size: 0.8em;
     color: #000000;
     margin-top: 20px;
@@ -497,7 +504,7 @@ header {
 
 /* ---- STATS CONTAINER ---- */
 
-.stats-container {
+.home-page .stats-container {
     display: flex;
     justify-content: space-around;
     padding: 10px;
@@ -505,7 +512,7 @@ header {
     gap: 15px;
 }
 
-.stat-box {
+.home-page .stat-box {
     background-color: #CCE2DC; 
     color: #4D7D72; 
     padding: 15px 5px;
@@ -518,23 +525,41 @@ header {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
     
-.stat-box:hover {
+.home-page .stat-box:hover {
     transform: scale(1.02); /* Ingrandisce la sezione del 2% */
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
 }
 
-.stat-box p {
+.home-page .stat-box p {
     font-size: 0.7em;
     margin-bottom: 5px;
 }
 
-.stat-number {
+.home-page .stat-number {
     font-size: 1.5em;
 }
 
 /* ---- ATTIVITÀ CONSIGLIATE ---- */
 
-.activity-section {
+.home-page .activity-section .activity-item {
+    background-color: #4D7D72; /* Arancione per le card piene */
+    border: none;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.home-page .activity-section h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #4D7D72;
+    margin-bottom: 30px;
+}
+
+/* ----------- STILE PER LA SEZIONE ATTIVITA SIA HOME CHE PAGINA ATTIVITA' -------- */ 
+
+.home-page .activity-section,
+.activity-page .activity-section {
     /*width: 90%;
     max-width: 800px; SE NON VUOI CHE SI ALLARGHI*/
     background-color: #ECE7D9; 
@@ -545,14 +570,8 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.activity-section h2 {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #4D7D72;
-    margin-bottom: 30px;
-}
-
-.activity-grid {
+.home-page .activity-grid, 
+.activity-page .activity-grid {
     /*width: 90%;
     max-width: 800px; SE NON VUOI CHE SI ALLARGHI*/
     display: grid;
@@ -563,7 +582,8 @@ header {
     margin-bottom: 25px;
 }
 
-.activity-item {
+.home-page .activity-item,
+.activity-page .activity-item {
     background-color: white;
     border: 1px solid #C5D6CF;
     border-radius: 10px;
@@ -574,41 +594,58 @@ header {
     transition: all 0.3s ease;
 }
 
-/* NON MI PIACE L'HOVER DELLE ATTIVITA' */
-.activity-item:hover {
-    background-color: #CCE2DC;
-    transform: scale(1.02); 
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+.home-page .activity-item:hover,
+.activity-page .activity-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.activity-icon {
+.home-page .activity-icon,
+.activity-page .activity-icon {
     margin-bottom: 5px;
     display: flex; /* Centra l'immagine se il div è più grande */
     justify-content: center;
     align-items: center;
 }
 
-.activity-icon img {
-    width: 80px; 
+.home-page .activity-icon img,
+.activity-page .activity-icon img {
+    width: 80px;
     height: auto;  /* Mantiene le proporzioni originali */
     display: block;
     mix-blend-mode: multiply; /* Rende il bianco trasparente rispetto allo sfondo sotto */
     /* RESPIRO HA LO SFONDO TROPPO SCURO NON SO COME RISOLVERE */
+
 }
 
-.activity-item p {
+.home-page .activity-item p,
+.activity-page .activity-item p {
     font-size: 0.85em;
     font-weight: 500;
+
 }
+
+.home-page .activity-icon,
+.activity-page .activity-icon {
+    width: 100%;          
+    height: 100px;         
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;      
+    background-color: white;
+    border-radius: 10px;
+}
+
 
 /* ---- PLAYLIST SECTION ---- */
 
-.playlist-section {
+.home-page .playlist-section {
     padding: 0 20px 120px 20px; /* Spazio extra per compensare il footer fisso */
     text-align: center;
 }
 
-.btn {
+.home-page .btn {
     width: 70%;
     padding: 14px;
     border: none;
@@ -623,13 +660,248 @@ header {
     margin: 10px
 }
 
-.primary-btn,
-.secondary-btn {
+.home-page .primary-btn,
+.home-page .secondary-btn {
     background: #84B59F; 
     color: white;
 }
 
-.primary-btn:hover,
-.secondary-btn:hover {
+.home-page .primary-btn:hover,
+.home-page .secondary-btn:hover {
     background: #679882;
 }
+
+
+/* -------------------------------------- 
+--------- SEZIONE ATTIVITÀ (Pagina) ------
+----------------------------------------- */
+
+/* --- STILI BASE (Mobile first) --- */
+
+.activity-page {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+/* Limitiamo la larghezza massima dei contenuti per non farli "spalmare" troppo su schermi giganti */
+.activity-page .activity-section, 
+.playlist-section {
+    width: 90%;
+    max-width: 1200px; /* Larghezza massima ideale per desktop */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- MEDIA QUERIES PER TABLET E COMPUTER --- */
+
+/* Schermi medi (Tablet - sopra i 768px) */
+@media (min-width: 768px) {
+    .activity-page .activity-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 colonne su tablet */
+        gap: 20px;
+    }
+    
+    .activity-page .spotify-container {
+        flex-direction: row; /* Le playlist si affiancano */
+        max-width: 100%;
+    }
+    
+    .activity-page .spotify-card {
+        flex: 1;
+    }
+}
+
+@media (min-width: 1024px) {
+    .activity-page .activity-grid,
+    .home-page .activity-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 colonne su computer */
+    }
+
+    /* Layout per la sezione suggerimenti su desktop */
+    .activity-page.suggestion-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .activity-page.propose-btn {
+        width: auto; /* Il bottone non è più a tutta larghezza */
+        padding: 15px 40px;
+    }
+}
+
+/* Filtri MINUTI */
+.activity-page .filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px 0;
+    margin-top: 15px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.activity-page .filter-btn {
+    padding: 10px 28px;
+    border-radius: 20px;
+    border: none;
+    background-color: #D1CEC1; /* Colore neutro come da immagine */
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.activity-page .filter-btn:hover {
+    background-color: #D17A55; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+    .activity-page .filters {
+        gap: 20px; /* Aumentiamo lo spazio tra i filtri su schermi grandi */
+        padding: 20px 0;
+    }
+
+    .activity-page .filter-btn {
+        padding: 10px 40px; /* Bottoni leggermente più grandi e comodi */
+        font-size: 1em;
+    }
+}
+
+@media (min-width: 1024px) {
+    .activity-page .filters {
+        gap: 20px; /* Aumentiamo lo spazio tra i filtri su schermi grandi */
+        padding: 20px 0;
+    }
+
+    .activity-page .filter-btn {
+        padding: 10px 40px; /* Bottoni leggermente più grandi e comodi */
+        font-size: 1em;
+    }
+}
+
+/* TITOLO + STELLA */
+.activity-page .section-header {
+    display: flex;
+    justify-content: center; 
+    position: relative;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.activity-page .section-header h2 {
+    margin: 0;
+    color: #D17A55;
+    font-size: 1.8em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.activity-page .star-icon {
+    position: absolute; /* La stacchiamo dal flusso per non influenzare il titolo */
+    right: 0;                
+    font-size: 1.5rem;
+    color: #4D7D72;
+    cursor: pointer;
+}
+
+.activity-page .activity-section .activity-item {
+    background-color: #D17A55; 
+    border: none;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+/* Sezione Proposta Nuova Attività */
+.activity-page .suggestion-section {
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.activity-page .suggestion-section p {
+    font-weight: 600;
+    color: black;
+    margin-bottom: 8px;
+}
+
+.activity-page .suggestion-section .help {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #D17A55;
+    margin-top: 5px;
+}
+
+.activity-page .suggestion-section .small-text {
+    font-size: 0.8em;
+    font-weight: 400;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.activity-page .propose-btn {
+    background-color: #D17A55;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.activity-page .propose-btn:hover{
+    background-color: #B1553E;
+}
+
+/* -------------------------------------- 
+----------- SEZIONE SPOTIFY -------------
+----------------------------------------- */
+
+.activity-page .playlist-section {
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.activity-page .spotify-container {
+    display: flex;
+    background-color: black;
+    flex-direction: column;
+    gap: 12px;
+    padding: 50px 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto 200px auto; 
+}
+
+.activity-page .spotify-card {
+    background-color: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.activity-page .spotify-icon {
+    width: 28px;
+    height: 28px;
+    background-color: #1DB954; /* Verde Spotify */
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
