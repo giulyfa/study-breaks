@@ -271,7 +271,7 @@ header {
     padding: 5px;
 }
 
-.home-page footer {
+footer {
     display: flex;
     width: 100%; 
     height: auto;
@@ -285,14 +285,14 @@ header {
 
 }
 
-.home-page .footer-links {
+.footer-links {
     display: flex;
     flex-direction: column; /* I link sono incolonnati a sinistra */
     padding: 5px 20px;
     font-size: 16px;
 }
 
-.home-page .footer-link {
+.footer-link {
     color: #CCE2DC;
     text-decoration: none;
     margin-left: 10px;
@@ -300,13 +300,13 @@ header {
     display: inline-block;
 }
 
-.home-page .footer-link:hover {
+.footer-link:hover {
     color: white;
     font-weight: bold;
 }
 
 @media (min-width: 900px) {
-    .home-page footer { 
+    footer { 
         background-image: url('../img/footer2.jpg');
         /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
         background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
@@ -315,12 +315,12 @@ header {
         background-size: auto !important;
     }
 
-    .home-page .footer-link {
+    .footer-link {
         color: #034231;
         font-weight: 500;
     }
 
-    .home-page .footer-link:hover {
+    .footer-link:hover {
         color: #034231;
         font-weight: bold;
     }
@@ -622,4 +622,216 @@ header {
 .primary-btn:hover,
 .secondary-btn:hover {
     background: #679882;
+}
+
+
+/* -------------------------------------- 
+-----------------PROFILO-----------------
+----------------------------------------- */
+
+
+.profile-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.streak-card {
+    background-color: #F2E3C9;
+    border-radius: 15px;
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.streak-big-number {
+    font-size: 3em;
+    font-weight: bold;
+    display: block;
+}
+
+.time-selector {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.time-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    background: #DED9C4;
+    color: white;
+    cursor: pointer;
+}
+
+.time-btn.active {
+    background: #E49A7D;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.stat-card {
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+}
+
+.stat-card.sessioni { background-color: #A8C69F; border: 3px solid #3498DB; }
+.stat-card.attivita { background-color: #8EBAA3; }
+
+.motivation-tag {
+    background: #E49A7D;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.activities-history {
+    /*background-image: url('/img/books-bg.jpg'); aggiungere immagine libri background */
+    background-size: cover;
+    padding: 15px;
+    border-radius: 15px;
+    color: white;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    color: #333;
+    margin: 10px 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    gap: 10px;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    background: #eee;
+    border-radius: 4px;
+}
+
+.progress-bar .fill {
+    height: 100%;
+    background: #E49A7D;
+    border-radius: 4px;
+}
+
+.expand-btn {
+    background: #8EBAA3;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 15px;
+    display: block;
+    margin: 10px auto;
+}
+
+
+/* Contenitore principale con immagine di sfondo */
+.activities-history-container {
+    /*background-image: url('../img/sfondo.jpg'); aggiungere immagine giusta */
+    background-size: cover;
+    background-position: center;
+    background-color: #034231; /*solo temporaneo per dare idea di come sarà*/
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.section-title {
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Riquadro piccolo bianco per ogni attività */
+.activity-row {
+    background-color: rgba(255, 255, 255, 0.95); /* Bianco quasi opaco */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Parte sinistra: Logo e Nome */
+.activity-info-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.activity-mini-logo {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.activity-name {
+    font-size: 0.9em;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Parte destra: Barra e Numero */
+.activity-stats-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+    justify-content: flex-end;
+    max-width: 120px; /* Limita la larghezza della barra */
+}
+
+.progress-bar-container {
+    background-color: #eee;
+    height: 6px;
+    border-radius: 3px;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #E49A7D;
+}
+
+.activity-count {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #555;
+    min-width: 15px;
+    text-align: right;
+}
+
+/* Bottone Espandi */
+.expand-btn {
+    display: block;
+    margin: 15px auto 0;
+    padding: 8px 25px;
+    background-color: #8EBAA3;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85em;
 }

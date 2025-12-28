@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Area Personale - Study Breaks</title>
+</head>
+<body class="profile-body">
+    <header>
+        <button class="menu-btn">&#9776;</button>
+        <span class="header-title">SB - Area Personale</span>
+    </header>
+
+    <main class="profile-container">
+        <section class="streak-card">
+            <div class="streak-content">
+                <h2>Giorni di fila</h2>
+                <span class="streak-big-number">7</span>
+            </div>
+            <img src="img/coffee-glasses.png" alt="Coffee and glasses" class="streak-img">
+        </section>
+
+        <nav class="time-selector">
+            <button class="time-btn active">Oggi</button>
+            <button class="time-btn">Settimana</button>
+            <button class="time-btn">Mese</button>
+        </nav>
+
+        <section class="stats-grid">
+            <div class="stat-card sessioni">
+                <h3>Sessioni</h3>
+                <span class="stat-val">5</span>
+            </div>
+            <div class="stat-card attivita">
+                <h3>Attività</h3>
+                <span class="stat-val">23</span>
+            </div>
+        </section>
+
+        <div class="motivation-tag">Stai andando forte, continua così!</div>
+
+        <section class="activities-history-container">
+            <div class="activities-history-content">
+                <h3 class="section-title">Attività svolte</h3>
+
+                <div class="activity-row">
+                    <div class="activity-info-left">
+                        <img src="img/snake.jpg" alt="Snake" class="activity-mini-logo"> <span class="activity-name">snake</span>
+                    </div>
+                    <div class="activity-stats-right">
+                        <div class="progress-bar-container">
+                            <div class="progress-fill" style="width: 70%;"></div> </div>
+                        <span class="activity-count">4</span> </div>
+                </div>
+
+                <div class="activity-row">
+                    <div class="activity-info-left">
+                        <img src="img/quiz.jpg" alt="Quiz" class="activity-mini-logo"> <span class="activity-name">quiz</span>
+                    </div>
+                    <div class="activity-stats-right">
+                        <div class="progress-bar-container">
+                            <div class="progress-fill" style="width: 90%;"></div>
+                        </div>
+                        <span class="activity-count">9</span>
+                    </div>
+                </div>
+
+                <button class="expand-btn">Espandi</button>
+            </div>
+            </section>
+
+        <section class="weekly-chart">
+            <h3>Attività settimanale</h3>
+            <div class="chart-container" style="position: relative; height:200px; width:100%">
+                <canvas id="myChart"></canvas> <!--il chart va programmato in javascript usando dati presi in php-->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <nav class="footer-links">
+            <a href="home.php" class="footer-link">Home</a>
+            <a href="activities.php" class="footer-link">Attività</a>
+            <a href="playlist.php" class="footer-link">Playlist</a>
+            <a href="profile.php" class="footer-link">Profilo</a><br>
+            <a href="about.php" class="footer-link about-link">Chi siamo?</a>
+        </nav>
+    </footer>
+</body>
+</html>
