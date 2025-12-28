@@ -272,7 +272,8 @@ header {
 }
 
 .home-page footer,
-.activity-page footer {
+.activity-page footer,
+.profile-page footer {
     display: flex;
     width: 100%; 
     height: auto;
@@ -286,7 +287,9 @@ header {
 
 }
 
-.home-page .footer-links {
+.home-page .footer-links,
+.activity-page .footer-links,
+.profile-page .footer-links {
     display: flex;
     flex-direction: column; /* I link sono incolonnati a sinistra */
     padding: 5px 20px;
@@ -294,7 +297,8 @@ header {
 }
 
 .home-page .footer-link,
-.activity-page .footer-link {
+.activity-page .footer-link,
+.profile-page .footer-link {
     color: #CCE2DC;
     text-decoration: none;
     margin-left: 10px;
@@ -302,14 +306,17 @@ header {
     display: inline-block;
 }
 
-.home-page .footer-link:hover {
+.home-page .footer-link:hover,
+.activity-page .footer-link:hover,
+.profile-page .footer-link:hover {
     color: white;
     font-weight: bold;
 }
 
 @media (min-width: 900px) {
     .home-page footer,
-    .activity-page footer { 
+    .activity-page footer,
+    .profile-page footer { 
         background-image: url('../img/footer2.jpg');
         /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
         background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
@@ -319,13 +326,15 @@ header {
     }
 
     .home-page .footer-link,
-    .activity-page .footer-link {
+    .activity-page .footer-link,
+    .profile-page .footer-link {
         color: #034231;
         font-weight: 500;
     }
 
     .home-page .footer-link:hover,
-    .activity-page .footer-link:hover {
+    .activity-page .footer-link:hover,
+    .profile-page .footer-link:hover {
         color: #034231;
         font-weight: bold;
     }
@@ -906,11 +915,8 @@ header {
 --------- SEZIONE ATTIVITÀ (Pagina) ------
 ----------------------------------------- */
 
-/* --- STILI BASE (Mobile first) --- */
-
 .activity-page {
     width: 100%;
-    max-width: 100%;
     padding: 0;
 }
 
@@ -1135,15 +1141,19 @@ header {
     margin-right: 15px;
 }
 
+/* GIULIA DEVI FINIRE LA PARTE SPOTIFY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
 /* -------------------------------------- 
 -----------------PROFILO-----------------
 ----------------------------------------- */
 
+.profile-page {
+    width: 100%;
+}
 
 .profile-container {
-    padding: 20px;
+    padding: 30px;
     width: 100%;
-    max-width: 500px;
 }
 
 .streak-card {

@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Area Personale - Study Breaks</title>
 </head>
-<body class="profile-body">
+<body>
+    <div class="profile-page">
     <header>
-        <button class="menu-btn">&#9776;</button>
-        <span class="header-title">SB - Area Personale</span>
+            <button class="menu-btn">&#9776;</button>
+            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
     </header>
 
     <main class="profile-container">
@@ -78,8 +81,9 @@
                 <canvas id="myChart"></canvas> <!--il chart va programmato in javascript usando dati presi in php-->
             </div>
         </section>
+        
     </main>
-
+    
     <footer>
         <nav class="footer-links">
             <a href="home.php" class="footer-link">Home</a>
@@ -89,5 +93,7 @@
             <a href="about.php" class="footer-link about-link">Chi siamo?</a>
         </nav>
     </footer>
+    </div>
+    
 </body>
 </html>
