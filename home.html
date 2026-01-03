@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Home - Study Breaks</title>
+</head>
+<body>
+    <div class="home-page">
+        <header>
+            <button class="menu-btn">&#9776;</button>
+            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+        </header>
+
+        <main>
+            <section class="hero-section">
+                    <h1>PRENDITI UNA PAUSA INTELLIGENTE</h1>
+                    <p>Micro-attività da 1 a 5 minuti per rigenerare la mente senza perdere la concentrazione</p>
+            </section>
+                
+            <section class="timer-card">
+                <div class="timer-background">
+                    <h1>Timer Pomodoro</h1>
+                    <div class="settings-icon">
+                            <a href="settings.php">⚙️</a>
+                    </div> 
+                    
+                    <div class="timer-circle">
+                        <div id="timer-time">25:00</div>
+                    </div>
+                
+                
+                    <div class="timer-status-selector">
+                        <button class="mode-btn" id="mode-studio">Studio</button>
+                        <button class="mode-btn" id="mode-pausa">Pausa</button>
+                    </div>
+                    
+                    <div class="timer-controls-bottom">
+                        <button id="start-btn" class="control-btn">Start</button>
+                        <button id="stop-btn" class="control-btn">Stop</button>
+                        <button id="restart-btn" class="control-btn">Restart</button>
+                    </div>
+                </div>
+                <p class="next-break">Sessioni di studio oggi: 7</p>
+            </section>
+
+            <section class="stats-container">
+                    <div class="stat-box">
+                        <p>PAUSE</p>
+                        <span class="stat-number">24</span> </div>
+                    <div class="stat-box">
+                        <p>STREAK</p>
+                        <span class="stat-number">7</span> </div>
+                    <div class="stat-box">
+                        <p>ATTIVITÀ</p>
+                        <span class="stat-number">42</span> </div>
+            </section>
+
+            <section class="activity-section">
+                <h2>Attività consigliate</h2>
+                <div class="activity-grid">
+                    <a href="activity_detail.html?name=Snake" class="activity-item">
+                        <div class="activity-icon"><img src="img/snake.jpg" alt="Snake Icon"></div>
+                        <p>Snake - 5 min</p>
+                    </a>
+                    
+                    <a href="activity_detail.html?name=Quiz" class="activity-item">
+                        <div class="activity-icon"><img src="img/quiz.jpg" alt="Quiz Icon"></div>
+                        <p>Quiz mentale - 3 min</p>
+                    </a>
+                    
+                    <a href="activity_detail.html?name=Yoga" class="activity-item">
+                        <div class="activity-icon"><img src="img/yoga.jpg" alt="Yoga Icon"></div>
+                        <p>Yoga - 5 min</p>
+                    </a>
+                    
+                    <a href="activity_detail.html?name=Respiro" class="activity-item">
+                        <div class="activity-icon"><img src="img/respiro.jpg" alt="Respiro Icon"></div>
+                        <p>Respiro - 2 min</p>
+                    </a>
+                </div>
+                <a href="activities.html" class="btn primary-btn">Vai alle attività</a>
+            </section>
+            
+            <section class="playlist-section">
+                 <a href="playlist.html" class="btn secondary-btn">Vai alle Playlist</a>
+            </section>
+        </main>
+        
+        <footer>
+            <nav class="footer-links">
+                <a href="home.php" class="footer-link">Home</a>
+                <a href="activities.php" class="footer-link">Attività</a>
+                <a href="playlist.php" class="footer-link">Playlist</a>
+                <a href="profile.php" class="footer-link">Profilo</a><br>
+                <a href="about.php" class="footer-link about-link">Chi siamo?</a>
+            </nav>
+        </footer>
+        
+    </div> 
+</body>
+</html>

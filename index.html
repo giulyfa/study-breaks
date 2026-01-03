@@ -7,101 +7,55 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Home - Study Breaks</title>
+    <link rel="stylesheet" href="css/style.css"> <title>Login - Study Breaks</title>
 </head>
 <body>
-    <div class="home-page">
-        <header>
-            <button class="menu-btn">&#9776;</button>
+    <header>
+        <a href="home.html" title="Torna alla Home Page">
             <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
-        </header>
+        </a>
+    </header>
 
-        <main>
-            <section class="hero-section">
-                    <h1>PRENDITI UNA PAUSA INTELLIGENTE</h1>
-                    <p>Micro-attività da 1 a 5 minuti per rigenerare la mente senza perdere la concentrazione</p>
-            </section>
-                
-            <section class="timer-card">
-                <div class="timer-background">
-                    <h1>Timer Pomodoro</h1>
-                    <div class="settings-icon">
-                            <a href="settings.php">⚙️</a>
-                    </div> 
-                    
-                    <div class="timer-circle">
-                        <div id="timer-time">25:00</div>
-                    </div>
-                
-                
-                    <div class="timer-status-selector">
-                        <button class="mode-btn" id="mode-studio">Studio</button>
-                        <button class="mode-btn" id="mode-pausa">Pausa</button>
+    <div class="login-page">
+    <main> 
+        <div class="content">
+                <div class="user-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>
+                    </svg>
+                </div>   
+                <h2>Login</h2>
+
+                <form method="POST" action="">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required autocomplete="email">
                     </div>
                     
-                    <div class="timer-controls-bottom">
-                        <button id="start-btn" class="control-btn">Start</button>
-                        <button id="stop-btn" class="control-btn">Stop</button>
-                        <button id="restart-btn" class="control-btn">Restart</button>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
                     </div>
-                </div>
-                <p class="next-break">Sessioni di studio oggi: 7</p>
-            </section>
+                    
 
-            <section class="stats-container">
-                    <div class="stat-box">
-                        <p>PAUSE</p>
-                        <span class="stat-number">24</span> </div>
-                    <div class="stat-box">
-                        <p>STREAK</p>
-                        <span class="stat-number">7</span> </div>
-                    <div class="stat-box">
-                        <p>ATTIVITÀ</p>
-                        <span class="stat-number">42</span> </div>
-            </section>
-
-            <section class="activity-section">
-                <h2>Attività consigliate</h2>
-                <div class="activity-grid">
-                    <a href="activity_detail.html?name=Snake" class="activity-item">
-                        <div class="activity-icon"><img src="img/snake.jpg" alt="Snake Icon"></div>
-                        <p>Snake - 5 min</p>
-                    </a>
-                    
-                    <a href="activity_detail.html?name=Quiz" class="activity-item">
-                        <div class="activity-icon"><img src="img/quiz.jpg" alt="Quiz Icon"></div>
-                        <p>Quiz mentale - 3 min</p>
-                    </a>
-                    
-                    <a href="activity_detail.html?name=Yoga" class="activity-item">
-                        <div class="activity-icon"><img src="img/yoga.jpg" alt="Yoga Icon"></div>
-                        <p>Yoga - 5 min</p>
-                    </a>
-                    
-                    <a href="activity_detail.html?name=Respiro" class="activity-item">
-                        <div class="activity-icon"><img src="img/respiro.jpg" alt="Respiro Icon"></div>
-                        <p>Respiro - 2 min</p>
-                    </a>
-                </div>
-                <a href="activities.html" class="btn primary-btn">Vai alle attività</a>
-            </section>
+                    <button type="submit" class="btn">LOGIN</button>
+                </form>
             
-            <section class="playlist-section">
-                 <a href="playlist.html" class="btn secondary-btn">Vai alle Playlist</a>
-            </section>
-        </main>
+                
+                <div class="register-link">
+                    Non hai un account? <a href="registrazione.php">Registrati</a>
+                </div>
+        </div> 
         
-        <footer>
-            <nav class="footer-links">
-                <a href="home.php" class="footer-link">Home</a>
-                <a href="activities.php" class="footer-link">Attività</a>
-                <a href="playlist.php" class="footer-link">Playlist</a>
-                <a href="profile.php" class="footer-link">Profilo</a><br>
-                <a href="about.php" class="footer-link about-link">Chi siamo?</a>
-            </nav>
-        </footer>
-        
-    </div> 
+        <div class="tagline">
+            non mollare, un passo alla volta!
+        </div>
+    </main> 
+    </div>
+    
+    <div class="login-footer">
+        <p>© 2025 - Study Breaks. Tutti i diritti riservati.</p>
+    </div>
 </body>
 </html>
