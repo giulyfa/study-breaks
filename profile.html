@@ -46,6 +46,7 @@
             </div>
         </div>
 
+        <div class="left-column">
         <section class="activities-history-container">
             <div class="activities-history-content">
                 <h3 class="section-title">Attività svolte</h3>
@@ -74,14 +75,40 @@
 
                 <button class="expand-btn">Espandi</button>
             </div>
-            </section>
-
-        <section class="weekly-chart">
-            <h3>Attività settimanale</h3>
-            <div class="chart-container" style="position: relative; height:200px; width:100%">
-                <canvas id="myChart"></canvas> <!--il chart va programmato in javascript usando dati presi in php-->
-            </div>
         </section>
+
+        <div class="weekly-activity-container">
+            <div class="chart-wrapper">
+                <h3 class="weekly-title">Attività settimanale</h3>
+                <svg class="activity-chart" viewBox="0 0 400 200">
+                    <line x1="10" y1="0" x2="10" y2="180" class="chart-grid-line" />
+                    <line x1="75" y1="0" x2="75" y2="180" class="chart-grid-line" />
+                    <line x1="140" y1="0" x2="140" y2="180" class="chart-grid-line" />
+                    <line x1="205" y1="0" x2="205" y2="180" class="chart-grid-line" />
+                    <line x1="270" y1="0" x2="270" y2="180" class="chart-grid-line" />
+                    <line x1="335" y1="0" x2="335" y2="180" class="chart-grid-line" />
+                    <line x1="390" y1="0" x2="390" y2="180" class="chart-grid-line" />
+
+                    <polyline
+                        fill="none"
+                        stroke="#E49A7D"
+                        stroke-width="3"
+                        points="10,140 75,80 140,120 205,90 270,160 335,145 390,70"
+                    />
+                </svg>
+                
+                <div class="chart-labels">
+                    <span>lun</span>
+                    <span>mar</span>
+                    <span>mer</span>
+                    <span>gio</span>
+                    <span>ven</span>
+                    <span>sab</span>
+                    <span>dom</span>
+                </div>
+            </div>
+        </div>
+        </div>
         
     </main>
     
