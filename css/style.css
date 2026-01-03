@@ -354,7 +354,7 @@ footer {
     padding-bottom: 20px;
 }
 
-/* ---- TIMER CARD (Pomodoro) ---- */
+/* TIMER CARD (Pomodoro)  */
 
 .home-page .timer-card {
     width: 90%; /* Occupa quasi tutto lo spazio su mobile */
@@ -495,7 +495,7 @@ footer {
     text-align: center;
 }
 
-/* ---- STATS CONTAINER ---- */
+/*  STATS CONTAINER */
 
 .home-page .stats-container {
     display: flex;
@@ -532,7 +532,7 @@ footer {
     font-size: 1.5em;
 }
 
-/* ---- ATTIVITÀ CONSIGLIATE ---- */
+/*  ATTIVITÀ CONSIGLIATE  */
 
 .home-page .activity-section .activity-item {
     background-color: #4D7D72; /* Arancione per le card piene */
@@ -549,7 +549,9 @@ footer {
     margin-bottom: 30px;
 }
 
-/* ----------- STILE PER LA SEZIONE ATTIVITA SIA HOME CHE PAGINA ATTIVITA' -------- */ 
+/* ----------------------------------------------------------------------------- 
+----------- STILE PER LA SEZIONE ATTIVITA SIA HOME CHE PAGINA ATTIVITA' -------- 
+-------------------------------------------------------------------------------*/ 
 
 .home-page .activity-section,
 .activity-page .activity-section {
@@ -630,8 +632,7 @@ footer {
     border-radius: 10px;
 }
 
-
-/* ---- PLAYLIST SECTION ---- */
+/* PLAYLIST SECTION  */
 
 .home-page .playlist-section {
     padding: 0 20px 120px 20px; /* Spazio extra per compensare il footer fisso */
@@ -682,9 +683,8 @@ footer {
     margin-bottom: auto;
 }
 
-/* --- PER TABLET E COMPUTER --- */
+/*  PER TABLET E COMPUTER  */
 
-/* 1. CREIAMO IL WRAPPER PER L'AFFIANCAMENTO */
 /* Su mobile i blocchi rimangono uno sotto l'altro */
 .activity-page .content-area {
     display: flex;
@@ -695,7 +695,6 @@ footer {
     gap: 20px;
 }
 
-/* 2. ADATTAMENTO PER DESKTOP (Computer) */
 @media (min-width: 1024px) {
     .activity-page .content-area {
         flex-direction: row; /* affianca i blocchi */
@@ -732,9 +731,7 @@ footer {
 }
 
 
-/* -------------------------------------- 
------------ SEZIONE SPOTIFY -------------
------------------------------------------ */
+/* SEZIONE SPOTIFY  */
 
 .activity-page .spotify-container {
     display: flex;
@@ -757,7 +754,7 @@ footer {
     margin-right: auto;
 }
 
-/* QUA ANDRANNO MESSI LINK X SPOTIFY VERI !!!!! */
+/* ------------------------ QUA ANDRANNO MESSI LINK X SPOTIFY VERI !!!!! */
 .activity-page .spotify-card {
     background-color: #333;
     color: white;
@@ -887,9 +884,6 @@ footer {
     background-color: #B1553E;
 }
 
-/* GIULIA DEVI FINIRE LA PARTE SPOTIFY (foto background + media query x computer)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-
-
 
 /* -------------------------------------- 
 -----------------PROFILO-----------------
@@ -962,7 +956,7 @@ footer {
 .stat-card.sessioni { background-color: #A8C69F; }
 .stat-card.attivita { background-color: #8EBAA3; }
 
-/* --- LAYOUT DESKTOP PER PROFILO --- */
+/*  LAYOUT DESKTOP PER PROFILO  */
 
 @media (min-width: 1024px) {
     .profile-page .content-profile {
