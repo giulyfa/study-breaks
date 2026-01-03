@@ -771,6 +771,7 @@ header {
     margin-right: auto;
 }
 
+/* QUA ANDRANNO MESSI LINK X SPOTIFY VERI !!!!! */
 .activity-page .spotify-card {
     background-color: #333;
     color: white;
@@ -785,7 +786,7 @@ header {
 .activity-page .spotify-icon {
     width: 28px;
     height: 28px;
-    background-color: #1DB954; /* Verde Spotify */
+    background-color: #1DB954; 
     border-radius: 50%;
     margin-right: 15px;
 }
@@ -912,13 +913,15 @@ header {
     width: 100%;
 }
 
-.profile-container {
+.profile-page .profile-container {
     padding: 30px;
     width: 100%;
 }
 
-.streak-card {
-    background-color: #F2E3C9;
+.profile-page .streak-card {
+    background-image: url('../img/streak.jpg');
+    background-size: cover;
+    background-position: center;
     border-radius: 15px;
     display: flex;
     padding: 20px;
@@ -927,19 +930,19 @@ header {
     margin-bottom: 20px;
 }
 
-.streak-big-number {
+.profile-page .streak-big-number {
     font-size: 3em;
     font-weight: bold;
     display: block;
 }
 
-.time-selector {
+.profile-page .time-selector {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.time-btn {
+.profile-page .time-btn {
     flex: 1;
     margin: 0 5px;
     padding: 8px;
@@ -948,40 +951,69 @@ header {
     background: #DED9C4;
     color: white;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.time-btn.active {
+.profile-page .time-btn:hover {
     background: #E49A7D;
 }
 
-.stats-grid {
+.profile-page .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-bottom: 15px;
 }
 
-.stat-card {
+.profile-page .stat-card {
     padding: 20px;
     border-radius: 15px;
     text-align: center;
     color: white;
 }
 
-.stat-card.sessioni { background-color: #A8C69F; border: 3px solid #3498DB; }
+.stat-card.sessioni { background-color: #A8C69F; }
 .stat-card.attivita { background-color: #8EBAA3; }
 
-.motivation-tag {
-    background: #E49A7D;
-    color: white;
-    padding: 5px;
-    border-radius: 10px;
-    font-size: 0.8em;
-    text-align: center;
-    margin-bottom: 25px;
+/* --- LAYOUT DESKTOP PER PROFILO --- */
+
+@media (min-width: 1024px) {
+    .profile-page .content-profile {
+        display: flex;
+        flex-direction: row; /* Allinea in orizzontale */
+        align-items: stretch; /* Fa sì che abbiano la stessa altezza */
+        gap: 25px; /* Spazio tra i due blocchi */
+        padding: 20px; /* Un po' più di respiro su schermi grandi */
+    }
+
+    /* La parte sinistra (Streak) */
+    .profile-page .streak-card {
+        flex: 1;
+        margin-bottom: 0;
+        min-height: 250px; /* Per farla bella grande */
+    }
+
+    /* La parte destra (Filtri + Stats) */
+    .profile-page .stats-column {
+        flex: 1.2; /* Diamo un po' più di spazio alla parte dati */
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Regoliamo i pulsanti per farli stare bene nel blocco */
+    .profile-page .time-selector {
+        justify-content: center; /* Allineati a sinistra nel loro blocco */
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+
+    .profile-page .time-btn {
+        flex: 1; 
+        padding: 8px 20px;
+    }
 }
 
-.activities-history {
+.profile-page.activities-history {
     /*background-image: url('/img/books-bg.jpg'); aggiungere immagine libri background */
     background-size: cover;
     padding: 15px;
@@ -989,7 +1021,7 @@ header {
     color: white;
 }
 
-.history-item {
+.profile-page .history-item {
     display: flex;
     align-items: center;
     background: white;
@@ -1000,20 +1032,20 @@ header {
     gap: 10px;
 }
 
-.progress-bar {
+.profile-page.progress-bar {
     flex-grow: 1;
     height: 8px;
     background: #eee;
     border-radius: 4px;
 }
 
-.progress-bar .fill {
+.profile-page .progress-bar .fill {
     height: 100%;
     background: #E49A7D;
     border-radius: 4px;
 }
 
-.expand-btn {
+.profile-page .expand-btn {
     background: #8EBAA3;
     border: none;
     color: white;
@@ -1025,7 +1057,7 @@ header {
 
 
 /* Contenitore principale con immagine di sfondo */
-.activities-history-container {
+.profile-page .activities-history-container {
     /*background-image: url('../img/sfondo.jpg'); aggiungere immagine giusta */
     background-size: cover;
     background-position: center;
@@ -1036,14 +1068,14 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.section-title {
+.profile-page .section-title {
     color: white;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
 /* Riquadro piccolo bianco per ogni attività */
-.activity-row {
+.profile-page .activity-row {
     background-color: rgba(255, 255, 255, 0.95); /* Bianco quasi opaco */
     border-radius: 8px;
     display: flex;
@@ -1055,26 +1087,26 @@ header {
 }
 
 /* Parte sinistra: Logo e Nome */
-.activity-info-left {
+.profile-page .activity-info-left {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.activity-mini-logo {
+.profile-page .activity-mini-logo {
     width: 25px;
     height: 25px;
     object-fit: contain;
 }
 
-.activity-name {
+.profile-page .activity-name {
     font-size: 0.9em;
     color: #333;
     font-weight: 500;
 }
 
 /* Parte destra: Barra e Numero */
-.activity-stats-right {
+.profile-page .activity-stats-right {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1083,7 +1115,7 @@ header {
     max-width: 120px; /* Limita la larghezza della barra */
 }
 
-.progress-bar-container {
+.profile-page .progress-bar-container {
     background-color: #eee;
     height: 6px;
     border-radius: 3px;
@@ -1091,12 +1123,12 @@ header {
     overflow: hidden;
 }
 
-.progress-fill {
+.profile-page .progress-fill {
     height: 100%;
     background-color: #E49A7D;
 }
 
-.activity-count {
+.profile-page .activity-count {
     font-size: 0.9em;
     font-weight: bold;
     color: #555;
@@ -1105,7 +1137,7 @@ header {
 }
 
 /* Bottone Espandi */
-.expand-btn {
+.profile-page .expand-btn {
     display: block;
     margin: 15px auto 0;
     padding: 8px 25px;
