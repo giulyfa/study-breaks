@@ -693,35 +693,101 @@ header {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: auto;
 }
 
 /* --- PER TABLET E COMPUTER --- */
 
-/* Schermi medi (Tablet - sopra i 768px) */
-@media (min-width: 768px) {
+/* 1. CREIAMO IL WRAPPER PER L'AFFIANCAMENTO */
+/* Su mobile i blocchi rimangono uno sotto l'altro */
+.activity-page .content-area {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* 2. ADATTAMENTO PER DESKTOP (Computer) */
+@media (min-width: 1024px) {
+    .activity-page .content-area {
+        flex-direction: row; /* affianca i blocchi */
+        align-items: flex-start; /* Evita che il box Spotify si allunghi quanto le attività */
+        gap: 40px;
+        padding: 40px 0;
+    }
+
+    /* Le attività prendono più spazio (circa il 65%) */
+    .activity-page .activity-section {
+        flex: 2;
+        margin: 0; /* Rimuoviamo i margini auto perché gestiti dal wrapper */
+        width: 100%;
+    }
+
+    /* La playlist prende meno spazio (circa il 35%) */
+    .activity-page .playlist-section {
+        flex: 1;
+        margin: 0;
+        width: 100%;
+    }
+
+    /* Rendiamo la playlist "Sticky": rimane fissa mentre scorri le attività */
+    .activity-page .playlist-section {
+        position: sticky;
+        top: 20px;
+    }
+
+    /* Modifica della griglia attività: essendo il box più stretto, 
+       meglio stare su 2 o 3 colonne invece di 4 */
     .activity-page .activity-grid {
-        grid-template-columns: repeat(3, 1fr); /* 3 colonne su tablet */
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
-@media (min-width: 1024px) {
-    .activity-page .activity-grid,
-    .home-page .activity-grid {
-        grid-template-columns: repeat(4, 1fr); /* 4 colonne su computer */
-    }
 
-    .activity-page .suggestion-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+/* -------------------------------------- 
+----------- SEZIONE SPOTIFY -------------
+----------------------------------------- */
 
-    .activity-page .propose-btn {
-        width: auto; 
-        padding: 15px 40px;
-    }
+.activity-page .spotify-container {
+    display: flex;
+    background-image: url('../img/spotify1.jpg');
+    background-repeat: no-repeat; /* Blocca la duplicazione */
+    background-size: cover;       /* Ridimensiona l'immagine per coprire tutto lo spazio senza distorcerla */
+    background-position: center;
+    flex-direction: column;
+    gap: 12px;
+    padding: 40px;
+    border-radius: 20px; 
+    width: 100%;
+    max-width: 100%; 
+    margin: 20px auto; 
+}
+
+.activity-page .playlist-section {
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.activity-page .spotify-card {
+    background-color: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    cursor: pointer;
+}
+
+.activity-page .spotify-icon {
+    width: 28px;
+    height: 28px;
+    background-color: #1DB954; /* Verde Spotify */
+    border-radius: 50%;
+    margin-right: 15px;
 }
 
 /* Filtri MINUTI */
@@ -730,7 +796,7 @@ header {
     justify-content: center;
     gap: 15px;
     padding: 15px 0;
-    margin-top: 15px;
+    margin-bottom: 15px;
     width: 100%;
     flex-wrap: wrap;
 }
@@ -739,7 +805,7 @@ header {
     padding: 10px 28px;
     border-radius: 20px;
     border: none;
-    background-color: #D1CEC1; /* Colore neutro come da immagine */
+    background-color: #D1CEC1; 
     color: white;
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
@@ -754,18 +820,6 @@ header {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-@media (min-width: 768px) {
-    .activity-page .filters {
-        gap: 20px; /* Aumentiamo lo spazio tra i filtri su schermi grandi */
-        padding: 20px 0;
-    }
-
-    .activity-page .filter-btn {
-        padding: 10px 40px; /* Bottoni leggermente più grandi e comodi */
-        font-size: 1em;
-    }
-}
-
 /* TITOLO + STELLA */
 .activity-page .section-header {
     display: flex;
@@ -773,7 +827,8 @@ header {
     position: relative;
     align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .activity-page .section-header h2 {
@@ -843,47 +898,6 @@ header {
 
 .activity-page .propose-btn:hover{
     background-color: #B1553E;
-}
-
-/* -------------------------------------- 
------------ SEZIONE SPOTIFY -------------
------------------------------------------ */
-
-.activity-page .playlist-section {
-    color: black;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.activity-page .spotify-container {
-    display: flex;
-    background-color: black;
-    flex-direction: column;
-    gap: 12px;
-    padding: 50px 30px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    margin: 30px auto 200px auto; 
-}
-
-.activity-page .spotify-card {
-    background-color: #333;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    text-align: left;
-    cursor: pointer;
-}
-
-.activity-page .spotify-icon {
-    width: 28px;
-    height: 28px;
-    background-color: #1DB954; /* Verde Spotify */
-    border-radius: 50%;
-    margin-right: 15px;
 }
 
 /* GIULIA DEVI FINIRE LA PARTE SPOTIFY (foto background + media query x computer)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
