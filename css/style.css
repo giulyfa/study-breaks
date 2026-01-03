@@ -1157,12 +1157,16 @@ header {
 .admin-page {
     width: 100%;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .admin-container {
     padding: 20px;
     max-width: 1000px;
     margin: 0 auto;
+    flex-grow: 1;
 }
 
 .admin-header-title {
