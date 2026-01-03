@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>SB - Utenti</title>
+</head>
+<body>
+    <div class="admin-page">
+        <header>
+            <button class="menu-btn">&#9776;</button>
+            <span class="admin-header-title">SB - Utenti</span>
+        </header>
+
+        <main class="admin-container">
+            <section class="admin-intro">
+                <h2>Gestisci utenti</h2>
+                <div class="search-bar">
+                    <input type="text" placeholder="Cerca Utente...">
+                </div>
+            </section>
+
+            <section class="table-container">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Stato</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Eleonora Bianco</td>
+                            <td>eleb@mymail.com</td>
+                            <td><span class="status-badge active">active</span></td>
+                            <td><button class="action-icon">🔒</button></td>
+                        </tr>
+                        <tr>
+                            <td>Cippa Lippa</td>
+                            <td>cippa@studio.unibo.it</td>
+                            <td><span class="status-badge blocked">blocked</span></td>
+                            <td><button class="action-icon">🔓</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer class="admin-footer-bg"></footer>
+    </div>
+</body>
+</html>
