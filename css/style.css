@@ -39,6 +39,61 @@ header {
     padding: 5px;
 }
 
+footer {
+    display: flex;
+    width: 100%; 
+    height: auto;
+    background-image: url('../img/footer.jpg');
+    color: white;
+    padding: 10px 0 20px 0; 
+    bottom: 0;
+    z-index: 10;
+    background-size: cover; /* L'immagine si ingrandisce per coprire tutto */
+    background-position: center; /* Resta centrata */
+
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column; /* I link sono incolonnati a sinistra */
+    padding: 5px 20px;
+    font-size: 16px;
+}
+
+.footer-link{
+    color: #CCE2DC;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: white;
+    font-weight: bold;
+}
+
+@media (min-width: 900px) {
+    footer { 
+        background-image: url('../img/footer2.jpg');
+        /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
+        background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
+        
+        /* Opzionale: assicura che l'immagine mantenga la sua dimensione originale senza stirarsi */
+        background-size: auto !important;
+    }
+
+    .footer-link {
+        color: #034231;
+        font-weight: 500;
+    }
+
+    .footer-link:hover {
+        color: #034231;
+        font-weight: bold;
+    }
+}
+
 
 /* -------------------------------------- 
 ---------LOGIN e REGISTRAZIONE-----------
@@ -269,75 +324,6 @@ header {
     min-height: auto;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.home-page footer,
-.activity-page footer,
-.profile-page footer {
-    display: flex;
-    width: 100%; 
-    height: auto;
-    background-image: url('../img/footer.jpg');
-    color: white;
-    padding: 10px 0 20px 0; 
-    bottom: 0;
-    z-index: 10;
-    background-size: cover; /* L'immagine si ingrandisce per coprire tutto */
-    background-position: center; /* Resta centrata */
-
-}
-
-.home-page .footer-links,
-.activity-page .footer-links,
-.profile-page .footer-links {
-    display: flex;
-    flex-direction: column; /* I link sono incolonnati a sinistra */
-    padding: 5px 20px;
-    font-size: 16px;
-}
-
-.home-page .footer-link,
-.activity-page .footer-link,
-.profile-page .footer-link {
-    color: #CCE2DC;
-    text-decoration: none;
-    margin-left: 10px;
-    margin-bottom: 5px;
-    display: inline-block;
-}
-
-.home-page .footer-link:hover,
-.activity-page .footer-link:hover,
-.profile-page .footer-link:hover {
-    color: white;
-    font-weight: bold;
-}
-
-@media (min-width: 900px) {
-    .home-page footer,
-    .activity-page footer,
-    .profile-page footer { 
-        background-image: url('../img/footer2.jpg');
-        /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
-        background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
-        
-        /* Opzionale: assicura che l'immagine mantenga la sua dimensione originale senza stirarsi */
-        background-size: auto !important;
-    }
-
-    .home-page .footer-link,
-    .activity-page .footer-link,
-    .profile-page .footer-link {
-        color: #034231;
-        font-weight: 500;
-    }
-
-    .home-page .footer-link:hover,
-    .activity-page .footer-link:hover,
-    .profile-page .footer-link:hover {
-        color: #034231;
-        font-weight: bold;
-    }
 }
 
 .home-page .hero-section {
@@ -924,7 +910,7 @@ header {
     background-position: center;
     border-radius: 15px;
     display: flex;
-    padding: 20px;
+    padding: 35px;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
@@ -939,12 +925,13 @@ header {
 .profile-page .time-selector {
     display: flex;
     justify-content: space-between;
+    margin-top: 40px;
     margin-bottom: 20px;
 }
 
 .profile-page .time-btn {
     flex: 1;
-    margin: 0 5px;
+    margin: 8px 5px;
     padding: 8px;
     border-radius: 20px;
     border: none;
@@ -981,16 +968,15 @@ header {
     .profile-page .content-profile {
         display: flex;
         flex-direction: row; /* Allinea in orizzontale */
-        align-items: stretch; /* Fa sì che abbiano la stessa altezza */
-        gap: 25px; /* Spazio tra i due blocchi */
-        padding: 20px; /* Un po' più di respiro su schermi grandi */
+        gap: 25px; 
+        padding: 20px;
     }
 
     /* La parte sinistra (Streak) */
     .profile-page .streak-card {
         flex: 1;
         margin-bottom: 0;
-        min-height: 250px; /* Per farla bella grande */
+        min-height: 220px; 
     }
 
     /* La parte destra (Filtri + Stats) */
@@ -1002,69 +988,25 @@ header {
 
     /* Regoliamo i pulsanti per farli stare bene nel blocco */
     .profile-page .time-selector {
-        justify-content: center; /* Allineati a sinistra nel loro blocco */
+        justify-content: center; 
+        margin-top: 0;
         gap: 10px;
         margin-bottom: 40px;
     }
 
     .profile-page .time-btn {
         flex: 1; 
-        padding: 8px 20px;
+        padding: 8px;
     }
 }
 
-.profile-page.activities-history {
-    /*background-image: url('/img/books-bg.jpg'); aggiungere immagine libri background */
-    background-size: cover;
-    padding: 15px;
-    border-radius: 15px;
-    color: white;
-}
-
-.profile-page .history-item {
-    display: flex;
-    align-items: center;
-    background: white;
-    color: #333;
-    margin: 10px 0;
-    padding: 5px 10px;
-    border-radius: 5px;
-    gap: 10px;
-}
-
-.profile-page.progress-bar {
-    flex-grow: 1;
-    height: 8px;
-    background: #eee;
-    border-radius: 4px;
-}
-
-.profile-page .progress-bar .fill {
-    height: 100%;
-    background: #E49A7D;
-    border-radius: 4px;
-}
-
-.profile-page .expand-btn {
-    background: #8EBAA3;
-    border: none;
-    color: white;
-    padding: 5px 20px;
-    border-radius: 15px;
-    display: block;
-    margin: 10px auto;
-}
-
-
-/* Contenitore principale con immagine di sfondo */
 .profile-page .activities-history-container {
-    /*background-image: url('../img/sfondo.jpg'); aggiungere immagine giusta */
+    background-image: url('../img/libri.jpg');
     background-size: cover;
     background-position: center;
-    background-color: #034231; /*solo temporaneo per dare idea di come sarà*/
     border-radius: 15px;
     padding: 20px;
-    margin: 20px 0;
+    margin: 50px 0;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
@@ -1074,9 +1016,8 @@ header {
     font-weight: 600;
 }
 
-/* Riquadro piccolo bianco per ogni attività */
 .profile-page .activity-row {
-    background-color: rgba(255, 255, 255, 0.95); /* Bianco quasi opaco */
+    background-color: white; 
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -1101,7 +1042,7 @@ header {
 
 .profile-page .activity-name {
     font-size: 0.9em;
-    color: #333;
+    color: #000000;
     font-weight: 500;
 }
 
@@ -1116,7 +1057,7 @@ header {
 }
 
 .profile-page .progress-bar-container {
-    background-color: #eee;
+    background-color: #dcdbdb;
     height: 6px;
     border-radius: 3px;
     flex-grow: 1;
@@ -1138,6 +1079,7 @@ header {
 
 /* Bottone Espandi */
 .profile-page .expand-btn {
+    font-family: 'Quicksand', sans-serif;
     display: block;
     margin: 15px auto 0;
     padding: 8px 25px;
@@ -1147,6 +1089,96 @@ header {
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.85em;
+    transition: all 0.3s ease;
+}
+
+.profile-page .expand-btn:hover {
+    background-color: #679882;
+}
+
+.profile-page .weekly-activity-container {
+    background-image: url('../img/settimana.jpg'); /* Carica l'immagine con le foglie */
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.profile-page .chart-wrapper {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-page .weekly-title {
+    color: #4D7D72; 
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.profile-page .activity-chart {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+}
+
+.profile-page .chart-grid-line {
+    stroke: #eee;
+    stroke-width: 1;
+}
+
+.profile-page .chart-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.profile-page.chart-labels span {
+    font-size: 0.85em;
+    color: #666;
+    flex: 1;
+    text-align: center;
+}
+
+@media (min-width: 680px) {
+    /* La colonna sinistra deve permettere ai figli di stare larghi */
+    .profile-page .left-column {
+        margin-top: 50px;
+        flex: 2; /* Diamo più spazio alla parte sinistra rispetto alle stats di destra */
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+    }
+
+    /* Bilanciamo i due contenitori al 50% ciascuno */
+    .profile-page .activities-history-container,
+    .profile-page .weekly-activity-container {
+        flex: 1;
+        margin: 0; /* Rimuoviamo i margini verticali che avevi prima */
+        width: 50%; /* Forza la divisione equa */
+    }
+
+    /* Piccola correzione per il grafico: essendo il box più stretto, 
+       assicuriamoci che l'SVG non crei overflow */
+    .profile-page .activity-chart {
+        max-width: 100%;
+    }
+}
+
+/* Su mobile rimangono uno sotto l'altro */
+.activities-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 
