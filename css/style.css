@@ -39,6 +39,61 @@ header {
     padding: 5px;
 }
 
+footer {
+    display: flex;
+    width: 100%; 
+    height: auto;
+    background-image: url('../img/footer.jpg');
+    color: white;
+    padding: 10px 0 20px 0; 
+    bottom: 0;
+    z-index: 10;
+    background-size: cover; /* L'immagine si ingrandisce per coprire tutto */
+    background-position: center; /* Resta centrata */
+
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column; /* I link sono incolonnati a sinistra */
+    padding: 5px 20px;
+    font-size: 16px;
+}
+
+.footer-link{
+    color: #CCE2DC;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: white;
+    font-weight: bold;
+}
+
+@media (min-width: 900px) {
+    footer { 
+        background-image: url('../img/footer2.jpg');
+        /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
+        background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
+        
+        /* Opzionale: assicura che l'immagine mantenga la sua dimensione originale senza stirarsi */
+        background-size: auto !important;
+    }
+
+    .footer-link {
+        color: #034231;
+        font-weight: 500;
+    }
+
+    .footer-link:hover {
+        color: #034231;
+        font-weight: bold;
+    }
+}
+
 
 /* -------------------------------------- 
 ---------LOGIN e REGISTRAZIONE-----------
@@ -269,75 +324,6 @@ header {
     min-height: auto;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.home-page footer,
-.activity-page footer,
-.profile-page footer {
-    display: flex;
-    width: 100%; 
-    height: auto;
-    background-image: url('../img/footer.jpg');
-    color: white;
-    padding: 10px 0 20px 0; 
-    bottom: 0;
-    z-index: 10;
-    background-size: cover; /* L'immagine si ingrandisce per coprire tutto */
-    background-position: center; /* Resta centrata */
-
-}
-
-.home-page .footer-links,
-.activity-page .footer-links,
-.profile-page .footer-links {
-    display: flex;
-    flex-direction: column; /* I link sono incolonnati a sinistra */
-    padding: 5px 20px;
-    font-size: 16px;
-}
-
-.home-page .footer-link,
-.activity-page .footer-link,
-.profile-page .footer-link {
-    color: #CCE2DC;
-    text-decoration: none;
-    margin-left: 10px;
-    margin-bottom: 5px;
-    display: inline-block;
-}
-
-.home-page .footer-link:hover,
-.activity-page .footer-link:hover,
-.profile-page .footer-link:hover {
-    color: white;
-    font-weight: bold;
-}
-
-@media (min-width: 900px) {
-    .home-page footer,
-    .activity-page footer,
-    .profile-page footer { 
-        background-image: url('../img/footer2.jpg');
-        /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
-        background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
-        
-        /* Opzionale: assicura che l'immagine mantenga la sua dimensione originale senza stirarsi */
-        background-size: auto !important;
-    }
-
-    .home-page .footer-link,
-    .activity-page .footer-link,
-    .profile-page .footer-link {
-        color: #034231;
-        font-weight: 500;
-    }
-
-    .home-page .footer-link:hover,
-    .activity-page .footer-link:hover,
-    .profile-page .footer-link:hover {
-        color: #034231;
-        font-weight: bold;
-    }
 }
 
 .home-page .hero-section {
