@@ -1371,3 +1371,67 @@ footer {
     font-family: 'Quicksand', sans-serif;
     width: 200px;
 }
+
+/* --- STILI PER LA DASHBOARD ADMIN --- */
+
+.admin-section {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.admin-section h2 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.admin-page .propose-btn {
+    background-color: #D17A55; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.admin-page .propose-btn:hover {
+    background-color: #B1553E;
+    transform: translateY(-2px);
+}
+
+.admin-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px; 
+    margin: 50px auto 0; 
+}
+
+
+.admin-navigation .btn.primary-btn {
+    background: #84B59F; 
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.admin-navigation .btn.primary-btn:hover {
+    background: #679882;
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
