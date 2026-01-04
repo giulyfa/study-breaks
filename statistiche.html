@@ -8,58 +8,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>Statistiche - Study Breaks</title>
+    <title>Statistiche Admin - Study Breaks</title>
 </head>
 <body>
     <div class="admin-page">
         <header>
             <button class="menu-btn">&#9776;</button>
-            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+            <h1 class="page-title-handwritten">SB – Statistiche</h1>
         </header>
 
         <main class="admin-container">
             <section class="admin-intro">
-                <h2 class="section-title-dark">Statistiche attività</h2>
+                <h2>Statistiche generali attività</h2>
             </section>
 
             <nav class="time-selector">
                 <button class="time-btn">Oggi</button>
                 <button class="time-btn">Settimana</button>
-                <button class="time-btn reject">Mese</button> </nav>
+                <button class="time-btn active-stats">Mese</button>
+            </nav>
 
-            <div class="stats-content-wrapper">
+            <div class="stats-grid-layout">
                 
-                <section class="admin-box-stats">
-                    <div class="admin-box-header">
+                <section class="admin-section stats-box">
+                    <div class="stats-header-beige">
                         <h3>Attività più giocate</h3>
                     </div>
-                    <div class="admin-box-body">
-                        <div class="stat-row-item">
-                            <span class="rank">1</span>
-                            <span class="item-name">Quiz</span>
-                            <span class="item-count">147 volte</span>
-                        </div>
-                        </div>
+                    <div class="table-container">
+                        <table class="user-table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>Quiz</td>
+                                    <td style="text-align: right;">147 volte</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>Snake</td>
+                                    <td style="text-align: right;">98 volte</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
-                <section class="admin-box-stats">
-                    <div class="admin-box-header">
+                <section class="admin-section stats-box">
+                    <div class="stats-header-beige">
                         <h3>Playlist più ascoltate</h3>
                     </div>
-                    <div class="admin-box-body">
-                        <div class="stat-row-item">
-                            <span class="rank">1</span>
-                            <span class="item-name">Lo-fi focus</span>
-                            <span class="item-count">50 volte</span>
-                        </div>
-                        </div>
+                    <div class="table-container">
+                        <table class="user-table">
+                            <tbody>
+                                <tr>
+                                    <td><strong>1</strong></td>
+                                    <td>Lo-fi focus</td>
+                                    <td style="text-align: right;">50 volte</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2</strong></td>
+                                    <td>Chill Study</td>
+                                    <td style="text-align: right;">32 volte</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
             </div>
+
+            <section class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
+                <a href="admin_dashboard.html" class="btn primary-btn" style="width: 100%; text-align: center; text-decoration: none;">Torna alla Dashboard</a>
+            </section>
         </main>
 
-        <footer class="footer-simple-green">
-            </footer>
+        <div class="admin-footer-bg">
+            <span>2025 - Study Breaks. Tutti i diritti riservati.</span>
+        </div>
     </div>
 </body>
 </html>
