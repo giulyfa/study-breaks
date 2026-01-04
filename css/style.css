@@ -1454,3 +1454,181 @@ footer {
     transform: scale(1.02);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
+
+
+/* --------------------------------------- 
+------------- PAGINA PROPOSTA ------------
+------------------------------------------ */
+
+.proposal-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.proposal-page .proposal-container {
+    padding: 30px;
+    width: 100%;
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.proposal-page .proposal-banner {
+    background-color: #E49A7D;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.proposal-page .proposal-form {
+    background-color: #E3E0D1; /* Colore beige sabbia dell'immagine */
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 20px;;
+}
+
+.proposal-page .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.proposal-page .form-group label {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Stile base per tutti i campi della pagina proposta */
+.proposal-page .form-group :is(input, select, textarea) {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Quicksand', sans-serif; 
+    color: #a3a3a3;
+    width: 100%;
+}
+
+/* Stato Focus per tutti contemporaneamente */
+.proposal-page .form-group :is(input, select, textarea):focus {
+    outline: none;
+    border: 1.5px solid #69A297;
+}
+
+/* Colore per tutti i placeholder (input e textarea) */
+.proposal-page .form-group :is(input, textarea)::placeholder {
+    color: #a3a3a3;          /* Un grigio più definito o un colore a tua scelta */
+    opacity: 1;           /* Importante: Firefox di default applica opacità ridotta */
+    font-style: italic;   /* Opzionale: per distinguerlo dal testo inserito */
+}
+
+/* Selettore durata */
+.proposal-page .duration-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.proposal-page .dur-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #C4C2B4;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.proposal-page .dur-btn:hover {
+    background-color: #E49A7D;
+}
+
+/* --- AREA INVIO PROPOSTA --- */
+
+/* Il testo di suggerimento (grigio e piccolo) */
+.proposal-page .form-disclaimer {
+    font-size: 0.85em;
+    color: #666;
+    line-height: 1.4;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+/* Il pulsante arancione "Invia proposta" */
+.proposal-page .submit-proposal-btn {
+    width: 100%; /* Occupa tutta la larghezza del form */
+    background-color: #E49A7D; /* Arancione come da immagine */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Effetto al passaggio del mouse (scurisce) */
+.proposal-page .submit-proposal-btn:hover {
+    background-color: #cd7d6a;
+}
+
+/* La nota finale sotto il pulsante */
+.proposal-page .admin-note {
+    font-size: 0.8em;
+    color: #888;
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* --- ADATTAMENTO DESKTOP --- */
+@media (min-width: 1024px) {
+    .proposal-page .submit-proposal-btn {
+        width: auto; /* Non più a tutta larghezza */
+        min-width: 250px;
+        display: block;
+        margin: 0 auto; /* Lo centra se preferisci */
+    }
+}
+
+/* Sezione Esempi */
+.proposal-page .examples-section {
+    background-color: #E3E0D1;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.proposal-page .example-card {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-orange { background-color: #F3C9A1; }
+.card-green { background-color: #F1DEB7; }
+.card-yellow { background-color: #F4ECBE; }
+
+/* LAYOUT DESKTOP */
+@media (min-width: 1024px) {
+    .proposal-content-wrapper {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .form-section { flex: 2; }
+    .examples-section { 
+        flex: 1; 
+        margin-top: 0; 
+    }
+}

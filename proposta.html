@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Proposta - Study Breaks</title>
+</head>
+<body>
+    <div class="proposal-page">
+        <header>
+            <button class="menu-btn">&#9776;</button>
+            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+        </header>
+
+        <main class="proposal-container">
+            <div class="proposal-banner">
+                <h2>Proponi un’attività</h2>
+                <p>Hai una nuova idea innovativa? Proponila!</p>
+            </div>
+
+            <div class="proposal-content-wrapper">
+                <section class="form-section">
+                    <form action="process_proposal.php" method="POST" class="proposal-form">
+                        <div class="form-group">
+                            <label>Titolo dell’Attività</label>
+                            <input type="text" name="titolo" placeholder="Es. Stretching per occhi per chi studia al PC">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tipo di Attività</label>
+                            <select name="tipo">
+                                <option value="" disabled selected>Seleziona un tipo</option>
+                                <option value="gioco">Gioco</option>
+                                <option value="relax">Relax</option>
+                                <option value="fisico">Esercizio Fisico</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Durata (minuti)</label>
+                            <div class="duration-selector">
+                                <button type="button" class="dur-btn">1</button>
+                                <button type="button" class="dur-btn">2</button>
+                                <button type="button" class="dur-btn">3</button>
+                                <button type="button" class="dur-btn">4</button>
+                                <button type="button" class="dur-btn">5</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descrizione breve</label>
+                            <textarea name="descrizione" placeholder="Spiega in poche parole di cosa si tratta"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Dettagli/Istruzioni (opzionale)</label>
+                            <textarea name="istruzioni" placeholder="Aggiungi istruzioni, link o altre informazioni utili"></textarea>
+                        </div>
+
+                        <p class="form-disclaimer">
+                            Suggerimento: Le attività più apprezzate sono semplici e veloci. Pensa a qualcosa che faresti durante una pausa dallo studio!
+                        </p>
+
+                        <button type="submit" class="submit-proposal-btn">Invia proposta</button>
+                        <p class="admin-note">L’admin esaminerà la tua proposta prima di pubblicarla</p>
+                    </form>
+                </section>
+
+                <aside class="examples-section">
+                    <h3 class="example-title">Esempi attività</h3>
+                    
+                    <div class="example-card card-orange">
+                        <img src="img/icon-wrist.png" alt="" class="ex-icon">
+                        <div class="ex-text">
+                            <strong>Rotazione polsi</strong>
+                            <span>2 min – Perfetto per chi scrive molto</span>
+                        </div>
+                    </div>
+
+                    <div class="example-card card-green">
+                        <img src="img/icon-world.png" alt="" class="ex-icon">
+                        <div class="ex-text">
+                            <strong>Quiz capitali del mondo</strong>
+                            <span>5 min – Cultura generale rilassante</span>
+                        </div>
+                    </div>
+
+                    <div class="example-card card-yellow">
+                        <img src="img/icon-color.png" alt="" class="ex-icon">
+                        <div class="ex-text">
+                            <strong>Color match</strong>
+                            <span>2 min – Abbina i colori velocemente</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <footer>
+            <nav class="footer-links">
+                <a href="home.php" class="footer-link">Home</a>
+                <a href="activities.php" class="footer-link">Attività</a>
+                <a href="playlist.php" class="footer-link">Playlist</a>
+                <a href="profile.php" class="footer-link">Profilo</a><br>
+                <a href="about.php" class="footer-link about-link">Chi siamo?</a>
+            </nav>
+        </footer>
+    </div>
+</body>
+</html>
