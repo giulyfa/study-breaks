@@ -19,13 +19,14 @@
         <main class="admin-container">
             <section class="admin-intro">
                 <h2>Gestisci utenti</h2>
-                <div class="search-bar">
-                    <input type="text" placeholder="Cerca Utente...">
-                </div>
             </section>
 
+            <div class="search-bar">
+                    <input type="text" placeholder="Cerca Utente...">
+            </div>
+
             <section class="table-container">
-                <table class="user-table">
+                <table class="user-table user-management-table">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -36,16 +37,16 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Eleonora Bianco</td>
-                            <td>eleb@mymail.com</td>
-                            <td><span class="status-badge active">active</span></td>
-                            <td><button class="action-icon">🔒</button></td>
+                            <td data-label="Nome"><strong>Eleonora Bianco</strong></td>
+                            <td data-label="E-mail">eleb@mymail.com</td>
+                            <td data-label="Stato"><span class="status-badge active">active</span></td>
+                            <td data-label="Azioni"><button class="action-icon">🔒</button></td>
                         </tr>
                         <tr>
-                            <td>Cippa Lippa</td>
-                            <td>cippa@studio.unibo.it</td>
-                            <td><span class="status-badge blocked">blocked</span></td>
-                            <td><button class="action-icon">🔓</button></td>
+                            <td data-label="Nome"><strong>Cippa Lippa</strong></td>
+                            <td data-label="E-mail">cippa@studio.unibo.it</td>
+                            <td data-label="Stato"><span class="status-badge blocked">blocked</span></td>
+                            <td data-label="Azioni"><button class="action-icon">🔓</button></td>
                         </tr>
                     </tbody>
                 </table>

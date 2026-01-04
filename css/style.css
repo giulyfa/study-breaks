@@ -1210,12 +1210,17 @@ footer {
 }
 
 .admin-page .admin-intro {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
     border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.admin-page .search-bar {
+    width: 100%;
+    margin-bottom: 25px; /* Spazio prima della tabella/cards */
+    max-width: 400px;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .admin-page .admin-intro h2,
@@ -1228,17 +1233,19 @@ footer {
 .admin-page .badge-count {
     background-color: #69A297;
     color: white;
-    padding: 8px 15px;
+    padding: 6px 12px;
     border-radius: 8px;
-    font-size: 0.9em;
+    font-size: 0.85em;
     font-weight: bold;
+    margin-bottom: 20px; /* Rimuovi il margine fisso che lo sposta a caso */
+    display: inline-block;
 }
 
 /* Card Approvazione */
 .admin-page .approval-card {
     background-color: #E2DDD1; /* Colore beige come da immagine */
     border-radius: 12px;
-    padding: 25px;
+    padding: 20px 15px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
@@ -1273,8 +1280,9 @@ footer {
 
 .admin-page .approval-footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
     padding-top: 15px;
     border-top: 1px solid rgba(0,0,0,0.1);
 }
@@ -1287,16 +1295,21 @@ footer {
 /* Bottoni Admin */
 .admin-page .action-buttons {
     display: flex;
-    gap: 10px;
+    width: 100%; /* I bottoni prendono tutta la larghezza */
+    justify-content: space-between; /* Li distribuiamo bene */
+    gap: 8px;
 }
 
 .admin-page .admin-btn {
-    padding: 8px 18px;
     border-radius: 6px;
     border: none;
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
     cursor: pointer;
+    flex: 1; /* Forza i bottoni ad avere la stessa grandezza */
+    padding: 12px 5px; /* Più alti per il touch, meno larghi per non uscire */
+    font-size: 0.85em; /* Leggermente più piccolo per farli stare su una riga */
+    text-align: center;
     transition: opacity 0.3s;
 }
 
@@ -1316,13 +1329,15 @@ footer {
     padding: 20px;
 }
 
-.admin-page .user-table {
+.admin-page .user-table,
+.admin-page .user-table-stats {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
 
-.admin-page .user-table th {
+.admin-page .user-table th,
+.admin-page .user-table-stats th {
     padding: 12px;
     border-bottom: 2px solid #C4C4C4;
     color: #555;
@@ -1330,7 +1345,8 @@ footer {
     text-transform: uppercase;
 }
 
-.admin-page .user-table td {
+.admin-page .user-table td,
+.admin-page .user-table-stats td {
     padding: 15px 12px;
     border-bottom: 1px solid #D1CEC1;
     font-size: 0.9em;
@@ -1349,7 +1365,7 @@ footer {
 .admin-page .status-badge.active { background-color: #8EBAA3; }
 .admin-page .status-badge.blocked { background-color: #E49A7D; }
 
-/* Icona Azione (Lucchetto) */
+/* Icona Azione */
 .admin-page .action-icon {
     background: #E2DDD1;
     border: 1px solid #adadad;
@@ -1361,6 +1377,76 @@ footer {
 
 .admin-page .action-icon:hover {
     background: #d1cec1;
+}
+
+@media (max-width: 600px) {
+    /* Nascondi l'intestazione della tabella */
+    .user-table thead {
+        display: none;
+    }
+
+    .user-table, .user-table tbody, .user-table tr, .user-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .user-table tr {
+        background-color: #f5f1ea; /* Beige coerente con le altre pagine */
+        border-radius: 12px;
+        margin-bottom: 15px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .user-table td {
+        border: none;
+        padding: 5px 0;
+        text-align: left;
+        display: flex;
+        justify-content: space-between; /* Mette l'etichetta a sx e il dato a dx */
+        align-items: center;
+    }
+
+    /* Aggiungi etichette invisibili su desktop ma visibili su mobile */
+    .user-table td::before {
+        content: attr(data-label); /* Usa l'attributo data-label che aggiungeremo all'HTML */
+        font-weight: 700;
+        color: #666;
+        font-size: 0.85em;
+        text-transform: uppercase;
+    }
+    
+    .user-table td:first-child {
+        font-size: 1.1em;
+        font-weight: 700;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .user-management-table td:last-child {
+        justify-content: space-between; /* Mantiene lo schema Nome -> Valore */
+    }
+    
+    .admin-dashboard-table td {
+        display: flex;
+        justify-content: flex-start; /* Sposta tutto a sinistra */
+        text-align: left;
+        padding: 8px 0;
+    }
+
+    /* Gestione dei pulsanti azione: allineati a sinistra e vicini */
+    .admin-dashboard-table td:last-child {
+        justify-content: center; 
+        gap: 20px;
+        padding-top: 15px;
+        margin-top: 10px;
+    }
+
+    /* Per il primo elemento (Titolo attività), nascondiamo l'etichetta */
+    .admin-dashboard-table td:first-child::before {
+        display: none;
+    }
 }
 
 /* Footer specifico per admin (fascia verde senza immagine) */
@@ -1463,13 +1549,7 @@ footer {
     text-align: center;
 }
 
-/* Pulizia tabella per le statistiche */
-.stats-box .user-table {
-    background-color: transparent;
-    margin: 0;
-}
-
-.stats-box .user-table td {
+.stats-box .user-table-stats td {
     border-bottom: 1px solid rgba(0,0,0,0.05);
     padding: 12px 20px;
 }
