@@ -1455,6 +1455,50 @@ footer {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
+.time-selector .time-btn {
+    background-color: #C4C2B4; 
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-selector .time-btn:hover {
+    background-color: #E49A7D;
+}
+
+.stats-box {
+    background-color: #E3E0D1; /* Beige della proposta */
+    border-radius: 15px;
+    padding: 0; /* Rimuoviamo il padding per far toccare l'header beige ai bordi */
+    overflow: hidden;
+}
+
+.table-container h3 {
+    color: #69A297; /* Verde scuro della Dashboard */
+    font-size: 1.1em;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #C4C2B4;
+    text-align: center;
+}
+
+/* Pulizia tabella per le statistiche */
+.stats-box .user-table {
+    background-color: transparent;
+    margin: 0;
+}
+
+.stats-box .user-table td {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 12px 20px;
+}
+
 
 /* --------------------------------------- 
 ------------- PAGINA PROPOSTA ------------
