@@ -1203,14 +1203,14 @@ footer {
     flex: 1;
 }
 
-.admin-header-title {
+.admin-page .admin-header-title {
     color: #274c43;
     font-weight: 700;
     font-size: 1.2em;
     margin-left: 15px;
 }
 
-.admin-intro {
+.admin-page .admin-intro {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1219,13 +1219,13 @@ footer {
     border-bottom: 1px solid #eee;
 }
 
-.admin-intro h2 {
+.admin-page .admin-intro h2 {
     font-weight: 600;
     color: #333;
 }
 
 /* Badge Contatore */
-.badge-count {
+.admin-page .badge-count {
     background-color: #69A297;
     color: white;
     padding: 8px 15px;
@@ -1235,7 +1235,7 @@ footer {
 }
 
 /* Card Approvazione */
-.approval-card {
+.admin-page .approval-card {
     background-color: #E2DDD1; /* Colore beige come da immagine */
     border-radius: 12px;
     padding: 25px;
@@ -1243,31 +1243,35 @@ footer {
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.approval-header h3 {
+.admin-page .approval-header h3 {
     font-size: 1.1em;
     color: #333;
     margin-bottom: 5px;
 }
 
-.meta-info {
+.admin-page .meta-info {
     font-size: 0.8em;
     color: #777;
     margin-bottom: 15px;
 }
 
-.approval-body p {
+.admin-page .approval-body p {
     font-size: 0.95em;
     line-height: 1.5;
     color: #444;
     margin-bottom: 15px;
 }
 
-.approval-body a {
+.admin-page .approval-body a {
     color: #69A297;
+    text-decoration: none;
+}
+
+.admin-page .approval-body a:hover {
     text-decoration: underline;
 }
 
-.approval-footer {
+.admin-page .approval-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1275,18 +1279,18 @@ footer {
     border-top: 1px solid rgba(0,0,0,0.1);
 }
 
-.steps-info {
+.admin-page .steps-info {
     font-size: 0.85em;
     color: #666;
 }
 
 /* Bottoni Admin */
-.action-buttons {
+.admin-page .action-buttons {
     display: flex;
     gap: 10px;
 }
 
-.admin-btn {
+.admin-page .admin-btn {
     padding: 8px 18px;
     border-radius: 6px;
     border: none;
@@ -1300,25 +1304,25 @@ footer {
 .admin-btn.reject { background-color: #E49A7D; color: white; }
 .admin-btn.approve { background-color: #8EBAA3; color: white; }
 
-.admin-btn:hover {
-    opacity: 0.8;
+.admin-page .admin-btn:hover {
+    opacity: 0.6;
 }
 
 /* Tabella Utenti */
-.table-container {
+.admin-page .table-container {
     overflow-x: auto;
     background-color: #E2DDD1;
     border-radius: 10px;
     padding: 20px;
 }
 
-.user-table {
+.admin-page .user-table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
 
-.user-table th {
+.admin-page .user-table th {
     padding: 12px;
     border-bottom: 2px solid #C4C4C4;
     color: #555;
@@ -1326,7 +1330,7 @@ footer {
     text-transform: uppercase;
 }
 
-.user-table td {
+.admin-page .user-table td {
     padding: 15px 12px;
     border-bottom: 1px solid #D1CEC1;
     font-size: 0.9em;
@@ -1334,7 +1338,7 @@ footer {
 }
 
 /* Badge di stato */
-.status-badge {
+.admin-page .status-badge {
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8em;
@@ -1342,13 +1346,13 @@ footer {
     color: white;
 }
 
-.status-badge.active { background-color: #8EBAA3; }
-.status-badge.blocked { background-color: #E49A7D; }
+.admin-page .status-badge.active { background-color: #8EBAA3; }
+.admin-page .status-badge.blocked { background-color: #E49A7D; }
 
 /* Icona Azione (Lucchetto) */
-.action-icon {
+.admin-page .action-icon {
     background: white;
-    border: 1px solid #E49A7D;
+    border: 1px solid #adadad;
     padding: 5px 8px;
     border-radius: 5px;
     cursor: pointer;
@@ -1356,7 +1360,7 @@ footer {
 }
 
 /* Footer specifico per admin (fascia verde senza immagine) */
-.admin-footer-bg {
+.admin-page .admin-footer-bg {
     width: 100%;
     height: 100px;
     background-color: #69A297;
@@ -1364,7 +1368,7 @@ footer {
 }
 
 /* Barra di ricerca */
-.search-bar input {
+.admin-page .search-bar input {
     padding: 8px 15px;
     border-radius: 20px;
     border: 1px solid #D1CEC1;
@@ -1372,22 +1376,30 @@ footer {
     width: 200px;
 }
 
+.admin-page .search-bar input:focus {
+    outline: none;
+    border: 1.5px solid #69A297;
+    box-shadow: 0 0 5px rgba(105, 162, 151, 0.5);
+}
+
 /* --- STILI PER LA DASHBOARD ADMIN --- */
 
-.admin-section {
+.admin-page .admin-section {
     width: 100%;
     margin-bottom: 30px;
 }
 
-.admin-section h2 {
-    color: #333;
-    font-weight: 600;
-    margin-bottom: 15px;
-    font-size: 1.4em;
+.admin-page .admin-section h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
 }
 
 .admin-page .propose-btn {
-    background-color: #D17A55; 
+    background-color: #69A297; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -1399,14 +1411,15 @@ footer {
     transition: background-color 0.3s, transform 0.2s;
     display: inline-block;
     text-decoration: none;
+    margin-bottom: 15px;
 }
 
 .admin-page .propose-btn:hover {
-    background-color: #B1553E;
+    background-color: #d38672;
     transform: translateY(-2px);
 }
 
-.admin-navigation {
+.admin-page .admin-navigation {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -1416,21 +1429,22 @@ footer {
 }
 
 
-.admin-navigation .btn.primary-btn {
+.admin-page .admin-navigation .btn.primary-btn {
     background: #84B59F; 
     color: white;
     padding: 16px;
-    border-radius: 12px;
+    border-radius: 20px;
     font-size: 16px;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
+    margin-bottom: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     border: none;
 }
 
-.admin-navigation .btn.primary-btn:hover {
+.admin-page .admin-navigation .btn.primary-btn:hover {
     background: #679882;
     transform: scale(1.02);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
