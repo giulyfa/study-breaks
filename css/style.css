@@ -131,6 +131,7 @@ footer {
 
 .login-page .btn, 
 .register-page .btn {
+    font-family: 'Quicksand', sans-serif;
     width: 100%;
     padding: 14px;
     background: #5a9185;
@@ -960,6 +961,12 @@ footer {
     border-radius: 15px;
     text-align: center;
     color: white;
+    transition: all 0.3s ease;
+}
+
+.profile-page .stat-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card.sessioni { background-color: #A8C69F; }
@@ -1233,7 +1240,7 @@ footer {
 .admin-page .badge-count {
     background-color: #69A297;
     color: white;
-    padding: 6px 12px;
+    padding: 10px 12px;
     border-radius: 8px;
     font-size: 0.85em;
     font-weight: bold;
@@ -1245,7 +1252,7 @@ footer {
 .admin-page .approval-card {
     background-color: #E2DDD1; /* Colore beige come da immagine */
     border-radius: 12px;
-    padding: 20px 15px;
+    padding: 25px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
@@ -1456,6 +1463,7 @@ footer {
     color: white;
     margin-top: 50px;
     padding: 20px;
+    font-size: 12px;
 }
 
 /* Barra di ricerca */
@@ -1577,6 +1585,7 @@ footer {
     background-color: #E49A7D;
     color: white;
     text-align: center;
+    font-size: 0.9em;
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 30px;
@@ -1596,7 +1605,7 @@ footer {
 }
 
 .proposal-page .form-group label {
-    font-weight: 700;
+    font-weight: 600;
     margin-bottom: 8px;
     color: #333;
 }
