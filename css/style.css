@@ -925,14 +925,14 @@ footer {
     display: block;
 }
 
-.profile-page .time-selector {
+.profile-page .time-selector, .admin-page .time-selector {
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
     margin-bottom: 20px;
 }
 
-.profile-page .time-btn {
+.profile-page .time-btn, .admin-page .time-btn {
     font-family: 'Quicksand', sans-serif;
     flex: 1;
     margin: 8px 5px;
@@ -945,7 +945,7 @@ footer {
     transition: all 0.3s ease;
 }
 
-.profile-page .time-btn:hover {
+.profile-page .time-btn:hover , .admin-page .time-btn:hover {
     background: #E49A7D;
 }
 
@@ -991,14 +991,14 @@ footer {
     }
 
     /* Regoliamo i pulsanti per farli stare bene nel blocco */
-    .profile-page .time-selector {
+    .profile-page .time-selector, .admin-page .time-selector {
         justify-content: center; 
         margin-top: 0;
         gap: 10px;
         margin-bottom: 40px;
     }
 
-    .profile-page .time-btn {
+    .profile-page .time-btn, .admin-page .time-btn {
         flex: 1; 
         padding: 8px;
     }
