@@ -573,8 +573,7 @@ footer {
 
 .home-page .activity-grid, 
 .activity-page .activity-grid {
-    /*width: 90%;
-    max-width: 800px; SE NON VUOI CHE SI ALLARGHI*/
+    max-width: 700px; 
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Due colonne */
     gap: 35px;
@@ -612,10 +611,10 @@ footer {
 .home-page .activity-icon img,
 .activity-page .activity-icon img {
     width: 80px;
-    height: auto;  /* Mantiene le proporzioni originali */
+    height: auto;  
+    border-radius: 50%;
     display: block;
-    mix-blend-mode: multiply; /* Rende il bianco trasparente rispetto allo sfondo sotto */
-    /* RESPIRO HA LO SFONDO TROPPO SCURO NON SO COME RISOLVERE */
+    object-fit: cover;  
 
 }
 
@@ -961,14 +960,6 @@ footer {
     font-size: 1.8em;
     font-weight: 700;
     text-align: center;
-}
-
-.activity-page .star-icon {
-    position: absolute; /* La stacchiamo dal flusso per non influenzare il titolo */
-    right: 0;                
-    font-size: 1.5rem;
-    color: #4D7D72;
-    cursor: pointer;
 }
 
 .activity-page .activity-section .activity-item {
