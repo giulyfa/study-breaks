@@ -671,6 +671,140 @@ footer {
     background: #679882;
 }
 
+@media (min-width: 1024px) {
+    /* Sezione superiore con sfondo colorato */
+    .dashboard-top {
+        background: linear-gradient(135deg, #e8f3ee 0%, #dceee5 100%);
+        padding: 60px 40px 80px;
+        width: 100%; /* Full width */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Contenitore interno centrato */
+    .dashboard-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        max-width: 1400px; /* Limita larghezza massima */
+        margin: 0 auto; /* Centra il contenuto */
+    }
+
+    /* Colonna sinistra: Hero + Stats */
+    .dashboard-top-left {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        max-width: 600px;
+    }
+
+    /* Hero section */
+    .home-page .hero-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .home-page .hero-section p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    /* Stats in riga orizzontale */
+    .home-page .stats-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin: 0;
+    }
+
+    .home-page .stat-box {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+
+    .home-page .stat-box p {
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+    .home-page .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+
+    /* Timer nella colonna destra */
+    .home-page .timer-card {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .home-page .activity-section {
+        padding: 80px 40px;
+        width: 100%;
+        max-width: 1200px;
+        margin: 60px auto;
+    }
+
+    .home-page .activity-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        font-weight: 700;
+    }
+
+    .home-page .activity-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        max-width: 1000px;
+        margin: 0 auto 40px;
+    }
+
+    .home-page .activity-item {
+        border-radius: 20px;
+        padding: 24px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .home-page .activity-icon {
+        width: 190px;
+        height: 160px;
+        border-radius: 50%;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    /* Bottone Vai alle attività */
+    .home-page .activity-section .primary-btn {
+        display: block;
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 18px 48px;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+
+    .home-page .playlist-section .secondary-btn {
+        padding: 20px 40px;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+}
+
+
 
 /* -------------------------------------- 
 --------- PAGINA ATTIVITÀ -------- ------
