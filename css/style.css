@@ -1976,3 +1976,45 @@ footer {
         margin-top: 0; 
     }
 }
+
+/* Sovrascrive la larghezza di base per la modale dei giochi */
+.modal-content.game-modal-content {
+    width: 90%;          /* Molto più largo */
+    max-width: 800px;    /* Massimo 800px */
+    height: 85vh;     /* Altezza 85% dello schermo */
+    padding: 0;       /* Rimuovi padding per l'iframe */
+    margin: 5% auto;     /* Centrato verticalmente */
+    display: flex;       /* Per gestire il layout interno */
+    flex-direction: column;
+    overflow: hidden;    /* Evita barre di scorrimento esterne */
+    position: relative;
+    background-color: white; /* Assicura sfondo bianco */
+}
+
+/* Stile per il bottone di chiusura specifico della modale attività */
+.close-btn-activity {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.7); /* Sfondo semitrasparente per vederlo sopra il gioco */
+    padding: 0 10px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+/* Stile per l'iframe che conterrà il gioco */
+#game-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    border-radius: 15px; /* Arrotonda gli angoli dell'iframe */
+}
