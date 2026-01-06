@@ -1,3 +1,12 @@
+<?php
+require_once 'config.php';
+
+// Verifica opzionale se l'utente è loggato (se vuoi proteggere la home)
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -104,27 +113,29 @@
             <section class="activity-section">
                 <h2>Attività consigliate</h2>
                 <div class="activity-grid">
-                    <a href="activity_detail.html?name=Snake" class="activity-item">
-                        <div class="activity-icon"><img src="img/snake.jpg" alt="Snake Icon"></div>
-                        <p>Snake - 5 min</p>
-                    </a>
-                    
-                    <a href="activity_detail.html?name=Quiz" class="activity-item">
-                        <div class="activity-icon"><img src="img/quiz.jpg" alt="Quiz Icon"></div>
-                        <p>Quiz mentale - 3 min</p>
-                    </a>
-                    
-                    <a href="activity_detail.html?name=Yoga" class="activity-item">
-                        <div class="activity-icon"><img src="img/yoga.jpg" alt="Yoga Icon"></div>
-                        <p>Yoga - 5 min</p>
-                    </a>
-                    
-                    <a href="activity_detail.html?name=Respiro" class="activity-item">
-                        <div class="activity-icon"><img src="img/respiro.jpg" alt="Respiro Icon"></div>
-                        <p>Respiro - 2 min</p>
-                    </a>
+                    <?php
+                    $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'active' LIMIT 4");
+
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $imagePath = 'img/' . $row['slug'] . '.jpg';
+                        
+                        if (!file_exists($imagePath)) {
+                            $imagePath = 'img/logo.png';
+                        }
+                    ?>
+
+                        <div class="activity-item" onclick="apriAttivita('<?php echo $row['slug']; ?>')" style="cursor: pointer;">
+                            <div class="activity-icon">
+                                <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
+                            </div>
+                            <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
+                        </div>
+                    <?php 
+                    } 
+                    ?>
                 </div>
-                <a href="activities.html" class="btn primary-btn">Vai alle attività</a>
+                
+                <a href="attivita.php" class="btn primary-btn">Vai alle attività</a>
             </section>
             
             <section class="playlist-section">
@@ -144,5 +155,42 @@
         
     </div> 
     <script src="js/timer.js"></script>
+    <div id="activity-modal" class="modal activity-overlay">
+        <div class="modal-content game-modal-content">
+            <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
+            
+            <iframe id="game-frame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function apriAttivita(slug) {
+            const modal = document.getElementById('activity-modal');
+            const iframe = document.getElementById('game-frame');
+            
+            // Imposta la sorgente dell'iframe su activity_player.php passando lo slug
+            iframe.src = 'activity_player.php?name=' + slug;
+            
+            // Mostra il modale
+            modal.style.display = 'block';
+        }
+
+        // Funzione per chiudere e resettare
+        function chiudiAttivita() {
+            const modal = document.getElementById('activity-modal');
+            const iframe = document.getElementById('game-frame');
+            
+            modal.style.display = 'none';
+            iframe.src = ''; // Questo ferma il gioco immediatamente!
+        }
+
+        // Chiude se si clicca fuori dal box del gioco
+        window.onclick = function(event) {
+            const modal = document.getElementById('activity-modal');
+            if (event.target == modal) {
+                chiudiAttivita();
+            }
+        }
+    </script>
 </body>
 </html>
