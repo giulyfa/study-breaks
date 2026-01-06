@@ -13,9 +13,23 @@
 <body>
     <div class="home-page">
         <header>
-            <button class="menu-btn">&#9776;</button>
-            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+            <button class="menu-btn" id="open-sidebar">&#9776;</button>
+            
+            <a href="home.php" class="logo-link">
+                <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+            </a>
         </header>
+
+        <div id="sidebar-nav" class="sidebar">
+            <button class="close-btn">&times;</button>
+            <div class="sidebar-links">
+                <a href="home.php">Home</a>
+                <a href="attivita.php">Attività</a>
+                <a href="playlist.php">Playlist</a>
+                <a href="profilo.php">Profilo</a>
+                <a href="chi-siamo.php">Chi Siamo</a>
+            </div>
+        </div>
 
         <main>
             <div class="dashboard-top">
@@ -46,8 +60,8 @@
                     <div class="timer-background">
                         <h1>Timer Pomodoro</h1>
                         <div class="settings-icon">
-                            <a href="settings.php">⚙️</a>
-                        </div> 
+                            <button type="button" id="settings-trigger">⚙️</button>
+                        </div>
                         
                         <div class="timer-circle">
                             <div id="timer-time">25:00</div>
@@ -64,7 +78,7 @@
                             <button id="restart-btn" class="control-btn">Restart</button>
                         </div>
                     </div>
-                    <p class="next-break">Sessioni di studio oggi: 7</p>
+                    <p class="next-break">Sessioni di studio oggi: <span id="sessions-count">0</span></p>
                 </section>
                 </div>
             </div>
@@ -111,5 +125,6 @@
         </footer>
         
     </div> 
+    <script src="js/timer.js"></script>
 </body>
 </html>

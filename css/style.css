@@ -99,7 +99,6 @@ footer {
     }
 }
 
-
 /* -------------------------------------- 
 ---------LOGIN e REGISTRAZIONE-----------
 ----------------------------------------- */
@@ -332,6 +331,47 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Nasconde la barra a sinistra */
+    width: 250px;
+    height: 100%;
+    background-color: #4D7D72; /* Il tuo verde scuro */
+    transition: 0.3s ease;
+    z-index: 2000;
+    padding-top: 50px;
+}
+
+/* Quando questa classe viene aggiunta, la barra appare */
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar-links a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.sidebar-links a:hover{
+    color: white;
+    font-weight: bold;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
 .home-page .hero-section {
     background-color: #ECE7D9; 
     padding: 20px 20px 0 20px;
@@ -403,11 +443,27 @@ footer {
     z-index: 10;
 }
 
-.home-page .settings-icon a {
-    text-decoration: none;
-    color: white; 
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+#settings-trigger {
+    background: none;        
+    border: none;            
+    padding: 0;             
+    font-size: 24px;         
+    cursor: pointer;         
+    transition: all 0.3s ease; 
+    outline: none;           
 }
+
+/* Effetto al passaggio del mouse */
+#settings-trigger:hover {
+    transform: rotate(90deg); /* Ruota l'ingranaggio */
+    opacity: 0.7;             /* Lo schiarisce leggermente */
+}
+
+/* Effetto quando viene cliccato */
+#settings-trigger:active {
+    transform: scale(0.9);    /* Si rimpicciolisce un po' (effetto pressione) */
+}
+
 
 .home-page .timer-circle {
     width: 210px;
@@ -457,6 +513,14 @@ footer {
 .home-page .mode-btn:hover {
     background: #ECE7D9; 
 }
+
+#mode-studio.active, 
+#mode-pausa.active {
+    background-color: #ECE7D9; 
+    font-weight: bold !important;
+    border: 2px solid #c5c0b1 !important; 
+}
+
 
 /* CONTROLLI Start/Stop/Restart */
 
