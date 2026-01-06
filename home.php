@@ -43,15 +43,15 @@
                     <section class="stats-container">
                         <div class="stat-box">
                             <p>PAUSE</p>
-                            <span class="stat-number">24</span>
+                            <span class="stat-number" id="pause-count">0</span>
                         </div>
                         <div class="stat-box">
                             <p>STREAK</p>
-                            <span class="stat-number">7</span>
+                            <span class="stat-number">0</span>
                         </div>
                         <div class="stat-box">
                             <p>ATTIVITÀ</p>
-                            <span class="stat-number">42</span>
+                            <span class="stat-number">0</span>
                         </div>
                     </section>
                 </div>

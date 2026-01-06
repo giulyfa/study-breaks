@@ -80,6 +80,13 @@ function handleTimerComplete() {
         btnStudio.classList.remove('active');
     } else {
         // Fine Pausa: pulizia e ritorno allo studio
+        let pauseCountSpan = document.getElementById('pause-count'); 
+        if (pauseCountSpan) {
+            let currentPause = parseInt(pauseCountSpan.textContent) || 0;
+            currentPause++;
+            pauseCountSpan.textContent = currentPause;
+        }
+        
         hideCustomAlert();
         suggestionBox.style.display = "none";
         
