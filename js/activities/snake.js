@@ -162,4 +162,4 @@ function restartGame() {
 
 // AVVIO DEL GIOCO
 // Esegui draw ogni 100ms
-game = setInterval(draw, 100);
+game = setInterval(draw, 190);
