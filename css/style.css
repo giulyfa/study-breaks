@@ -99,6 +99,23 @@ footer {
     }
 }
 
+.alert-toast {
+    display: none; /* Nascosto di base */
+    width: 100%;
+    background-color: #4D7D72; /* Il tuo verde */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    position: relative; /* Non copre l'header, sta sotto */
+    z-index: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert-toast.show {
+    display: block; /* Resta visibile finché non cambiamo modalità */
+}
+
 /* -------------------------------------- 
 ---------LOGIN e REGISTRAZIONE-----------
 ----------------------------------------- */

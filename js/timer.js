@@ -6,7 +6,7 @@ let timerId = null;
 let isRunning = false;
 let currentMode = 'studio'; 
 
-// Elementi del DOM - Timer
+// Elementi DOM - Timer
 const timerDisplay = document.getElementById('timer-time');
 const startBtn = document.getElementById('start-btn');
 const stopBtn = document.getElementById('stop-btn');
@@ -14,19 +14,33 @@ const restartBtn = document.getElementById('restart-btn');
 const btnStudio = document.getElementById('mode-studio');
 const btnPausa = document.getElementById('mode-pausa');
 
-// Elementi del DOM - Navigazione
+// Elementi DOM - Navigazione & Banner Persistente
 const openSidebar = document.getElementById('open-sidebar');
 const closeSidebar = document.querySelector('.close-btn');
 const sidebar = document.getElementById('sidebar-nav');
+const customAlert = document.getElementById('custom-alert');
+const alertMessage = document.getElementById('alert-message');
 
-// Elementi del DOM - Modal Impostazioni
+// Elementi DOM - Modal & Suggerimenti
 const settingsBtn = document.getElementById('settings-trigger');
 const modal = document.getElementById('custom-modal');
 const inputMins = document.getElementById('new-minutes');
 const saveModalBtn = document.getElementById('save-modal');
 const closeModalBtn = document.getElementById('close-modal');
+const suggestionBox = document.getElementById('suggestion-message');
 
-// --- 2. FUNZIONI DI GESTIONE TIMER ---
+// --- 2. FUNZIONI DI SERVIZIO ---
+
+// Mostra il banner sotto l'header (rimane visibile finché non viene rimosso)
+function showCustomAlert(message) {
+    alertMessage.textContent = message;
+    customAlert.classList.add('show');
+}
+
+// Nasconde il banner
+function hideCustomAlert() {
+    customAlert.classList.remove('show');
+}
 
 function setTimer(minutes) {
     clearInterval(timerId);
@@ -41,13 +55,52 @@ function updateDisplay() {
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// --- 3. SELEZIONE MODALITÀ ---
+// --- 3. LOGICA DI FINE SESSIONE (CICLO AUTOMATICO) ---
+
+function handleTimerComplete() {
+    if (currentMode === 'studio') {
+        // Aggiorna contatore sessioni
+        hideCustomAlert();
+        let sessionsCountSpan = document.getElementById('sessions-count'); 
+        let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
+        currentSessions++;
+        sessionsCountSpan.textContent = currentSessions;
+
+        // Banner persistente per la pausa
+        showCustomAlert("SESSIONE COMPLETATA! Prenditi una pausa");
+        
+        // Suggerimento sopra i giochini
+        suggestionBox.textContent = "Ottimo lavoro! Che ne pensi di un giochino per svagarti?";
+        suggestionBox.style.display = "block";
+
+        // Switch automatico a Pausa
+        currentMode = 'pausa';
+        setTimer(pausaMinutes);
+        btnPausa.classList.add('active');
+        btnStudio.classList.remove('active');
+    } else {
+        // Fine Pausa: pulizia e ritorno allo studio
+        hideCustomAlert();
+        suggestionBox.style.display = "none";
+        
+        showCustomAlert("LA PAUSA È FINITA! Si ricomincia con lo studio.");
+        
+        currentMode = 'studio';
+        setTimer(studioMinutes);
+        btnStudio.classList.add('active');
+        btnPausa.classList.remove('active');
+    }
+}
+
+// --- 4. GESTIONE EVENTI (TIMER & MODALITÀ) ---
 
 btnStudio.addEventListener('click', () => {
     currentMode = 'studio';
     setTimer(studioMinutes);
     btnStudio.classList.add('active');
     btnPausa.classList.remove('active');
+    suggestionBox.style.display = "none";
+    hideCustomAlert();
 });
 
 btnPausa.addEventListener('click', () => {
@@ -55,13 +108,13 @@ btnPausa.addEventListener('click', () => {
     setTimer(pausaMinutes);
     btnPausa.classList.add('active');
     btnStudio.classList.remove('active');
+    hideCustomAlert();
 });
-
-// --- 4. CONTROLLI TIMER ---
 
 startBtn.addEventListener('click', () => {
     if (isRunning) return;
     isRunning = true;
+    hideCustomAlert(); // Rimuove eventuali avvisi quando il timer parte
     timerId = setInterval(() => {
         timeLeft--;
         updateDisplay();
@@ -80,63 +133,21 @@ stopBtn.addEventListener('click', () => {
 
 restartBtn.addEventListener('click', () => {
     setTimer(currentMode === 'studio' ? studioMinutes : pausaMinutes);
+    hideCustomAlert();
 });
 
-function handleTimerComplete() {
-    const suggestionBox = document.getElementById('suggestion-message');
-    
-    if (currentMode === 'studio') {
-        // 1. Aumenta le sessioni
-        let sessionsCountSpan = document.getElementById('sessions-count'); 
-        let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
-        currentSessions++;
-        sessionsCountSpan.textContent = currentSessions;
-
-        // 2. Prepara il messaggio per i giochini
-        suggestionBox.textContent = "Ottimo lavoro! Che ne pensi di un giochino per svagarti?";
-        suggestionBox.style.display = "block";
-
-        // 3. CAMBIO AUTOMATICO A PAUSA
-        currentMode = 'pausa';
-        setTimer(pausaMinutes);
-        btnPausa.classList.add('active');
-        btnStudio.classList.remove('active');
-        
-        alert("Sessione di studio finita! Passiamo alla pausa?");
-        
-    } else {
-        // 1. Nascondi il messaggio dei giochini (si torna a studiare)
-        suggestionBox.style.display = "none";
-
-        // 2. CAMBIO AUTOMATICO A STUDIO
-        currentMode = 'studio';
-        setTimer(studioMinutes);
-        btnStudio.classList.add('active');
-        btnPausa.classList.remove('active');
-        
-        alert("Pausa finita! Pronto a rimetterti al lavoro?");
-    }
-}
-
-// --- 5. NAVIGAZIONE SIDEBAR ---
+// --- 5. SIDEBAR & MODAL ---
 
 if (openSidebar) {
-    openSidebar.addEventListener('click', () => {
-        sidebar.classList.add('open');
-    });
+    openSidebar.addEventListener('click', () => sidebar.classList.add('open'));
 }
-
 if (closeSidebar) {
-    closeSidebar.addEventListener('click', () => {
-        sidebar.classList.remove('open');
-    });
+    closeSidebar.addEventListener('click', () => sidebar.classList.remove('open'));
 }
-
-// --- 6. MODAL IMPOSTAZIONI (SOSTITUISCE IL PROMPT) ---
 
 if (settingsBtn) {
     settingsBtn.addEventListener('click', () => {
-        modal.style.display = "block"; // Apre la modal
+        modal.style.display = "block";
         inputMins.value = (currentMode === 'studio') ? studioMinutes : pausaMinutes;
     });
 }
@@ -145,33 +156,26 @@ if (saveModalBtn) {
     saveModalBtn.addEventListener('click', () => {
         const val = parseInt(inputMins.value);
         if (val > 0) {
-            if (currentMode === 'studio') {
-                studioMinutes = val;
-            } else {
-                pausaMinutes = val;
-            }
+            if (currentMode === 'studio') studioMinutes = val;
+            else pausaMinutes = val;
             if (!isRunning) setTimer(val);
             modal.style.display = "none";
         } else {
-            alert("Inserisci un numero valido!");
+            showCustomAlert("Inserisci un numero valido!");
+            setTimeout(hideCustomAlert, 3000);
         }
     });
 }
 
 if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', () => {
-        modal.style.display = "none";
-    });
+    closeModalBtn.addEventListener('click', () => modal.style.display = "none");
 }
 
-// Chiude la modal cliccando fuori dal contenuto
-window.addEventListener('click', (event) => {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+window.addEventListener('click', (e) => {
+    if (e.target == modal) modal.style.display = "none";
 });
 
-// --- 7. AVVIO INIZIALE ---
+// --- 6. AVVIO ---
 document.addEventListener('DOMContentLoaded', () => {
     setTimer(25);
     if (btnStudio) btnStudio.classList.add('active');

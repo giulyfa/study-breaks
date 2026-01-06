@@ -56,6 +56,10 @@
                     </section>
                 </div>
 
+                <div id="custom-alert" class="alert-toast">
+                    <span id="alert-message"></span>
+                </div>
+
                 <section class="timer-card">
                     <div class="timer-background">
                         <h1>Timer Pomodoro</h1>
@@ -95,7 +99,7 @@
                 </div>
             </div>
 
-            <div id="suggestion-message" style="display: none; font-size: 700; text-align: center; margin: 20px; font-weight: bold; color: #4D7D72;"></div>
+            <div id="suggestion-message" style="display: none; font-size: 700; text-align: center; margin: 0 20px 20px 20px; font-weight: bold; color: #E49A7D;"></div>
 
             <section class="activity-section">
                 <h2>Attività consigliate</h2>
