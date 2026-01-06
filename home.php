@@ -95,6 +95,8 @@
                 </div>
             </div>
 
+            <div id="suggestion-message" style="display: none; font-size: 700; text-align: center; margin: 20px; font-weight: bold; color: #4D7D72;"></div>
+
             <section class="activity-section">
                 <h2>Attività consigliate</h2>
                 <div class="activity-grid">

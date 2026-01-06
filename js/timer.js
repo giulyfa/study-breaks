@@ -83,12 +83,38 @@ restartBtn.addEventListener('click', () => {
 });
 
 function handleTimerComplete() {
-    alert("Sessione completata! Ottimo lavoro.");
-    const sessionsCountSpan = document.getElementById('sessions-count'); 
+    const suggestionBox = document.getElementById('suggestion-message');
+    
     if (currentMode === 'studio') {
+        // 1. Aumenta le sessioni
+        let sessionsCountSpan = document.getElementById('sessions-count'); 
         let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
         currentSessions++;
         sessionsCountSpan.textContent = currentSessions;
+
+        // 2. Prepara il messaggio per i giochini
+        suggestionBox.textContent = "Ottimo lavoro! Che ne pensi di un giochino per svagarti?";
+        suggestionBox.style.display = "block";
+
+        // 3. CAMBIO AUTOMATICO A PAUSA
+        currentMode = 'pausa';
+        setTimer(pausaMinutes);
+        btnPausa.classList.add('active');
+        btnStudio.classList.remove('active');
+        
+        alert("Sessione di studio finita! Passiamo alla pausa?");
+        
+    } else {
+        // 1. Nascondi il messaggio dei giochini (si torna a studiare)
+        suggestionBox.style.display = "none";
+
+        // 2. CAMBIO AUTOMATICO A STUDIO
+        currentMode = 'studio';
+        setTimer(studioMinutes);
+        btnStudio.classList.add('active');
+        btnPausa.classList.remove('active');
+        
+        alert("Pausa finita! Pronto a rimetterti al lavoro?");
     }
 }
 
