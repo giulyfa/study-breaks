@@ -6,34 +6,27 @@ let timerId = null;
 let isRunning = false;
 let currentMode = 'studio'; 
 
-// Elementi del DOM
+// Elementi del DOM - Timer
 const timerDisplay = document.getElementById('timer-time');
 const startBtn = document.getElementById('start-btn');
 const stopBtn = document.getElementById('stop-btn');
 const restartBtn = document.getElementById('restart-btn');
-const settingsBtn = document.getElementById('settings-trigger');
 const btnStudio = document.getElementById('mode-studio');
 const btnPausa = document.getElementById('mode-pausa');
+
+// Elementi del DOM - Navigazione
 const openSidebar = document.getElementById('open-sidebar');
 const closeSidebar = document.querySelector('.close-btn');
 const sidebar = document.getElementById('sidebar-nav');
 
-if (openSidebar) {
-    openSidebar.addEventListener('click', () => {
-        sidebar.classList.add('open'); // Aggiunge la classe che la sposta a sinistra: 0
-    });
-}
+// Elementi del DOM - Modal Impostazioni
+const settingsBtn = document.getElementById('settings-trigger');
+const modal = document.getElementById('custom-modal');
+const inputMins = document.getElementById('new-minutes');
+const saveModalBtn = document.getElementById('save-modal');
+const closeModalBtn = document.getElementById('close-modal');
 
-if (closeSidebar) {
-    closeSidebar.addEventListener('click', () => {
-        sidebar.classList.remove('open'); // La riporta a sinistra: -250px
-    });
-}
-
-// Avvia la funzione quando la pagina è pronta
-document.addEventListener('DOMContentLoaded', initNavigation);
-
-// --- 2. FUNZIONI DI GESTIONE ---
+// --- 2. FUNZIONI DI GESTIONE TIMER ---
 
 function setTimer(minutes) {
     clearInterval(timerId);
@@ -48,7 +41,7 @@ function updateDisplay() {
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// --- 3. SELEZIONE MODALITÀ (CON EVIDENZIAZIONE) ---
+// --- 3. SELEZIONE MODALITÀ ---
 
 btnStudio.addEventListener('click', () => {
     currentMode = 'studio';
@@ -90,7 +83,7 @@ restartBtn.addEventListener('click', () => {
 });
 
 function handleTimerComplete() {
-    alert("Sessione completata!");
+    alert("Sessione completata! Ottimo lavoro.");
     const sessionsCountSpan = document.getElementById('sessions-count'); 
     if (currentMode === 'studio') {
         let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
@@ -99,26 +92,61 @@ function handleTimerComplete() {
     }
 }
 
-// --- 5. IMPOSTAZIONI INTELLIGENTI ---
+// --- 5. NAVIGAZIONE SIDEBAR ---
+
+if (openSidebar) {
+    openSidebar.addEventListener('click', () => {
+        sidebar.classList.add('open');
+    });
+}
+
+if (closeSidebar) {
+    closeSidebar.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+    });
+}
+
+// --- 6. MODAL IMPOSTAZIONI (SOSTITUISCE IL PROMPT) ---
 
 if (settingsBtn) {
     settingsBtn.addEventListener('click', () => {
-        let modeName = (currentMode === 'studio') ? "STUDIO" : "PAUSA";
-        let currentVal = (currentMode === 'studio') ? studioMinutes : pausaMinutes;
+        modal.style.display = "block"; // Apre la modal
+        inputMins.value = (currentMode === 'studio') ? studioMinutes : pausaMinutes;
+    });
+}
 
-        const userMinutes = prompt(`Quanti minuti vuoi per la ${modeName}?`, currentVal);
-        
-        if (userMinutes !== null && !isNaN(userMinutes) && userMinutes > 0) {
-            let newMins = parseInt(userMinutes);
-            if (currentMode === 'studio') studioMinutes = newMins;
-            else pausaMinutes = newMins;
-
-            if (!isRunning) setTimer(newMins);
-            alert(`Timer ${modeName} aggiornato!`);
+if (saveModalBtn) {
+    saveModalBtn.addEventListener('click', () => {
+        const val = parseInt(inputMins.value);
+        if (val > 0) {
+            if (currentMode === 'studio') {
+                studioMinutes = val;
+            } else {
+                pausaMinutes = val;
+            }
+            if (!isRunning) setTimer(val);
+            modal.style.display = "none";
+        } else {
+            alert("Inserisci un numero valido!");
         }
     });
 }
 
-// --- 6. AVVIO INIZIALE ---
-setTimer(25);
-btnStudio.classList.add('active');
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        modal.style.display = "none";
+    });
+}
+
+// Chiude la modal cliccando fuori dal contenuto
+window.addEventListener('click', (event) => {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+});
+
+// --- 7. AVVIO INIZIALE ---
+document.addEventListener('DOMContentLoaded', () => {
+    setTimer(25);
+    if (btnStudio) btnStudio.classList.add('active');
+});

@@ -62,6 +62,18 @@
                         <div class="settings-icon">
                             <button type="button" id="settings-trigger">⚙️</button>
                         </div>
+
+                        <div id="custom-modal" class="modal">
+                            <div class="modal-content">
+                                <h3>Impostazioni Timer</h3>
+                                <p>Inserisci i minuti per la sessione:</p>
+                                <input type="number" id="new-minutes" placeholder="Es. 25">
+                                <div class="modal-buttons">
+                                    <button id="save-modal" class="save-btn">Salva</button>
+                                    <button id="close-modal" class="cancel-btn">Annulla</button>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="timer-circle">
                             <div id="timer-time">25:00</div>
