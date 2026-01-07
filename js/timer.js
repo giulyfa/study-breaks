@@ -63,8 +63,17 @@ function handleTimerComplete() {
         hideCustomAlert();
         let sessionsCountSpan = document.getElementById('sessions-count'); 
         let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
-        currentSessions++;
-        sessionsCountSpan.textContent = currentSessions;
+        sessionsCountSpan.textContent = currentSessions + 1;
+
+        // Sessioni Totali (nella stat-box in alto)
+        let totalSessionsSpan = document.getElementById('total-sessions-count');
+        if (totalSessionsSpan) {
+            let totalSessions = parseInt(totalSessionsSpan.textContent) || 0;
+            totalSessionsSpan.textContent = totalSessions + 1;
+        }
+
+        // --- 2. SALVATAGGIO SU SERVER (PHP SESSION) ---
+        fetch('salva_dati.php?azione=studio');
 
         // Banner persistente per la pausa
         showCustomAlert("SESSIONE COMPLETATA! Prenditi una pausa");
@@ -83,13 +92,13 @@ function handleTimerComplete() {
         let pauseCountSpan = document.getElementById('pause-count'); 
         if (pauseCountSpan) {
             let currentPause = parseInt(pauseCountSpan.textContent) || 0;
-            currentPause++;
-            pauseCountSpan.textContent = currentPause;
+            pauseCountSpan.textContent = currentPause + 1;
         }
+
+        fetch('salva_dati.php?azione=pausa');
         
         hideCustomAlert();
         suggestionBox.style.display = "none";
-        
         showCustomAlert("LA PAUSA È FINITA! Si ricomincia con lo studio.");
         
         currentMode = 'studio';

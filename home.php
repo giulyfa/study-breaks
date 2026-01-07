@@ -51,8 +51,8 @@ if (!isset($_SESSION['user_id'])) {
 
                     <section class="stats-container">
                         <div class="stat-box">
-                            <p>PAUSE</p>
-                            <span class="stat-number" id="pause-count"><?php echo $_SESSION['pause'] ?? 0; ?></span>
+                            <p>SESSIONI</p>
+                            <span class="stat-number" id="total-sessions-count"><?php echo $_SESSION['sessioni_totali'] ?? 0; ?></span>
                         </div>
                         <div class="stat-box">
                             <p>STREAK</p>
@@ -68,7 +68,10 @@ if (!isset($_SESSION['user_id'])) {
                     <span id="alert-message"></span>
                 </div>
 
-                <section class="timer-card">
+                <section class="timer-card"> 
+                    <div id="custom-alert" class="alert-toast">
+                        <span id="alert-message"></span>
+                    </div>
                     <div class="timer-background">
                         <h1>Timer Pomodoro</h1>
                         <div class="settings-icon">
@@ -107,7 +110,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
 
-            <div id="suggestion-message" style="display: none; font-size: 700; text-align: center; margin: 0 20px 20px 20px; font-weight: bold; color: #E49A7D;"></div>
+            <div id="suggestion-message" style="display: none; font-size: 700; text-align: center; margin: 10px 20px; font-weight: bold; color: #E49A7D;"></div>
 
             <section class="activity-section">
                 <h2>Attività consigliate</h2>

@@ -99,9 +99,10 @@ footer {
     }
 }
 
+/* --- STILE BASE (Mobile) --- */
 .alert-toast {
     display: none; /* Nascosto di base */
-    width: 100%;
+    width: 100%; 
     background-color: #4D7D72; /* Il tuo verde */
     color: white;
     padding: 15px;
@@ -112,8 +113,25 @@ footer {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* --- MEDIA QUERY (Desktop/PC) --- */
+@media (min-width: 1024px) {
+    .alert-toast {
+        display: none;
+        position: absolute;
+        top: 20px;  /* Dentro la card */
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+}
+
 .alert-toast.show {
-    display: block; /* Resta visibile finché non cambiamo modalità */
+    display: block;
 }
 
 /* -------------------------------------- 
@@ -428,6 +446,7 @@ footer {
     display: flex; /* Aiuta a gestire i figli */
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 .home-page .timer-background {
@@ -443,6 +462,7 @@ footer {
     flex-direction: column; 
     align-items: center;
     padding: 20px;
+    z-index: 1;
 }
 
 .home-page .timer-background h1 {
