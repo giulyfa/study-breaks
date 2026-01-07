@@ -1,5 +1,7 @@
 // --- 1. CONFIGURAZIONE E VARIABILI ---
-let studioMinutes = 25; 
+
+// AGGIUNTA: Legge il valore impostato nel PHP, se non esiste usa 25
+let studioMinutes = typeof minutiSalvati !== 'undefined' ? minutiSalvati : 25; 
 let pausaMinutes = 5;
 let timeLeft;
 let timerId = null;
@@ -31,13 +33,11 @@ const suggestionBox = document.getElementById('suggestion-message');
 
 // --- 2. FUNZIONI DI SERVIZIO ---
 
-// Mostra il banner sotto l'header (rimane visibile finché non viene rimosso)
 function showCustomAlert(message) {
     alertMessage.textContent = message;
     customAlert.classList.add('show');
 }
 
-// Nasconde il banner
 function hideCustomAlert() {
     customAlert.classList.remove('show');
 }
@@ -55,41 +55,46 @@ function updateDisplay() {
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// --- 3. LOGICA DI FINE SESSIONE (CICLO AUTOMATICO) ---
+// --- 3. LOGICA DI FINE SESSIONE ---
 
 function handleTimerComplete() {
     if (currentMode === 'studio') {
-        // Aggiorna contatore sessioni
         hideCustomAlert();
+        
+        // Sessioni Oggi
         let sessionsCountSpan = document.getElementById('sessions-count'); 
         let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
-        currentSessions++;
-        sessionsCountSpan.textContent = currentSessions;
+        sessionsCountSpan.textContent = currentSessions + 1;
 
-        // Banner persistente per la pausa
+        // Sessioni Totali
+        let totalSessionsSpan = document.getElementById('total-sessions-count');
+        if (totalSessionsSpan) {
+            let totalSessions = parseInt(totalSessionsSpan.textContent) || 0;
+            totalSessionsSpan.textContent = totalSessions + 1;
+        }
+
+        // SALVATAGGIO SU SERVER
+        fetch('salva_dati.php?azione=studio');
+
         showCustomAlert("SESSIONE COMPLETATA! Prenditi una pausa");
-        
-        // Suggerimento sopra i giochini
         suggestionBox.textContent = "Ottimo lavoro! Che ne pensi di un giochino per svagarti?";
         suggestionBox.style.display = "block";
 
-        // Switch automatico a Pausa
         currentMode = 'pausa';
         setTimer(pausaMinutes);
         btnPausa.classList.add('active');
         btnStudio.classList.remove('active');
     } else {
-        // Fine Pausa: pulizia e ritorno allo studio
         let pauseCountSpan = document.getElementById('pause-count'); 
         if (pauseCountSpan) {
             let currentPause = parseInt(pauseCountSpan.textContent) || 0;
-            currentPause++;
-            pauseCountSpan.textContent = currentPause;
+            pauseCountSpan.textContent = currentPause + 1;
         }
+
+        fetch('salva_dati.php?azione=pausa');
         
         hideCustomAlert();
         suggestionBox.style.display = "none";
-        
         showCustomAlert("LA PAUSA È FINITA! Si ricomincia con lo studio.");
         
         currentMode = 'studio';
@@ -99,7 +104,7 @@ function handleTimerComplete() {
     }
 }
 
-// --- 4. GESTIONE EVENTI (TIMER & MODALITÀ) ---
+// --- 4. GESTIONE EVENTI ---
 
 btnStudio.addEventListener('click', () => {
     currentMode = 'studio';
@@ -121,7 +126,7 @@ btnPausa.addEventListener('click', () => {
 startBtn.addEventListener('click', () => {
     if (isRunning) return;
     isRunning = true;
-    hideCustomAlert(); // Rimuove eventuali avvisi quando il timer parte
+    hideCustomAlert();
     timerId = setInterval(() => {
         timeLeft--;
         updateDisplay();
@@ -163,8 +168,13 @@ if (saveModalBtn) {
     saveModalBtn.addEventListener('click', () => {
         const val = parseInt(inputMins.value);
         if (val > 0) {
-            if (currentMode === 'studio') studioMinutes = val;
-            else pausaMinutes = val;
+            if (currentMode === 'studio') {
+                studioMinutes = val;
+                // AGGIUNTA: Salva la scelta nel PHP così non si resetta al refresh
+                fetch('salva_dati.php?azione=set_timer&minuti=' + val);
+            } else {
+                pausaMinutes = val;
+            }
             if (!isRunning) setTimer(val);
             modal.style.display = "none";
         } else {
@@ -184,6 +194,9 @@ window.addEventListener('click', (e) => {
 
 // --- 6. AVVIO ---
 document.addEventListener('DOMContentLoaded', () => {
-    setTimer(25);
+    // Aggiorna il timer basandosi su studioMinutes (che ora può essere quello salvato)
+    setTimer(studioMinutes); 
+    
     if (btnStudio) btnStudio.classList.add('active');
+    if (suggestionBox) suggestionBox.style.display = "none";
 });

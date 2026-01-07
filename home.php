@@ -37,6 +37,8 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="playlist.php">Playlist</a>
                 <a href="profilo.php">Profilo</a>
                 <a href="chi-siamo.php">Chi Siamo</a>
+                <br><br>
+                <a href="logout.php">Logout</a>
             </div>
         </div>
 
@@ -51,25 +53,23 @@ if (!isset($_SESSION['user_id'])) {
 
                     <section class="stats-container">
                         <div class="stat-box">
-                            <p>PAUSE</p>
-                            <span class="stat-number" id="pause-count">0</span>
+                            <p>SESSIONI</p>
+                            <span class="stat-number" id="total-sessions-count"><?php echo $_SESSION['sessioni_totali'] ?? 0; ?></span>
                         </div>
                         <div class="stat-box">
                             <p>STREAK</p>
-                            <span class="stat-number">0</span>
-                        </div>
+                            <span class="stat-number" id="streak-count">0</span> </div>
                         <div class="stat-box">
                             <p>ATTIVITÀ</p>
-                            <span class="stat-number">0</span>
+                            <span class="stat-number" id="activities-count"><?php echo $_SESSION['attivita_totali'] ?? 0; ?></span>
                         </div>
                     </section>
                 </div>
 
-                <div id="custom-alert" class="alert-toast">
-                    <span id="alert-message"></span>
-                </div>
-
-                <section class="timer-card">
+                <section class="timer-card"> 
+                    <div id="custom-alert" class="alert-toast">
+                        <span id="alert-message"></span>
+                    </div>
                     <div class="timer-background">
                         <h1>Timer Pomodoro</h1>
                         <div class="settings-icon">
@@ -103,12 +103,12 @@ if (!isset($_SESSION['user_id'])) {
                             <button id="restart-btn" class="control-btn">Restart</button>
                         </div>
                     </div>
-                    <p class="next-break">Sessioni di studio oggi: <span id="sessions-count">0</span></p>
+                    <p class="next-break">Sessioni di studio oggi: <span id="sessions-count"><?php echo $_SESSION['sessioni_oggi'] ?? 0; ?></span></p>
                 </section>
                 </div>
             </div>
 
-            <div id="suggestion-message" style="display: none; font-size: 700; text-align: center; margin: 0 20px 20px 20px; font-weight: bold; color: #E49A7D;"></div>
+            <div id="suggestion-message" style="display: none; font-size: 700; text-align: center; margin: 10px 20px; font-weight: bold; color: #E49A7D;"></div>
 
             <section class="activity-section">
                 <h2>Attività consigliate</h2>
@@ -154,6 +154,11 @@ if (!isset($_SESSION['user_id'])) {
         </footer>
         
     </div> 
+
+    <script>
+        // Recuperiamo il valore dalla sessione PHP, se non c'è usiamo 25 di default
+        const minutiSalvati = <?php echo $_SESSION['timer_scelto'] ?? 25; ?>;
+    </script>
     <script src="js/timer.js"></script>
     <div id="activity-modal" class="modal activity-overlay">
         <div class="modal-content game-modal-content">
@@ -173,13 +178,28 @@ if (!isset($_SESSION['user_id'])) {
             
             // Mostra il modale
             modal.style.display = 'block';
+
+            // Memorizziamo il momento esatto in cui hai aperto il gioco. PER AGGIORNARE NUMERO ATTIVITA'
+            tempoInizioAttivita = Date.now();
         }
 
         // Funzione per chiudere e resettare
         function chiudiAttivita() {
             const modal = document.getElementById('activity-modal');
             const iframe = document.getElementById('game-frame');
-            
+
+            //PER AGGIORNARE NUMERO ATTIVITA'
+            const tempoFineAttivita = Date.now();
+            const secondiPassati = (tempoFineAttivita - tempoInizioAttivita) / 1000;
+            // CONDIZIONE: Conta l'attività solo se sei stata dentro più di 60 secondi
+            if (secondiPassati >= 60) {
+                let actSpan = document.getElementById('activities-count');
+                if(actSpan) {
+                    actSpan.textContent = parseInt(actSpan.textContent) + 1;
+                    fetch('salva_dati.php?azione=attivita');
+                }
+            }   
+
             modal.style.display = 'none';
             iframe.src = ''; // Questo ferma il gioco immediatamente!
         }
