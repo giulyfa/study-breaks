@@ -52,15 +52,14 @@ if (!isset($_SESSION['user_id'])) {
                     <section class="stats-container">
                         <div class="stat-box">
                             <p>PAUSE</p>
-                            <span class="stat-number" id="pause-count">0</span>
+                            <span class="stat-number" id="pause-count"><?php echo $_SESSION['pause'] ?? 0; ?></span>
                         </div>
                         <div class="stat-box">
                             <p>STREAK</p>
-                            <span class="stat-number">0</span>
-                        </div>
+                            <span class="stat-number" id="streak-count">0</span> </div>
                         <div class="stat-box">
                             <p>ATTIVITÀ</p>
-                            <span class="stat-number">0</span>
+                            <span class="stat-number" id="activities-count">0</span>
                         </div>
                     </section>
                 </div>
@@ -103,7 +102,7 @@ if (!isset($_SESSION['user_id'])) {
                             <button id="restart-btn" class="control-btn">Restart</button>
                         </div>
                     </div>
-                    <p class="next-break">Sessioni di studio oggi: <span id="sessions-count">0</span></p>
+                    <p class="next-break">Sessioni di studio oggi: <span id="sessions-count"><?php echo $_SESSION['sessioni'] ?? 0; ?></span></p>
                 </section>
                 </div>
             </div>

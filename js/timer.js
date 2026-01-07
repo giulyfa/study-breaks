@@ -182,8 +182,20 @@ window.addEventListener('click', (e) => {
     if (e.target == modal) modal.style.display = "none";
 });
 
-// --- 6. AVVIO ---
+// --- 6. AVVIO AGGIORNATO ---
 document.addEventListener('DOMContentLoaded', () => {
-    setTimer(25);
+    // 1. Leggi i valori attuali dalle span (stampate dal PHP)
+    const savedSessions = parseInt(document.getElementById('sessions-count').textContent) || 0;
+    const savedPauses = parseInt(document.getElementById('pause-count').textContent) || 0;
+
+    console.log("Dati recuperati dalla sessione PHP:", { savedSessions, savedPauses });
+
+    // 2. Imposta il timer iniziale
+    setTimer(studioMinutes); 
+    
+    // 3. Attiva il bottone grafico dello studio
     if (btnStudio) btnStudio.classList.add('active');
+    
+    // 4. Se c'è un messaggio di suggerimento residuo, nascondilo all'avvio
+    if (suggestionBox) suggestionBox.style.display = "none";
 });
