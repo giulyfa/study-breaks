@@ -2,8 +2,7 @@
 
 // AGGIUNTA: Legge il valore impostato nel PHP, se non esiste usa 25
 let studioMinutes = typeof minutiSalvati !== 'undefined' ? minutiSalvati : 25; 
-let pausaMinutes = 5;
-let timeLeft;
+let pausaMinutes = typeof pausaSalvata !== 'undefined' ? pausaSalvata : 5; 
 let timerId = null;
 let isRunning = false;
 let currentMode = 'studio'; 
@@ -171,9 +170,10 @@ if (saveModalBtn) {
             if (currentMode === 'studio') {
                 studioMinutes = val;
                 // AGGIUNTA: Salva la scelta nel PHP così non si resetta al refresh
-                fetch('salva_dati.php?azione=set_timer&minuti=' + val);
+                fetch('salva_dati.php?azione=set_timer&minuti=' + val + '&tipo=studio');
             } else {
                 pausaMinutes = val;
+                fetch('salva_dati.php?azione=set_timer&minuti=' + val + '&tipo=pausa');
             }
             if (!isRunning) setTimer(val);
             modal.style.display = "none";

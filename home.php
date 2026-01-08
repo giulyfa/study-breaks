@@ -1,11 +1,28 @@
 <?php
-require_once 'config.php';
+require_once 'config.php'; // Carica sessione e connessione al DB
 
-// Verifica opzionale se l'utente è loggato (se vuoi proteggere la home)
+// Verifica se l'utente è loggato
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit;
 }
+
+// --- LOGICA DI RESET GIORNALIERO ---
+$oggi = date('Y-m-d'); // Recupera la data attuale (formato 2024-05-20)
+
+// Se la data salvata in sessione è diversa da quella di oggi, resettiamo i contatori giornalieri
+if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso'] !== $oggi) {
+    $_SESSION['pause_oggi'] = 0;      // Reset pause giornaliere
+    $_SESSION['attivita_oggi'] = 0;   // Reset attività giornaliere
+    $_SESSION['sessioni_oggi'] = 0;   // Reset sessioni studio (se le usi altrove)
+    
+    $_SESSION['data_ultimo_accesso'] = $oggi;
+}
+
+// 3. RECUPERO ATTIVITÀ (Aggiungi questo!)
+// Senza questo pezzo, il ciclo foreach sotto non saprà cosa stampare
+$stmt = $pdo->query("SELECT id, slug, titolo, tipo, durata FROM attivita WHERE stato = 'attivo'");
+$attivita = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -53,15 +70,16 @@ if (!isset($_SESSION['user_id'])) {
 
                     <section class="stats-container">
                         <div class="stat-box">
-                            <p>SESSIONI</p>
-                            <span class="stat-number" id="total-sessions-count"><?php echo $_SESSION['sessioni_totali'] ?? 0; ?></span>
+                            <p>PAUSE OGGI</p>
+                            <span class="stat-number" id="pause-count"><?php echo $_SESSION['pause_oggi'] ?? 0; ?></span>                        
                         </div>
                         <div class="stat-box">
                             <p>STREAK</p>
-                            <span class="stat-number" id="streak-count">0</span> </div>
+                            <span class="stat-number" id="streak-count"><?php echo $_SESSION['streak'] ?? 0; ?></span>
+                        </div>
                         <div class="stat-box">
-                            <p>ATTIVITÀ</p>
-                            <span class="stat-number" id="activities-count"><?php echo $_SESSION['attivita_totali'] ?? 0; ?></span>
+                            <p>ATTIVITÀ OGGI</p>
+                            <span class="stat-number" id="activities-today-count"><?php echo $_SESSION['attivita_oggi'] ?? 0; ?></span>                        
                         </div>
                     </section>
                 </div>
@@ -114,25 +132,36 @@ if (!isset($_SESSION['user_id'])) {
                 <h2>Attività consigliate</h2>
                 <div class="activity-grid">
                     <?php
-                    $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'active' LIMIT 4");
+                        $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'active' LIMIT 4");
 
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                        $imagePath = 'img/' . $row['slug'] . '.jpg';
-                        
-                        if (!file_exists($imagePath)) {
-                            $imagePath = 'img/logo.png';
-                        }
-                    ?>
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                            $imagePath = 'img/' . $row['slug'] . '.jpg';
+                            
+                            if (!file_exists($imagePath)) {
+                                $imagePath = 'img/logo.png';
+                            }
+                            
+                            // Prepariamo i dati per il JavaScript
+                            $id = $row['id'];
+                            $slug = $row['slug'];
+                            $titolo = addslashes($row['titolo']); // addslashes evita errori se il titolo ha apostrofi
+                            $tipo = $row['tipo']; // Assicurati che la colonna nel DB si chiami 'tipo'
+                            $durata = $row['durata'];
+                        ?>
 
-                        <div class="activity-item" onclick="apriAttivita('<?php echo $row['slug']; ?>')" style="cursor: pointer;">
-                            <div class="activity-icon">
-                                <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
+                            <div class="activity-item" 
+                                onclick="apriAttivita(<?php echo $id; ?>, '<?php echo $slug; ?>', '<?php echo $titolo; ?>', '<?php echo $tipo; ?>', <?php echo $durata; ?>)" 
+                                style="cursor: pointer;">
+                                
+                                <div class="activity-icon">
+                                    <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
+                                </div>
+                                <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
                             </div>
-                            <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
-                        </div>
-                    <?php 
-                    } 
-                    ?>
+
+                        <?php 
+                        } 
+                        ?>
                 </div>
                 
                 <a href="attivita.php" class="btn primary-btn">Vai alle attività</a>
@@ -158,6 +187,7 @@ if (!isset($_SESSION['user_id'])) {
     <script>
         // Recuperiamo il valore dalla sessione PHP, se non c'è usiamo 25 di default
         const minutiSalvati = <?php echo $_SESSION['timer_scelto'] ?? 25; ?>;
+        const pausaSalvata = <?php echo $_SESSION['pausa_scelta'] ?? 5; ?>; // Aggiungi questa
     </script>
     <script src="js/timer.js"></script>
     <div id="activity-modal" class="modal activity-overlay">
@@ -169,39 +199,62 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <script>
-        function apriAttivita(slug) {
+        // Variabile globale per memorizzare i dati dell'attività aperta
+        let attivitaCorrente = { id: 0, nome: '', tipo: '', durata: 0 };
+        let tempoInizioAttivita = 0;
+
+        function apriAttivita(id, slug, titolo, tipo, durata) {
             const modal = document.getElementById('activity-modal');
             const iframe = document.getElementById('game-frame');
             
-            // Imposta la sorgente dell'iframe su activity_player.php passando lo slug
+            // Memorizziamo i dati dell'attività per usarli nella chiusura
+            attivitaCorrente.id = id;
+            attivitaCorrente.nome = titolo;
+            attivitaCorrente.tipo = tipo;
+            attivitaCorrente.durata = durata;
+            
+            // Imposta la sorgente dell'iframe
             iframe.src = 'activity_player.php?name=' + slug;
             
             // Mostra il modale
             modal.style.display = 'block';
 
-            // Memorizziamo il momento esatto in cui hai aperto il gioco. PER AGGIORNARE NUMERO ATTIVITA'
+            // Segnamo l'orario di inizio
             tempoInizioAttivita = Date.now();
         }
 
-        // Funzione per chiudere e resettare
         function chiudiAttivita() {
             const modal = document.getElementById('activity-modal');
             const iframe = document.getElementById('game-frame');
 
-            //PER AGGIORNARE NUMERO ATTIVITA'
-            const tempoFineAttivita = Date.now();
-            const secondiPassati = (tempoFineAttivita - tempoInizioAttivita) / 1000;
-            // CONDIZIONE: Conta l'attività solo se sei stata dentro più di 60 secondi
-            if (secondiPassati >= 60) {
-                let actSpan = document.getElementById('activities-count');
-                if(actSpan) {
-                    actSpan.textContent = parseInt(actSpan.textContent) + 1;
-                    fetch('salva_dati.php?azione=attivita');
+            const secondiPassati = (Date.now() - tempoInizioAttivita) / 1000;
+
+            // CONDIZIONE: 30 secondi per convalidare
+            if (secondiPassati >= 30) {
+                // CAMBIO QUI: Usa l'ID del box "Attività Oggi" che abbiamo deciso prima
+                let actTodaySpan = document.getElementById('activities-today-count'); 
+                
+                if(actTodaySpan) {
+                    // Incrementa il numero che l'utente vede nel quadratino bianco
+                    actTodaySpan.textContent = parseInt(actTodaySpan.textContent) + 1;
+                    
+                    // Prepariamo i dati per il database (questo rimane uguale, è perfetto)
+                    const params = new URLSearchParams({
+                        azione: 'attivita',
+                        id_att: attivitaCorrente.id,
+                        nome: attivitaCorrente.nome,
+                        categoria: attivitaCorrente.tipo,
+                        durata: attivitaCorrente.durata
+                    });
+
+                    // Invio al server: il PHP si occuperà di aumentare sia il totale nel DB 
+                    // sia la variabile $_SESSION['attivita_oggi']
+                    fetch('salva_dati.php?' + params.toString());
                 }
             }   
 
             modal.style.display = 'none';
-            iframe.src = ''; // Questo ferma il gioco immediatamente!
+            iframe.src = ''; 
         }
 
         // Chiude se si clicca fuori dal box del gioco
