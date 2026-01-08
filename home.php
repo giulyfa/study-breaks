@@ -7,20 +7,31 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// --- LOGICA DI RESET GIORNALIERO ---
-$oggi = date('Y-m-d'); // Recupera la data attuale (formato 2024-05-20)
+$user_id = $_SESSION['user_id']; // Recuperiamo l'ID dell'utente
+$oggi = date('Y-m-d'); 
 
-// Se la data salvata in sessione è diversa da quella di oggi, resettiamo i contatori giornalieri
+// --- LOGICA DI RESET GIORNALIERO ---
 if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso'] !== $oggi) {
-    $_SESSION['pause_oggi'] = 0;      // Reset pause giornaliere
-    $_SESSION['attivita_oggi'] = 0;   // Reset attività giornaliere
-    $_SESSION['sessioni_oggi'] = 0;   // Reset sessioni studio (se le usi altrove)
+    
+    // 1. RESET SUL DATABASE: Azzeriamo i contatori per la nuova giornata
+    // Questo assicura che se l'utente fa logout e rientra domani, troverà 0
+    $stmtReset = $pdo->prepare("UPDATE utenti SET 
+        pause_oggi = 0, 
+        attivita_oggi = 0, 
+        sessioni_oggi = 0 
+        WHERE id = ?");
+    $stmtReset->execute([$user_id]);
+
+    // 2. RESET IN SESSIONE
+    $_SESSION['pause_oggi'] = 0;
+    $_SESSION['attivita_oggi'] = 0;
+    $_SESSION['sessioni_oggi'] = 0;
     
     $_SESSION['data_ultimo_accesso'] = $oggi;
 }
 
-// 3. RECUPERO ATTIVITÀ (Aggiungi questo!)
-// Senza questo pezzo, il ciclo foreach sotto non saprà cosa stampare
+// 3. RECUPERO ATTIVITÀ
+// Recuperiamo le attività per visualizzarle nella griglia
 $stmt = $pdo->query("SELECT id, slug, titolo, tipo, durata FROM attivita WHERE stato = 'attivo'");
 $attivita = $stmt->fetchAll();
 ?>
@@ -231,7 +242,7 @@ $attivita = $stmt->fetchAll();
 
             // CONDIZIONE: 30 secondi per convalidare
             if (secondiPassati >= 30) {
-                // CAMBIO QUI: Usa l'ID del box "Attività Oggi" che abbiamo deciso prima
+                // Aggiornamento attività in tempo reale
                 let actTodaySpan = document.getElementById('activities-today-count'); 
                 
                 if(actTodaySpan) {

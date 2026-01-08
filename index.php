@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 if (isset($_SESSION['user_id'])) {
-    header("Location: home.php"); // Se già loggato vai alla home
+    header("Location: home.php");
     exit;
 }
 
@@ -19,10 +19,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($user['stato'] == 'blocked') {
             $errore = "Il tuo account è stato bloccato. Contatta l'amministratore.";
         } else {
+            // --- INIZIO SESSIONE UTENTE ---
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_nome'] = $user['nome'];
             $_SESSION['user_ruolo'] = $user['ruolo'];
             
+            // AGGIUNTA: Carichiamo i dati dal DB nella sessione per non perderli
+            $_SESSION['sessioni_totali'] = $user['sessioni_totali'] ?? 0;
+            $_SESSION['attivita_totali'] = $user['attivita_totali'] ?? 0;
+            $_SESSION['streak'] = $user['streak'] ?? 0;
+            $_SESSION['data_ultimo_accesso'] = $user['ultima_sessione'] ?? ''; 
+            
+            // Inizializziamo i contatori giornalieri (questi ripartono da 0 a ogni login)
+            $_SESSION['sessioni_oggi'] = $user['sessioni_oggi'];
+            $_SESSION['pause_oggi'] = $user['pause_oggi'];
+            $_SESSION['attivita_oggi'] = $user['attivita_oggi'];
+
             // Redirect basato sul ruolo
             if ($user['ruolo'] == 'admin') {
                 header("Location: admin_dashboard.php");

@@ -22,13 +22,14 @@ if ($azione == 'studio') {
     if ($ultima_data == $ieri) {
         $nuova_streak = $streak_attuale + 1;
     } elseif ($ultima_data == $oggi) {
-        $nuova_streak = $streak_attuale;
+        $nuova_streak = ($streak_attuale == 0) ? 1 : $streak_attuale;
     } else {
         $nuova_streak = 1;
     }
 
     $stmt = $pdo->prepare("UPDATE utenti SET 
         sessioni_totali = sessioni_totali + 1, 
+        sessioni_oggi = sessioni_oggi + 1, 
         streak = ?, 
         ultima_sessione = ? 
         WHERE id = ?");
@@ -40,6 +41,8 @@ if ($azione == 'studio') {
 } 
 
 elseif ($azione == 'pausa') {
+    $stmt = $pdo->prepare("UPDATE utenti SET pause_oggi = pause_oggi + 1 WHERE id = ?");
+    $stmt->execute([$user_id]);
     // AGGIUNTA: Incrementa il contatore delle pause di oggi nella sessione
     $_SESSION['pause_oggi'] = ($_SESSION['pause_oggi'] ?? 0) + 1;
 }
@@ -50,8 +53,10 @@ elseif ($azione == 'attivita') {
     $cat_att = $_GET['categoria'] ?? 'Generale';
     $durata_att = intval($_GET['durata'] ?? 0);
 
-    // 1. Aggiorna il totale generale nel database
-    $stmtUser = $pdo->prepare("UPDATE utenti SET attivita_totali = attivita_totali + 1 WHERE id = ?");
+    $stmtUser = $pdo->prepare("UPDATE utenti SET 
+        attivita_totali = attivita_totali + 1,
+        attivita_oggi = attivita_oggi + 1 
+        WHERE id = ?");
     $stmtUser->execute([$user_id]);
 
     // 2. Inserisce il record nel log dettagliato

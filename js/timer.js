@@ -65,11 +65,14 @@ function handleTimerComplete() {
         let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
         sessionsCountSpan.textContent = currentSessions + 1;
 
-        // Sessioni Totali
-        let totalSessionsSpan = document.getElementById('total-sessions-count');
-        if (totalSessionsSpan) {
-            let totalSessions = parseInt(totalSessionsSpan.textContent) || 0;
-            totalSessionsSpan.textContent = totalSessions + 1;
+        // AGGIUNTA: Aggiornamento Streak in tempo reale
+        let streakCountSpan = document.getElementById('streak-count');
+        if (streakCountSpan) {
+            let currentStreak = parseInt(streakCountSpan.textContent) || 0;
+            
+            // Logica: se era 0 diventa 1. Se era già più di 0, aumenta di 1.
+            // Nota: visivamente aumenterà ogni volta che finisci una sessione in questo test.
+            streakCountSpan.textContent = currentStreak + 1;
         }
 
         // SALVATAGGIO SU SERVER
@@ -84,6 +87,7 @@ function handleTimerComplete() {
         btnPausa.classList.add('active');
         btnStudio.classList.remove('active');
     } else {
+        // Aggiornamento pause in tempo reale
         let pauseCountSpan = document.getElementById('pause-count'); 
         if (pauseCountSpan) {
             let currentPause = parseInt(pauseCountSpan.textContent) || 0;
