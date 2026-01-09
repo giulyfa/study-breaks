@@ -691,7 +691,8 @@ footer {
 ----------- STILE PER LA SEZIONE ATTIVITA SIA HOME CHE PAGINA ATTIVITA' -------- 
 -------------------------------------------------------------------------------*/ 
 
-.home-page .activity-section {
+.home-page .activity-section,
+.activity-page .activity-section {
     background-color: #ECE7D9; 
     padding: 20px;
     text-align: center;
@@ -700,14 +701,14 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.activity-page .activity-section {
+/*.activity-page .activity-section {
     background-color: #E7D0B9; 
     padding: 20px;
     text-align: center;
     border-radius: 10px;
     margin: 35px 20px 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+}*/
 
 .home-page .activity-grid, 
 .activity-page .activity-grid {
