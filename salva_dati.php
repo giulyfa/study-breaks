@@ -67,7 +67,6 @@ elseif ($azione == 'attivita') {
     $_SESSION['attivita_totali'] = ($_SESSION['attivita_totali'] ?? 0) + 1;
     $_SESSION['attivita_oggi'] = ($_SESSION['attivita_oggi'] ?? 0) + 1; 
 }
-
 elseif ($azione == 'set_timer') {
     if (isset($_GET['minuti'])) {
         $minuti = intval($_GET['minuti']);
@@ -79,6 +78,21 @@ elseif ($azione == 'set_timer') {
             $_SESSION['timer_scelto'] = $minuti;
         }
     }
+}
+elseif ($azione === 'log_playlist') {
+    // Recuperiamo solo l'ID della playlist (il titolo non serve per questa tabella)
+    $idP = $_GET['id_p'];
+    $userId = $_SESSION['user_id'];
+
+    // Prepariamo la query con le colonne ESATTE che hai nel database
+    $stmtLog = $pdo->prepare("INSERT INTO log_ascolti (id_utente, id_playlist) VALUES (?, ?)");
+    
+    if ($stmtLog->execute([$userId, $idP])) {
+        echo json_encode(['status' => 'success']);
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Errore query']);
+    }
+    exit;
 }
 
 echo json_encode(['status' => 'success']);

@@ -34,6 +34,9 @@ if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso']
 // Recuperiamo le attività per visualizzarle nella griglia
 $stmt = $pdo->query("SELECT id, slug, titolo, tipo, durata FROM attivita WHERE stato = 'attivo'");
 $attivita = $stmt->fetchAll();
+
+$stmtP = $pdo->query("SELECT * FROM playlist");
+$playlists = $stmtP->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -62,7 +65,6 @@ $attivita = $stmt->fetchAll();
             <div class="sidebar-links">
                 <a href="home.php">Home</a>
                 <a href="attivita.php">Attività</a>
-                <a href="playlist.php">Playlist</a>
                 <a href="profilo.php">Profilo</a>
                 <a href="chi-siamo.php">Chi Siamo</a>
                 <br><br>
@@ -179,15 +181,14 @@ $attivita = $stmt->fetchAll();
             </section>
             
             <section class="playlist-section">
-                 <a href="playlist.html" class="btn secondary-btn">Vai alle Playlist</a>
+                 <button onclick="togglePlaylist()" class="btn secondary-btn">Vai alle Playlist</button>
             </section>
         </main>
         
         <footer>
             <nav class="footer-links">
                 <a href="home.php" class="footer-link">Home</a>
-                <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="playlist.php" class="footer-link">Playlist</a>
+                <a href="attivia.php" class="footer-link">Attività</a>
                 <a href="profile.php" class="footer-link">Profilo</a><br>
                 <a href="about.php" class="footer-link about-link">Chi siamo?</a>
             </nav>
@@ -268,13 +269,67 @@ $attivita = $stmt->fetchAll();
             iframe.src = ''; 
         }
 
+        function togglePlaylist() {
+            const overlay = document.getElementById('playlist-overlay');
+            overlay.style.display = (overlay.style.display === 'none' || overlay.style.display === '') ? 'block' : 'none';
+        }
+
+        function registraAscolto(event, id) {
+            // Inviamo solo l'id_p al server
+            const url = `salva_dati.php?azione=log_playlist&id_p=${id}`;
+            
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(url);
+            } else {
+                fetch(url);
+            }
+            
+            return true; // Permette l'apertura del link Spotify
+        }
+
         // Chiude se si clicca fuori dal box del gioco
         window.onclick = function(event) {
-            const modal = document.getElementById('activity-modal');
-            if (event.target == modal) {
+            const activityModal = document.getElementById('activity-modal');
+            const playlistOverlay = document.getElementById('playlist-overlay');
+
+            // Se clicchi fuori dal box dell'attività
+            if (event.target == activityModal) {
                 chiudiAttivita();
+            }
+            
+            // Se clicchi fuori dal box delle playlist
+            if (event.target == playlistOverlay) {
+                togglePlaylist();
             }
         }
     </script>
+
+    <div id="playlist-overlay" class="modal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);">
+        <div class="modal-content" style="background:#fff; margin: 5% auto; padding:25px; border-radius:20px; width:90%; max-width:500px; position:relative;">
+            <span class="close-btn" onclick="togglePlaylist()" style="position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;">&times;</span>
+            
+            <h2 style="color:#333; margin-bottom:20px; font-family:'Quicksand';">Scegli la tua musica</h2>
+            
+            <div class="playlist-list" style="display:flex; flex-direction:column; gap:15px;">
+                <?php foreach ($playlists as $p): ?>
+                    <?php if ($p['attiva']): // Entra qui solo se attiva è 1 (true) ?>
+                        <div class="playlist-item" style="background:#1DB954; padding:15px; border-radius:12px; display:flex; justify-content:space-between; align-items:center; color:white;">
+                            <div>
+                                <strong style="display:block;"><?php echo htmlspecialchars($p['titolo']); ?></strong>
+                                <small>Playlist Spotify</small>
+                            </div>
+                            <a href="<?php echo $p['url_spotify']; ?>" 
+                            target="_blank" 
+                            onclick="return registraAscolto(event, <?php echo $p['id']; ?>)" 
+                            class="btn" 
+                            style="background:rgba(255,255,255,0.2); padding:5px 15px; border-radius:20px; color:white; text-decoration:none; font-size:0.8em; border:1px solid white;">
+                            Ascolta
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
