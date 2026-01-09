@@ -196,12 +196,6 @@ $playlists = $stmtP->fetchAll();
         
     </div> 
 
-    <script>
-        // Recuperiamo il valore dalla sessione PHP, se non c'è usiamo 25 di default
-        const minutiSalvati = <?php echo $_SESSION['timer_scelto'] ?? 25; ?>;
-        const pausaSalvata = <?php echo $_SESSION['pausa_scelta'] ?? 5; ?>; // Aggiungi questa
-    </script>
-    <script src="js/timer.js"></script>
     <div id="activity-modal" class="modal activity-overlay">
         <div class="modal-content game-modal-content">
             <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
@@ -210,6 +204,13 @@ $playlists = $stmtP->fetchAll();
         </div>
     </div>
 
+    <script>
+        // Recuperiamo il valore dalla sessione PHP, se non c'è usiamo 25 di default
+        const minutiSalvati = <?php echo $_SESSION['timer_scelto'] ?? 25; ?>;
+        const pausaSalvata = <?php echo $_SESSION['pausa_scelta'] ?? 5; ?>; // Aggiungi questa
+    </script>
+    <script src="js/global.js"></script>
+    <script src="js/timer.js"></script>                    
     <script>
         // Variabile globale per memorizzare i dati dell'attività aperta
         let attivitaCorrente = { id: 0, nome: '', tipo: '', durata: 0 };

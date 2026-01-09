@@ -136,7 +136,7 @@ $playlists = $stmtP->fetchAll();
         </footer>
 
     </div>
-
+    <script src="js/global.js"></script>
     <script>
         // Variabile globale per memorizzare i dati dell'attività aperta
         let attivitaCorrente = { id: 0, nome: '', tipo: '', durata: 0 };

@@ -16,9 +16,6 @@ const btnStudio = document.getElementById('mode-studio');
 const btnPausa = document.getElementById('mode-pausa');
 
 // Elementi DOM - Navigazione & Banner Persistente
-const openSidebar = document.getElementById('open-sidebar');
-const closeSidebar = document.querySelector('.close-btn');
-const sidebar = document.getElementById('sidebar-nav');
 const customAlert = document.getElementById('custom-alert');
 const alertMessage = document.getElementById('alert-message');
 
@@ -151,14 +148,7 @@ restartBtn.addEventListener('click', () => {
     hideCustomAlert();
 });
 
-// --- 5. SIDEBAR & MODAL ---
-
-if (openSidebar) {
-    openSidebar.addEventListener('click', () => sidebar.classList.add('open'));
-}
-if (closeSidebar) {
-    closeSidebar.addEventListener('click', () => sidebar.classList.remove('open'));
-}
+// --- 5. MODAL ---
 
 if (settingsBtn) {
     settingsBtn.addEventListener('click', () => {
