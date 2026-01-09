@@ -777,6 +777,7 @@ footer {
 }
 
 .home-page .btn {
+    font-family: 'Quicksand', sans-serif;
     width: 70%;
     padding: 14px;
     border: none;
