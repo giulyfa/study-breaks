@@ -172,7 +172,7 @@ $attivita = $stmt->fetchAll();
 
                         <?php 
                         } 
-                        ?>
+                    ?>
                 </div>
                 
                 <a href="attivita.php" class="btn primary-btn">Vai alle attività</a>
@@ -186,7 +186,7 @@ $attivita = $stmt->fetchAll();
         <footer>
             <nav class="footer-links">
                 <a href="home.php" class="footer-link">Home</a>
-                <a href="activities.php" class="footer-link">Attività</a>
+                <a href="attivita.php" class="footer-link">Attività</a>
                 <a href="playlist.php" class="footer-link">Playlist</a>
                 <a href="profile.php" class="footer-link">Profilo</a><br>
                 <a href="about.php" class="footer-link about-link">Chi siamo?</a>
