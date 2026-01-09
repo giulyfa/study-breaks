@@ -136,6 +136,15 @@ $playlists = $stmtP->fetchAll();
         </footer>
 
     </div>
+
+    <div id="activity-modal" class="modal activity-overlay">
+        <div class="modal-content game-modal-content">
+            <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
+            
+            <iframe id="game-frame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
     <script src="js/global.js"></script>
     <script>
         // Variabile globale per memorizzare i dati dell'attività aperta
