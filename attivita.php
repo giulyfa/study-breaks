@@ -130,8 +130,8 @@ $playlists = $stmtP->fetchAll();
             <nav class="footer-links">
                 <a href="home.php" class="footer-link">Home</a>
                 <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="profile.php" class="footer-link">Profilo</a><br>
-                <a href="about.php" class="footer-link about-link">Chi siamo?</a>
+                <a href="profilo.php" class="footer-link">Profilo</a><br>
+                <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
             </nav>
         </footer>
 
