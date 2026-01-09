@@ -1038,11 +1038,16 @@ footer {
 }
 
 .activity-page .spotify-icon {
-    width: 28px;
-    height: 28px;
-    background-color: #1DB954; 
+    width: 38px;
+    height: 38px;
+    background-image: url('../img/spotify.jpg');
+    background-size: cover;       /* Ridimensiona l'immagine per riempire il cerchio */
+    background-position: center;  /* Centra l'immagine nel cerchio */
+    background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+    
     border-radius: 50%;
     margin-right: 15px;
+    display: inline-block;        /* Assicurati che abbia una natura da blocco per vedere le dimensioni */
 }
 
 /* Filtri MINUTI */
