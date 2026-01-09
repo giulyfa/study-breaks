@@ -35,7 +35,7 @@ if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso']
 $stmt = $pdo->query("SELECT id, slug, titolo, tipo, durata FROM attivita WHERE stato = 'attivo'");
 $attivita = $stmt->fetchAll();
 
-$stmtP = $pdo->query("SELECT * FROM playlist");
+$stmtP = $pdo->query("SELECT * FROM playlist WHERE attiva = 1");
 $playlists = $stmtP->fetchAll();
 ?>
 <!DOCTYPE html>

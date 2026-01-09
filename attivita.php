@@ -14,6 +14,10 @@ $oggi = date('Y-m-d');
 // Recuperiamo le attività per visualizzarle nella griglia
 $stmt = $pdo->query("SELECT id, slug, titolo, tipo, durata FROM attivita WHERE stato = 'attivo'");
 $attivita = $stmt->fetchAll();
+
+// RECUPERO PLAYLIST
+$stmtP = $pdo->query("SELECT * FROM playlist WHERE attiva = 1");
+$playlists = $stmtP->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -42,7 +46,6 @@ $attivita = $stmt->fetchAll();
             <div class="sidebar-links">
                 <a href="home.php">Home</a>
                 <a href="attivita.php">Attività</a>
-                <a href="playlist.php">Playlist</a>
                 <a href="profilo.php">Profilo</a>
                 <a href="chi-siamo.php">Chi Siamo</a>
                 <br><br>
@@ -98,27 +101,27 @@ $attivita = $stmt->fetchAll();
                     ?>
             </div>
 
-                <div class="suggestion-section">
-                    <p>Hai un'idea per una nuova attività?</p>
-                    <p class="small-text">Proponi la tua micro-attività e sarà valutata dall'admin</p>
-                    <button class="propose-btn">Proponi nuova attività</button>
-                    <p class="help">Aiutaci a migliorare!</p>
-                </div>
-            </section>
+            <div class="suggestion-section">
+                <p>Hai un'idea per una nuova attività?</p>
+                <p class="small-text">Proponi la tua micro-attività e sarà valutata dall'admin</p>
+                <button class="propose-btn">Proponi nuova attività</button>
+                <p class="help">Aiutaci a migliorare!</p>
+            </div>
+        </section>
 
         <section class="playlist-section">
             <p class="playlist-intro">Oppure...</p>
             <h3>Rilassati con una playlist!</h3>
             
             <div class="spotify-container">
-                <div class="spotify-card">
-                    <div class="spotify-icon"></div>
-                    <span>Lo-Fi Focus</span>
-                </div>
-                <div class="spotify-card">
-                    <div class="spotify-icon"></div>
-                    <span>Calm Vibes</span>
-                </div>
+                <?php foreach ($playlists as $p): ?>
+                    <div class="spotify-card" 
+                        onclick="registraAscolto(event, <?php echo $p['id']; ?>); window.open('<?php echo $p['url_spotify']; ?>', '_blank')" 
+                        style="cursor: pointer;">
+                        <div class="spotify-icon"></div>
+                        <span><?php echo htmlspecialchars($p['titolo']); ?></span>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </section>
         </div>
@@ -127,7 +130,6 @@ $attivita = $stmt->fetchAll();
             <nav class="footer-links">
                 <a href="home.php" class="footer-link">Home</a>
                 <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="playlist.php" class="footer-link">Playlist</a>
                 <a href="profile.php" class="footer-link">Profilo</a><br>
                 <a href="about.php" class="footer-link about-link">Chi siamo?</a>
             </nav>
@@ -192,6 +194,17 @@ $attivita = $stmt->fetchAll();
 
             modal.style.display = 'none';
             iframe.src = ''; 
+        }
+
+        // Funzione per registrare l'ascolto (identica alla Home)
+        function registraAscolto(event, id) {
+            const url = `salva_dati.php?azione=log_playlist&id_p=${id}`;
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(url);
+            } else {
+                fetch(url);
+            }
+            return true; 
         }
 
         // Chiude se si clicca fuori dal box del gioco
