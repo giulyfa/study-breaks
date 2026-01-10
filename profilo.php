@@ -88,6 +88,9 @@ try {
         .hidden-row {
             display: none !important;
         }
+        .show-row {
+            display: flex !important;
+        }
     </style>
 </head>
 <body>
@@ -144,20 +147,21 @@ try {
                                 $count = 0;
                                 foreach($preferite as $fav): 
                                     $count++;
-                                    // Aggiungiamo la classe hidden-row se siamo oltre la terza attività
-                                    $rowClass = ($count > 3) ? 'activity-row hidden-row' : 'activity-row';
-                                    
-                                    $img = !empty($fav['slug']) ? 'img/'.$fav['slug'].'.jpg' : 'img/logo.png';
-                                    if(!file_exists($img)) $img = 'img/logo.png';
-                                    $percent = min(($fav['totale'] / 20) * 100, 100); 
+                                    // Le righe dopo la terza partono nascoste con display:none
+                                    $display = ($count > 3) ? 'display: none;' : 'display: flex;';
                             ?>
-                                <div class="<?php echo $rowClass; ?>">
+                                <div class="activity-row" style="<?php echo $display; ?>">
                                     <div class="activity-info-left">
+                                        <?php 
+                                            $img = !empty($fav['slug']) ? 'img/'.$fav['slug'].'.jpg' : 'img/logo.png';
+                                            if(!file_exists($img)) $img = 'img/logo.png';
+                                        ?>
                                         <img src="<?php echo $img; ?>" class="activity-mini-logo"> 
                                         <span class="activity-name"><?php echo htmlspecialchars($fav['nome_attivita']); ?></span>
                                     </div>
                                     <div class="activity-stats-right">
                                         <div class="progress-bar-container">
+                                            <?php $percent = min(($fav['totale'] / 20) * 100, 100); ?>
                                             <div class="progress-fill" style="width: <?php echo $percent; ?>%;"></div>
                                         </div>
                                         <span class="activity-count"><?php echo $fav['totale']; ?></span>
@@ -216,16 +220,22 @@ try {
 
         // Funzione per mostrare/nascondere le attività extra
         function toggleRows() {
-            const hiddenRows = document.querySelectorAll('.hidden-row');
+            // Prende TUTTE le righe delle attività
+            const rows = document.querySelectorAll('.activity-row');
             const btn = document.getElementById('toggle-btn');
-            const allRows = document.querySelectorAll('.activity-row');
 
             if (btn.textContent === "Espandi") {
-                hiddenRows.forEach(row => row.style.display = 'flex');
+                // Mostra tutto
+                rows.forEach(row => {
+                    row.style.display = 'flex';
+                });
                 btn.textContent = "Chiudi";
             } else {
-                allRows.forEach((row, index) => {
-                    if (index >= 3) row.style.display = 'none';
+                // Nasconde dal quarto in poi (indice 3)
+                rows.forEach((row, index) => {
+                    if (index >= 3) {
+                        row.style.display = 'none';
+                    }
                 });
                 btn.textContent = "Espandi";
             }
