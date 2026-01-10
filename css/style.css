@@ -1219,6 +1219,11 @@ footer {
     background: #E49A7D;
 }
 
+.time-btn.active {
+    background: #E49A7D; /* Colore arancio del tuo brand */
+    font-weight: bold;
+}
+
 .profile-page .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
