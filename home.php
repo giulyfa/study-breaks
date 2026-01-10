@@ -32,11 +32,18 @@ if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso']
 
 // 3. RECUPERO ATTIVITÀ
 // Recuperiamo le attività per visualizzarle nella griglia
-$stmt = $pdo->query("SELECT id, slug, titolo, tipo, durata FROM attivita WHERE stato = 'attivo'");
-$attivita = $stmt->fetchAll();
-
-$stmtP = $pdo->query("SELECT * FROM playlist WHERE attiva = 1");
-$playlists = $stmtP->fetchAll();
+// --- 3. ATTIVITÀ PIÙ SVOLTE (Con JOIN per prendere lo slug della foto) ---
+$stmtFav = $pdo->prepare("
+    SELECT asv.nome_attivita, COUNT(*) as totale, a.slug 
+    FROM attivita_svolte asv
+    LEFT JOIN attivita a ON asv.id_attivita = a.id
+    WHERE asv.id_utente = ? AND asv.id_attivita > 0 
+    GROUP BY asv.id_attivita 
+    ORDER BY totale DESC 
+    LIMIT 2
+");
+$stmtFav->execute([$user_id]);
+$preferite = $stmtFav->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -189,8 +196,8 @@ $playlists = $stmtP->fetchAll();
             <nav class="footer-links">
                 <a href="home.php" class="footer-link">Home</a>
                 <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="profile.php" class="footer-link">Profilo</a><br>
-                <a href="about.php" class="footer-link about-link">Chi siamo?</a>
+                <a href="profilo.php" class="footer-link">Profilo</a><br>
+                <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
             </nav>
         </footer>
         

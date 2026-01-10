@@ -9,6 +9,7 @@ $user_id = $_SESSION['user_id'];
 $azione = $_GET['azione'] ?? '';
 
 if ($azione == 'studio') {
+    // 1. Recupero dati utente per la streak
     $stmt = $pdo->prepare("SELECT streak, ultima_sessione FROM utenti WHERE id = ?");
     $stmt->execute([$user_id]);
     $user = $stmt->fetch();
@@ -27,6 +28,7 @@ if ($azione == 'studio') {
         $nuova_streak = 1;
     }
 
+    // 2. Aggiornamento tabella UTENTI (Totali e Streak)
     $stmt = $pdo->prepare("UPDATE utenti SET 
         sessioni_totali = sessioni_totali + 1, 
         sessioni_oggi = sessioni_oggi + 1, 
@@ -34,21 +36,28 @@ if ($azione == 'studio') {
         ultima_sessione = ? 
         WHERE id = ?");
     $stmt->execute([$nuova_streak, $oggi, $user_id]);
+
+    // --- AGGIUNTA PER IL GRAFICO: Inserimento in attivita_svolte ---
+    // Recuperiamo la durata passata dal JS, se manca mettiamo 25 di default
+    $durata_studio = intval($_GET['durata'] ?? 25); 
+
+    $stmtLogStudio = $pdo->prepare("INSERT INTO attivita_svolte 
+        (id_utente, id_attivita, categoria, nome_attivita, durata_minuti, data_ora) 
+        VALUES (?, 0, 'Studio', 'Sessione Studio', ?, NOW())");
+    $stmtLogStudio->execute([$user_id, $durata_studio]);
+    // --------------------------------------------------------------
     
     $_SESSION['sessioni_totali'] = ($_SESSION['sessioni_totali'] ?? 0) + 1;
     $_SESSION['sessioni_oggi'] = ($_SESSION['sessioni_oggi'] ?? 0) + 1;
     $_SESSION['streak'] = $nuova_streak;
 } 
-
 elseif ($azione == 'pausa') {
     $stmt = $pdo->prepare("UPDATE utenti SET pause_oggi = pause_oggi + 1 WHERE id = ?");
     $stmt->execute([$user_id]);
-    // AGGIUNTA: Incrementa il contatore delle pause di oggi nella sessione
     $_SESSION['pause_oggi'] = ($_SESSION['pause_oggi'] ?? 0) + 1;
 }
-
 elseif ($azione == 'attivita') {
-    $id_att = intval($_GET['id_att'] ?? 0); // Recupera l'ID dell'attività
+    $id_att = intval($_GET['id_att'] ?? 0); 
     $nome_att = $_GET['nome'] ?? 'Attività';
     $cat_att = $_GET['categoria'] ?? 'Generale';
     $durata_att = intval($_GET['durata'] ?? 0);
@@ -59,11 +68,9 @@ elseif ($azione == 'attivita') {
         WHERE id = ?");
     $stmtUser->execute([$user_id]);
 
-    // 2. Inserisce il record nel log dettagliato
     $stmtLog = $pdo->prepare("INSERT INTO attivita_svolte (id_utente, id_attivita, categoria, nome_attivita, durata_minuti, data_ora) VALUES (?, ?, ?, ?, ?, NOW())");
     $stmtLog->execute([$user_id, $id_att, $cat_att, $nome_att, $durata_att]);
 
-    // 3. AGGIORNAMENTO SESSIONE: Aggiorna sia il totale che il contatore di oggi
     $_SESSION['attivita_totali'] = ($_SESSION['attivita_totali'] ?? 0) + 1;
     $_SESSION['attivita_oggi'] = ($_SESSION['attivita_oggi'] ?? 0) + 1; 
 }
@@ -80,11 +87,9 @@ elseif ($azione == 'set_timer') {
     }
 }
 elseif ($azione === 'log_playlist') {
-    // Recuperiamo solo l'ID della playlist (il titolo non serve per questa tabella)
     $idP = $_GET['id_p'];
     $userId = $_SESSION['user_id'];
 
-    // Prepariamo la query con le colonne ESATTE che hai nel database
     $stmtLog = $pdo->prepare("INSERT INTO log_ascolti (id_utente, id_playlist) VALUES (?, ?)");
     
     if ($stmtLog->execute([$userId, $idP])) {

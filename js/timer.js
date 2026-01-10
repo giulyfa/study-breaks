@@ -72,9 +72,10 @@ function handleTimerComplete() {
             streakCountSpan.textContent = currentStreak + 1;
         }
 
-        // SALVATAGGIO SU SERVER
-        fetch('salva_dati.php?azione=studio');
-
+        // SALVATAGGIO SU SERVER (Includiamo la durata per attivita_svolte)
+        // Usiamo studioMinutes che è la variabile che contiene il tempo impostato
+        fetch(`salva_dati.php?azione=studio&durata=${studioMinutes}`);
+        
         showCustomAlert("SESSIONE COMPLETATA! Prenditi una pausa");
         suggestionBox.textContent = "Ottimo lavoro! Che ne pensi di un giochino per svagarti?";
         suggestionBox.style.display = "block";

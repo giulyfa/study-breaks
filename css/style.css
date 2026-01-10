@@ -1178,6 +1178,37 @@ footer {
     flex: 1;
 }
 
+.welcome-card {
+    grid-column: 1 / -1; /* Occupa tutte le colonne della griglia */
+    background-color: #faf6ee;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-left: 8px solid #E49A7D; /* Un richiamo al colore del brand */
+}
+
+.welcome-content h1 {
+    font-family: 'Quicksand', sans-serif;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.welcome-content p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Ottimizzazione per Mobile */
+@media (max-width: 768px) {
+    .welcome-card {
+        padding: 20px;
+        text-align: center;
+    }
+}
+
 .profile-page .streak-card {
     background-image: url('../img/streak.jpg');
     background-size: cover;
@@ -1219,6 +1250,11 @@ footer {
     background: #E49A7D;
 }
 
+.time-btn.active {
+    background: #E49A7D; /* Colore arancio del tuo brand */
+    font-weight: bold;
+}
+
 .profile-page .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1244,7 +1280,7 @@ footer {
 
 /*  LAYOUT DESKTOP PER PROFILO  */
 
-@media (min-width: 1024px) {
+@media (min-width: 680px) {
     .profile-page .content-profile {
         display: flex;
         flex-direction: row; /* Allinea in orizzontale */
@@ -1383,6 +1419,7 @@ footer {
     border-radius: 20px;
     padding: 25px;
     margin-top: 30px;
+    margin-bottom: 80px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
@@ -1429,7 +1466,7 @@ footer {
     text-align: center;
 }
 
-@media (min-width: 680px) {
+@media (min-width: 1024px) {
     /* La colonna sinistra deve permettere ai figli di stare larghi */
     .profile-page .left-column {
         margin-top: 50px;
