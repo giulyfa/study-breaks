@@ -72,9 +72,24 @@ function handleTimerComplete() {
             streakCountSpan.textContent = currentStreak + 1;
         }
 
-        // SALVATAGGIO SU SERVER (Includiamo la durata per attivita_svolte)
         // Usiamo studioMinutes che è la variabile che contiene il tempo impostato
-        fetch(`salva_dati.php?azione=studio&durata=${studioMinutes}`);
+        // 2. SALVATAGGIO E AGGIORNAMENTO STREAK REALE
+        fetch(`salva_dati.php?azione=studio&durata=${studioMinutes}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Prendi il quadratino della streak
+                    let streakCountSpan = document.getElementById('streak-count');
+                    if (streakCountSpan) {
+                        // USA IL DATO CHE ARRIVA DAL PHP!
+                        // Se il PHP dice che la streak è 5, scriviamo 5.
+                        streakCountSpan.textContent = data.nuova_streak;
+                    }
+                    console.log("Database sincronizzato. Streak attuale:", data.nuova_streak);
+                }
+            })
+            .catch(error => console.error("Errore nel salvataggio:", error));
+            
         
         showCustomAlert("SESSIONE COMPLETATA! Prenditi una pausa");
         suggestionBox.textContent = "Ottimo lavoro! Che ne pensi di un giochino per svagarti?";

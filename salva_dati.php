@@ -37,20 +37,25 @@ if ($azione == 'studio') {
         WHERE id = ?");
     $stmt->execute([$nuova_streak, $oggi, $user_id]);
 
-    // --- AGGIUNTA PER IL GRAFICO: Inserimento in attivita_svolte ---
-    // Recuperiamo la durata passata dal JS, se manca mettiamo 25 di default
+    // 3. INSERIMENTO IN ATTIVITA_SVOLTE (Spostato SOPRA l'uscita)
     $durata_studio = intval($_GET['durata'] ?? 25); 
-
     $stmtLogStudio = $pdo->prepare("INSERT INTO attivita_svolte 
         (id_utente, id_attivita, categoria, nome_attivita, durata_minuti, data_ora) 
         VALUES (?, 0, 'Studio', 'Sessione Studio', ?, NOW())");
     $stmtLogStudio->execute([$user_id, $durata_studio]);
-    // --------------------------------------------------------------
     
+    // 4. AGGIORNAMENTO SESSIONI PHP (Per vedere i dati subito senza ricaricare)
     $_SESSION['sessioni_totali'] = ($_SESSION['sessioni_totali'] ?? 0) + 1;
     $_SESSION['sessioni_oggi'] = ($_SESSION['sessioni_oggi'] ?? 0) + 1;
     $_SESSION['streak'] = $nuova_streak;
-} 
+
+    // 5. ORA POSSIAMO RISPONDERE AL JAVASCRIPT E USCIRE
+    echo json_encode([
+        'status' => 'success',
+        'nuova_streak' => $nuova_streak
+    ]);
+    exit; 
+}
 elseif ($azione == 'pausa') {
     $stmt = $pdo->prepare("UPDATE utenti SET pause_oggi = pause_oggi + 1 WHERE id = ?");
     $stmt->execute([$user_id]);
