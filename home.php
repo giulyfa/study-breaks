@@ -44,6 +44,11 @@ $stmtFav = $pdo->prepare("
 ");
 $stmtFav->execute([$user_id]);
 $preferite = $stmtFav->fetchAll(PDO::FETCH_ASSOC);
+
+// Recupero delle playlist disponibili nel database
+$stmtP = $pdo->prepare("SELECT * FROM playlist WHERE attiva = 1");
+$stmtP->execute();
+$playlists = $stmtP->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="it">

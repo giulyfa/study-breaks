@@ -1042,6 +1042,11 @@ footer {
     align-items: center;
     text-align: left;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.activity-page .spotify-card:hover {
+    transform: translateY(-2px);
 }
 
 .activity-page .spotify-icon {
