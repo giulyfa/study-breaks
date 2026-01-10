@@ -8,19 +8,20 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// --- 1. RECUPERO DATI UTENTE (Dalla tabella utenti) ---
 try {
-    $stmt = $pdo->prepare("SELECT streak, sessioni_oggi, attivita_oggi FROM utenti WHERE id = ?");
+    // 1. RECUPERO DATI UTENTE
+    $stmt = $pdo->prepare("SELECT nome, streak, sessioni_oggi, attivita_oggi FROM utenti WHERE id = ?");
     $stmt->execute([$user_id]);
     $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $nome_utente = $user_data['nome'] ?? 'Studente';
 
     $streak = $user_data['streak'] ?? 0;
     $sess_oggi = $user_data['sessioni_oggi'] ?? 0;
     $att_oggi = $user_data['attivita_oggi'] ?? 0;
 
-    // --- 2. QUERY PER SETTIMANA E MESE (Dalla cronologia attivita_svolte) ---
+    // --- 2. QUERY PER SETTIMANA E MESE ---
     function getPeriodStats($pdo, $user_id, $tipo, $intervallo) {
-        // Studio = id_attivita 0 | Giochi = id_attivita > 0
         $condition = ($tipo == 'studio') ? "id_attivita = 0" : "id_attivita > 0";
         $sql = "SELECT COUNT(*) FROM attivita_svolte 
                 WHERE id_utente = ? AND $condition 
@@ -35,37 +36,37 @@ try {
     $att_sett = getPeriodStats($pdo, $user_id, 'gioco', 7);
     $att_mese = getPeriodStats($pdo, $user_id, 'gioco', 30);
 
-    // --- 3. ATTIVITÀ PIÙ SVOLTE (Per le barre di progresso) ---
-    $stmtFav = $pdo->prepare("SELECT nome_attivita, COUNT(*) as totale 
-                             FROM attivita_svolte 
-                             WHERE id_utente = ? AND id_attivita > 0 
-                             GROUP BY nome_attivita ORDER BY totale DESC LIMIT 2");
+    // --- 3. ATTIVITÀ PREFERITE (Aumentato il limite per l'espansione) ---
+    $stmtFav = $pdo->prepare("SELECT asv.nome_attivita, COUNT(*) as totale, a.slug 
+                             FROM attivita_svolte asv
+                             LEFT JOIN attivita a ON asv.id_attivita = a.id
+                             WHERE asv.id_utente = ? AND asv.id_attivita > 0 
+                             GROUP BY asv.id_attivita ORDER BY totale DESC LIMIT 10");
     $stmtFav->execute([$user_id]);
     $preferite = $stmtFav->fetchAll(PDO::FETCH_ASSOC);
 
-    // --- 4. LOGICA GRAFICO STUDIO (Ultimi 7 giorni) ---
+    // --- 4. LOGICA GRAFICO STUDIO ---
     $punti_grafico = "";
     $etichette_giorni = [];
-    $x = 10;
-
-    // Array di traduzione manuale
-    $giorni_it = [
-        'Sun' => 'dom', 'Mon' => 'lun', 'Tue' => 'mar', 
-        'Wed' => 'mer', 'Thu' => 'gio', 'Fri' => 'ven', 'Sat' => 'sab'
-    ];
+    $giorni_it = ['Sun'=>'dom','Mon'=>'lun','Tue'=>'mar','Wed'=>'mer','Thu'=>'gio','Fri'=>'ven','Sat'=>'sab'];
+    
+    $width_svg = 400;
+    $margin = 35; 
+    $spazio_utile = $width_svg - ($margin * 2);
+    $step_x = $spazio_utile / 6;
 
     for ($i = 6; $i >= 0; $i--) {
         $data_check = date('Y-m-d', strtotime("-$i days"));
-        $giorno_en = date('D', strtotime($data_check)); // Prende "Mon", "Tue"...
-        $etichette_giorni[] = $giorni_it[$giorno_en]; // Traduce in italiano
+        $giorno_en = date('D', strtotime($data_check));
+        $etichette_giorni[] = $giorni_it[$giorno_en];
 
         $stmtG = $pdo->prepare("SELECT COUNT(*) FROM attivita_svolte WHERE id_utente = ? AND id_attivita = 0 AND DATE(data_ora) = ?");
         $stmtG->execute([$user_id, $data_check]);
         $val = $stmtG->fetchColumn();
 
-        $y = 180 - (min($val, 10) * 17); 
-        $punti_grafico .= "$x," . round($y) . " ";
-        $x += 63;
+        $current_x = $margin + ((6 - $i) * $step_x);
+        $y = 180 - (min($val, 10) * 16); 
+        $punti_grafico .= round($current_x) . "," . round($y) . " ";
     }
 
 } catch (PDOException $e) {
@@ -82,6 +83,12 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Area Personale - Study Breaks</title>
+    <style>
+        /* Stile per nascondere le righe extra */
+        .hidden-row {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
     <div class="profile-page">
@@ -91,6 +98,13 @@ try {
         </header>
 
         <main class="profile-container">
+            <section class="welcome-card">
+                <div class="welcome-content">
+                    <h1>Ciao, <?php echo htmlspecialchars($nome_utente); ?>! </h1>
+                    <p>Questa è la tua area personale. Qui puoi monitorare i tuoi progressi e vedere quanto sei stato produttivo.</p>
+                </div>
+            </section>
+
             <div class="content-profile">
                 <section class="streak-card">
                     <div class="streak-content">
@@ -123,41 +137,53 @@ try {
                 <section class="activities-history-container">
                     <div class="activities-history-content">
                         <h3 class="section-title">Attività preferite</h3>
-                        <?php if(empty($preferite)): ?>
-                            <p style="text-align:center; padding: 10px;">Ancora nessuna attività registrata.</p>
-                        <?php else: foreach($preferite as $fav): 
-                            $percent = min(($fav['totale'] / 20) * 100, 100); // 20 è il target massimo puramente estetico
-                        ?>
-                            <div class="activity-row">
-                                <div class="activity-info-left">
-                                    <img src="img/<?php echo strtolower($fav['nome_attivita']); ?>.jpg" class="activity-mini-logo"> 
-                                    <span class="activity-name"><?php echo $fav['nome_attivita']; ?></span>
-                                </div>
-                                <div class="activity-stats-right">
-                                    <div class="progress-bar-container">
-                                        <div class="progress-fill" style="width: <?php echo $percent; ?>%;"></div>
+                        <div id="activities-wrapper">
+                            <?php if(empty($preferite)): ?>
+                                <p style="text-align:center; padding: 10px;">Ancora nessuna attività registrata.</p>
+                            <?php else: 
+                                $count = 0;
+                                foreach($preferite as $fav): 
+                                    $count++;
+                                    // Aggiungiamo la classe hidden-row se siamo oltre la terza attività
+                                    $rowClass = ($count > 3) ? 'activity-row hidden-row' : 'activity-row';
+                                    
+                                    $img = !empty($fav['slug']) ? 'img/'.$fav['slug'].'.jpg' : 'img/logo.png';
+                                    if(!file_exists($img)) $img = 'img/logo.png';
+                                    $percent = min(($fav['totale'] / 20) * 100, 100); 
+                            ?>
+                                <div class="<?php echo $rowClass; ?>">
+                                    <div class="activity-info-left">
+                                        <img src="<?php echo $img; ?>" class="activity-mini-logo"> 
+                                        <span class="activity-name"><?php echo htmlspecialchars($fav['nome_attivita']); ?></span>
                                     </div>
-                                    <span class="activity-count"><?php echo $fav['totale']; ?></span>
+                                    <div class="activity-stats-right">
+                                        <div class="progress-bar-container">
+                                            <div class="progress-fill" style="width: <?php echo $percent; ?>%;"></div>
+                                        </div>
+                                        <span class="activity-count"><?php echo $fav['totale']; ?></span>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php endforeach; endif; ?>
-                        <button class="expand-btn">Espandi</button>
+                            <?php endforeach; endif; ?>
+                        </div>
+
+                        <?php if(count($preferite) > 3): ?>
+                            <button class="expand-btn" id="toggle-btn" onclick="toggleRows()">Espandi</button>
+                        <?php endif; ?>
                     </div>
                 </section>
 
                 <div class="weekly-activity-container">
                     <div class="chart-wrapper">
                         <h3 class="weekly-title">Impegno Studio (Settimana)</h3>
-                        <svg class="activity-chart" viewBox="0 0 400 200">
-                            <?php for($i=0; $i<7; $i++): ?>
-                                <line x1="<?php echo 10 + ($i*63); ?>" y1="0" x2="<?php echo 10 + ($i*63); ?>" y2="180" class="chart-grid-line" />
+                        <svg class="activity-chart" viewBox="0 0 400 200" preserveAspectRatio="none">
+                            <?php for($i=0; $i<7; $i++): $lineX = 35 + ($i * ($spazio_utile/6)); ?>
+                                <line x1="<?php echo $lineX; ?>" y1="0" x2="<?php echo $lineX; ?>" y2="180" class="chart-grid-line" />
                             <?php endfor; ?>
-                            
-                            <polyline fill="none" stroke="#E49A7D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                            <polyline fill="none" stroke="#E49A7D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
                                 points="<?php echo trim($punti_grafico); ?>" />
                         </svg>
-                        <div class="chart-labels">
-                            <?php foreach($etichette_giorni as $label) echo "<span>".strtolower($label)."</span>"; ?>
+                        <div class="chart-labels" style="display: flex; justify-content: space-between; padding: 0 8%;">
+                            <?php foreach($etichette_giorni as $label) echo "<span style='flex:1; text-align:center;'>$label</span>"; ?>
                         </div>
                     </div>
                 </div>
@@ -175,7 +201,6 @@ try {
     </div>
 
     <script>
-        // Questi dati vengono stampati da PHP una volta sola al caricamento
         const data = {
             oggi: { s: <?php echo $sess_oggi; ?>, a: <?php echo $att_oggi; ?> },
             settimana: { s: <?php echo $sess_sett; ?>, a: <?php echo $att_sett; ?> },
@@ -183,17 +208,27 @@ try {
         };
 
         function updateStats(periodo, btn) {
-            // 1. Aggiorna i testi
             document.getElementById('display-sess').textContent = data[periodo].s;
             document.getElementById('display-att').textContent = data[periodo].a;
-            
-            // 2. Rimuove la classe 'active' da tutti i bottoni
             document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-            
-            // 3. Aggiunge la classe 'active' al bottone cliccato
             btn.classList.add('active');
-            
-            console.log("Visualizzazione aggiornata a: " + periodo);
+        }
+
+        // Funzione per mostrare/nascondere le attività extra
+        function toggleRows() {
+            const hiddenRows = document.querySelectorAll('.hidden-row');
+            const btn = document.getElementById('toggle-btn');
+            const allRows = document.querySelectorAll('.activity-row');
+
+            if (btn.textContent === "Espandi") {
+                hiddenRows.forEach(row => row.style.display = 'flex');
+                btn.textContent = "Chiudi";
+            } else {
+                allRows.forEach((row, index) => {
+                    if (index >= 3) row.style.display = 'none';
+                });
+                btn.textContent = "Espandi";
+            }
         }
     </script>
     <script src="js/global.js"></script>
