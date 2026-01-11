@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <a href="activities.php" class="footer-link">Attività</a>
                 <a href="profile.php" class="footer-link">Profilo</a>
                 <a href="proposta.php" class="footer-link">Proposta</a><br>
-                <a href="about.php" class="footer-link about-link">Chi siamo?</a>
+                <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
             </nav>
         </footer>
     </div>

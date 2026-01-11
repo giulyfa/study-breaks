@@ -1503,6 +1503,129 @@ footer {
     gap: 20px;
 }
 
+/* -------------------------------------- 
+---------- CHI SIAMO ???????? ----------
+----------------------------------------- */
+.about-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.about-container {
+    padding: 30px;
+    width: 100%;
+    flex: 1;
+    text-align: center;
+}
+
+/* Sezione Contatti */
+.contact-section {
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+@media (max-width: 680px) {
+    .contact-section {
+        margin-top: 50px;
+        padding: 20px;
+        border-radius: 30px;
+        text-align: left;
+    }
+}
+
+.contact-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.contact-section strong {
+    display: block;
+    color: #333;
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
+/* Stile Link Mail */
+.contact-section a {
+    color: #E49A7D; 
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.contact-section a:hover {
+    color: #d3896c;
+    border-bottom: 2px solid #E49A7D;
+}
+
+.hero-about h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 50px;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.about-card {
+    background: #E2DDD1;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.about-card:hover {
+    transform: translateY(-10px);
+}
+
+.about-card .icon {
+    width: 80px;          
+    height: 80px;   
+    margin: 0 auto 20px;  
+    display: flex;        
+    align-items: center;
+    justify-content: center;
+}
+
+.about-card .icon img {
+    width: 100%;          
+    height: 100%;
+    border-radius: 50%;      
+    object-fit: contain;  
+}
+
+.about-card h3 {
+    color: #E49A7D;
+    margin-bottom: 15px;
+}
+
+.team-section {
+    background: #faf6ee;
+    padding: 40px;
+    border-radius: 30px;
+    margin-top: 40px;
+}
+
+.team-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
 
 /* -------------------------------------- 
 ---------- AREA AMMINISTRATORE ----------
