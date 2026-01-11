@@ -100,6 +100,19 @@ try {
             <a href="home.php"><img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" /></a>
         </header>
 
+        <div id="sidebar-nav" class="sidebar">
+            <button class="close-btn">&times;</button>
+            <div class="sidebar-links">
+                <a href="home.php">Home</a>
+                <a href="attivita.php">Attività</a>
+                <a href="profilo.php">Profilo</a>
+                <a href="proposta.php">Proposta</a>
+                <a href="chi-siamo.php">Chi Siamo</a>
+                <br><br>
+                <a href="logout.php">Logout</a>
+            </div>
+        </div>
+
         <main class="profile-container">
             <section class="welcome-card">
                 <div class="welcome-content">
@@ -198,7 +211,8 @@ try {
             <nav class="footer-links">
                 <a href="home.php" class="footer-link">Home</a>
                 <a href="activities.php" class="footer-link">Attività</a>
-                <a href="profile.php" class="footer-link">Profilo</a><br>
+                <a href="profile.php" class="footer-link">Profilo</a>
+                <a href="proposta.php" class="footer-link">Proposta</a><br>
                 <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
             </nav>
         </footer>

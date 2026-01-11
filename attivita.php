@@ -47,6 +47,7 @@ $playlists = $stmtP->fetchAll();
                 <a href="home.php">Home</a>
                 <a href="attivita.php">Attività</a>
                 <a href="profilo.php">Profilo</a>
+                <a href="proposta.php">Proposta</a>
                 <a href="chi-siamo.php">Chi Siamo</a>
                 <br><br>
                 <a href="logout.php">Logout</a>
@@ -104,7 +105,7 @@ $playlists = $stmtP->fetchAll();
             <div class="suggestion-section">
                 <p>Hai un'idea per una nuova attività?</p>
                 <p class="small-text">Proponi la tua micro-attività e sarà valutata dall'admin</p>
-                <button class="propose-btn">Proponi nuova attività</button>
+                <button class="propose-btn" onclick="window.location.href='proposta.php'">Proponi nuova attività</button>
                 <p class="help">Aiutaci a migliorare!</p>
             </div>
         </section>
@@ -130,7 +131,8 @@ $playlists = $stmtP->fetchAll();
             <nav class="footer-links">
                 <a href="home.php" class="footer-link">Home</a>
                 <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="profilo.php" class="footer-link">Profilo</a><br>
+                <a href="profilo.php" class="footer-link">Profilo</a>
+                <a href="proposta.php" class="footer-link">Proposta</a><br>
                 <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
             </nav>
         </footer>
