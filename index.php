@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             // AGGIUNTA: Carichiamo i dati dal DB nella sessione per non perderli
             $_SESSION['sessioni_totali'] = $user['sessioni_totali'] ?? 0;
-            $_SESSION['attivita_totali'] = $user['attivita_totali'] ?? 0;
             $_SESSION['streak'] = $user['streak'] ?? 0;
             $_SESSION['data_ultimo_accesso'] = $user['ultima_sessione'] ?? ''; 
             

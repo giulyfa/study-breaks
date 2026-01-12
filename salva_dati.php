@@ -67,17 +67,15 @@ elseif ($azione == 'attivita') {
     $cat_att = $_GET['categoria'] ?? 'Generale';
     $durata_att = intval($_GET['durata'] ?? 0);
 
-    $stmtUser = $pdo->prepare("UPDATE utenti SET 
-        attivita_totali = attivita_totali + 1,
-        attivita_oggi = attivita_oggi + 1 
-        WHERE id = ?");
-    $stmtUser->execute([$user_id]);
+    // --- TOLTO: L'UPDATE della tabella utenti ---
+    // Non serve più aggiornare attivita_totali e attivita_oggi qui
 
+    // MANTENIAMO SOLO QUESTO: Il log dell'attività reale
     $stmtLog = $pdo->prepare("INSERT INTO attivita_svolte (id_utente, id_attivita, categoria, nome_attivita, durata_minuti, data_ora) VALUES (?, ?, ?, ?, ?, NOW())");
     $stmtLog->execute([$user_id, $id_att, $cat_att, $nome_att, $durata_att]);
 
-    $_SESSION['attivita_totali'] = ($_SESSION['attivita_totali'] ?? 0) + 1;
-    $_SESSION['attivita_oggi'] = ($_SESSION['attivita_oggi'] ?? 0) + 1; 
+    // --- TOLTO: L'aggiornamento della $_SESSION ---
+    // Visto che d'ora in poi conteremo le righe nel DB, aggiornare la sessione a mano è inutile
 }
 elseif ($azione == 'set_timer') {
     if (isset($_GET['minuti'])) {
