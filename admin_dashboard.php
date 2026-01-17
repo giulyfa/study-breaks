@@ -116,7 +116,7 @@ $playlists = $stmtPlay->fetchAll();
 
             <section class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
                 <a href="approvazione_attivita.php" class="btn primary-btn">Vai alle proposte degli utenti</a>
-                <a href="gestione_utenti.php" class="btn primary-btn">Vai alla gestione degli utenti</a>
+                <a href="utenti.php" class="btn primary-btn">Vai alla gestione degli utenti</a>
             </section>
         </main>
 
