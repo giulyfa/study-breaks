@@ -1643,6 +1643,67 @@ footer {
 ---------- AREA AMMINISTRATORE ----------
 ----------------------------------------- */
 
+/* SOVRASCRIVI TUTTO per il modale modifica */
+#modal-modifica .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; 
+}
+
+#modal-modifica .form-group label {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #2C5F4F;
+}
+
+#modal-modifica .form-group input,
+#modal-modifica .form-group select {
+    font-family: 'Quicksand', sans-serif;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 2px solid #E0EBE7;
+    font-size: 1em;
+    background: white;
+}
+
+#modal-modifica .form-group input:focus,
+#modal-modifica .form-group select:focus {
+    outline: none;
+    border-color: #4D7D72;
+    box-shadow: 0 0 0 3px rgba(77, 125, 114, 0.1);
+}
+
+#modal-modifica .modal-buttons {
+    display: flex;
+    gap: 12px;
+    padding-top: 25px;
+    border-top: 1px solid #E0EBE7;
+}
+
+#modal-modifica .save-btn,
+#modal-modifica .cancel-btn {
+    flex: 1;
+    padding: 13px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#modal-modifica .save-btn {
+    background: #4D7D72 !important;
+    color: white !important;
+    border: none !important;
+}
+
+#modal-modifica .cancel-btn {
+    background: #F0F4F2 !important;
+    color: #4D7D72 !important;
+    border: none !important;
+}
+
 .admin-page {
     width: 100%;
     display: flex;

@@ -54,11 +54,12 @@ $playlists = $stmtPlay->fetchAll();
                                     </span>
                                 </td>
                                 <td>
-                                    <button class="action-icon">📝</button> 
-                                    <button class="action-icon" onclick="eliminaAttivita(<?php echo $row['id']; ?>)">🗑️</button>
+                                    <button class="action-icon" onclick='apriModifica(<?php echo json_encode($row); ?>)'>📝</button> 
+                                    
+                                    <button class="action-icon" onclick="eliminaElemento(<?php echo $row['id']; ?>, 'attivita')">🗑️</button>
                                 </td>
                             </tr>
-                            <?php endforeach; ?>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -86,8 +87,8 @@ $playlists = $stmtPlay->fetchAll();
                                     </span>
                                 </td>
                                 <td>
-                                    <button class="action-icon">📝</button> 
-                                    <button class="action-icon">🗑️</button>
+                                    <button class="action-icon" onclick='apriModifica(<?php echo json_encode($p); ?>)'>📝</button>
+                                    <button class="action-icon" onclick="eliminaElemento(<?php echo $p['id']; ?>, 'playlist')">🗑️</button>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -104,6 +105,80 @@ $playlists = $stmtPlay->fetchAll();
         </main>
 
         <?php include 'includes/footer.php'; ?>
+    </div>
+
+    <script>
+        // Funzione per ELIMINARE
+        function eliminaElemento(id, tipo) {
+            if (confirm("Sei sicuro di voler eliminare definitivamente questo elemento?")) {
+                fetch(`dati_admin.php?azione=elimina&id=${id}&tipo=${tipo}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            location.reload(); // Ricarica per vedere la riga sparire
+                        } else {
+                            alert("Errore durante l'eliminazione.");
+                        }
+                    });
+            }
+        }
+
+        // Funzione per APRIRE il modale di modifica e popolarlo
+        function apriModifica(dati) {
+            document.getElementById('edit-id').value = dati.id;
+            document.getElementById('edit-titolo').value = dati.titolo;
+            document.getElementById('edit-tipo').value = dati.tipo;
+            document.getElementById('edit-durata').value = dati.durata;
+            document.getElementById('edit-stato').value = dati.stato;
+
+            document.getElementById('modal-modifica').style.display = 'block';
+        }
+
+        function chiudiModale(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+    </script>
+
+    <div id="modal-modifica" class="modal">
+        <div class="modal-content">
+            <h3>Modifica Attività</h3>
+            <form action="dati_admin.php" method="POST">
+                <input type="hidden" name="azione" value="modifica_attivita">
+                <input type="hidden" name="id_attivita" id="edit-id">
+                
+                <div class="form-group">
+                    <label>Titolo</label>
+                    <input type="text" name="titolo" id="edit-titolo" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select name="tipo" id="edit-tipo" required>
+                        <option value="gioco">Gioco</option>
+                        <option value="relax">Relax</option>
+                        <option value="fisico">Fisico</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Durata (min)</label>
+                    <input type="number" name="durata" id="edit-durata" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Stato</label>
+                    <select name="stato" id="edit-stato">
+                        <option value="active">Attivo</option>
+                        <option value="disabled">Disabilitato</option>
+                    </select>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Salva Modifiche</button>
+                    <button type="button" class="cancel-btn" onclick="chiudiModale('modal-modifica')">Annulla</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
