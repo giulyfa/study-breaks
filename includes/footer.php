@@ -1,4 +1,4 @@
-<footer>
+<footer class="footer-home">
     <nav class="footer-links">
         <a href="home.php" class="footer-link">Home</a>
         <a href="attivita.php" class="footer-link">Attività</a>

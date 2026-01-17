@@ -51,7 +51,7 @@ footer, .login-footer, .register-footer {
     color: white;
 }
 
-footer {
+footer.footer-home {
     display: flex;
     padding: 10px 0 20px 0; 
     background-image: url('../img/footer.jpg');

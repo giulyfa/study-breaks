@@ -104,8 +104,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
     
-    <div class="register-footer">
-        <p>© 2025 - Study Breaks. Tutti i diritti riservati.</p>
-    </div>
+    <?php include 'includes/footer_simple.php'; ?>
 </body>
 </html>
