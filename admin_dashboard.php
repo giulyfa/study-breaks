@@ -104,7 +104,9 @@ $playlists = $stmtPlay->fetchAll();
             </section>
         </main>
 
-        <?php include 'includes/footer.php'; ?>
+        <div class="admin-footer-bg">
+            <span>2025 - Study Breaks. Tutti i diritti riservati.</span>
+        </div>
     </div>
 
     <script>

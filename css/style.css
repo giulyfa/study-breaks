@@ -502,6 +502,8 @@ footer {
     transform: scale(0.9);    /* Si rimpicciolisce un po' (effetto pressione) */
 }
 
+
+/*MODEL BASE PER TUTTI I MODALI (PROMPT DI MODIFICA DI TUTTO!!!!!!!!!!!!!!!!!)*/
 .modal {
     display: none; /* Nascosta di base */
     position: fixed;
@@ -510,6 +512,19 @@ footer {
     width: 100%; height: 100%;
     background-color: rgba(0,0,0,0.5); /* Sfondo scuro semitrasparente */
     backdrop-filter: blur(5px); /* Effetto sfocato figo */
+}
+
+/* MODALE BASE (per tutti i modali) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0; 
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
@@ -522,16 +537,121 @@ footer {
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
+.modal-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.modal-content p {
+    margin-bottom: 15px;
+    color: #666;
+}
+
 .modal-content input {
     width: 80%;
     padding: 10px;
     margin: 20px 0;
     border: 1px solid #ddd;
     border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
 }
 
-.save-btn { font-family: 'Quicksand', sans-serif; background-color: #4D7D72; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-.cancel-btn { font-family: 'Quicksand', sans-serif; background: none; border: none; color: #888; cursor: pointer; margin-left: 10px; }
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-btn { 
+    font-family: 'Quicksand', sans-serif; 
+    background-color: #4D7D72; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+.cancel-btn { 
+    font-family: 'Quicksand', sans-serif; 
+    background: none; 
+    border: none; 
+    color: #888; 
+    cursor: pointer; 
+}
+
+/* MODALE ADMIN - Più largo per il form */
+#modal-modifica .modal-content,
+#modal-nuova .modal-content {
+    width: 90%;
+    max-width: 450px;
+    padding: 30px;
+}
+
+#modal-modifica h3,
+#modal-nuova h3 {
+    margin-bottom: 25px;
+}
+
+/* Form Admin */
+#modal-modifica form,
+#modal-nuova form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+#modal-modifica .form-group,
+#modal-nuova .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+#modal-modifica .form-group label,
+#modal-nuova .form-group label {
+    font-weight: 600;
+    font-size: 0.9em;
+    color: #555;
+}
+
+#modal-modifica .form-group input,
+#modal-modifica .form-group select,
+#modal-nuova .form-group input,
+#modal-nuova .form-group select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1em;
+    margin: 0;
+}
+
+#modal-modifica .form-group input:focus,
+#modal-modifica .form-group select:focus,
+#modal-nuova .form-group input:focus,
+#modal-nuova .form-group select:focus {
+    outline: none;
+    border-color: #4D7D72;
+}
+
+#modal-modifica .modal-buttons,
+#modal-nuova .modal-buttons {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+#modal-modifica .save-btn,
+#modal-modifica .cancel-btn,
+#modal-nuova .save-btn,
+#modal-nuova .cancel-btn {
+    flex: 1;
+}
 
 .home-page .timer-circle {
     width: 210px;
@@ -1642,67 +1762,6 @@ footer {
 /* -------------------------------------- 
 ---------- AREA AMMINISTRATORE ----------
 ----------------------------------------- */
-
-/* SOVRASCRIVI TUTTO per il modale modifica */
-#modal-modifica .form-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px; 
-}
-
-#modal-modifica .form-group label {
-    font-weight: 600;
-    font-size: 0.9em;
-    color: #2C5F4F;
-}
-
-#modal-modifica .form-group input,
-#modal-modifica .form-group select {
-    font-family: 'Quicksand', sans-serif;
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 8px;
-    border: 2px solid #E0EBE7;
-    font-size: 1em;
-    background: white;
-}
-
-#modal-modifica .form-group input:focus,
-#modal-modifica .form-group select:focus {
-    outline: none;
-    border-color: #4D7D72;
-    box-shadow: 0 0 0 3px rgba(77, 125, 114, 0.1);
-}
-
-#modal-modifica .modal-buttons {
-    display: flex;
-    gap: 12px;
-    padding-top: 25px;
-    border-top: 1px solid #E0EBE7;
-}
-
-#modal-modifica .save-btn,
-#modal-modifica .cancel-btn {
-    flex: 1;
-    padding: 13px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1em;
-    cursor: pointer;
-    font-family: 'Quicksand', sans-serif;
-}
-
-#modal-modifica .save-btn {
-    background: #4D7D72 !important;
-    color: white !important;
-    border: none !important;
-}
-
-#modal-modifica .cancel-btn {
-    background: #F0F4F2 !important;
-    color: #4D7D72 !important;
-    border: none !important;
-}
 
 .admin-page {
     width: 100%;
