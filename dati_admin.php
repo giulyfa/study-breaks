@@ -8,12 +8,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_ruolo'] !== 'admin') {
     exit;
 }
 
-// --- LOGICA PER ELIMINARE (Richiesta via GET/Fetch) ---
+// --- 1. LOGICA PER ELIMINARE ---
 if (isset($_GET['azione']) && $_GET['azione'] === 'elimina') {
     $id = intval($_GET['id']);
-    $tipo = $_GET['tipo']; // 'attivita' o 'playlist'
-    
-    // Decidiamo su quale tabella lavorare
+    $tipo = $_GET['tipo']; 
     $tabella = ($tipo === 'attivita') ? 'attivita' : 'playlist';
     
     $stmt = $pdo->prepare("DELETE FROM $tabella WHERE id = ?");
@@ -24,37 +22,47 @@ if (isset($_GET['azione']) && $_GET['azione'] === 'elimina') {
     exit;
 }
 
-// --- LOGICA PER MODIFICARE ATTIVITÀ (Richiesta via POST dal Modale) ---
-// --- MODIFICA SOLO STATO ATTIVITÀ ---
+// --- 2. LOGICA PER ATTIVITÀ (Salva o Aggiorna) ---
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['azione']) && $_POST['azione'] === 'modifica_attivita') {
-    $id = intval($_POST['id_attivita']);
+    // Se l'ID è vuoto (dal form nuova attività), sarà null
+    $id = !empty($_POST['id_attivita']) ? intval($_POST['id_attivita']) : null;
+    $titolo = sanitize($_POST['titolo']);
+    $tipo = sanitize($_POST['tipo']);
+    $durata = intval($_POST['durata']);
     $stato = sanitize($_POST['stato']);
 
-    $stmt = $pdo->prepare("UPDATE attivita SET stato = ? WHERE id = ?");
-    $stmt->execute([$stato, $id]);
+    if ($id) {
+        // UPDATE: Qui aggiorniamo tutto (anche se alcuni campi sono readonly nel modale, il valore arriva comunque)
+        $stmt = $pdo->prepare("UPDATE attivita SET titolo = ?, tipo = ?, durata = ?, stato = ? WHERE id = ?");
+        $stmt->execute([$titolo, $tipo, $durata, $stato, $id]);
+    } else {
+        // INSERT: Nuova riga
+        $stmt = $pdo->prepare("INSERT INTO attivita (titolo, tipo, durata, stato) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$titolo, $tipo, $durata, $stato]);
+    }
 
     header("Location: admin_dashboard.php?msg=ok");
     exit;
 }
 
-// --- SALVATAGGIO MODIFICA PLAYLIST ---
+// --- 3. LOGICA PER PLAYLIST (Salva o Aggiorna) ---
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['azione']) && $_POST['azione'] === 'modifica_playlist') {
-    
-    // Recuperiamo i dati inviati dal form
-    $id = intval($_POST['id_playlist']);
+    $id = !empty($_POST['id_playlist']) ? intval($_POST['id_playlist']) : null;
     $titolo = sanitize($_POST['titolo']);
-    $attiva = intval($_POST['attiva']); // Riceve 1 o 0 dal select
+    $url = sanitize($_POST['url']); // Ricevuto dall'input name="url"
+    $attiva = intval($_POST['attiva']);
 
-    // Prepariamo la query (Assicurati che la colonna si chiami 'attiva' nel tuo DB)
-    $stmt = $pdo->prepare("UPDATE playlist SET titolo = ?, attiva = ? WHERE id = ?");
-    
-    if ($stmt->execute([$titolo, $attiva, $id])) {
-        // Se va a buon fine, torna alla dashboard con un messaggio di successo
-        header("Location: admin_dashboard.php?status=success");
+    if ($id) {
+        // UPDATE (Ricordati di usare url_spotify come colonna DB)
+        $stmt = $pdo->prepare("UPDATE playlist SET titolo = ?, url_spotify = ?, attiva = ? WHERE id = ?");
+        $stmt->execute([$titolo, $url, $attiva, $id]);
     } else {
-        // Se c'è un errore, mostralo (utile per il debug)
-        echo "Errore durante l'aggiornamento: " . print_r($stmt->errorInfo(), true);
+        // INSERT
+        $stmt = $pdo->prepare("INSERT INTO playlist (titolo, url_spotify, attiva) VALUES (?, ?, ?)");
+        $stmt->execute([$titolo, $url, $attiva]);
     }
+
+    header("Location: admin_dashboard.php?status=success");
     exit;
 }
 ?>

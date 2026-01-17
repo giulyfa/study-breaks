@@ -1,8 +1,7 @@
 <?php
 require_once 'config.php';
 
-// Sicurezza: Solo l'admin può accedere (Assumendo che tu abbia una colonna 'ruolo' o simile)
-// Per ora lo lasciamo aperto, ma in futuro aggiungeremo un controllo se $_SESSION['ruolo'] == 'admin'
+
 
 // 1. Recupero tutte le Micro-attività
 $stmtAtt = $pdo->query("SELECT * FROM attivita ORDER BY id DESC");
@@ -117,9 +116,7 @@ $playlists = $stmtPlay->fetchAll();
             </section>
         </main>
 
-        <div class="admin-footer-bg">
-            <span>2025 - Study Breaks. Tutti i diritti riservati.</span>
-        </div>
+        <?php include 'includes/footer_simple.php'; ?>
     </div>
 
     <script>
@@ -160,7 +157,7 @@ $playlists = $stmtPlay->fetchAll();
             document.getElementById('edit-titolo').value = '';
             document.getElementById('edit-tipo').value = 'gioco';
             document.getElementById('edit-durata').value = '';
-            document.getElementById('edit-stato').value = 'attiva';
+            document.getElementById('edit-stato').value = 'disattivata';
 
             // 2. SBLOCCHIAMO i campi per il nuovo inserimento
             const campiDaSbloccare = ['edit-titolo', 'edit-tipo', 'edit-durata'];
@@ -220,7 +217,7 @@ $playlists = $stmtPlay->fetchAll();
                 
                 <div class="form-group">
                     <label>Attività</label>
-                    <input type="text" id="edit-titolo" required>
+                    <input type="text" name="titolo" id="edit-titolo" required>
                 </div>
 
                 <div class="form-group">
