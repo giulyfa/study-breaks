@@ -41,18 +41,7 @@ $playlists = $stmtP->fetchAll();
             </a>
         </header>
 
-        <div id="sidebar-nav" class="sidebar">
-            <button class="close-btn">&times;</button>
-            <div class="sidebar-links">
-                <a href="home.php">Home</a>
-                <a href="attivita.php">Attività</a>
-                <a href="profilo.php">Profilo</a>
-                <a href="proposta.php">Proposta</a>
-                <a href="chi-siamo.php">Chi Siamo</a>
-                <br><br>
-                <a href="logout.php">Logout</a>
-            </div>
-        </div>
+        <?php include 'includes/sidebar.php'; ?>
 
         <div class="content-area">
         <section class="activity-section">
@@ -127,15 +116,7 @@ $playlists = $stmtP->fetchAll();
         </section>
         </div>
 
-        <footer>
-            <nav class="footer-links">
-                <a href="home.php" class="footer-link">Home</a>
-                <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="profilo.php" class="footer-link">Profilo</a>
-                <a href="proposta.php" class="footer-link">Proposta</a><br>
-                <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
-            </nav>
-        </footer>
+        <?php include 'includes/footer.php'; ?>
 
     </div>
 
@@ -147,7 +128,6 @@ $playlists = $stmtP->fetchAll();
         </div>
     </div>
 
-    <script src="js/global.js"></script>
     <script>
         // Variabile globale per memorizzare i dati dell'attività aperta
         let attivitaCorrente = { id: 0, nome: '', tipo: '', durata: 0 };
@@ -226,5 +206,7 @@ $playlists = $stmtP->fetchAll();
             }
         }
     </script>
+
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

@@ -20,19 +20,7 @@ require_once 'config.php';
             <a href="home.php"><img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" /></a>
         </header>
 
-        <div id="sidebar-nav" class="sidebar">
-            <button class="close-btn">&times;</button>
-            <div class="sidebar-links">
-                <a href="home.php">Home</a>
-                <a href="attivita.php">Attività</a>
-                <a href="profilo.php">Profilo</a>
-                <a href="proposta.php">Proposta</a>
-                <a href="chi-siamo.php">Chi Siamo</a>
-                <?php if(isset($_SESSION['user_id'])): ?>
-                    <br><br><a href="logout.php">Logout</a>
-                <?php endif; ?>
-            </div>
-        </div>
+        <?php include 'includes/sidebar.php'; ?>
 
         <main class="about-container">
             <section class="hero-about">
@@ -76,17 +64,9 @@ require_once 'config.php';
             </section>
         </main>
 
-        <footer>
-            <nav class="footer-links">
-                <a href="home.php" class="footer-link">Home</a>
-                <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="profile.php" class="footer-link">Profilo</a>
-                <a href="proposta.php" class="footer-link">Proposta</a><br>
-                <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
-            </nav>
-        </footer>
+        <?php include 'includes/footer.php'; ?>
     </div>
 
-    <script src="js/global.js"></script>
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

@@ -72,18 +72,7 @@ $playlists = $stmtP->fetchAll(PDO::FETCH_ASSOC);
             </a>
         </header>
 
-        <div id="sidebar-nav" class="sidebar">
-            <button class="close-btn">&times;</button>
-            <div class="sidebar-links">
-                <a href="home.php">Home</a>
-                <a href="attivita.php">Attività</a>
-                <a href="profilo.php">Profilo</a>
-                <a href="proposta.php">Proposta</a>
-                <a href="chi-siamo.php">Chi Siamo</a>
-                <br><br>
-                <a href="logout.php">Logout</a>
-            </div>
-        </div>
+        <?php include 'includes/sidebar.php'; ?>
 
         <main>
             <div class="dashboard-top">
@@ -198,16 +187,7 @@ $playlists = $stmtP->fetchAll(PDO::FETCH_ASSOC);
             </section>
         </main>
         
-        <footer>
-            <nav class="footer-links">
-                <a href="home.php" class="footer-link">Home</a>
-                <a href="attivita.php" class="footer-link">Attività</a>
-                <a href="profilo.php" class="footer-link">Profilo</a>
-                <a href="proposta.php" class="footer-link">Proposta</a><br>
-                <a href="chi-siamo.php" class="footer-link about-link">Chi siamo?</a>
-            </nav>
-        </footer>
-        
+        <?php include 'includes/footer.php'; ?>
     </div> 
 
     <div id="activity-modal" class="modal activity-overlay">
@@ -223,7 +203,6 @@ $playlists = $stmtP->fetchAll(PDO::FETCH_ASSOC);
         const minutiSalvati = <?php echo $_SESSION['timer_scelto'] ?? 25; ?>;
         const pausaSalvata = <?php echo $_SESSION['pausa_scelta'] ?? 5; ?>; // Aggiungi questa
     </script>
-    <script src="js/global.js"></script>
     <script src="js/timer.js"></script>                    
     <script>
         // Variabile globale per memorizzare i dati dell'attività aperta
@@ -346,5 +325,7 @@ $playlists = $stmtP->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>
