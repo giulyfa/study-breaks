@@ -76,7 +76,7 @@ $playlists = $stmtPlay->fetchAll();
                         </tbody>
                     </table>
                 </div>
-                <button class="propose-btn" style="margin-top: 25px;">+ Nuova Attività</button>
+                <button class="propose-btn" style="margin-top: 25px;" onclick="apriNuovaAttivita()">+ Nuova Attività</button>
             </section>
 
             <section class="admin-section" style="margin-top: 40px;">
@@ -123,14 +123,13 @@ $playlists = $stmtPlay->fetchAll();
     </div>
 
     <script>
-        // Funzione per ELIMINARE
         function eliminaElemento(id, tipo) {
             if (confirm("Sei sicuro di voler eliminare definitivamente questo elemento?")) {
                 fetch(`dati_admin.php?azione=elimina&id=${id}&tipo=${tipo}`)
                     .then(res => res.json())
                     .then(data => {
                         if (data.status === 'success') {
-                            location.reload(); // Ricarica per vedere la riga sparire
+                            location.reload(); 
                         } else {
                             alert("Errore durante l'eliminazione.");
                         }
@@ -138,49 +137,77 @@ $playlists = $stmtPlay->fetchAll();
             }
         }
 
-        // Funzione per APRIRE il modale di modifica e popolarlo
         function apriModifica(dati) {
             document.getElementById('edit-id').value = dati.id;
             document.getElementById('edit-titolo').value = dati.titolo;
+            document.getElementById('edit-tipo').value = dati.tipo;
+            document.getElementById('edit-durata').value = dati.durata;
             document.getElementById('edit-stato').value = dati.stato;
+
+            // 2. BLOCCHIAMO i campi che non vuoi modificare
+            const campiDaBloccare = ['edit-titolo', 'edit-tipo', 'edit-durata'];
+            campiDaBloccare.forEach(id => {
+                const el = document.getElementById(id);
+                el.readOnly = true;
+                if(el.tagName === 'SELECT') el.style.pointerEvents = 'none'; // Blocca i select
+                el.style.background = "#f0f0f0";
+            });
+            document.getElementById('modal-modifica').style.display = 'block';
+        }
+
+        function apriNuovaAttivita() {
+            document.getElementById('edit-id').value = '';
+            document.getElementById('edit-titolo').value = '';
+            document.getElementById('edit-tipo').value = 'gioco';
+            document.getElementById('edit-durata').value = '';
+            document.getElementById('edit-stato').value = 'attiva';
+
+            // 2. SBLOCCHIAMO i campi per il nuovo inserimento
+            const campiDaSbloccare = ['edit-titolo', 'edit-tipo', 'edit-durata'];
+            campiDaSbloccare.forEach(id => {
+                const el = document.getElementById(id);
+                el.readOnly = false;
+                if(el.tagName === 'SELECT') el.style.pointerEvents = 'auto';
+                el.style.background = "#fff";
+            });
+
+            document.querySelector('#modal-modifica h3').innerText = "Aggiungi Nuova Attività";
             document.getElementById('modal-modifica').style.display = 'block';
         }
 
         function apriModificaPlaylist(dati) {
             document.getElementById('edit-pl-id').value = dati.id;
-            document.getElementById('edit-pl-titolo').value = dati.titolo;
-            
-            // 2. Carichiamo l'URL che arriva dal database
+            const titoloInput = document.getElementById('edit-pl-titolo');
+            titoloInput.value = dati.titolo;
             const urlInput = document.getElementById('edit-pl-url');
             urlInput.value = dati.url_spotify || '';
             
             // 3. Blocchiamo il campo URL (sola lettura)
             urlInput.readOnly = true; 
+            titoloInput.readOnly = true;
+            titoloInput.style.background = "#f0f0f0";
+            urlInput.style.background = "#f0f0f0";
         
             document.getElementById('edit-pl-attiva').value = dati.attiva;
             document.getElementById('playlist-overlay').style.display = 'block';
         }
 
-        function chiudiModale(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
         function apriNuovaPlaylist() {
-            // Resettiamo il form
             document.getElementById('edit-pl-id').value = ''; // ID vuoto = Nuovo inserimento
             document.getElementById('edit-pl-titolo').value = '';
-            document.getElementById('edit-pl-attiva').value = '1'; // Di default attiva
+            document.getElementById('edit-pl-attiva').value = '1'; 
 
-            // Sblocchiamo l'URL per la nuova playlist
             const urlInput = document.getElementById('edit-pl-url');
             urlInput.value = '';
             urlInput.readOnly = false;
+            urlInput.style.background = "#fff";
             
-            // Cambiamo il titolo del modale per chiarezza
             document.querySelector('#playlist-overlay h3').innerText = "Aggiungi Nuova Playlist";
-            
-            // Mostriamo il modale
             document.getElementById('playlist-overlay').style.display = 'block';
+        }
+
+        function chiudiModale(id) {
+            document.getElementById(id).style.display = 'none';
         }
     </script>
 
@@ -194,6 +221,20 @@ $playlists = $stmtPlay->fetchAll();
                 <div class="form-group">
                     <label>Attività</label>
                     <input type="text" id="edit-titolo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select name="tipo" id="edit-tipo" required>
+                        <option value="gioco">Gioco</option>
+                        <option value="relax">Relax</option>
+                        <option value="fisico">Fisico</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Durata (min)</label>
+                    <input type="number" name="durata" id="edit-durata" required>
                 </div>
 
                 <div class="form-group">
