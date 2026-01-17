@@ -721,20 +721,23 @@ footer {
     margin-bottom: 25px;
 }
 
-.home-page .activity-item,
-.activity-page .activity-item {
+/* Stile base per ogni card attività in ogni pagina */
+.activity-item {
     background-color: white;
     border: 1px solid #C5D6CF;
     border-radius: 10px;
     padding: 15px 10px;
     text-align: center;
     text-decoration: none;
-    color: #4D7D72;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column; /* Mette il testo SOTTO l'immagine */
+    align-items: center;    /* Centra tutto orizzontalmente */
+    gap: 10px;
 }
 
-.home-page .activity-item:hover,
-.activity-page .activity-item:hover {
+.activity-item:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
@@ -761,7 +764,7 @@ footer {
 .activity-page .activity-item p {
     font-size: 0.85em;
     font-weight: 500;
-
+    padding-bottom: 3px;
 }
 
 .home-page .activity-icon,
@@ -952,6 +955,9 @@ footer {
 .activity-page {
     width: 100%;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .activity-page .activity-section, 
@@ -966,6 +972,7 @@ footer {
 
 /* Su mobile i blocchi rimangono uno sotto l'altro */
 .activity-page .content-area {
+    flex: 1;
     display: flex;
     flex-direction: column;
     width: 95%;
@@ -1091,6 +1098,11 @@ footer {
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.activity-page .filter-btn.active {
+    background-color: #D17A55; /* Il tuo colore arancio */
+    color: white;
 }
 
 /* TITOLO + STELLA */

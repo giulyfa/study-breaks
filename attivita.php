@@ -44,45 +44,46 @@ $playlists = $stmtP->fetchAll();
             </div>
 
             <div class="filters">
-                <button class="filter-btn">Tutte</button>
-                <button class="filter-btn">1 min</button>
-                <button class="filter-btn">2 min</button>
-                <button class="filter-btn">3 min</button>
-                <button class="filter-btn">5 min</button>
+                <button class="filter-btn active" data-filter="all">Tutte</button>
+                <button class="filter-btn" data-filter="1">1 min</button>
+                <button class="filter-btn" data-filter="2">2 min</button>
+                <button class="filter-btn" data-filter="3">3 min</button>
+                <button class="filter-btn" data-filter="5">5 min</button>
             </div>
 
             <div class="activity-grid">
                 <?php
-                        $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'active'");
+                $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'active'");
 
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            $imagePath = 'img/' . $row['slug'] . '.jpg';
-                            
-                            if (!file_exists($imagePath)) {
-                                $imagePath = 'img/logo.png';
-                            }
-                            
-                            // Prepariamo i dati per il JavaScript
-                            $id = $row['id'];
-                            $slug = $row['slug'];
-                            $titolo = addslashes($row['titolo']); // addslashes evita errori se il titolo ha apostrofi
-                            $tipo = $row['tipo']; // Assicurati che la colonna nel DB si chiami 'tipo'
-                            $durata = $row['durata'];
-                        ?>
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $imagePath = 'img/' . $row['slug'] . '.jpg';
+                    
+                    if (!file_exists($imagePath)) {
+                        $imagePath = 'img/logo.png';
+                    }
+                    
+                    // Prepariamo i dati per il JavaScript
+                    $id = $row['id'];
+                    $slug = $row['slug'];
+                    $titolo = addslashes($row['titolo']); // addslashes evita errori se il titolo ha apostrofi
+                    $tipo = $row['tipo']; // Assicurati che la colonna nel DB si chiami 'tipo'
+                    $durata = $row['durata'];
+                ?>
 
-                            <div class="activity-item" 
-                                onclick="apriAttivita(<?php echo $id; ?>, '<?php echo $slug; ?>', '<?php echo $titolo; ?>', '<?php echo $tipo; ?>', <?php echo $durata; ?>)" 
-                                style="cursor: pointer;">
-                                
-                                <div class="activity-icon">
-                                    <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
-                                </div>
-                                <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
-                            </div>
+                <div class="activity-item"
+                    data-durata="<?php echo $durata; ?>"
+                    onclick="apriAttivita(<?php echo $id; ?>, '<?php echo $slug; ?>', '<?php echo $titolo; ?>', '<?php echo $tipo; ?>', <?php echo $durata; ?>)" 
+                    style="cursor: pointer;">
+                    
+                    <div class="activity-icon">
+                        <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
+                    </div>
+                    <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
+                </div>
 
-                        <?php 
-                        } 
-                    ?>
+                <?php 
+                    } 
+                ?>
             </div>
 
             <div class="suggestion-section">
@@ -123,6 +124,32 @@ $playlists = $stmtP->fetchAll();
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const items = document.querySelectorAll('.activity-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filtro = this.getAttribute('data-filter');
+
+                    items.forEach(item => {
+                        const durataItem = item.getAttribute('data-durata');
+
+                        // Togliamo le transizioni JS che creano artefatti
+                        if (filtro === 'all' || filtro === durataItem) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+
+
         // Variabile globale per memorizzare i dati dell'attività aperta
         let attivitaCorrente = { id: 0, nome: '', tipo: '', durata: 0 };
         let tempoInizioAttivita = 0;
