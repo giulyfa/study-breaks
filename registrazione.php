@@ -2,36 +2,40 @@
 require_once 'config.php';
 
 $errore = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nome = sanitize($_POST['nome']);
     $cognome = sanitize($_POST['cognome']);
     $email = sanitize($_POST['email']);
     $password = $_POST['password'];
-    $ripeti_password = $_POST['ripeti_password'];
+    $ripeti = $_POST['ripeti_password'];
 
-    // Validazioni semplici
-    if ($password !== $ripeti_password) {
+    // Validazione dati
+    if ($password !== $ripeti) {
         $errore = "Le password non coincidono.";
-    } elseif (!isValidEmail($email)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errore = "Formato email non valido.";
     } else {
-        // Controlla se l'email esiste già
         $stmt = $pdo->prepare("SELECT id FROM utenti WHERE email = ?");
         $stmt->execute([$email]);
+        
         if ($stmt->fetch()) {
             $errore = "Questa email è già registrata.";
         } else {
-            // Inserimento
+            // Creazione nuovo utente
             $hash = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("INSERT INTO utenti (nome, cognome, email, password, ruolo) VALUES (?, ?, ?, ?, 'studente')");
+            
             if ($stmt->execute([$nome, $cognome, $email, $hash])) {
-                // Recuperiamo l'ID appena creato dal database
-                $new_user_id = $pdo->lastInsertId();
-                // Creiamo le variabili di sessione (come nel login)
-                $_SESSION['user_id'] = $new_user_id;
+                // Login automatico post-registrazione
+                $_SESSION['user_id'] = $pdo->lastInsertId();
                 $_SESSION['user_nome'] = $nome;
                 $_SESSION['user_ruolo'] = 'studente';
-                // Reindirizziamo direttamente alla home
+                
+                // Inizializzazione sessione
+                $stats = ['sessioni_totali', 'streak', 'sessioni_oggi', 'pause_oggi', 'attivita_oggi'];
+                foreach ($stats as $field) { $_SESSION[$field] = 0; }
+
                 header("Location: home.php"); 
                 exit;
             }
@@ -39,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -54,13 +57,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <a href="home.html" title="Torna alla Home Page">
-        <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
         </a>
     </header>
 
     <div class="register-page">  
         <div class="content">
-            <?php if($errore) echo "<p style='color:red'>$errore</p>"; ?>
+            <?php if($errore): ?>
+                <p style="color:red"><?= htmlspecialchars($errore) ?></p>
+            <?php endif; ?>
+
             <h2>Registrazione</h2>
             
             <form method="POST" action="registrazione.php">
@@ -94,9 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn">REGISTRATI</button>
             </form>
             
-            <div class="login-link">
-                Hai già un account? <a href="login.php">Accedi</a>
-            </div>
+            <div class="login-link">Hai già un account?<a href="login.php">Accedi</a></div>
         </div>
     </div>
     

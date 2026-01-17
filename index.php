@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <h2>Login</h2>
 
-                <form method="POST" action="">
+                <form method="POST" action="index.php">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required autocomplete="email">
