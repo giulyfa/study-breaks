@@ -33,4 +33,35 @@ function sanitize($data) {
 function isValidEmail($email) {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
 }
+
+// Controllo e azzeramento Streak
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    
+    // Recuperiamo i dati dell'utente
+    $stmt = $pdo->prepare("SELECT ultima_sessione, streak FROM utenti WHERE id = ?");
+    $stmt->execute([$user_id]);
+    $user_data = $stmt->fetch();
+
+    if ($user_data && $user_data['ultima_sessione']) {
+        $oggi = new DateTime(date('Y-m-d'));
+        $ultima = new DateTime($user_data['ultima_sessione']);
+        
+        // Calcoliamo la differenza in giorni
+        $intervallo = $oggi->diff($ultima);
+        $giorni_passati = $intervallo->days;
+
+        // Se è passato più di un giorno solare dall'ultima sessione, la streak si rompe
+        // Esempio: Ultima sessione Lunedì, oggi è Mercoledì -> giorni_passati = 2 -> Reset!
+        if ($giorni_passati > 1) {
+            $stmtReset = $pdo->prepare("UPDATE utenti SET streak = 0 WHERE id = ?");
+            $stmtReset->execute([$user_id]);
+            
+            // Opzionale: aggiorna anche la variabile in sessione se la usi per il display veloce
+            if(isset($_SESSION['streak'])) {
+                $_SESSION['streak'] = 0;
+            }
+        }
+    }
+}
 ?>
