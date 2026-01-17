@@ -503,17 +503,6 @@ footer {
 }
 
 
-/*MODEL BASE PER TUTTI I MODALI (PROMPT DI MODIFICA DI TUTTO!!!!!!!!!!!!!!!!!)*/
-.modal {
-    display: none; /* Nascosta di base */
-    position: fixed;
-    z-index: 3000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.5); /* Sfondo scuro semitrasparente */
-    backdrop-filter: blur(5px); /* Effetto sfocato figo */
-}
-
 /* MODALE BASE (per tutti i modali) */
 .modal {
     display: none;
@@ -582,46 +571,25 @@ footer {
     cursor: pointer; 
 }
 
-/* MODALE ADMIN - Più largo per il form */
-#modal-modifica .modal-content,
-#modal-nuova .modal-content {
-    width: 90%;
-    max-width: 450px;
-    padding: 30px;
-}
-
-#modal-modifica h3,
-#modal-nuova h3 {
-    margin-bottom: 25px;
-}
-
-/* Form Admin */
 #modal-modifica form,
-#modal-nuova form {
+#playlist-overlay form {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
 }
 
 #modal-modifica .form-group,
-#modal-nuova .form-group {
+#playlist-overlay .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    text-align: left;
-}
-
-#modal-modifica .form-group label,
-#modal-nuova .form-group label {
-    font-weight: 600;
-    font-size: 0.9em;
-    color: #555;
+   
 }
 
 #modal-modifica .form-group input,
 #modal-modifica .form-group select,
-#modal-nuova .form-group input,
-#modal-nuova .form-group select {
+#playlist-overlay .form-group input,
+#playlist-overlay .form-group select {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #ddd;
@@ -631,25 +599,10 @@ footer {
     margin: 0;
 }
 
-#modal-modifica .form-group input:focus,
-#modal-modifica .form-group select:focus,
-#modal-nuova .form-group input:focus,
-#modal-nuova .form-group select:focus {
-    outline: none;
-    border-color: #4D7D72;
-}
-
-#modal-modifica .modal-buttons,
-#modal-nuova .modal-buttons {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-}
-
 #modal-modifica .save-btn,
 #modal-modifica .cancel-btn,
-#modal-nuova .save-btn,
-#modal-nuova .cancel-btn {
+#playlist-overlay .save-btn,
+#playlist-overlay .cancel-btn {
     flex: 1;
 }
 
@@ -1936,8 +1889,8 @@ footer {
     color: white;
 }
 
-.admin-page .status-badge.active { background-color: #8EBAA3; }
-.admin-page .status-badge.blocked { background-color: #E49A7D; }
+.admin-page .status-badge.attiva { background-color: #8EBAA3; }
+.admin-page .status-badge.disattivata { background-color: #E49A7D; }
 
 /* Icona Azione */
 .admin-page .action-icon {

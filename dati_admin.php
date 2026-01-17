@@ -25,17 +25,36 @@ if (isset($_GET['azione']) && $_GET['azione'] === 'elimina') {
 }
 
 // --- LOGICA PER MODIFICARE ATTIVITÀ (Richiesta via POST dal Modale) ---
+// --- MODIFICA SOLO STATO ATTIVITÀ ---
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['azione']) && $_POST['azione'] === 'modifica_attivita') {
     $id = intval($_POST['id_attivita']);
-    $titolo = sanitize($_POST['titolo']);
-    $tipo = sanitize($_POST['tipo']);
-    $durata = intval($_POST['durata']);
     $stato = sanitize($_POST['stato']);
 
-    $stmt = $pdo->prepare("UPDATE attivita SET titolo = ?, tipo = ?, durata = ?, stato = ? WHERE id = ?");
-    $stmt->execute([$titolo, $tipo, $durata, $stato, $id]);
+    $stmt = $pdo->prepare("UPDATE attivita SET stato = ? WHERE id = ?");
+    $stmt->execute([$stato, $id]);
 
-    header("Location: admin_dashboard.php?msg=updated");
+    header("Location: admin_dashboard.php?msg=ok");
+    exit;
+}
+
+// --- SALVATAGGIO MODIFICA PLAYLIST ---
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['azione']) && $_POST['azione'] === 'modifica_playlist') {
+    
+    // Recuperiamo i dati inviati dal form
+    $id = intval($_POST['id_playlist']);
+    $titolo = sanitize($_POST['titolo']);
+    $attiva = intval($_POST['attiva']); // Riceve 1 o 0 dal select
+
+    // Prepariamo la query (Assicurati che la colonna si chiami 'attiva' nel tuo DB)
+    $stmt = $pdo->prepare("UPDATE playlist SET titolo = ?, attiva = ? WHERE id = ?");
+    
+    if ($stmt->execute([$titolo, $attiva, $id])) {
+        // Se va a buon fine, torna alla dashboard con un messaggio di successo
+        header("Location: admin_dashboard.php?status=success");
+    } else {
+        // Se c'è un errore, mostralo (utile per il debug)
+        echo "Errore durante l'aggiornamento: " . print_r($stmt->errorInfo(), true);
+    }
     exit;
 }
 ?>

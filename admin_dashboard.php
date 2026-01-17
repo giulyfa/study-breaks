@@ -26,7 +26,20 @@ $playlists = $stmtPlay->fetchAll();
 <body>
     <div class="admin-page">
         <?php include 'includes/header.php'; ?>
-        <?php include 'includes/sidebar.php'; ?>
+
+        <div id="sidebar-nav" class="sidebar">
+            <button class="close-btn">&times;</button>
+            <div class="sidebar-links">
+                <a href="admin_dashboard.php">Home</a>
+                <a href="utenti.php">Utenti</a>
+                <a href="proposta.php">Proposte</a>
+                <a href="statistiche.php">Statistiche</a>
+                <?php if(isset($_SESSION['user_id'])): ?>
+                    <br><br>
+                    <a href="logout.php">Logout</a>
+                <?php endif; ?>
+            </div>
+        </div>
 
         <main class="admin-container">
             <section class="admin-section">
@@ -82,12 +95,12 @@ $playlists = $stmtPlay->fetchAll();
                             <tr>
                                 <td><strong><?php echo htmlspecialchars($p['titolo']); ?></strong></td>
                                 <td>
-                                    <span class="status-badge <?php echo ($p['attiva'] ? 'active' : 'inactive'); ?>">
-                                        <?php echo ($p['attiva'] ? 'attiva' : 'disattiva'); ?>
+                                    <span class="status-badge <?php echo ($p['attiva'] ? 'attiva' : 'disattivata'); ?>">
+                                        <?php echo ($p['attiva'] ? 'attiva' : 'disattivata'); ?>
                                     </span>
                                 </td>
                                 <td>
-                                    <button class="action-icon" onclick='apriModifica(<?php echo json_encode($p); ?>)'>📝</button>
+                                    <button class="action-icon" onclick='apriModificaPlaylist(<?php echo json_encode($p); ?>)'>📝</button>
                                     <button class="action-icon" onclick="eliminaElemento(<?php echo $p['id']; ?>, 'playlist')">🗑️</button>
                                 </td>
                             </tr>
@@ -129,11 +142,15 @@ $playlists = $stmtPlay->fetchAll();
         function apriModifica(dati) {
             document.getElementById('edit-id').value = dati.id;
             document.getElementById('edit-titolo').value = dati.titolo;
-            document.getElementById('edit-tipo').value = dati.tipo;
-            document.getElementById('edit-durata').value = dati.durata;
             document.getElementById('edit-stato').value = dati.stato;
-
             document.getElementById('modal-modifica').style.display = 'block';
+        }
+
+        function apriModificaPlaylist(dati) {
+            document.getElementById('edit-pl-id').value = dati.id;
+            document.getElementById('edit-pl-titolo').value = dati.titolo;
+            document.getElementById('edit-pl-attiva').value = dati.attiva;
+            document.getElementById('playlist-overlay').style.display = 'block';
         }
 
         function chiudiModale(id) {
@@ -143,44 +160,60 @@ $playlists = $stmtPlay->fetchAll();
 
     <div id="modal-modifica" class="modal">
         <div class="modal-content">
-            <h3>Modifica Attività</h3>
+            <h3>Modifica Stato Attività</h3>
             <form action="dati_admin.php" method="POST">
                 <input type="hidden" name="azione" value="modifica_attivita">
                 <input type="hidden" name="id_attivita" id="edit-id">
                 
                 <div class="form-group">
-                    <label>Titolo</label>
-                    <input type="text" name="titolo" id="edit-titolo" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Tipo</label>
-                    <select name="tipo" id="edit-tipo" required>
-                        <option value="gioco">Gioco</option>
-                        <option value="relax">Relax</option>
-                        <option value="fisico">Fisico</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Durata (min)</label>
-                    <input type="number" name="durata" id="edit-durata" required>
+                    <label>Attività</label>
+                    <input type="text" id="edit-titolo" required>
                 </div>
 
                 <div class="form-group">
                     <label>Stato</label>
                     <select name="stato" id="edit-stato">
-                        <option value="active">Attivo</option>
-                        <option value="disabled">Disabilitato</option>
+                        <option value="attiva">Attiva</option>
+                        <option value="disattivata">Disattivata</option>
                     </select>
                 </div>
 
                 <div class="modal-buttons">
-                    <button type="submit" class="save-btn">Salva Modifiche</button>
+                    <button type="submit" class="save-btn">Salva</button>
                     <button type="button" class="cancel-btn" onclick="chiudiModale('modal-modifica')">Annulla</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <div id="playlist-overlay" class="modal">
+        <div class="modal-content">
+            <h3>Modifica Playlist</h3>
+            <form action="dati_admin.php" method="POST">
+                <input type="hidden" name="azione" value="modifica_playlist">
+                <input type="hidden" name="id_playlist" id="edit-pl-id">
+
+                <div class="form-group">
+                    <label>Titolo Playlist</label>
+                    <input type="text" name="titolo" id="edit-pl-titolo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Stato</label>
+                    <select name="attiva" id="edit-pl-attiva">
+                        <option value="1">Attiva</option>
+                        <option value="0">Disattivata</option>
+                    </select>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="submit" class="save-btn">Salva</button>
+                    <button type="button" class="cancel-btn" onclick="chiudiModale('playlist-overlay')">Annulla</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

@@ -53,7 +53,7 @@ $playlists = $stmtP->fetchAll();
 
             <div class="activity-grid">
                 <?php
-                $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'active'");
+                $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'attiva'");
 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $imagePath = 'img/' . $row['slug'] . '.jpg';

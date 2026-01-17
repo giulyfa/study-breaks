@@ -37,7 +37,7 @@ $stmtFav = $pdo->prepare("
     SELECT asv.nome_attivita, COUNT(*) as totale, a.slug 
     FROM attivita_svolte asv
     LEFT JOIN attivita a ON asv.id_attivita = a.id
-    WHERE asv.id_utente = ? AND asv.id_attivita > 0 
+    WHERE asv.id_utente = ? AND asv.id_attivita > 0 AND a.stato = 'attiva'
     GROUP BY asv.id_attivita 
     ORDER BY totale DESC 
     LIMIT 2
@@ -141,7 +141,7 @@ $playlists = $stmtP->fetchAll(PDO::FETCH_ASSOC);
                 <h2>Attività consigliate</h2>
                 <div class="activity-grid">
                     <?php
-                        $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'active' LIMIT 4");
+                        $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'attiva' LIMIT 4");
 
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                             $imagePath = 'img/' . $row['slug'] . '.jpg';
@@ -197,7 +197,9 @@ $playlists = $stmtP->fetchAll(PDO::FETCH_ASSOC);
         const minutiSalvati = <?php echo $_SESSION['timer_scelto'] ?? 25; ?>;
         const pausaSalvata = <?php echo $_SESSION['pausa_scelta'] ?? 5; ?>; // Aggiungi questa
     </script>
-    <script src="js/timer.js"></script>                    
+
+    <script src="js/timer.js"></script>    
+
     <script>
         // Variabile globale per memorizzare i dati dell'attività aperta
         let attivitaCorrente = { id: 0, nome: '', tipo: '', durata: 0 };
