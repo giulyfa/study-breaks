@@ -3,7 +3,12 @@ require_once 'config.php'; // Carica sessione e connessione al DB
 
 // Verifica se l'utente è loggato
 if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
+    header("Location: index.php"); // Ti rimanda al login
+    exit;
+}
+
+if (isset($_SESSION['user_ruolo']) && strtolower($_SESSION['user_ruolo']) === 'admin') {
+    header("Location: admin_dashboard.php");
     exit;
 }
 
