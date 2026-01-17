@@ -45,7 +45,7 @@ header {
 }
 
 /* --- LAYOUT FOOTER --- */
-footer, .login-footer, .register-footer {
+footer, .footer-minimal {
     width: 100%; 
     background-color: #69A297;
     color: white;
@@ -81,19 +81,19 @@ footer.footer-home {
     font-weight: bold;
 }
 
-.login-footer, .register-footer {
+.footer-minimal {
     padding: 20px 0; 
     text-align: left;
     font-size: 12px;
 }
 
-.login-footer p, .register-footer p {
+.footer-minimal p {
     margin: 0 20px; 
 }
 
 /* --- MEDIA QUERY FOOTER (Tablet e desktop) --- */
 @media (min-width: 900px) {
-    footer { 
+    footer.footer-home { 
         background-image: url('../img/footer2.jpg');
         background-repeat: repeat !important; 
         background-size: auto !important;
@@ -107,39 +107,6 @@ footer.footer-home {
     .footer-link:hover {
         color: #034231;
         font-weight: bold;
-    }
-}
-
-/* --- ALERT --- */
-.alert-toast {
-    display: none; 
-    width: max-content;
-    background-color: #4D7D72; 
-    color: white;
-    padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 10px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.alert-toast.show { display: block; }
-
-/* --- MEDIA QUERY ALERT (Desktop) --- */
-@media (min-width: 1024px) {
-    .alert-toast {
-        display: none;
-        position: absolute;
-        top: 20px;  /* Dentro la card */
-        left: 50%;
-        transform: translateX(-50%);
-        width: max-content;
-        padding: 15px;
-        text-align: center;
-        border-radius: 10px;
-        z-index: 1000;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
 }
 
@@ -277,6 +244,39 @@ footer.footer-home {
 /* -------------------------------------- 
 -------------------HOME------------------
 ----------------------------------------- */
+
+/* --- ALERT --- */
+.alert-toast {
+    display: none; 
+    width: max-content;
+    background-color: #4D7D72; 
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.alert-toast.show { display: block; }
+
+/* --- MEDIA QUERY ALERT (Desktop) --- */
+@media (min-width: 1024px) {
+    .alert-toast {
+        display: none;
+        position: absolute;
+        top: 20px;  
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+}
 
 .home-page {
     display: flex;
