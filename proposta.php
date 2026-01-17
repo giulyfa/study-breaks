@@ -80,10 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="proposal-page">
-        <header>
-            <button class="menu-btn" id="open-sidebar">&#9776;</button>
-            <a href="home.php"><img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" /></a>
-        </header>
+        <?php include 'includes/header.php'; ?>
 
         <?php include 'includes/sidebar.php'; ?>
 
@@ -206,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (defaultBtn) defaultBtn.classList.add('active');
         });
     </script>
-    
+
     <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

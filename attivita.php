@@ -33,13 +33,7 @@ $playlists = $stmtP->fetchAll();
 </head>
 <body>
     <div class="activity-page">
-        <header>
-            <button class="menu-btn" id="open-sidebar">&#9776;</button>
-            
-            <a href="attivita.php" class="logo-link">
-                <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
-            </a>
-        </header>
+        <?php include 'includes/header.php'; ?>
 
         <?php include 'includes/sidebar.php'; ?>
 
