@@ -6,7 +6,6 @@
 
 html, body {
     height: 100%;
-    margin: 0;
 }
 
 body {
@@ -16,17 +15,18 @@ body {
     flex-direction: column;
     min-height: 100vh;
     align-items: center;
-    justify-content: space-between; /* Spinge header e footer alle estremità */
+    justify-content: space-between; 
 }
 
+/* --- LAYOUT HEADER --- */
 header {
     width: 100%;
     background-color: #69A297;
     padding: 20px;
     height: 100px;
     display: flex;
-    align-items: center; /* Allineamento verticale (centrato) */
-    justify-content: flex-start; /* Allineamento orizzontale (a sinistra, come nell'immagine) */
+    align-items: center; 
+    justify-content: flex-start; 
 }
 
 .header-logo {
@@ -44,33 +44,36 @@ header {
     padding: 5px;
 }
 
+/* --- LAYOUT FOOTER --- */
+footer, .login-footer, .register-footer {
+    width: 100%; 
+    background-color: #69A297;
+    color: white;
+}
+
 footer {
     display: flex;
-    width: 100%; 
-    height: auto;
-    background-image: url('../img/footer.jpg');
-    color: white;
     padding: 10px 0 20px 0; 
-    bottom: 0;
-    z-index: 10;
+    background-image: url('../img/footer.jpg');
     background-size: cover; /* L'immagine si ingrandisce per coprire tutto */
     background-position: center; /* Resta centrata */
-
+    z-index: 10;
 }
 
 .footer-links {
     display: flex;
-    flex-direction: column; /* I link sono incolonnati a sinistra */
+    flex-direction: column; 
     padding: 5px 20px;
     font-size: 16px;
 }
 
-.footer-link{
+.footer-link {
     color: #CCE2DC;
     text-decoration: none;
     margin-left: 10px;
     margin-bottom: 5px;
     display: inline-block;
+    transition: all 0.3s;
 }
 
 .footer-link:hover {
@@ -78,13 +81,21 @@ footer {
     font-weight: bold;
 }
 
+.login-footer, .register-footer {
+    padding: 20px 0; 
+    text-align: left;
+    font-size: 12px;
+}
+
+.login-footer p, .register-footer p {
+    margin: 0 20px; 
+}
+
+/* --- MEDIA QUERY FOOTER (Tablet e desktop) --- */
 @media (min-width: 900px) {
     footer { 
         background-image: url('../img/footer2.jpg');
-        /* Permette all'immagine di ripetersi orizzontalmente e verticalmente */
-        background-repeat: repeat !important; /* FORSE L'IMPORTANT NON E' IMPORTANTE*/
-        
-        /* Opzionale: assicura che l'immagine mantenga la sua dimensione originale senza stirarsi */
+        background-repeat: repeat !important; 
         background-size: auto !important;
     }
 
@@ -99,22 +110,23 @@ footer {
     }
 }
 
-/* --- STILE BASE (Mobile) --- */
+/* --- ALERT --- */
 .alert-toast {
-    display: none; /* Nascosto di base */
+    display: none; 
     width: max-content;
-    background-color: #4D7D72; /* Il tuo verde */
+    background-color: #4D7D72; 
     color: white;
     padding: 15px;
     text-align: center;
     font-weight: bold;
     border-radius: 10px;
-    z-index: 500;
     margin-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* --- MEDIA QUERY (Desktop/PC) --- */
+.alert-toast.show { display: block; }
+
+/* --- MEDIA QUERY ALERT (Desktop) --- */
 @media (min-width: 1024px) {
     .alert-toast {
         display: none;
@@ -131,41 +143,55 @@ footer {
     }
 }
 
-.alert-toast.show {
-    display: block;
+/* --- LOGIN e REGISTRAZIONE (Stili comuni) --- */
+.login-page, .register-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    width: 100%; 
+    padding: 50px 0; 
 }
 
-/* -------------------------------------- 
----------LOGIN e REGISTRAZIONE-----------
------------------------------------------ */
+.login-page .content, .register-page .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 
-.login-page label,
-.register-page label {
+.login-page h2, .register-page h2 {
+    color: #333;
+    font-weight: 400;
+    font-size: 2em;
+    margin: 15px 0 25px 0;
+    text-align: center;
+}
+
+.login-page label, .register-page label {
     display: block;
     color: #555;
     margin-bottom: 8px;
     font-size: 14px;
 }
 
-.login-page input, 
-.register-page input {
+.login-page input, .register-page input {
     width: 100%;
     padding: 12px 15px;
     border: 2px solid #e0e0e0;
     border-radius: 8px;
     font-size: 14px;
-    transition: border-color 0.3s;
     background: #f5f3ed;
+    transition: border-color 0.3s;
 }
 
-.login-page input:focus, 
-.register-page input:focus {
+.login-page input:focus, .register-page input:focus {
     outline: none;
     border-color: #7db5a6;
 }
 
-.login-page .btn, 
-.register-page .btn {
+.login-page .btn, .register-page .btn {
     font-family: 'Quicksand', sans-serif;
     width: 100%;
     padding: 14px;
@@ -175,53 +201,37 @@ footer {
     border-radius: 8px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
     margin: 25px 0 0 0;
-    font-weight: 400;
+    transition: background-color 0.3s;
 }
 
-.login-page .btn:hover,
-.register-page .btn:hover {
+.login-page .btn:hover, .register-page .btn:hover {
     background: #4d7d72;
 }
 
-.login-footer,
-.register-footer{
-    width: 100%; 
-    background-color: #69A297;
-    color: white;
-    padding: 20px 0; 
-    text-align: left;
-    font-size: 12px;
+.register-link, .login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
 }
 
-.login-footer p, 
-.register-footer p {
-    margin: 0 20px; 
+.register-link a, .login-link a {
+    color: #5a9185;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-
-/* -------------------------------------- 
-------------------LOGIN------------------
------------------------------------------ */
-
-.login-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* centra orizzontalmente il div */
-    justify-content: center; /* centra verticalmente il contenuto */
-    flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
-    width: 100%; 
-    padding: 50px 0; 
+.register-link a:hover, .login-link a:hover {
+    text-decoration: underline;
 }
 
-.login-page .content {
-    flex-grow: 1; /* Permette al contenuto di occupare lo spazio centrale */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-top: 50px;
+/* --- LOGIN --- */
+.tagline {
+    font-family: 'Nothing You Could Do', cursive;
+    color: #5a9185;
+    font-size: 18px;
+    margin-top: 50px;
+    text-align: center;
 }
 
 .login-page main {
@@ -234,121 +244,33 @@ footer {
 .login-page .user-icon {
     width: 100px;
     height: 100px;
-    color: #888; /* Colore grigio per l'icona */
-    margin: 0;
 }
 
 .login-page .user-icon svg {
     width: 100%;
     height: 100%;
-    fill: #888; /* Riempi l'icona con il grigio */
+    fill: #888; 
 }
 
-.login-page h2 {
-    color: #333;
-    font-weight: 400;
-    font-size: 2em;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-.login-page form {
+/* --- GESTIONE FORM (Distinto) --- */
+.login-page form, .register-page form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Spazio tra i gruppi di form */
+    gap: 15px;
     margin-bottom: 20px;
 }
 
-.login-page .form-group {
-    text-align: left;
-}
-
-.login-page .register-link {
-    text-align: center;
-    margin-top: 20px;
-    color: #666;
-}
-
-.login-page .register-link a {
-    color: #5a9185;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.login-page .register-link a:hover {
-    text-decoration: underline;
-}
-
-.login-page .tagline {
-    font-family: 'Nothing You Could Do', cursive;
-    text-align: center;
-    color: #5a9185;
-    font-style: italic;
-    font-size: 18px;
-    margin-top: 50px;
-}
-
-
-/* -------------------------------------- 
---------------REGISTRAZIONE--------------
------------------------------------------ */
-
-.register-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* centra orizzontalmente il div */
-    justify-content: center; /* centra verticalmente il contenuto */
-    flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
-    width: 100%; 
-    padding: 50px 0; 
-}
-
-.register-page .content {
-    flex-grow: 1; /* Permette al contenuto di occupare lo spazio centrale */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-top: 50px;
-}
-
-.register-page .content h2 {
-    color: #333;
-    font-weight: 400;
-    font-size: 2em;
-    margin-top: 15px;
-    margin-bottom: 25px;
-    text-align: center;
+.login-page form {
+    min-width: 250px; 
 }
 
 .register-page form {
     max-width: 350px; 
     width: 90%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-    margin-bottom: 20px;
 }
 
-.register-page .form-group {
+.login-page .form-group, .register-page .form-group {
     text-align: left;
-}
-
-.register-page .login-link {
-    text-align: center;
-    margin-top: 10px;
-    color: #666;
-}
-
-.register-page .login-link a {
-    color: #5a9185;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.register-page .login-link a:hover {
-    text-decoration: underline;
 }
 
 

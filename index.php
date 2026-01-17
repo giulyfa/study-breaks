@@ -75,11 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </svg>
                 </div>   
 
-                <?php if($errore): ?>
-                    <p class="error-message" style="color:red"><?= htmlspecialchars($errore) ?></p>
-                <?php endif; ?>
-
                 <h2>Login</h2>
+
+                <?php if($errore): ?>
+                    <p class="error-message" style="color:red; margin-bottom: 15px;"><?= htmlspecialchars($errore) ?></p>
+                <?php endif; ?>
 
                 <form method="POST" action="index.php">
                     <div class="form-group">
