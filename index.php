@@ -1,8 +1,13 @@
 <?php
 require_once 'config.php';
 
+// MODIFICA QUI: Redirect intelligente se la sessione esiste già
 if (isset($_SESSION['user_id'])) {
-    header("Location: home.php");
+    if ($_SESSION['user_ruolo'] === 'admin') {
+        header("Location: admin_dashboard.php");
+    } else {
+        header("Location: home.php");
+    }
     exit;
 }
 
