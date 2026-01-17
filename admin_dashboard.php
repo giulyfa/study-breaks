@@ -108,7 +108,7 @@ $playlists = $stmtPlay->fetchAll();
                         </tbody>
                     </table>
                 </div>
-                <button class="propose-btn" style="margin-top: 25px;">+ Nuova Playlist</button>
+                <button class="propose-btn" style="margin-top: 25px;" onclick="apriNuovaPlaylist()">+ Nuova Playlist</button>
             </section>
 
             <section class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
@@ -149,12 +149,38 @@ $playlists = $stmtPlay->fetchAll();
         function apriModificaPlaylist(dati) {
             document.getElementById('edit-pl-id').value = dati.id;
             document.getElementById('edit-pl-titolo').value = dati.titolo;
+            
+            // 2. Carichiamo l'URL che arriva dal database
+            const urlInput = document.getElementById('edit-pl-url');
+            urlInput.value = dati.url_spotify || '';
+            
+            // 3. Blocchiamo il campo URL (sola lettura)
+            urlInput.readOnly = true; 
+        
             document.getElementById('edit-pl-attiva').value = dati.attiva;
             document.getElementById('playlist-overlay').style.display = 'block';
         }
 
         function chiudiModale(id) {
             document.getElementById(id).style.display = 'none';
+        }
+
+        function apriNuovaPlaylist() {
+            // Resettiamo il form
+            document.getElementById('edit-pl-id').value = ''; // ID vuoto = Nuovo inserimento
+            document.getElementById('edit-pl-titolo').value = '';
+            document.getElementById('edit-pl-attiva').value = '1'; // Di default attiva
+
+            // Sblocchiamo l'URL per la nuova playlist
+            const urlInput = document.getElementById('edit-pl-url');
+            urlInput.value = '';
+            urlInput.readOnly = false;
+            
+            // Cambiamo il titolo del modale per chiarezza
+            document.querySelector('#playlist-overlay h3').innerText = "Aggiungi Nuova Playlist";
+            
+            // Mostriamo il modale
+            document.getElementById('playlist-overlay').style.display = 'block';
         }
     </script>
 
@@ -188,7 +214,7 @@ $playlists = $stmtPlay->fetchAll();
 
     <div id="playlist-overlay" class="modal">
         <div class="modal-content">
-            <h3>Modifica Playlist</h3>
+            <h3>Modifica Stato Playlist</h3>
             <form action="dati_admin.php" method="POST">
                 <input type="hidden" name="azione" value="modifica_playlist">
                 <input type="hidden" name="id_playlist" id="edit-pl-id">
@@ -196,6 +222,11 @@ $playlists = $stmtPlay->fetchAll();
                 <div class="form-group">
                     <label>Titolo Playlist</label>
                     <input type="text" name="titolo" id="edit-pl-titolo" required>
+                </div>
+
+                <div class="form-group">
+                    <label>URL Spotify</label>
+                    <input type="text" name="url" id="edit-pl-url" required>
                 </div>
 
                 <div class="form-group">
