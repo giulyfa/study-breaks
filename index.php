@@ -1,18 +1,22 @@
 <?php
 require_once 'config.php';
 
-// MODIFICA QUI: Redirect intelligente se la sessione esiste già
-if (isset($_SESSION['user_id'])) {
-    if ($_SESSION['user_ruolo'] === 'admin') {
-        header("Location: admin_dashboard.php");
-    } else {
-        header("Location: home.php");
-    }
+// Funzione per il reindirizzamento 
+function redirectUser($role) {
+    $target = ($role === 'admin') ? "admin_dashboard.php" : "home.php";
+    header("Location: $target");
     exit;
 }
 
+// Controllo accesso già effettuato
+if (isset($_SESSION['user_id'])) {
+    redirectUser($_SESSION['user_ruolo']);
+}
+
 $errore = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+// Logica Login
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = sanitize($_POST['email']);
     $password = $_POST['password'];
 
@@ -21,38 +25,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-        if ($user['stato'] == 'blocked') {
+        if ($user['stato'] === 'blocked') {
             $errore = "Il tuo account è stato bloccato. Contatta l'amministratore.";
         } else {
-            // --- INIZIO SESSIONE UTENTE ---
+            // Popolamento Sessione 
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_nome'] = $user['nome'];
             $_SESSION['user_ruolo'] = $user['ruolo'];
             
-            // AGGIUNTA: Carichiamo i dati dal DB nella sessione per non perderli
-            $_SESSION['sessioni_totali'] = $user['sessioni_totali'] ?? 0;
-            $_SESSION['streak'] = $user['streak'] ?? 0;
-            $_SESSION['data_ultimo_accesso'] = $user['ultima_sessione'] ?? ''; 
-            
-            // Inizializziamo i contatori giornalieri (questi ripartono da 0 a ogni login)
-            $_SESSION['sessioni_oggi'] = $user['sessioni_oggi'];
-            $_SESSION['pause_oggi'] = $user['pause_oggi'];
-            $_SESSION['attivita_oggi'] = $user['attivita_oggi'];
-
-            // Redirect basato sul ruolo
-            if ($user['ruolo'] == 'admin') {
-                header("Location: admin_dashboard.php");
-            } else {
-                header("Location: home.php");
+            // Dati statistici
+            $stats = ['sessioni_totali', 'streak', 'sessioni_oggi', 'pause_oggi', 'attivita_oggi'];
+            foreach ($stats as $field) {
+                $_SESSION[$field] = $user[$field] ?? 0;
             }
-            exit;
+            $_SESSION['data_ultimo_accesso'] = $user['ultima_sessione'] ?? '';
+
+            redirectUser($user['ruolo']);
         }
     } else {
         $errore = "Email o password errati.";
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -67,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <a href="home.html" title="Torna alla Home Page">
-        <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
+            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo"/>
         </a>
     </header>
 
@@ -80,10 +74,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/>
                     </svg>
                 </div>   
-                <?php if($errore) echo "<p style='color:red'>$errore</p>"; ?>
+
+                <?php if($errore): ?>
+                    <p class="error-message" style="color:red"><?= htmlspecialchars($errore) ?></p>
+                <?php endif; ?>
+
                 <h2>Login</h2>
 
-                <form method="POST" action="index.php">
+                <form method="POST" action="">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" required autocomplete="email">
@@ -94,19 +92,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="password" id="password" name="password" required autocomplete="current-password">
                     </div>
                     
-
                     <button type="submit" class="btn">LOGIN</button>
                 </form>
             
                 
-                <div class="register-link">
-                    Non hai un account? <a href="registrazione.php">Registrati</a>
-                </div>
+                <div class="register-link">Non hai un account? <a href="registrazione.php">Registrati</a></div>
             </div> 
         
-            <div class="tagline">
-                non mollare, un passo alla volta!
-            </div>
+            <div class="tagline">non mollare, un passo alla volta!</div>
         </main> 
     </div>
     
