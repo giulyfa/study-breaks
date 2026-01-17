@@ -1,7 +1,11 @@
 <?php
 require_once 'config.php';
 
-
+// Verifica se l'utente è loggato e se è admin
+if (!isset($_SESSION['user_ruolo']) || $_SESSION['user_ruolo'] !== 'admin') {
+    header("Location: index.php");
+    exit;
+}
 
 // 1. Recupero tutte le Micro-attività
 $stmtAtt = $pdo->query("SELECT * FROM attivita ORDER BY id DESC");
