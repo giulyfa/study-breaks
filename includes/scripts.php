@@ -1,1 +1,1 @@
-<script src="js/global.js"></script>
+<script src="js/sidebar.js"></script>
