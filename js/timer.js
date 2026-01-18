@@ -1,6 +1,3 @@
-// --- 1. CONFIGURAZIONE E VARIABILI ---
-
-// AGGIUNTA: Legge il valore impostato nel PHP, se non esiste usa 25
 let studioMinutes = typeof minutiSalvati !== 'undefined' ? minutiSalvati : 25; 
 let pausaMinutes = typeof pausaSalvata !== 'undefined' ? pausaSalvata : 5; 
 let timerId = null;
@@ -19,7 +16,7 @@ const btnPausa = document.getElementById('mode-pausa');
 const customAlert = document.getElementById('custom-alert');
 const alertMessage = document.getElementById('alert-message');
 
-// Elementi DOM - Modal & Suggerimenti
+// Elementi - Modal & Suggerimenti
 const settingsBtn = document.getElementById('settings-trigger');
 const modal = document.getElementById('custom-modal');
 const inputMins = document.getElementById('new-minutes');
@@ -27,7 +24,7 @@ const saveModalBtn = document.getElementById('save-modal');
 const closeModalBtn = document.getElementById('close-modal');
 const suggestionBox = document.getElementById('suggestion-message');
 
-// --- 2. FUNZIONI DI SERVIZIO ---
+// --- FUNZIONI DI SERVIZIO ---
 
 function showCustomAlert(message) {
     alertMessage.textContent = message;
@@ -51,38 +48,28 @@ function updateDisplay() {
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// --- 3. LOGICA DI FINE SESSIONE ---
+// --- LOGICA DI FINE SESSIONE ---
 
 function handleTimerComplete() {
     if (currentMode === 'studio') {
         hideCustomAlert();
         
-        // Sessioni Oggi
         let sessionsCountSpan = document.getElementById('sessions-count'); 
         let currentSessions = parseInt(sessionsCountSpan.textContent) || 0;
         sessionsCountSpan.textContent = currentSessions + 1;
 
-        // AGGIUNTA: Aggiornamento Streak in tempo reale
         let streakCountSpan = document.getElementById('streak-count');
         if (streakCountSpan) {
             let currentStreak = parseInt(streakCountSpan.textContent) || 0;
-            
-            // Logica: se era 0 diventa 1. Se era già più di 0, aumenta di 1.
-            // Nota: visivamente aumenterà ogni volta che finisci una sessione in questo test.
             streakCountSpan.textContent = currentStreak + 1;
         }
 
-        // Usiamo studioMinutes che è la variabile che contiene il tempo impostato
-        // 2. SALVATAGGIO E AGGIORNAMENTO STREAK REALE
         fetch(`salva_dati.php?azione=studio&durata=${studioMinutes}`)
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    // Prendi il quadratino della streak
                     let streakCountSpan = document.getElementById('streak-count');
                     if (streakCountSpan) {
-                        // USA IL DATO CHE ARRIVA DAL PHP!
-                        // Se il PHP dice che la streak è 5, scriviamo 5.
                         streakCountSpan.textContent = data.nuova_streak;
                     }
                     console.log("Database sincronizzato. Streak attuale:", data.nuova_streak);
@@ -100,7 +87,6 @@ function handleTimerComplete() {
         btnPausa.classList.add('active');
         btnStudio.classList.remove('active');
     } else {
-        // Aggiornamento pause in tempo reale
         let pauseCountSpan = document.getElementById('pause-count'); 
         if (pauseCountSpan) {
             let currentPause = parseInt(pauseCountSpan.textContent) || 0;
@@ -120,7 +106,7 @@ function handleTimerComplete() {
     }
 }
 
-// --- 4. GESTIONE EVENTI ---
+// --- GESTIONE EVENTI ---
 
 btnStudio.addEventListener('click', () => {
     currentMode = 'studio';
@@ -164,7 +150,7 @@ restartBtn.addEventListener('click', () => {
     hideCustomAlert();
 });
 
-// --- 5. MODAL ---
+// --- MODAL ---
 
 if (settingsBtn) {
     settingsBtn.addEventListener('click', () => {
@@ -179,7 +165,6 @@ if (saveModalBtn) {
         if (val > 0) {
             if (currentMode === 'studio') {
                 studioMinutes = val;
-                // AGGIUNTA: Salva la scelta nel PHP così non si resetta al refresh
                 fetch('salva_dati.php?azione=set_timer&minuti=' + val + '&tipo=studio');
             } else {
                 pausaMinutes = val;
@@ -202,11 +187,9 @@ window.addEventListener('click', (e) => {
     if (e.target == modal) modal.style.display = "none";
 });
 
-// --- 6. AVVIO ---
+// --- AVVIO ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Aggiorna il timer basandosi su studioMinutes (che ora può essere quello salvato)
     setTimer(studioMinutes); 
-    
     if (btnStudio) btnStudio.classList.add('active');
     if (suggestionBox) suggestionBox.style.display = "none";
 });

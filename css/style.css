@@ -261,6 +261,15 @@ footer.footer-home {
 
 .alert-toast.show { display: block; }
 
+.suggestion-text {
+    display: none; 
+    font-size: 700; 
+    text-align: center; 
+    margin: 10px 20px; 
+    font-weight: bold; 
+    color: #E49A7D;
+}
+
 /* --- MEDIA QUERY ALERT (Desktop) --- */
 @media (min-width: 1024px) {
     .alert-toast {
@@ -526,6 +535,39 @@ footer.footer-home {
 #playlist-overlay .save-btn,
 #playlist-overlay .cancel-btn {
     flex: 1;
+}
+
+#playlist-selector-overlay .playlist-list {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#playlist-selector-overlay .playlist-item {
+    background: #1DB954; 
+    padding: 15px; 
+    border-radius: 12px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#playlist-selector-overlay .close-btn {
+    position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;
+}
+
+.playlist-item a {
+    background:rgba(255,255,255,0.2); 
+    padding:5px 15px; 
+    border-radius:20px; 
+    color:white; 
+    text-decoration:none; 
+    font-size:0.8em; 
+    border:1px solid white;
 }
 
 .home-page .timer-circle {
