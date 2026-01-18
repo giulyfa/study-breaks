@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php'; // Connessione al database
+require_once 'config.php';
 
 if (!isset($_SESSION['user_id'])) {
     exit;
@@ -9,7 +9,6 @@ $user_id = $_SESSION['user_id'];
 $azione = $_GET['azione'] ?? '';
 
 if ($azione == 'studio') {
-    // 1. Recupero dati utente per la streak
     $stmt = $pdo->prepare("SELECT streak, ultima_sessione FROM utenti WHERE id = ?");
     $stmt->execute([$user_id]);
     $user = $stmt->fetch();
@@ -28,7 +27,7 @@ if ($azione == 'studio') {
         $nuova_streak = 1;
     }
 
-    // 2. Aggiornamento tabella UTENTI (Totali e Streak)
+    // AGGIORNAMENTO TABELLA UTENTI
     $stmt = $pdo->prepare("UPDATE utenti SET 
         sessioni_totali = sessioni_totali + 1, 
         sessioni_oggi = sessioni_oggi + 1, 
@@ -37,19 +36,18 @@ if ($azione == 'studio') {
         WHERE id = ?");
     $stmt->execute([$nuova_streak, $oggi, $user_id]);
 
-    // 3. INSERIMENTO IN ATTIVITA_SVOLTE (Spostato SOPRA l'uscita)
+    // INSERIMENTO IN ATTIVITA SVOLTE
     $durata_studio = intval($_GET['durata'] ?? 25); 
     $stmtLogStudio = $pdo->prepare("INSERT INTO attivita_svolte 
         (id_utente, id_attivita, categoria, nome_attivita, durata_minuti, data_ora) 
         VALUES (?, 0, 'Studio', 'Sessione Studio', ?, NOW())");
     $stmtLogStudio->execute([$user_id, $durata_studio]);
     
-    // 4. AGGIORNAMENTO SESSIONI PHP (Per vedere i dati subito senza ricaricare)
+    // AGGIORNAMENTO SESSIONI PHP PER DISPLAY IMMEDIATO
     $_SESSION['sessioni_totali'] = ($_SESSION['sessioni_totali'] ?? 0) + 1;
     $_SESSION['sessioni_oggi'] = ($_SESSION['sessioni_oggi'] ?? 0) + 1;
     $_SESSION['streak'] = $nuova_streak;
 
-    // 5. ORA POSSIAMO RISPONDERE AL JAVASCRIPT E USCIRE
     echo json_encode([
         'status' => 'success',
         'nuova_streak' => $nuova_streak
@@ -67,19 +65,16 @@ elseif ($azione == 'attivita') {
     $cat_att = sanitize($_GET['categoria'] ?? 'Generale');
     $durata_att = intval($_GET['durata'] ?? 0);
 
-    // 1. Log dell'attività (Cronologia storica)
     $stmtLog = $pdo->prepare("INSERT INTO attivita_svolte (id_utente, id_attivita, categoria, nome_attivita, durata_minuti, data_ora) VALUES (?, ?, ?, ?, ?, NOW())");
     $stmtLog->execute([$user_id, $id_att, $cat_att, $nome_att, $durata_att]);
 
-    // 2. Aggiornamento contatore giornaliero (SISTEMATO: tolta la virgola dopo + 1)
     $stmtUpdate = $pdo->prepare("UPDATE utenti SET attivita_oggi = attivita_oggi + 1 WHERE id = ?");
     $stmtUpdate->execute([$user_id]);
 
-    // 3. Aggiorna la sessione per il display immediato
     $_SESSION['attivita_oggi'] = ($_SESSION['attivita_oggi'] ?? 0) + 1;
 
-    // Risposta immediata e uscita
     echo json_encode(['status' => 'success', 'nuovo_totale' => $_SESSION['attivita_oggi']]);
+    exit;
 }
 elseif ($azione == 'set_timer') {
     if (isset($_GET['minuti'])) {

@@ -1618,7 +1618,6 @@ footer.footer-home {
 /* -------------------------------------- 
 ---------- AREA AMMINISTRATORE ----------
 ----------------------------------------- */
-
 .admin-page {
     width: 100%;
     display: flex;
@@ -1917,7 +1916,7 @@ footer.footer-home {
     align-items: center;
     margin-bottom: 30px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 2px solid #eee;
 }
 
 .admin-page .propose-btn {
