@@ -6,10 +6,10 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$user_id = $_SESSION['user_id']; // Recuperiamo l'ID dell'utente
+$user_id = $_SESSION['user_id'];
 $oggi = date('Y-m-d'); 
 
-// RECUPERO DATI (Eseguiamo le query una volta sola all'inizio)
+// RECUPERO DATI
 $attivita = $pdo->query("SELECT * FROM attivita WHERE stato = 'attiva'")->fetchAll();
 $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
 ?>
