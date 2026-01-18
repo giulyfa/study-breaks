@@ -195,7 +195,9 @@ $playlists = $stmtPlay->fetchAll();
 
         function apriNuovaPlaylist() {
             document.getElementById('edit-pl-id').value = ''; // ID vuoto = Nuovo inserimento
-            document.getElementById('edit-pl-titolo').value = '';
+            const titoloInput = document.getElementById('edit-pl-titolo');
+            titoloInput.value = '';
+            titoloInput.readOnly = false;
             document.getElementById('edit-pl-attiva').value = '1'; 
 
             const urlInput = document.getElementById('edit-pl-url');
