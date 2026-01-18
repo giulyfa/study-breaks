@@ -1,6 +1,5 @@
 <?php
 require_once 'config.php';
-// Non è obbligatorio essere loggati per vedere chi siamo, ma carichiamo la sessione se c'è
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -16,7 +15,6 @@ require_once 'config.php';
 <body>
     <div class="about-page">
         <?php include 'includes/header.php'; ?>
-
         <?php include 'includes/sidebar.php'; ?>
 
         <main class="about-container">
@@ -63,7 +61,6 @@ require_once 'config.php';
 
         <?php include 'includes/footer.php'; ?>
     </div>
-
     <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

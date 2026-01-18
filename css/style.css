@@ -55,8 +55,8 @@ footer.footer-home {
     display: flex;
     padding: 10px 0 20px 0; 
     background-image: url('../img/footer.jpg');
-    background-size: cover; /* L'immagine si ingrandisce per coprire tutto */
-    background-position: center; /* Resta centrata */
+    background-size: cover; 
+    background-position: center; 
     z-index: 10;
 }
 
@@ -567,7 +567,7 @@ footer.footer-home {
 
 #settings-trigger:hover { transform: rotate(90deg); }
 
-/* SELEZIONE MODALITÀ STUDIO/PAUSA */
+/* --- SELEZIONE MODALITÀ STUDIO/PAUSA --- */
 .home-page .timer-status-selector {
     display: flex;
     justify-content: center;
@@ -1299,7 +1299,7 @@ footer.footer-home {
     stroke-width: 1;
 }
 
-/*  MEDIA QUERY PER PROFILO  */
+/* --- MEDIA QUERY PER PROFILO --- */
 @media (min-width: 680px) {
     .welcome-card {
         padding: 20px;
@@ -1320,7 +1320,7 @@ footer.footer-home {
     .profile-page .stats-column { flex: 1.2; }
 }
 
-/* MEDIA QUERY PER PROFILO (Desktop) */
+/* --- MEDIA QUERY PER PROFILO (Desktop) --- */
 @media (min-width: 1024px) {
     .profile-page .left-column {
         margin-top: 50px;
@@ -1335,9 +1335,185 @@ footer.footer-home {
     }
 }
 
-/* -------------------------------------- 
----------- CHI SIAMO ???????? ----------
------------------------------------------ */
+/* --------------------------------------- 
+------------- PAGINA PROPOSTA ------------
+------------------------------------------ */
+
+.proposal-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.proposal-page .proposal-container {
+    padding: 30px;
+    width: 100%;
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.proposal-page .proposal-banner {
+    background-color: #E49A7D;
+    color: white;
+    text-align: center;
+    font-size: 0.9em;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.proposal-page .proposal-form {
+    background-color: #E3E0D1; /* Colore beige sabbia dell'immagine */
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 20px;;
+}
+
+.proposal-page .form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.proposal-page .form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Stile base per tutti i campi della pagina proposta */
+.proposal-page .form-group :is(input, select, textarea) {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-family: 'Quicksand', sans-serif; 
+    color: #a3a3a3;
+    width: 100%;
+}
+
+/* Stato Focus per tutti contemporaneamente */
+.proposal-page .form-group :is(input, select, textarea):focus {
+    outline: none;
+    border: 1.5px solid #69A297;
+}
+
+/* Colore per tutti i placeholder (input e textarea) */
+.proposal-page .form-group :is(input, textarea)::placeholder {
+    color: #a3a3a3;          /* Un grigio più definito o un colore a tua scelta */
+    opacity: 1;           /* Importante: Firefox di default applica opacità ridotta */
+    font-style: italic;   /* Opzionale: per distinguerlo dal testo inserito */
+}
+
+/* Selettore durata */
+.proposal-page .duration-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.proposal-page .dur-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #C4C2B4;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.proposal-page .dur-btn:hover {
+    background-color: #E49A7D;
+}
+
+/* --- AREA INVIO PROPOSTA --- */
+
+/* Il testo di suggerimento (grigio e piccolo) */
+.proposal-page .form-disclaimer {
+    font-size: 0.85em;
+    color: #666;
+    line-height: 1.4;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+/* Il pulsante arancione "Invia proposta" */
+.proposal-page .submit-proposal-btn {
+    width: 100%; /* Occupa tutta la larghezza del form */
+    background-color: #E49A7D; /* Arancione come da immagine */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Effetto al passaggio del mouse (scurisce) */
+.proposal-page .submit-proposal-btn:hover {
+    background-color: #cd7d6a;
+}
+
+/* La nota finale sotto il pulsante */
+.proposal-page .admin-note {
+    font-size: 0.8em;
+    color: #888;
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* --- ADATTAMENTO DESKTOP --- */
+@media (min-width: 1024px) {
+    .proposal-page .submit-proposal-btn {
+        width: auto; /* Non più a tutta larghezza */
+        min-width: 250px;
+        display: block;
+        margin: 0 auto; /* Lo centra se preferisci */
+    }
+}
+
+/* Sezione Esempi */
+.proposal-page .examples-section {
+    background-color: #E3E0D1;
+    padding: 25px;
+    border-radius: 20px;
+}
+
+.proposal-page .example-card {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-orange { background-color: #F3C9A1; }
+.card-green { background-color: #F1DEB7; }
+.card-yellow { background-color: #F4ECBE; }
+
+/* LAYOUT DESKTOP */
+@media (min-width: 1024px) {
+    .proposal-content-wrapper {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    .form-section { flex: 2; }
+    .examples-section { 
+        flex: 1; 
+        margin-top: 0; 
+    }
+}
+
+/* --- CHI SIAMO ????? --- */
 .about-page {
     width: 100%;
     display: flex;
@@ -1352,48 +1528,6 @@ footer.footer-home {
     text-align: center;
 }
 
-/* Sezione Contatti */
-.contact-section {
-    margin-top: 50px;
-    padding: 20px;
-    border-radius: 30px;
-}
-
-@media (max-width: 680px) {
-    .contact-section {
-        margin-top: 50px;
-        padding: 20px;
-        border-radius: 30px;
-        text-align: left;
-    }
-}
-
-.contact-section h2 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.contact-section strong {
-    display: block;
-    color: #333;
-    margin-top: 8px;
-    margin-bottom: 6px;
-}
-
-/* Stile Link Mail */
-.contact-section a {
-    color: #E49A7D; 
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-}
-
-.contact-section a:hover {
-    color: #d3896c;
-    border-bottom: 2px solid #E49A7D;
-}
-
 .hero-about h1 {
     font-size: 2.5rem;
     color: #333;
@@ -1406,6 +1540,7 @@ footer.footer-home {
     margin-bottom: 50px;
 }
 
+/* --- GRID E CARD --- */
 .about-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1421,24 +1556,18 @@ footer.footer-home {
     transition: transform 0.3s;
 }
 
-.about-card:hover {
-    transform: translateY(-10px);
-}
+.about-card:hover { transform: translateY(-10px); }
 
 .about-card .icon {
     width: 80px;          
     height: 80px;   
     margin: 0 auto 20px;  
-    display: flex;        
-    align-items: center;
-    justify-content: center;
 }
 
 .about-card .icon img {
     width: 100%;          
     height: 100%;
     border-radius: 50%;      
-    object-fit: contain;  
 }
 
 .about-card h3 {
@@ -1453,11 +1582,39 @@ footer.footer-home {
     margin-top: 40px;
 }
 
-.team-section h2 {
-    margin-bottom: 20px;
-    color: #333;
+.team-section h2 { margin-bottom: 20px; }
+
+/* --- SEZIONE CONTATTI ---*/
+.contact-section {
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 30px;
 }
 
+.contact-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.contact-section strong {
+    display: block;
+    color: #333;
+    margin-top: 8px;
+    margin-bottom: 6px;
+}
+
+.contact-section a {
+    color: #E49A7D; 
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.contact-section a:hover {
+    color: #d3896c;
+    border-bottom: 2px solid #E49A7D;
+}
 
 /* -------------------------------------- 
 ---------- AREA AMMINISTRATORE ----------
@@ -1829,185 +1986,7 @@ footer.footer-home {
     padding: 12px 20px;
 }
 
-
-/* --------------------------------------- 
-------------- PAGINA PROPOSTA ------------
------------------------------------------- */
-
-.proposal-page {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-.proposal-page .proposal-container {
-    padding: 30px;
-    width: 100%;
-    flex: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.proposal-page .proposal-banner {
-    background-color: #E49A7D;
-    color: white;
-    text-align: center;
-    font-size: 0.9em;
-    padding: 20px;
-    border-radius: 15px;
-    margin-bottom: 30px;
-}
-
-.proposal-page .proposal-form {
-    background-color: #E3E0D1; /* Colore beige sabbia dell'immagine */
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 20px;;
-}
-
-.proposal-page .form-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.proposal-page .form-group label {
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-/* Stile base per tutti i campi della pagina proposta */
-.proposal-page .form-group :is(input, select, textarea) {
-    padding: 12px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-family: 'Quicksand', sans-serif; 
-    color: #a3a3a3;
-    width: 100%;
-}
-
-/* Stato Focus per tutti contemporaneamente */
-.proposal-page .form-group :is(input, select, textarea):focus {
-    outline: none;
-    border: 1.5px solid #69A297;
-}
-
-/* Colore per tutti i placeholder (input e textarea) */
-.proposal-page .form-group :is(input, textarea)::placeholder {
-    color: #a3a3a3;          /* Un grigio più definito o un colore a tua scelta */
-    opacity: 1;           /* Importante: Firefox di default applica opacità ridotta */
-    font-style: italic;   /* Opzionale: per distinguerlo dal testo inserito */
-}
-
-/* Selettore durata */
-.proposal-page .duration-selector {
-    display: flex;
-    gap: 10px;
-}
-
-.proposal-page .dur-btn {
-    flex: 1;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #C4C2B4;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.proposal-page .dur-btn:hover {
-    background-color: #E49A7D;
-}
-
-/* --- AREA INVIO PROPOSTA --- */
-
-/* Il testo di suggerimento (grigio e piccolo) */
-.proposal-page .form-disclaimer {
-    font-size: 0.85em;
-    color: #666;
-    line-height: 1.4;
-    margin-top: 25px;
-    margin-bottom: 20px;
-}
-
-/* Il pulsante arancione "Invia proposta" */
-.proposal-page .submit-proposal-btn {
-    width: 100%; /* Occupa tutta la larghezza del form */
-    background-color: #E49A7D; /* Arancione come da immagine */
-    color: white;
-    border: none;
-    padding: 15px;
-    border-radius: 12px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.1em;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-/* Effetto al passaggio del mouse (scurisce) */
-.proposal-page .submit-proposal-btn:hover {
-    background-color: #cd7d6a;
-}
-
-/* La nota finale sotto il pulsante */
-.proposal-page .admin-note {
-    font-size: 0.8em;
-    color: #888;
-    text-align: center;
-    margin-top: 15px;
-    font-style: italic;
-}
-
-/* --- ADATTAMENTO DESKTOP --- */
-@media (min-width: 1024px) {
-    .proposal-page .submit-proposal-btn {
-        width: auto; /* Non più a tutta larghezza */
-        min-width: 250px;
-        display: block;
-        margin: 0 auto; /* Lo centra se preferisci */
-    }
-}
-
-/* Sezione Esempi */
-.proposal-page .examples-section {
-    background-color: #E3E0D1;
-    padding: 25px;
-    border-radius: 20px;
-}
-
-.proposal-page .example-card {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.card-orange { background-color: #F3C9A1; }
-.card-green { background-color: #F1DEB7; }
-.card-yellow { background-color: #F4ECBE; }
-
-/* LAYOUT DESKTOP */
-@media (min-width: 1024px) {
-    .proposal-content-wrapper {
-        display: flex;
-        gap: 40px;
-        align-items: flex-start;
-    }
-
-    .form-section { flex: 2; }
-    .examples-section { 
-        flex: 1; 
-        margin-top: 0; 
-    }
-}
-
+/* --- MODALE GIOCHI --- */
 /* Sovrascrive la larghezza di base per la modale dei giochi */
 .modal-content.game-modal-content {
     width: 90%;          /* Molto più largo */
