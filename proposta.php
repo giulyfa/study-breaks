@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if ($successo): ?>
                 <div class="success-banner">
                     <strong>Ottimo lavoro!</strong> La tua proposta è stata inviata all'admin per la revisione. <br><br>
-                    <a href="home.php" class="btn primary-btn">Torna alla Home</a>
+                    <a href="home.php" class="footer-link" style="text-decoration: underline;">Torna alla Home</a>
                 </div>
             <?php else: ?>
                 <?php if ($errore): ?>

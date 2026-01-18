@@ -1335,39 +1335,7 @@ footer.footer-home {
     }
 }
 
-/* --------------------------------------- 
-------------- PAGINA PROPOSTA ------------
------------------------------------------- */
-.dur-btn {
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.dur-btn.active {
-    background-color: #E49A7D !important;
-    color: white !important;
-    border-color: #E49A7D !important;
-    transform: scale(1.1);
-}
-
-.success-banner {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    margin-bottom: 25px;
-    border: 1px solid #c3e6cb;
-}
-
-.error-banner {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 15px;
-    border-radius: 15px;
-    margin-bottom: 25px;
-}
-
+/* --- PAGINA PROPOSTA --- */
 .proposal-page {
     width: 100%;
     display: flex;
@@ -1382,21 +1350,34 @@ footer.footer-home {
     max-width: 1200px;
     margin: 0 auto;
 }
+
+/* --- BANNER E  AVVISI --- */
 .proposal-page .proposal-banner {
     background-color: #E49A7D;
     color: white;
     text-align: center;
-    font-size: 0.9em;
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 30px;
 }
 
+.success-banner, .error-banner {
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid;
+}
+
+.success-banner { background-color: #d4edda; color: #155724; }
+.error-banner { background-color: #f8d7da; color: #721c24; }
+
+/* --- FORM PROPOSTA --- */
 .proposal-page .proposal-form {
-    background-color: #E3E0D1; /* Colore beige sabbia dell'immagine */
+    background-color: #E3E0D1; 
     padding: 30px;
     border-radius: 20px;
-    margin-bottom: 20px;;
+    margin-bottom: 30px;
 }
 
 .proposal-page .form-group {
@@ -1411,30 +1392,27 @@ footer.footer-home {
     color: #333;
 }
 
-/* Stile base per tutti i campi della pagina proposta */
 .proposal-page .form-group :is(input, select, textarea) {
     padding: 12px;
     border-radius: 10px;
     border: 1px solid #ccc;
     font-family: 'Quicksand', sans-serif; 
-    color: #a3a3a3;
+    color: #444;
     width: 100%;
 }
 
-/* Stato Focus per tutti contemporaneamente */
 .proposal-page .form-group :is(input, select, textarea):focus {
     outline: none;
     border: 1.5px solid #69A297;
 }
 
-/* Colore per tutti i placeholder (input e textarea) */
 .proposal-page .form-group :is(input, textarea)::placeholder {
-    color: #a3a3a3;          /* Un grigio più definito o un colore a tua scelta */
-    opacity: 1;           /* Importante: Firefox di default applica opacità ridotta */
-    font-style: italic;   /* Opzionale: per distinguerlo dal testo inserito */
+    color: #a3a3a3;     
+    opacity: 1;  
+    font-style: italic; 
 }
 
-/* Selettore durata */
+/* --- SELETTORE DURATA --- */
 .proposal-page .duration-selector {
     display: flex;
     gap: 10px;
@@ -1451,13 +1429,15 @@ footer.footer-home {
     transition: all 0.3s ease;
 }
 
-.proposal-page .dur-btn:hover {
+.proposal-page .dur-btn:hover { background-color: #E49A7D; }
+
+.dur-btn.active {
     background-color: #E49A7D;
+    color: white ;
+    transform: scale(1.1);
 }
 
 /* --- AREA INVIO PROPOSTA --- */
-
-/* Il testo di suggerimento (grigio e piccolo) */
 .proposal-page .form-disclaimer {
     font-size: 0.85em;
     color: #666;
@@ -1466,10 +1446,9 @@ footer.footer-home {
     margin-bottom: 20px;
 }
 
-/* Il pulsante arancione "Invia proposta" */
 .proposal-page .submit-proposal-btn {
-    width: 100%; /* Occupa tutta la larghezza del form */
-    background-color: #E49A7D; /* Arancione come da immagine */
+    width: 100%; 
+    background-color: #E49A7D; 
     color: white;
     border: none;
     padding: 15px;
@@ -1482,12 +1461,8 @@ footer.footer-home {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Effetto al passaggio del mouse (scurisce) */
-.proposal-page .submit-proposal-btn:hover {
-    background-color: #cd7d6a;
-}
+.proposal-page .submit-proposal-btn:hover { background-color: #cd7d6a; }
 
-/* La nota finale sotto il pulsante */
 .proposal-page .admin-note {
     font-size: 0.8em;
     color: #888;
@@ -1496,17 +1471,7 @@ footer.footer-home {
     font-style: italic;
 }
 
-/* --- ADATTAMENTO DESKTOP --- */
-@media (min-width: 1024px) {
-    .proposal-page .submit-proposal-btn {
-        width: auto; /* Non più a tutta larghezza */
-        min-width: 250px;
-        display: block;
-        margin: 0 auto; /* Lo centra se preferisci */
-    }
-}
-
-/* Sezione Esempi */
+/* --- SEZIONE ESEMPI --- */
 .proposal-page .examples-section {
     background-color: #E3E0D1;
     padding: 25px;
@@ -1527,7 +1492,7 @@ footer.footer-home {
 .card-green { background-color: #F1DEB7; }
 .card-yellow { background-color: #F4ECBE; }
 
-/* LAYOUT DESKTOP */
+/* MEDIA QUERY PER PROPOSTA (Desktop) */
 @media (min-width: 1024px) {
     .proposal-content-wrapper {
         display: flex;
@@ -1536,9 +1501,13 @@ footer.footer-home {
     }
 
     .form-section { flex: 2; }
-    .examples-section { 
-        flex: 1; 
-        margin-top: 0; 
+    .examples-section { flex: 1; }
+
+    .proposal-page .submit-proposal-btn {
+        width: auto;
+        min-width: 250px;
+        display: block;
+        margin: 0 auto;
     }
 }
 
