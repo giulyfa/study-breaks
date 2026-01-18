@@ -91,7 +91,7 @@ footer.footer-home {
     margin: 0 20px; 
 }
 
-/* --- MEDIA QUERY FOOTER (Tablet e desktop) --- */
+/* --- MEDIA QUERY FOOTER (Tutte le pagine) --- */
 @media (min-width: 900px) {
     footer.footer-home { 
         background-image: url('../img/footer2.jpg');
@@ -192,6 +192,27 @@ footer.footer-home {
     text-decoration: underline;
 }
 
+/* --- GESTIONE FORM (Per login e registrazione) --- */
+.login-page form, .register-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.login-page form {
+    min-width: 250px; 
+}
+
+.register-page form {
+    max-width: 350px; 
+    width: 90%;
+}
+
+.login-page .form-group, .register-page .form-group {
+    text-align: left;
+}
+
 /* --- LOGIN --- */
 .tagline {
     font-family: 'Nothing You Could Do', cursive;
@@ -217,27 +238,6 @@ footer.footer-home {
     width: 100%;
     height: 100%;
     fill: #888; 
-}
-
-/* --- GESTIONE FORM (Distinto) --- */
-.login-page form, .register-page form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.login-page form {
-    min-width: 250px; 
-}
-
-.register-page form {
-    max-width: 350px; 
-    width: 90%;
-}
-
-.login-page .form-group, .register-page .form-group {
-    text-align: left;
 }
 
 /* --- SIDEBAR E MODALI per TUTTO IL SITO --- */
@@ -601,7 +601,7 @@ footer.footer-home {
     border: 2px solid #c5c0b1; 
 }
 
-/* --- CONTROLLI Start/Stop/Restart --- */
+/* --- CONTROLLI START/STOP/RESTART --- */
 .home-page .timer-controls-bottom {
     display: flex;
     justify-content: center;
@@ -664,8 +664,7 @@ footer.footer-home {
     color: white;
 }
 
-.home-page .primary-btn:hover,
-.home-page .secondary-btn:hover {
+.home-page .primary-btn:hover, .home-page .secondary-btn:hover {
     background: #679882;
 }
 
@@ -1053,6 +1052,24 @@ footer.footer-home {
 /* -------------------------------------- 
 -----------------PROFILO-----------------
 ----------------------------------------- */
+.chart-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8%;
+    margin-top: 10px;
+}
+
+.chart-labels span {
+    flex: 1;
+    text-align: center;
+    font-size: 0.8em;
+    color: #888;
+}
+
+.activities-wrapper p {
+   text-align:center;
+   padding: 10px;
+}
 
 .profile-page {
     width: 100%;

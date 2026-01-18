@@ -9,18 +9,14 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 try {
-    // 1. RECUPERO DATI UTENTE
     $stmt = $pdo->prepare("SELECT nome, streak, sessioni_oggi, attivita_oggi FROM utenti WHERE id = ?");
     $stmt->execute([$user_id]);
     $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $nome_utente = $user_data['nome'] ?? 'Studente';
-
-    $streak = $user_data['streak'] ?? 0;
     $sess_oggi = $user_data['sessioni_oggi'] ?? 0;
     $att_oggi = $user_data['attivita_oggi'] ?? 0;
 
-    // --- 2. QUERY PER SETTIMANA E MESE ---
+    // FUNZIONE PER STATISTICHE PERIODICHE
     function getPeriodStats($pdo, $user_id, $tipo, $intervallo) {
         $condition = ($tipo == 'studio') ? "id_attivita = 0" : "id_attivita > 0";
         $sql = "SELECT COUNT(*) FROM attivita_svolte 
@@ -36,7 +32,7 @@ try {
     $att_sett = getPeriodStats($pdo, $user_id, 'gioco', 7);
     $att_mese = getPeriodStats($pdo, $user_id, 'gioco', 30);
 
-    // --- 3. ATTIVITÀ PREFERITE (Aumentato il limite per l'espansione) ---
+    // ATTIVITÀ PREFERITE 
     $stmtFav = $pdo->prepare("SELECT asv.nome_attivita, COUNT(*) as totale, a.slug 
                              FROM attivita_svolte asv
                              LEFT JOIN attivita a ON asv.id_attivita = a.id
@@ -45,7 +41,7 @@ try {
     $stmtFav->execute([$user_id]);
     $preferite = $stmtFav->fetchAll(PDO::FETCH_ASSOC);
 
-    // --- 4. LOGICA GRAFICO STUDIO ---
+    // LOGICA GRAFICO STUDIO
     $punti_grafico = "";
     $etichette_giorni = [];
     $giorni_it = ['Sun'=>'dom','Mon'=>'lun','Tue'=>'mar','Wed'=>'mer','Thu'=>'gio','Fri'=>'ven','Sat'=>'sab'];
@@ -83,26 +79,16 @@ try {
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Area Personale - Study Breaks</title>
-    <style>
-        /* Stile per nascondere le righe extra */
-        .hidden-row {
-            display: none !important;
-        }
-        .show-row {
-            display: flex !important;
-        }
-    </style>
 </head>
 <body>
     <div class="profile-page">
         <?php include 'includes/header.php'; ?>
-
         <?php include 'includes/sidebar.php'; ?>
 
         <main class="profile-container">
             <section class="welcome-card">
                 <div class="welcome-content">
-                    <h1>Ciao, <?php echo htmlspecialchars($nome_utente); ?>! </h1>
+                    <h1>Ciao, <?= htmlspecialchars($user_data['nome'] ?? 'Studente') ?>!</h1>
                     <p>Questa è la tua area personale. Qui puoi monitorare i tuoi progressi e vedere quanto sei stato produttivo.</p>
                 </div>
             </section>
@@ -111,7 +97,7 @@ try {
                 <section class="streak-card">
                     <div class="streak-content">
                         <h2>Giorni di fila</h2>
-                        <span class="streak-big-number"><?php echo $streak; ?></span>
+                        <span class="streak-big-number"><?= $user_data['streak'] ?? 0 ?></span>
                     </div>
                 </section>
 
@@ -141,12 +127,11 @@ try {
                         <h3 class="section-title">Attività preferite</h3>
                         <div id="activities-wrapper">
                             <?php if(empty($preferite)): ?>
-                                <p style="text-align:center; padding: 10px;">Ancora nessuna attività registrata.</p>
+                                <p>Ancora nessuna attività registrata.</p>
                             <?php else: 
                                 $count = 0;
                                 foreach($preferite as $fav): 
                                     $count++;
-                                    // Le righe dopo la terza partono nascoste con display:none
                                     $display = ($count > 3) ? 'display: none;' : 'display: flex;';
                             ?>
                                 <div class="activity-row" style="<?php echo $display; ?>">
@@ -185,8 +170,8 @@ try {
                             <polyline fill="none" stroke="#E49A7D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"
                                 points="<?php echo trim($punti_grafico); ?>" />
                         </svg>
-                        <div class="chart-labels" style="display: flex; justify-content: space-between; padding: 0 8%;">
-                            <?php foreach($etichette_giorni as $label) echo "<span style='flex:1; text-align:center;'>$label</span>"; ?>
+                        <div class="chart-labels">
+                            <?php foreach($etichette_giorni as $label) echo "<span>$label</span>"; ?>
                         </div>
                     </div>
                 </div>
@@ -210,20 +195,16 @@ try {
             btn.classList.add('active');
         }
 
-        // Funzione per mostrare/nascondere le attività extra
         function toggleRows() {
-            // Prende TUTTE le righe delle attività
             const rows = document.querySelectorAll('.activity-row');
             const btn = document.getElementById('toggle-btn');
 
             if (btn.textContent === "Espandi") {
-                // Mostra tutto
                 rows.forEach(row => {
                     row.style.display = 'flex';
                 });
                 btn.textContent = "Chiudi";
             } else {
-                // Nasconde dal quarto in poi (indice 3)
                 rows.forEach((row, index) => {
                     if (index >= 3) {
                         row.style.display = 'none';
@@ -233,7 +214,6 @@ try {
             }
         }
     </script>
-    
     <?php include 'includes/scripts.php'; ?>
 </body>
 </html>
