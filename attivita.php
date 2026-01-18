@@ -1,7 +1,6 @@
 <?php
-require_once 'config.php'; // Carica sessione e connessione al DB
+require_once 'config.php'; 
 
-// Verifica se l'utente è loggato
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit;
@@ -10,14 +9,9 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id']; // Recuperiamo l'ID dell'utente
 $oggi = date('Y-m-d'); 
 
-// 3. RECUPERO ATTIVITÀ
-// Recuperiamo le attività per visualizzarle nella griglia
-$stmt = $pdo->query("SELECT id, slug, titolo, tipo, durata FROM attivita WHERE stato = 'attivo'");
-$attivita = $stmt->fetchAll();
-
-// RECUPERO PLAYLIST
-$stmtP = $pdo->query("SELECT * FROM playlist WHERE attiva = 1");
-$playlists = $stmtP->fetchAll();
+// RECUPERO DATI (Eseguiamo le query una volta sola all'inizio)
+$attivita = $pdo->query("SELECT * FROM attivita WHERE stato = 'attiva'")->fetchAll();
+$playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -34,91 +28,68 @@ $playlists = $stmtP->fetchAll();
 <body>
     <div class="activity-page">
         <?php include 'includes/header.php'; ?>
-
         <?php include 'includes/sidebar.php'; ?>
 
         <div class="content-area">
-        <section class="activity-section">
-            <div class="section-header">
-                <h2>Attività</h2>
-            </div>
-
-            <div class="filters">
-                <button class="filter-btn active" data-filter="all">Tutte</button>
-                <button class="filter-btn" data-filter="1">1 min</button>
-                <button class="filter-btn" data-filter="2">2 min</button>
-                <button class="filter-btn" data-filter="3">3 min</button>
-                <button class="filter-btn" data-filter="5">5 min</button>
-            </div>
-
-            <div class="activity-grid">
-                <?php
-                $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'attiva'");
-
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $imagePath = 'img/' . $row['slug'] . '.jpg';
-                    
-                    if (!file_exists($imagePath)) {
-                        $imagePath = 'img/logo.png';
-                    }
-                    
-                    // Prepariamo i dati per il JavaScript
-                    $id = $row['id'];
-                    $slug = $row['slug'];
-                    $titolo = addslashes($row['titolo']); // addslashes evita errori se il titolo ha apostrofi
-                    $tipo = $row['tipo']; // Assicurati che la colonna nel DB si chiami 'tipo'
-                    $durata = $row['durata'];
-                ?>
-
-                <div class="activity-item"
-                    data-durata="<?php echo $durata; ?>"
-                    onclick="apriAttivita(<?php echo $id; ?>, '<?php echo $slug; ?>', '<?php echo $titolo; ?>', '<?php echo $tipo; ?>', <?php echo $durata; ?>)" 
-                    style="cursor: pointer;">
-                    
-                    <div class="activity-icon">
-                        <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
-                    </div>
-                    <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
+            <section class="activity-section">
+                <div class="section-header">
+                    <h2>Attività</h2>
                 </div>
 
-                <?php 
-                    } 
-                ?>
-            </div>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">Tutte</button>
+                    <?php foreach([1, 2, 3, 5] as $min): ?>
+                            <button class="filter-btn" data-filter="<?= $min ?>"><?= $min ?> min</button>
+                    <?php endforeach; ?>
+                </div>
 
-            <div class="suggestion-section">
-                <p>Hai un'idea per una nuova attività?</p>
-                <p class="small-text">Proponi la tua micro-attività e sarà valutata dall'admin</p>
-                <button class="propose-btn" onclick="window.location.href='proposta.php'">Proponi nuova attività</button>
-                <p class="help">Aiutaci a migliorare!</p>
-            </div>
-        </section>
+                <div class="activity-grid">
+                    <?php foreach ($attivita as $row): 
+                        $imagePath = file_exists("img/{$row['slug']}.jpg") ? "img/{$row['slug']}.jpg" : "img/logo.png";
+                    ?>
 
-        <section class="playlist-section">
-            <p class="playlist-intro">Oppure...</p>
-            <h3>Rilassati con una playlist!</h3>
-            
-            <div class="spotify-container">
-                <?php foreach ($playlists as $p): ?>
-                    <div class="spotify-card" 
-                        onclick="registraAscolto(event, <?php echo $p['id']; ?>); window.open('<?php echo $p['url_spotify']; ?>', '_blank')" 
-                        style="cursor: pointer;">
-                        <div class="spotify-icon"></div>
-                        <span><?php echo htmlspecialchars($p['titolo']); ?></span>
+                    <div class="activity-item"
+                        data-durata="<?php echo $row['durata']; ?>"
+                        onclick="apriAttivita(<?php echo $row['id']; ?>, '<?php echo $row['slug']; ?>', '<?php echo addslashes($row['titolo']); ?>', '<?php echo $row['tipo']; ?>', <?php echo $row['durata']; ?>)">
+                        
+                        <div class="activity-icon">
+                            <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
+                        </div>
+                        <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
                     </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
+
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="suggestion-section">
+                    <p>Hai un'idea per una nuova attività?</p>
+                    <p class="small-text">Proponi la tua micro-attività e sarà valutata dall'admin</p>
+                    <button class="propose-btn" onclick="window.location.href='proposta.php'">Proponi nuova attività</button>
+                    <p class="help">Aiutaci a migliorare!</p>
+                </div>
+            </section>
+
+            <section class="playlist-section">
+                <p class="playlist-intro">Oppure...</p>
+                <h3>Rilassati con una playlist!</h3>
+                
+                <div class="spotify-container">
+                    <?php foreach ($playlists as $p): ?>
+                        <div class="spotify-card" onclick="registraAscolto(event, <?php echo $p['id']; ?>); window.open('<?php echo $p['url_spotify']; ?>', '_blank')">
+                            <div class="spotify-icon"></div>
+                            <span><?php echo htmlspecialchars($p['titolo']); ?></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </section>
         </div>
 
         <?php include 'includes/footer.php'; ?>
-
     </div>
 
     <div id="activity-modal" class="modal activity-overlay">
         <div class="modal-content game-modal-content">
             <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
-            
             <iframe id="game-frame" src="" frameborder="0"></iframe>
         </div>
     </div>
@@ -137,18 +108,12 @@ $playlists = $stmtP->fetchAll();
 
                     items.forEach(item => {
                         const durataItem = item.getAttribute('data-durata');
-
-                        // Togliamo le transizioni JS che creano artefatti
-                        if (filtro === 'all' || filtro === durataItem) {
-                            item.style.display = 'flex';
-                        } else {
-                            item.style.display = 'none';
-                        }
+                        item.style.display = (filtro === 'all' || filtro === durataItem) ? 'flex' : 'none';
                     });
                 });
             });
         });
     </script>
-    <script src="js/home.js"></script><?php include 'includes/scripts.php'; ?>
+    <script src="js/activities.js"></script><?php include 'includes/scripts.php'; ?>
 </body>
 </html>

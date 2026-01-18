@@ -185,6 +185,6 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
         const pausaSalvata = <?php echo $_SESSION['pausa_scelta'] ?? 5; ?>;
     </script>
     <script src="js/timer.js"></script>    
-    <script src="js/home.js"></script><?php include 'includes/scripts.php'; ?>
+    <script src="js/activities.js"></script><?php include 'includes/scripts.php'; ?>
 </body>
 </html>
