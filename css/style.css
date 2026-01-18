@@ -641,22 +641,6 @@ footer.footer-home {
     text-align: center;
 }
 
-/* --- GRIGLIA ATTIVITÀ --- */
-.home-page .activity-section .activity-item {
-    background-color: #4D7D72; 
-    border: none;
-    color: white;
-    border-radius: 15px;
-    padding: 10px;
-}
-
-.home-page .activity-section h2 {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #4D7D72;
-    margin-bottom: 30px;
-}
-
 .home-page .playlist-section {
     padding: 0 20px 120px 20px;
     text-align: center;
@@ -686,8 +670,7 @@ footer.footer-home {
 }
 
 /* --- STILE SEZIONE ATTIVITA (Comune per pagina home e attività) --- */ 
-.home-page .activity-section,
-.activity-page .activity-section {
+.activity-section {
     background-color: #ECE7D9; 
     padding: 20px;
     text-align: center;
@@ -704,17 +687,40 @@ footer.footer-home {
     margin: 0 auto 25px;
 }
 
-.activity-item {
-    background-color: white;
-    border: 1px solid #C5D6CF;
-    border-radius: 10px;
-    padding: 15px 10px;
-    transition: 0.3s ease;
-    cursor: pointer;
+.activity-section h2 {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+.home-page .activity-section h2 {
+    color: #4D7D72;
+    margin-bottom: 30px;
+}
+
+.activity-page .activity-section h2 {
+    margin: 5px 0 10px;
+    color: #D17A55;
+}
+
+.activity-section .activity-item {
     display: flex;
     flex-direction: column; 
-    align-items: center;    
+    align-items: center;
     gap: 10px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    cursor: pointer;
+    border: none;
+    color: white;
+    padding: 10px;
+}
+
+.home-page .activity-section .activity-item {
+    background-color: #4D7D72; 
+}
+
+.activity-page .activity-section .activity-item {
+    background-color: #D17A55; 
 }
 
 .activity-item:hover {
@@ -885,21 +891,11 @@ footer.footer-home {
 /* --- PAGINA ATTIVITÀ --- */
 .activity-page {
     width: 100%;
-    padding: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-.activity-page .activity-section, 
-.playlist-section {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: auto;
-}
-
-/* Su mobile i blocchi rimangono uno sotto l'altro */
 .activity-page .content-area {
     flex: 1;
     display: flex;
@@ -910,101 +906,20 @@ footer.footer-home {
     gap: 20px;
 }
 
-@media (min-width: 1024px) {
-    .activity-page .content-area {
-        flex-direction: row; /* affianca i blocchi */
-        align-items: flex-start; /* Evita che il box Spotify si allunghi quanto le attività */
-        gap: 40px;
-        padding: 40px 0;
-    }
-
-    /* Le attività prendono più spazio (circa il 65%) */
-    .activity-page .activity-section {
-        flex: 2;
-        margin: 0; /* Rimuoviamo i margini auto perché gestiti dal wrapper */
-        width: 100%;
-    }
-
-    /* La playlist prende meno spazio (circa il 35%) */
-    .activity-page .playlist-section {
-        flex: 1;
-        margin: 0;
-        width: 100%;
-    }
-
-    /* Rendiamo la playlist "Sticky": rimane fissa mentre scorri le attività */
-    .activity-page .playlist-section {
-        position: sticky;
-        top: 20px;
-    }
-
-    /* Modifica della griglia attività: essendo il box più stretto, 
-       meglio stare su 2 o 3 colonne invece di 4 */
-    .activity-page .activity-grid {
-        grid-template-columns: repeat(2, 1fr); 
-    }
-}
-
-
-/* SEZIONE SPOTIFY  */
-.activity-page .spotify-container {
-    display: flex;
-    background-image: url('../img/spotify1.jpg');
-    background-repeat: no-repeat; /* Blocca la duplicazione */
-    background-size: cover;       /* Ridimensiona l'immagine per coprire tutto lo spazio senza distorcerla */
-    background-position: center;
-    flex-direction: column;
-    gap: 12px;
-    padding: 40px;
-    border-radius: 20px; 
-    width: 100%;
-    max-width: 100%; 
-    margin: 20px auto 80px auto; 
-}
-
-.activity-page .playlist-section {
-    color: black;
+.activity-page .activity-section, .activity-page .playlist-section {
+    width: 90%;
+    margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
 }
 
-.activity-page .spotify-card {
-    background-color: #333;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.activity-page .spotify-card:hover {
-    transform: translateY(-2px);
-}
-
-.activity-page .spotify-icon {
-    width: 38px;
-    height: 38px;
-    background-image: url('../img/spotify.jpg');
-    background-size: cover;       /* Ridimensiona l'immagine per riempire il cerchio */
-    background-position: center;  /* Centra l'immagine nel cerchio */
-    background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
-    
-    border-radius: 50%;
-    margin-right: 15px;
-    display: inline-block;        /* Assicurati che abbia una natura da blocco per vedere le dimensioni */
-}
-
-/* Filtri MINUTI */
+/* --- FILTRI MINUTI --- */
 .activity-page .filters {
     display: flex;
     justify-content: center;
     gap: 15px;
     padding: 15px 0;
     margin-bottom: 15px;
-    width: 100%;
     flex-wrap: wrap;
 }
 
@@ -1018,49 +933,54 @@ footer.footer-home {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: nowrap;
 }
 
-.activity-page .filter-btn:hover {
+.activity-page .filter-btn:hover, .activity-page .filter-btn.active {
     background-color: #D17A55; 
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.activity-page .filter-btn.active {
-    background-color: #D17A55; /* Il tuo colore arancio */
-    color: white;
-}
-
-/* TITOLO + STELLA */
-.activity-page .section-header {
+/* --- SEZIONE SPOTIFY --- */
+.activity-page .spotify-container {
     display: flex;
-    justify-content: center; 
-    position: relative;
-    align-items: center;
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    background-image: url('../img/spotify1.jpg');
+    background-repeat: no-repeat; 
+    background-size: cover;       
+    background-position: center;
+    flex-direction: column;
+    gap: 12px;
+    padding: 40px;
+    border-radius: 20px;  
+    margin: 20px auto 80px; 
 }
 
-.activity-page .section-header h2 {
-    margin: 0;
-    color: #D17A55;
-    font-size: 1.8em;
-    font-weight: 700;
-    text-align: center;
-}
-
-.activity-page .activity-section .activity-item {
-    background-color: #D17A55; 
-    border: none;
+.activity-page .spotify-card {
+    background-color: #333;
     color: white;
-    border-radius: 15px;
-    padding: 10px;
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* Sezione Proposta Nuova Attività */
+.activity-page .spotify-card:hover { transform: translateY(-2px); }
+
+.activity-page .spotify-icon {
+    width: 38px;
+    height: 38px;
+    background-image: url('../img/spotify.jpg');
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat; 
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* --- SEZIONE PROPOSTA --- */
 .activity-page .suggestion-section {
     margin-top: 40px;
     padding: 20px;
@@ -1098,11 +1018,35 @@ footer.footer-home {
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-bottom: 10px;
-    transition: background-color 0.3s;
+    transition: 0.3s;
 }
 
-.activity-page .propose-btn:hover{
-    background-color: #B1553E;
+.activity-page .propose-btn:hover{ background-color: #B1553E; }
+
+/* --- MEDIA QUERY ATTIVITA (Desktop) --- */
+@media (min-width: 1024px) {
+    .activity-page .content-area {
+        flex-direction: row; 
+        align-items: flex-start; 
+        gap: 40px;
+        padding: 40px 0;
+    }
+
+    .activity-page .activity-section {
+        flex: 2;
+        margin: 0; 
+    }
+
+    .activity-page .playlist-section {
+        flex: 1;
+        margin: 0;
+        position: sticky;
+        top: 20px;
+    }
+
+    .activity-page .activity-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
 }
 
 

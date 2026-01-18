@@ -32,9 +32,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
 
         <div class="content-area">
             <section class="activity-section">
-                <div class="section-header">
-                    <h2>Attività</h2>
-                </div>
+                <h2>Attività</h2>
 
                 <div class="filters">
                     <button class="filter-btn active" data-filter="all">Tutte</button>
