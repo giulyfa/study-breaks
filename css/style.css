@@ -1048,10 +1048,7 @@ footer.footer-home {
     }
 }
 
-
-/* -------------------------------------- 
------------------PROFILO-----------------
------------------------------------------ */
+/* --- PROFILO --- */
 .profile-page {
     width: 100%;
     display: flex;
@@ -1067,6 +1064,7 @@ footer.footer-home {
 
 .welcome-card {
     background-color: #faf6ee;
+    text-align: center;
     border-radius: 20px;
     padding: 30px;
     margin-bottom: 50px;
@@ -1085,6 +1083,7 @@ footer.footer-home {
     font-size: 1.1rem;
 }
 
+/* --- STREAK CARD --- */
 .profile-page .streak-card {
     background-image: url('../img/streak.jpg');
     background-size: cover;
@@ -1102,14 +1101,14 @@ footer.footer-home {
     font-weight: bold;
 }
 
-/* SELEZIONE (ANCHE X ADMIN-PAGE)*/
+/* --- SELETTORE TEMPORARE (Per profilo e admin page) --- */
 .time-selector {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.profile-page .time-btn, .admin-page .time-btn {
+.time-btn {
     font-family: 'Quicksand', sans-serif;
     flex: 1;
     margin: 8px 5px;
@@ -1122,12 +1121,8 @@ footer.footer-home {
     transition: all 0.3s ease;
 }
 
-.profile-page .time-btn:hover , .admin-page .time-btn:hover, .time-btn.active {
+.time-btn:hover, .time-btn.active {
     background: #E49A7D;
-}
-
-.time-btn.active {
-    font-weight: bold;
 }
 
 /* --- GRIGLIA STATISTICHE --- */
@@ -1153,6 +1148,7 @@ footer.footer-home {
 .stat-card.sessioni { background-color: #A8C69F; }
 .stat-card.attivita { background-color: #8EBAA3; }
 
+/* --- STORICO ATTIVITA --- */
 .profile-page .activities-history-container {
     background-image: url('../img/libri.jpg');
     background-size: cover;
@@ -1202,6 +1198,7 @@ footer.footer-home {
     font-weight: 500;
 }
 
+/* --- PROGRESS BAR --- */
 .profile-page .activity-stats-right {
     display: flex;
     align-items: center;
@@ -1232,7 +1229,6 @@ footer.footer-home {
     text-align: right;
 }
 
-/* Bottone Espandi */
 .profile-page .expand-btn {
     font-family: 'Quicksand', sans-serif;
     display: block;
@@ -1251,6 +1247,7 @@ footer.footer-home {
     background-color: #679882;
 }
 
+/* --- ATTIVITÀ SETTIMANALE --- */
 .profile-page .weekly-activity-container {
     background-image: url('../img/settimana.jpg'); 
     background-size: cover;
@@ -1289,8 +1286,6 @@ footer.footer-home {
     font-size: 1.4em;
     font-weight: 700;
     margin-bottom: 20px;
-    text-align: left;
-    width: 100%;
 }
 
 .profile-page .activity-chart {
@@ -1304,37 +1299,21 @@ footer.footer-home {
     stroke-width: 1;
 }
 
-.profile-page .chart-labels {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.profile-page.chart-labels span {
-    font-size: 0.85em;
-    color: #666;
-    flex: 1;
-    text-align: center;
-}
-
 /*  MEDIA QUERY PER PROFILO  */
 @media (min-width: 680px) {
     .welcome-card {
         padding: 20px;
-        text-align: center;
+        text-align: left;
     }
 
     .profile-page .content-profile {
-        display: flex;
-        flex-direction: row; 
+        display: flex; 
         gap: 25px; 
         padding: 20px;
     }
 
     .profile-page .streak-card {
         flex: 1;
-        margin-bottom: 0;
         min-height: 220px; 
     }
 
@@ -1349,8 +1328,7 @@ footer.footer-home {
         gap: 50px;
     }
 
-    .profile-page .activities-history-container,
-    .profile-page .weekly-activity-container {
+    .activities-history-container, .weekly-activity-container {
         flex: 1;
         margin: 0; 
         width: 50%; 
