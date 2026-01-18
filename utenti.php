@@ -88,9 +88,10 @@ $utenti = $stmt->fetchAll();
                             <?php foreach ($utenti as $user): ?>
                                 <?php 
                                     // Gestione visuale dello stato (se la colonna 'stato' non esiste nel DB, assume 'attivo')
-                                    $stato = isset($user['stato']) ? $user['stato'] : 'attivo';
-                                    $badgeClass = ($stato === 'attivo') ? 'active' : 'blocked';
-                                    $icon = ($stato === 'attivo') ? '🔒' : '🔓'; // Lucchetto chiuso per bloccare, aperto per sbloccare
+                                    $stato = $user['stato'] ?: 'attivo';
+                                    $badgeClass = ($stato === 'attivo') ? 'attivo' : 'bloccato';
+                                    $testoBadge = ucfirst($stato);
+                                    $icon = ($stato === 'attivo') ? '🔒' : '🔓';
                                     $title = ($stato === 'attivo') ? 'Blocca utente' : 'Sblocca utente';
                                 ?>
                                 <tr>

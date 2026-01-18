@@ -1811,8 +1811,8 @@ footer.footer-home {
     color: white;
 }
 
-.admin-page .status-badge.attiva { background-color: #8EBAA3; }
-.admin-page .status-badge.disattivata { background-color: #E49A7D; }
+.admin-page .status-badge.attivo, .admin-page .status-badge.attivo { background-color: #8EBAA3; }
+.admin-page .status-badge.disattivata, .admin-page .status-badge.bloccato { background-color: #E49A7D; }
 
 /* Icona Azione */
 .admin-page .action-icon {

@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-        if ($user['stato'] === 'blocked') {
+        if ($user['stato'] === 'bloccato') {
             $errore = "Il tuo account è stato bloccato. Contatta l'amministratore.";
         } else {
             // Popolamento Sessione 
