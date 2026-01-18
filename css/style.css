@@ -1647,28 +1647,28 @@ footer.footer-home {
     border-bottom: 2px solid #eee;
 }
 
-.admin-page .admin-header-title {
+.admin-header-title {
     color: #274c43;
     font-weight: 700;
     font-size: 1.2em;
     margin-left: 15px;
 }
 
-.admin-page .admin-intro {
+.admin-intro {
     border-bottom: 1px solid #eee;
     padding-bottom: 15px;
     margin-bottom: 20px;
 }
 
-.admin-page .admin-intro h2{
+.admin-intro h2{
     font-weight: 600;
     color: #333;
 }
 
 /* --- BARRA DI RICERCA --- */
-.admin-page .search-bar {
+.search-bar {
     width: 100%;
-    margin-bottom: 25px; /* Spazio prima della tabella/cards */
+    margin-bottom: 25px;
     max-width: 400px;
     display: flex;
     justify-content: flex-start;
@@ -1696,15 +1696,13 @@ footer.footer-home {
     padding: 20px;
 }
 
-.admin-page .user-table,
-.admin-page .user-table-stats {
+.user-table, .user-table-stats {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
 
-.admin-page .user-table th,
-.admin-page .user-table-stats th {
+.user-table th, .user-table-stats th {
     padding: 12px;
     border-bottom: 2px solid #C4C4C4;
     color: #555;
@@ -1712,15 +1710,14 @@ footer.footer-home {
     text-transform: uppercase;
 }
 
-.admin-page .user-table td,
-.admin-page .user-table-stats td {
+.user-table td, .user-table-stats td {
     padding: 15px 12px;
     border-bottom: 1px solid #D1CEC1;
     font-size: 0.9em;
     color: #333;
 }
 
-.admin-page .status-badge {
+.status-badge {
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.8em;
@@ -1740,7 +1737,7 @@ footer.footer-home {
     font-size: 1.1em;
 }
 
-.admin-page .action-icon:hover {
+.action-icon:hover {
     background: #d1cec1;
 }
 
@@ -1765,7 +1762,7 @@ footer.footer-home {
     transform: translateY(-2px);
 }
 
-.admin-page .admin-navigation {
+.admin-navigation {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -1774,7 +1771,7 @@ footer.footer-home {
     margin: 50px auto 0; 
 }
 
-.admin-page .admin-navigation .btn.primary-btn {
+.admin-navigation .btn.primary-btn {
     background: #84B59F; 
     color: white;
     padding: 16px;
@@ -1789,7 +1786,7 @@ footer.footer-home {
     border: none;
 }
 
-.admin-page .admin-navigation .btn.primary-btn:hover {
+.admin-navigation .btn.primary-btn:hover {
     background: #679882;
     transform: scale(1.02);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
@@ -1811,7 +1808,7 @@ footer.footer-home {
 }
 
 /* --- APPROVAZIONE PROPOSTE --- */
-.admin-page .badge-count {
+.badge-count {
     background-color: #69A297;
     color: white;
     padding: 10px 12px;
@@ -1823,7 +1820,7 @@ footer.footer-home {
 }
 
 /* Card Approvazione */
-.admin-page .approval-card {
+.approval-card {
     background-color: #E2DDD1; /* Colore beige come da immagine */
     border-radius: 12px;
     padding: 25px;
@@ -1831,35 +1828,35 @@ footer.footer-home {
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.admin-page .approval-header h3 {
+.approval-header h3 {
     font-size: 1.1em;
     color: #333;
     margin-bottom: 5px;
 }
 
-.admin-page .meta-info {
+.meta-info {
     font-size: 0.8em;
     color: #777;
     margin-bottom: 15px;
 }
 
-.admin-page .approval-body p {
+.approval-body p {
     font-size: 0.95em;
     line-height: 1.5;
     color: #444;
     margin-bottom: 15px;
 }
 
-.admin-page .approval-body a {
+.approval-body a {
     color: #69A297;
     text-decoration: none;
 }
 
-.admin-page .approval-body a:hover {
+.approval-body a:hover {
     text-decoration: underline;
 }
 
-.admin-page .approval-footer {
+.approval-footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1868,7 +1865,7 @@ footer.footer-home {
     border-top: 1px solid rgba(0,0,0,0.1);
 }
 
-.admin-page .steps-info {
+.steps-info {
     font-size: 0.85em;
     color: #666;
 }
@@ -1881,7 +1878,7 @@ footer.footer-home {
     gap: 8px;
 }
 
-.admin-page .admin-btn {
+.admin-btn {
     border-radius: 6px;
     border: none;
     font-family: 'Quicksand', sans-serif;
@@ -1898,7 +1895,7 @@ footer.footer-home {
 .admin-btn.reject { background-color: #E49A7D; color: white; }
 .admin-btn.approve { background-color: #8EBAA3; color: white; }
 
-.admin-page .admin-btn:hover {
+.admin-btn:hover {
     opacity: 0.6;
 }
 
@@ -1973,16 +1970,16 @@ footer.footer-home {
 /* --- MODALE GIOCHI --- */
 /* Sovrascrive la larghezza di base per la modale dei giochi */
 .modal-content.game-modal-content {
-    width: 90%;          /* Molto più largo */
-    max-width: 800px;    /* Massimo 800px */
-    height: 85vh;     /* Altezza 85% dello schermo */
-    padding: 0;       /* Rimuovi padding per l'iframe */
-    margin: 5% auto;     /* Centrato verticalmente */
-    display: flex;       /* Per gestire il layout interno */
+    width: 90%;          
+    max-width: 800px;    
+    height: 85vh;     
+    padding: 0;      
+    margin: 5% auto;     
+    display: flex;       
     flex-direction: column;
-    overflow: hidden;    /* Evita barre di scorrimento esterne */
+    overflow: hidden;   
     position: relative;
-    background-color: white; /* Assicura sfondo bianco */
+    background-color: white;
 }
 
 /* Stile per il bottone di chiusura specifico della modale attività */
@@ -1995,7 +1992,7 @@ footer.footer-home {
     color: #333;
     cursor: pointer;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.7); /* Sfondo semitrasparente per vederlo sopra il gioco */
+    background: rgba(255, 255, 255, 0.7);
     padding: 0 10px;
     border-radius: 50%;
     width: 40px;
@@ -2010,5 +2007,5 @@ footer.footer-home {
     height: 100%;
     border: none;
     display: block;
-    border-radius: 15px; /* Arrotonda gli angoli dell'iframe */
+    border-radius: 15px;
 }
