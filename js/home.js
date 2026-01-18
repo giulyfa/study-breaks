@@ -10,6 +10,7 @@ function apriAttivita(id, slug, titolo, tipo, durata) {
     attivitaCorrente.tipo = tipo;
     attivitaCorrente.durata = durata;
     
+    // Imposta la sorgente dell'iframe
     iframe.src = 'activity_player.php?name=' + slug;
     
     modal.style.display = 'block';

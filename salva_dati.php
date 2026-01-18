@@ -63,8 +63,8 @@ elseif ($azione == 'pausa') {
 }
 elseif ($azione == 'attivita') {
     $id_att = intval($_GET['id_att'] ?? 0); 
-    $nome_att = $_GET['nome'] ?? 'Attività';
-    $cat_att = $_GET['categoria'] ?? 'Generale';
+    $nome_att = sanitize($_GET['nome'] ?? 'Attività');
+    $cat_att = sanitize($_GET['categoria'] ?? 'Generale');
     $durata_att = intval($_GET['durata'] ?? 0);
 
     // 1. Log dell'attività (Cronologia storica)
@@ -76,10 +76,10 @@ elseif ($azione == 'attivita') {
     $stmtUpdate->execute([$user_id]);
 
     // 3. Aggiorna la sessione per il display immediato
-    if (!isset($_SESSION['attivita_oggi'])) {
-        $_SESSION['attivita_oggi'] = 0;
-    }
-    $_SESSION['attivita_oggi'] += 1;
+    $_SESSION['attivita_oggi'] = ($_SESSION['attivita_oggi'] ?? 0) + 1;
+
+    // Risposta immediata e uscita
+    echo json_encode(['status' => 'success', 'nuovo_totale' => $_SESSION['attivita_oggi']]);
 }
 elseif ($azione == 'set_timer') {
     if (isset($_GET['minuti'])) {
