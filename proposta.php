@@ -1,7 +1,6 @@
 <?php
 require_once 'config.php'; 
 
-// Controllo accesso: se non è loggato torna alla index
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit;
@@ -11,21 +10,16 @@ $user_id = $_SESSION['user_id'];
 $successo = false;
 $errore = "";
 
-// Gestione dell'invio del modulo
-// Gestione dell'invio del modulo
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titolo = trim($_POST['titolo'] ?? '');
     $tipo = $_POST['tipo'] ?? '';
-    $durata = intval($_POST['durata_selezionata'] ?? 3); // Recupera il valore dal campo nascosto
+    $durata = intval($_POST['durata_selezionata'] ?? 3); 
     $descrizione = trim($_POST['descrizione'] ?? '');
     $istruzioni = trim($_POST['istruzioni'] ?? '');
 
     if (!empty($titolo) && !empty($tipo) && !empty($descrizione)) {
         try {
-            // AGGIORNATA: Inseriamo anche la colonna 'durata'
             $stmt = $pdo->prepare("INSERT INTO proposte (id_utente, nome_attivita, categoria, durata, descrizione, link_suggerito) VALUES (?, ?, ?, ?, ?, ?)");
-            
-            // Passiamo i 6 parametri corrispondenti ai ?
             if ($stmt->execute([$user_id, $titolo, $tipo, $durata, $descrizione, $istruzioni])) {
                 $successo = true;
             }
@@ -37,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -48,40 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Proposta - Study Breaks</title>
-    <style>
-        /* Stili specifici per rendere i bottoni durata interattivi */
-        .dur-btn {
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .dur-btn.active {
-            background-color: #E49A7D !important;
-            color: white !important;
-            border-color: #E49A7D !important;
-            transform: scale(1.1);
-        }
-        .success-banner {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 25px;
-            border: 1px solid #c3e6cb;
-        }
-        .error-banner {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-        }
-    </style>
 </head>
 <body>
     <div class="proposal-page">
         <?php include 'includes/header.php'; ?>
-
         <?php include 'includes/sidebar.php'; ?>
 
         <main class="proposal-container">
@@ -92,23 +55,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <?php if ($successo): ?>
                 <div class="success-banner">
-                    <strong>Ottimo lavoro!</strong> La tua proposta è stata inviata all'admin per la revisione. 
-                    <br><br>
-                    <a href="home.php" class="footer-link" style="text-decoration: underline;">Torna alla Home</a>
+                    <strong>Ottimo lavoro!</strong> La tua proposta è stata inviata all'admin per la revisione. <br><br>
+                    <a href="home.php" class="btn primary-btn">Torna alla Home</a>
                 </div>
-            <?php endif; ?>
+            <?php else: ?>
+                <?php if ($errore): ?>
+                    <div class="error-banner"><?php echo $errore; ?></div>
+                <?php endif; ?>
 
-            <?php if ($errore): ?>
-                <div class="error-banner"><?php echo $errore; ?></div>
-            <?php endif; ?>
-
-            <div class="proposal-content-wrapper" <?php if($successo) echo 'style="display:none;"'; ?>>
-                <section class="form-section">
-                    <form action="proposta.php" method="POST" class="proposal-form" id="form-proposta">
-                        <div class="form-group">
-                            <label>Titolo dell’Attività</label>
-                            <input type="text" name="titolo" required placeholder="Es. Stretching per occhi per chi studia al PC">
-                        </div>
+                <div class="proposal-content-wrapper">
+                    <section class="form-section">
+                        <form action="proposta.php" method="POST" class="proposal-form" id="form-proposta">
+                            <div class="form-group">
+                                <label>Titolo dell’Attività</label>
+                                <input type="text" name="titolo" required placeholder="Es. Stretching per occhi per chi studia al PC">
+                            </div>
 
                         <div class="form-group">
                             <label>Tipo di Attività</label>
@@ -123,11 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form-group">
                             <label>Durata (minuti)</label>
                             <div class="duration-selector">
-                                <button type="button" class="dur-btn" data-val="1">1</button>
-                                <button type="button" class="dur-btn" data-val="2">2</button>
-                                <button type="button" class="dur-btn" data-val="3">3</button>
-                                <button type="button" class="dur-btn" data-val="4">4</button>
-                                <button type="button" class="dur-btn" data-val="5">5</button>
+                                <?php foreach([1,2,3,4,5] as $m): ?>
+                                    <button type="button" class="dur-btn" data-val="<?= $m ?>"><?= $m ?></button>
+                                <?php endforeach; ?>
                             </div>
                             <input type="hidden" name="durata_selezionata" id="durata_input" value="3">
                         </div>
@@ -148,62 +107,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         <button type="submit" class="submit-proposal-btn">Invia proposta</button>
                         <p class="admin-note">L’admin esaminerà la tua proposta prima di pubblicarla</p>
-                    </form>
-                </section>
+                        </form>
+                    </section>
 
-                <aside class="examples-section">
-                    <h3 class="example-title">Esempi attività</h3>
-                    
-                    <div class="example-card card-orange">
-                        <div class="ex-text">
-                            <strong>Rotazione polsi</strong>
-                            <span>2 min – Perfetto per chi scrive molto</span>
+                    <aside class="examples-section">
+                        <h3 class="example-title">Esempi attività</h3>
+                        <div class="example-card card-orange">
+                            <div class="ex-text">
+                                <strong>Rotazione polsi</strong>
+                                <span>2 min – Perfetto per chi scrive molto</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="example-card card-green">
-                        <div class="ex-text">
-                            <strong>Quiz capitali del mondo</strong>
-                            <span>5 min – Cultura generale rilassante</span>
+                        <div class="example-card card-green">
+                            <div class="ex-text">
+                                <strong>Quiz capitali del mondo</strong>
+                                <span>5 min – Cultura generale rilassante</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="example-card card-yellow">
-                        <div class="ex-text">
-                            <strong>Color match</strong>
-                            <span>2 min – Abbina i colori velocemente</span>
+                        <div class="example-card card-yellow">
+                            <div class="ex-text">
+                                <strong>Color match</strong>
+                                <span>2 min – Abbina i colori velocemente</span>
+                            </div>
                         </div>
-                    </div>
-                </aside>
-            </div>
+                    </aside>
+                </div>
+            <?php endif; ?>
         </main>
-
         <?php include 'includes/footer.php'; ?>
     </div>
 
     <script>
-        // Gestione della selezione della durata
         const durBtns = document.querySelectorAll('.dur-btn');
         const durInput = document.getElementById('durata_input');
 
         durBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                // Rimuovi classe active da tutti
                 durBtns.forEach(b => b.classList.remove('active'));
-                // Aggiungi al cliccato
                 this.classList.add('active');
-                // Salva valore nell'input nascosto
                 durInput.value = this.getAttribute('data-val');
             });
         });
 
-        // Imposta il valore predefinito (3 min) come attivo al caricamento
-        document.addEventListener('DOMContentLoaded', () => {
-            const defaultBtn = document.querySelector('.dur-btn[data-val="3"]');
-            if (defaultBtn) defaultBtn.classList.add('active');
-        });
+        document.querySelector('.dur-btn[data-val="3"]').classList.add('active');
     </script>
-
     <?php include 'includes/scripts.php'; ?>
 </body>
 </html>
