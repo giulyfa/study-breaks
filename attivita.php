@@ -148,60 +148,7 @@ $playlists = $stmtP->fetchAll();
                 });
             });
         });
-
-
-        // Variabile globale per memorizzare i dati dell'attività aperta
-        let attivitaCorrente = { id: 0, nome: '', tipo: '', durata: 0 };
-        let tempoInizioAttivita = 0;
-
-        function apriAttivita(id, slug, titolo, tipo, durata) {
-            const modal = document.getElementById('activity-modal');
-            const iframe = document.getElementById('game-frame');
-            
-            // Memorizziamo i dati dell'attività per usarli nella chiusura
-            attivitaCorrente.id = id;
-            attivitaCorrente.nome = titolo;
-            attivitaCorrente.tipo = tipo;
-            attivitaCorrente.durata = durata;
-            
-            // Imposta la sorgente dell'iframe
-            iframe.src = 'activity_player.php?name=' + slug;
-            
-            // Mostra il modale
-            modal.style.display = 'block';
-
-            // Segnamo l'orario di inizio
-            tempoInizioAttivita = Date.now();
-        }
-
-        function chiudiAttivita() {
-            const modal = document.getElementById('activity-modal');
-            const iframe = document.getElementById('game-frame');
-
-            modal.style.display = 'none';
-            iframe.src = ''; 
-        }
-
-        // Funzione per registrare l'ascolto (identica alla Home)
-        function registraAscolto(event, id) {
-            const url = `salva_dati.php?azione=log_playlist&id_p=${id}`;
-            if (navigator.sendBeacon) {
-                navigator.sendBeacon(url);
-            } else {
-                fetch(url);
-            }
-            return true; 
-        }
-
-        // Chiude se si clicca fuori dal box del gioco
-        window.onclick = function(event) {
-            const modal = document.getElementById('activity-modal');
-            if (event.target == modal) {
-                chiudiAttivita();
-            }
-        }
     </script>
-
-    <?php include 'includes/scripts.php'; ?>
+    <script src="js/home.js"></script><?php include 'includes/scripts.php'; ?>
 </body>
 </html>
