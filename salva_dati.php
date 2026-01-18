@@ -80,6 +80,7 @@ elseif ($azione == 'attivita') {
 
     // Risposta immediata e uscita
     echo json_encode(['status' => 'success', 'nuovo_totale' => $_SESSION['attivita_oggi']]);
+    exit;
 }
 elseif ($azione == 'set_timer') {
     if (isset($_GET['minuti'])) {
