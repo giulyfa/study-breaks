@@ -244,8 +244,18 @@ footer.footer-home {
 /* -------------------------------------- 
 -------------------HOME------------------
 ----------------------------------------- */
+.home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    flex-grow: 1; 
+    width: 100%;
+    min-height: auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-/* --- ALERT --- */
+/* --- ALERT E SUGGESTION --- */
 .alert-toast {
     display: none; 
     width: max-content;
@@ -270,50 +280,20 @@ footer.footer-home {
     color: #E49A7D;
 }
 
-/* --- MEDIA QUERY ALERT (Desktop) --- */
-@media (min-width: 1024px) {
-    .alert-toast {
-        display: none;
-        position: absolute;
-        top: 20px;  
-        left: 50%;
-        transform: translateX(-50%);
-        width: max-content;
-        padding: 15px;
-        text-align: center;
-        border-radius: 10px;
-        z-index: 1000;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-}
-
-.home-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* centra verticalmente il contenuto */
-    flex-grow: 1; /* occupa tutto lo spazio tra header e footer */
-    width: 100%;
-    min-height: auto;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
+/* --- SIDEBAR E MODALI X TUTTO IL SITO --- */
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Nasconde la barra a sinistra */
+    left: -250px; 
     width: 250px;
     height: 100%;
-    background-color: #4D7D72; /* Il tuo verde scuro */
+    background-color: #4D7D72; 
     transition: 0.3s ease;
     z-index: 2000;
     padding-top: 50px;
 }
 
-/* Quando questa classe viene aggiunta, la barra appare */
-.sidebar.open {
-    left: 0;
-}
+.sidebar.open { left: 0; }
 
 .sidebar-links a {
     display: block;
@@ -321,120 +301,11 @@ footer.footer-home {
     color: white;
     text-decoration: none;
     font-size: 1.2rem;
+    transition: all 0.2s;
 }
 
-.sidebar-links a:hover{
-    color: white;
-    font-weight: bold;
-}
+.sidebar-links a:hover{ font-weight: bold; }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-}
-
-.home-page .hero-section {
-    background-color: #ECE7D9; 
-    padding: 20px 20px 0 20px;
-    text-align: left;
-    margin: 30px 20px 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.home-page .hero-section:hover {
-    transform: scale(1.02); 
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
-}
-
-.home-page .hero-section h1 {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #4D7D72; 
-    margin-bottom: 5px;
-}
-
-.home-page .hero-section p {
-    font-size: 0.9em;
-    color: #888;
-    padding-bottom: 20px;
-}
-
-/* TIMER CARD (Pomodoro)  */
-
-.home-page .timer-card {
-    width: 90%; /* Occupa quasi tutto lo spazio su mobile */
-    max-width: 800px; /* Impedisce che diventi troppo gigante su PC */
-    padding: 0 20px 20px 20px;
-    text-align: center;
-    margin: 30px auto 5px auto; /* Versione abbreviata per top:30px e auto ai lati */
-    display: flex; /* Aiuta a gestire i figli */
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-.home-page .timer-background {
-    width: 100%; 
-    position: relative;
-    min-height: 450px; /* Altezza per contenere l'immagine e il timer */
-    background-image: url('../img/timer.jpg'); 
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    padding: 20px;
-    z-index: 1;
-}
-
-.home-page .timer-background h1 {
-    color: white;
-    font-size: 1.0em;
-    font-weight: 700;
-    margin-bottom: 40px;
-}
-
-.home-page .settings-icon {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 1.5em;
-    z-index: 10;
-}
-
-#settings-trigger {
-    background: none;        
-    border: none;            
-    padding: 0;             
-    font-size: 24px;         
-    cursor: pointer;         
-    transition: all 0.3s ease; 
-    outline: none;           
-}
-
-/* Effetto al passaggio del mouse */
-#settings-trigger:hover {
-    transform: rotate(90deg); /* Ruota l'ingranaggio */
-    opacity: 0.7;             /* Lo schiarisce leggermente */
-}
-
-/* Effetto quando viene cliccato */
-#settings-trigger:active {
-    transform: scale(0.9);    /* Si rimpicciolisce un po' (effetto pressione) */
-}
-
-
-/* MODALE BASE (per tutti i modali) */
 .modal {
     display: none;
     position: fixed;
@@ -486,6 +357,7 @@ footer.footer-home {
 
 .save-btn { 
     font-family: 'Quicksand', sans-serif; 
+    flex: 1;
     background-color: #4D7D72; 
     color: white; 
     border: none; 
@@ -496,6 +368,7 @@ footer.footer-home {
 
 .cancel-btn { 
     font-family: 'Quicksand', sans-serif; 
+    flex: 1;
     background: none; 
     border: none; 
     color: #888; 
@@ -530,13 +403,6 @@ footer.footer-home {
     margin: 0;
 }
 
-#modal-modifica .save-btn,
-#modal-modifica .cancel-btn,
-#playlist-overlay .save-btn,
-#playlist-overlay .cancel-btn {
-    flex: 1;
-}
-
 #playlist-selector-overlay .playlist-list {
     margin-top: 20px;
     display: flex;
@@ -556,10 +422,6 @@ footer.footer-home {
     transition: background-color 0.3s;
 }
 
-#playlist-selector-overlay .close-btn {
-    position:absolute; right:20px; top:10px; font-size:30px; cursor:pointer;
-}
-
 .playlist-item a {
     background:rgba(255,255,255,0.2); 
     padding:5px 15px; 
@@ -568,6 +430,77 @@ footer.footer-home {
     text-decoration:none; 
     font-size:0.8em; 
     border:1px solid white;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* --- HERO SECTION --- */
+.home-page .hero-section {
+    background-color: #ECE7D9; 
+    padding: 20px 20px 0 20px;
+    text-align: left;
+    margin: 30px 20px 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.home-page .hero-section:hover { transform: scale(1.02); }
+
+.home-page .hero-section h1 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #4D7D72; 
+    margin-bottom: 5px;
+}
+
+.home-page .hero-section p {
+    font-size: 0.9em;
+    color: #888;
+    padding-bottom: 20px;
+}
+
+/* --- TIMER CARD --- */
+.home-page .timer-card {
+    width: 90%; 
+    max-width: 800px; 
+    text-align: center;
+    margin: 30px auto 5px; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.home-page .timer-background {
+    width: 100%; 
+    min-height: 450px;
+    background-image: url('../img/timer.jpg'); 
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 20px;
+    z-index: 1;
+    position: relative;
+}
+
+.home-page .timer-background h1 {
+    color: white;
+    font-size: 1.0em;
+    font-weight: 700;
+    margin-bottom: 40px;
 }
 
 .home-page .timer-circle {
@@ -579,17 +512,35 @@ footer.footer-home {
     align-items: center;
     justify-content: center;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    margin-top: 0;
-    overflow: hidden;
 }
 
-#timer-time { /* SPECIFICO per l'elemento (selettore di ID) */
+#timer-time { 
     font-size: 3.5em;
     font-weight: 700;
     color: #4D7D72; 
 }
 
-/* CONTROLLI Studio/Pausa */
+.home-page .settings-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5em;
+    z-index: 10;
+}
+
+#settings-trigger {
+    background: none;        
+    border: none;            
+    padding: 0;             
+    font-size: 24px;         
+    cursor: pointer;         
+    transition: all 0.3s ease; 
+    outline: none;           
+}
+
+#settings-trigger:hover { transform: rotate(90deg); }
+
+/* SELEZIONE MODALITÀ STUDIO/PAUSA */
 .home-page .timer-status-selector {
     display: flex;
     justify-content: center;
@@ -615,20 +566,15 @@ footer.footer-home {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.home-page .mode-btn:hover {
-    background: #ECE7D9; 
-}
+.home-page .mode-btn:hover { background: #ECE7D9; }
 
-#mode-studio.active, 
-#mode-pausa.active {
+#mode-studio.active, #mode-pausa.active {
     background-color: #ECE7D9; 
-    font-weight: bold !important;
-    border: 2px solid #c5c0b1 !important; 
+    font-weight: bold;
+    border: 2px solid #c5c0b1; 
 }
 
-
-/* CONTROLLI Start/Stop/Restart */
-
+/* --- CONTROLLI Start/Stop/Restart --- */
 .home-page .timer-controls-bottom {
     display: flex;
     justify-content: center;
@@ -658,9 +604,7 @@ footer.footer-home {
     transition: background-color 0.3s;
 }
 
-.home-page .control-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+.home-page .control-btn:hover { background-color: rgba(255, 255, 255, 0.1); }
 
 .home-page .next-break {
     font-size: 0.8em;
@@ -670,8 +614,7 @@ footer.footer-home {
     text-align: center;
 }
 
-/*  STATS CONTAINER */
-
+/* --- STATS CONTAINER --- */
 .home-page .stats-container {
     display: flex;
     justify-content: space-around;
@@ -688,29 +631,22 @@ footer.footer-home {
     flex-grow: 1;
     text-align: center;
     font-weight: bold;
-    font-size: 0.9em;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
 }
     
-.home-page .stat-box:hover {
-    transform: scale(1.02); /* Ingrandisce la sezione del 2% */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
-}
+.home-page .stat-box:hover { transform: scale(1.02); }
 
 .home-page .stat-box p {
     font-size: 0.7em;
     margin-bottom: 5px;
 }
 
-.home-page .stat-number {
-    font-size: 1.5em;
-}
+.home-page .stat-number { font-size: 1.5em; }
 
-/*  ATTIVITÀ CONSIGLIATE  */
-
+/* --- GRIGLIA ATTIVITÀ --- */
 .home-page .activity-section .activity-item {
-    background-color: #4D7D72; /* Arancione per le card piene */
+    background-color: #4D7D72; 
     border: none;
     color: white;
     border-radius: 15px;
@@ -724,102 +660,8 @@ footer.footer-home {
     margin-bottom: 30px;
 }
 
-/* ----------------------------------------------------------------------------- 
------------ STILE PER LA SEZIONE ATTIVITA SIA HOME CHE PAGINA ATTIVITA' -------- 
--------------------------------------------------------------------------------*/ 
-
-.home-page .activity-section,
-.activity-page .activity-section {
-    background-color: #ECE7D9; 
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
-    margin: 35px 20px 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/*.activity-page .activity-section {
-    background-color: #E7D0B9; 
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
-    margin: 35px 20px 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}*/
-
-.home-page .activity-grid, 
-.activity-page .activity-grid {
-    max-width: 700px; 
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Due colonne */
-    gap: 35px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 25px;
-}
-
-/* Stile base per ogni card attività in ogni pagina */
-.activity-item {
-    background-color: white;
-    border: 1px solid #C5D6CF;
-    border-radius: 10px;
-    padding: 15px 10px;
-    text-align: center;
-    text-decoration: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column; /* Mette il testo SOTTO l'immagine */
-    align-items: center;    /* Centra tutto orizzontalmente */
-    gap: 10px;
-}
-
-.activity-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
-
-.home-page .activity-icon,
-.activity-page .activity-icon {
-    margin-bottom: 5px;
-    display: flex; /* Centra l'immagine se il div è più grande */
-    justify-content: center;
-    align-items: center;
-}
-
-.home-page .activity-icon img,
-.activity-page .activity-icon img {
-    width: 80px;
-    height: auto;  
-    border-radius: 50%;
-    display: block;
-    object-fit: cover;  
-
-}
-
-.home-page .activity-item p,
-.activity-page .activity-item p {
-    font-size: 0.85em;
-    font-weight: 500;
-    padding-bottom: 3px;
-}
-
-.home-page .activity-icon,
-.activity-page .activity-icon {
-    width: 100%;          
-    height: 100px;         
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;      
-    background-color: white;
-    border-radius: 10px;
-}
-
-/* PLAYLIST SECTION  */
-
 .home-page .playlist-section {
-    padding: 0 20px 120px 20px; /* Spazio extra per compensare il footer fisso */
+    padding: 0 20px 120px 20px;
     text-align: center;
 }
 
@@ -833,14 +675,10 @@ footer.footer-home {
     cursor: pointer;
     transition: background-color 0.3s;
     font-weight: 600;
-    text-decoration: none; /* Per i tag <a> come i bottoni in Home */
+    text-decoration: none;
     display: inline-block;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin: 10px
-}
-
-.home-page .primary-btn,
-.home-page .secondary-btn {
+    margin: 10px;
     background: #84B59F; 
     color: white;
 }
@@ -850,26 +688,99 @@ footer.footer-home {
     background: #679882;
 }
 
+/* --- STILE COMUNE SEZIONE ATTIVITA SIA HOME CHE PAGINA ATTIVITA' --- */ 
+.home-page .activity-section,
+.activity-page .activity-section {
+    background-color: #ECE7D9; 
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 35px 20px 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 35px;
+    max-width: 700px; 
+    margin: 0 auto 25px;
+}
+
+.activity-item {
+    background-color: white;
+    border: 1px solid #C5D6CF;
+    border-radius: 10px;
+    padding: 15px 10px;
+    transition: 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    
+    gap: 10px;
+}
+
+.activity-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.activity-icon {
+    width: 100%;          
+    height: 100px;         
+    display: flex;
+    justify-content: center;
+    align-items: center;     
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.activity-icon img {
+    width: 80px;
+    height: auto;  
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;  
+}
+
+.activity-item p {
+    font-size: 0.85em;
+    font-weight: 500;
+    padding-bottom: 3px;
+}
+
+/* --- MEDIA QUERY HOME (DESKTOP) --- */
 @media (min-width: 1024px) {
-    /* Sezione superiore con sfondo colorato */
+    .alert-toast {
+        display: none;
+        position: absolute;
+        top: 20px;  
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+        padding: 15px;
+        text-align: center;
+        border-radius: 10px;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
     .dashboard-top {
         background: linear-gradient(135deg, #e8f3ee 0%, #dceee5 100%);
         padding: 60px 40px 80px;
-        width: 100%; /* Full width */
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
-    /* Contenitore interno centrato */
     .dashboard-inner {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 80px;
         align-items: center;
-        max-width: 1400px; /* Limita larghezza massima */
-        margin: 0 auto; /* Centra il contenuto */
+        max-width: 1400px;
+        margin: 0 auto; 
     }
 
-    /* Colonna sinistra: Hero + Stats */
     .dashboard-top-left {
         margin: 0;
         display: flex;
@@ -878,24 +789,17 @@ footer.footer-home {
         max-width: 600px;
     }
 
-    /* Hero section */
-    .home-page .hero-section h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        line-height: 1.2;
-    }
+    .home-page .hero-section h1 { font-size: 2.5rem; }
 
     .home-page .hero-section p {
         font-size: 1.2rem;
         line-height: 1.6;
     }
 
-    /* Stats in riga orizzontale */
     .home-page .stats-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-        margin: 0;
     }
 
     .home-page .stat-box {
@@ -917,7 +821,6 @@ footer.footer-home {
         font-weight: 700;
     }
 
-    /* Timer nella colonna destra */
     .home-page .timer-card {
         width: 100%;
         max-width: 600px;
@@ -966,7 +869,6 @@ footer.footer-home {
         margin: 0 auto;
     }
 
-    /* Bottone Vai alle attività */
     .home-page .activity-section .primary-btn {
         display: block;
         max-width: 300px;

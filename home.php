@@ -170,7 +170,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                                 <strong><?php echo htmlspecialchars($p['titolo']); ?></strong><br>
                                 <small>Playlist Spotify</small>
                             </div>
-                            <a href="<?php echo $p['url_spotify']; ?>" target="_blank" onclick="return registraAscolto(event, <?php echo $p['id']; ?>)" class="btn">
+                            <a href="<?php echo $p['url_spotify']; ?>" target="_blank" onclick="return registraAscolto(event, <?php echo $p['id']; ?>)">
                             Ascolta
                             </a>
                         </div>
