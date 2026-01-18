@@ -123,41 +123,39 @@ try {
 
             <div class="left-column">
                 <section class="activities-history-container">
-                    <div class="activities-history-content">
-                        <h3 class="section-title">Attività preferite</h3>
-                        <div id="activities-wrapper">
-                            <?php if(empty($preferite)): ?>
-                                <p>Ancora nessuna attività registrata.</p>
-                            <?php else: 
-                                $count = 0;
-                                foreach($preferite as $fav): 
-                                    $count++;
-                                    $display = ($count > 3) ? 'display: none;' : 'display: flex;';
-                            ?>
-                                <div class="activity-row" style="<?php echo $display; ?>">
-                                    <div class="activity-info-left">
-                                        <?php 
-                                            $img = !empty($fav['slug']) ? 'img/'.$fav['slug'].'.jpg' : 'img/logo.png';
-                                            if(!file_exists($img)) $img = 'img/logo.png';
-                                        ?>
-                                        <img src="<?php echo $img; ?>" class="activity-mini-logo"> 
-                                        <span class="activity-name"><?php echo htmlspecialchars($fav['nome_attivita']); ?></span>
-                                    </div>
-                                    <div class="activity-stats-right">
-                                        <div class="progress-bar-container">
-                                            <?php $percent = min(($fav['totale'] / 20) * 100, 100); ?>
-                                            <div class="progress-fill" style="width: <?php echo $percent; ?>%;"></div>
-                                        </div>
-                                        <span class="activity-count"><?php echo $fav['totale']; ?></span>
-                                    </div>
+                    <h3 class="section-title">Attività preferite</h3>
+                    <div id="activities-wrapper">
+                        <?php if(empty($preferite)): ?>
+                            <p>Ancora nessuna attività registrata.</p>
+                        <?php else: 
+                            $count = 0;
+                            foreach($preferite as $fav): 
+                                $count++;
+                                $display = ($count > 3) ? 'display: none;' : 'display: flex;';
+                        ?>
+                            <div class="activity-row" style="<?php echo $display; ?>">
+                                <div class="activity-info-left">
+                                    <?php 
+                                        $img = !empty($fav['slug']) ? 'img/'.$fav['slug'].'.jpg' : 'img/logo.png';
+                                        if(!file_exists($img)) $img = 'img/logo.png';
+                                    ?>
+                                    <img src="<?php echo $img; ?>" class="activity-mini-logo"> 
+                                    <span class="activity-name"><?php echo htmlspecialchars($fav['nome_attivita']); ?></span>
                                 </div>
-                            <?php endforeach; endif; ?>
-                        </div>
-
-                        <?php if(count($preferite) > 3): ?>
-                            <button class="expand-btn" id="toggle-btn" onclick="toggleRows()">Espandi</button>
-                        <?php endif; ?>
+                                <div class="activity-stats-right">
+                                    <div class="progress-bar-container">
+                                        <?php $percent = min(($fav['totale'] / 20) * 100, 100); ?>
+                                        <div class="progress-fill" style="width: <?php echo $percent; ?>%;"></div>
+                                    </div>
+                                    <span class="activity-count"><?php echo $fav['totale']; ?></span>
+                                </div>
+                            </div>
+                        <?php endforeach; endif; ?>
                     </div>
+
+                    <?php if(count($preferite) > 3): ?>
+                        <button class="expand-btn" id="toggle-btn" onclick="toggleRows()">Espandi</button>
+                    <?php endif; ?>
                 </section>
 
                 <div class="weekly-activity-container">

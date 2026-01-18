@@ -1052,25 +1052,6 @@ footer.footer-home {
 /* -------------------------------------- 
 -----------------PROFILO-----------------
 ----------------------------------------- */
-.chart-labels {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 8%;
-    margin-top: 10px;
-}
-
-.chart-labels span {
-    flex: 1;
-    text-align: center;
-    font-size: 0.8em;
-    color: #888;
-}
-
-.activities-wrapper p {
-   text-align:center;
-   padding: 10px;
-}
-
 .profile-page {
     width: 100%;
     display: flex;
@@ -1078,24 +1059,22 @@ footer.footer-home {
     min-height: 100vh;
 }
 
-.profile-page .profile-container {
+.profile-container {
     padding: 30px;
     width: 100%;
     flex: 1;
 }
 
 .welcome-card {
-    grid-column: 1 / -1; /* Occupa tutte le colonne della griglia */
     background-color: #faf6ee;
     border-radius: 20px;
     padding: 30px;
     margin-bottom: 50px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    border-left: 8px solid #E49A7D; /* Un richiamo al colore del brand */
+    border-left: 8px solid #E49A7D; 
 }
 
 .welcome-content h1 {
-    font-family: 'Quicksand', sans-serif;
     color: #333;
     margin-bottom: 10px;
     font-size: 1.8rem;
@@ -1104,15 +1083,6 @@ footer.footer-home {
 .welcome-content p {
     color: #666;
     font-size: 1.1rem;
-    margin: 0;
-}
-
-/* Ottimizzazione per Mobile */
-@media (max-width: 768px) {
-    .welcome-card {
-        padding: 20px;
-        text-align: center;
-    }
 }
 
 .profile-page .streak-card {
@@ -1127,13 +1097,13 @@ footer.footer-home {
     margin-bottom: 20px;
 }
 
-.profile-page .streak-big-number {
+.streak-big-number {
     font-size: 3em;
     font-weight: bold;
-    display: block;
 }
 
-.profile-page .time-selector, .admin-page .time-selector {
+/* SELEZIONE (ANCHE X ADMIN-PAGE)*/
+.time-selector {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -1152,20 +1122,19 @@ footer.footer-home {
     transition: all 0.3s ease;
 }
 
-.profile-page .time-btn:hover , .admin-page .time-btn:hover {
+.profile-page .time-btn:hover , .admin-page .time-btn:hover, .time-btn.active {
     background: #E49A7D;
 }
 
 .time-btn.active {
-    background: #E49A7D; /* Colore arancio del tuo brand */
     font-weight: bold;
 }
 
+/* --- GRIGLIA STATISTICHE --- */
 .profile-page .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    margin-bottom: 15px;
 }
 
 .profile-page .stat-card {
@@ -1184,44 +1153,6 @@ footer.footer-home {
 .stat-card.sessioni { background-color: #A8C69F; }
 .stat-card.attivita { background-color: #8EBAA3; }
 
-/*  LAYOUT DESKTOP PER PROFILO  */
-
-@media (min-width: 680px) {
-    .profile-page .content-profile {
-        display: flex;
-        flex-direction: row; /* Allinea in orizzontale */
-        gap: 25px; 
-        padding: 20px;
-    }
-
-    /* La parte sinistra (Streak) */
-    .profile-page .streak-card {
-        flex: 1;
-        margin-bottom: 0;
-        min-height: 220px; 
-    }
-
-    /* La parte destra (Filtri + Stats) */
-    .profile-page .stats-column {
-        flex: 1.2; /* Diamo un po' più di spazio alla parte dati */
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Regoliamo i pulsanti per farli stare bene nel blocco */
-    .profile-page .time-selector, .admin-page .time-selector {
-        justify-content: center; 
-        margin-top: 0;
-        gap: 10px;
-        margin-bottom: 40px;
-    }
-
-    .profile-page .time-btn, .admin-page .time-btn {
-        flex: 1; 
-        padding: 8px;
-    }
-}
-
 .profile-page .activities-history-container {
     background-image: url('../img/libri.jpg');
     background-size: cover;
@@ -1230,6 +1161,11 @@ footer.footer-home {
     padding: 20px;
     margin: 50px 0;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.activities-wrapper p {
+   text-align:center;
+   padding: 10px;
 }
 
 .profile-page .section-title {
@@ -1249,7 +1185,6 @@ footer.footer-home {
     border: 1px solid #ddd;
 }
 
-/* Parte sinistra: Logo e Nome */
 .profile-page .activity-info-left {
     display: flex;
     align-items: center;
@@ -1264,18 +1199,16 @@ footer.footer-home {
 
 .profile-page .activity-name {
     font-size: 0.9em;
-    color: #000000;
     font-weight: 500;
 }
 
-/* Parte destra: Barra e Numero */
 .profile-page .activity-stats-right {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-grow: 1;
     justify-content: flex-end;
-    max-width: 120px; /* Limita la larghezza della barra */
+    max-width: 120px; 
 }
 
 .profile-page .progress-bar-container {
@@ -1319,7 +1252,7 @@ footer.footer-home {
 }
 
 .profile-page .weekly-activity-container {
-    background-image: url('../img/settimana.jpg'); /* Carica l'immagine con le foglie */
+    background-image: url('../img/settimana.jpg'); 
     background-size: cover;
     background-position: center;
     border-radius: 20px;
@@ -1335,7 +1268,20 @@ footer.footer-home {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+
+.chart-labels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8%;
+    margin-top: 10px;
+}
+
+.chart-labels span {
+    flex: 1;
+    text-align: center;
+    font-size: 0.8em;
+    color: #888;
 }
 
 .profile-page .weekly-title {
@@ -1372,36 +1318,43 @@ footer.footer-home {
     text-align: center;
 }
 
+/*  MEDIA QUERY PER PROFILO  */
+@media (min-width: 680px) {
+    .welcome-card {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .profile-page .content-profile {
+        display: flex;
+        flex-direction: row; 
+        gap: 25px; 
+        padding: 20px;
+    }
+
+    .profile-page .streak-card {
+        flex: 1;
+        margin-bottom: 0;
+        min-height: 220px; 
+    }
+
+    .profile-page .stats-column { flex: 1.2; }
+}
+
+/* MEDIA QUERY PER PROFILO (Desktop) */
 @media (min-width: 1024px) {
-    /* La colonna sinistra deve permettere ai figli di stare larghi */
     .profile-page .left-column {
         margin-top: 50px;
-        flex: 2; /* Diamo più spazio alla parte sinistra rispetto alle stats di destra */
         display: flex;
-        flex-direction: row;
         gap: 50px;
     }
 
-    /* Bilanciamo i due contenitori al 50% ciascuno */
     .profile-page .activities-history-container,
     .profile-page .weekly-activity-container {
         flex: 1;
-        margin: 0; /* Rimuoviamo i margini verticali che avevi prima */
-        width: 50%; /* Forza la divisione equa */
+        margin: 0; 
+        width: 50%; 
     }
-
-    /* Piccola correzione per il grafico: essendo il box più stretto, 
-       assicuriamoci che l'SVG non crei overflow */
-    .profile-page .activity-chart {
-        max-width: 100%;
-    }
-}
-
-/* Su mobile rimangono uno sotto l'altro */
-.profile-page .activities-row {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 /* -------------------------------------- 
