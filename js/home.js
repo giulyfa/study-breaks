@@ -20,26 +20,6 @@ function chiudiAttivita() {
     const modal = document.getElementById('activity-modal');
     const iframe = document.getElementById('game-frame');
 
-    const secondiPassati = (Date.now() - tempoInizioAttivita) / 1000;
-
-    if (secondiPassati >= 30) {
-        let actTodaySpan = document.getElementById('activities-today-count'); 
-        
-        if(actTodaySpan) {
-            actTodaySpan.textContent = parseInt(actTodaySpan.textContent) + 1;
-            
-            const params = new URLSearchParams({
-                azione: 'attivita',
-                id_att: attivitaCorrente.id,
-                nome: attivitaCorrente.nome,
-                categoria: attivitaCorrente.tipo,
-                durata: attivitaCorrente.durata
-            });
-
-            fetch('salva_dati.php?' + params.toString());
-        }
-    }   
-
     modal.style.display = 'none';
     iframe.src = ''; 
 }

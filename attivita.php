@@ -178,32 +178,6 @@ $playlists = $stmtP->fetchAll();
             const modal = document.getElementById('activity-modal');
             const iframe = document.getElementById('game-frame');
 
-            const secondiPassati = (Date.now() - tempoInizioAttivita) / 1000;
-
-            // CONDIZIONE: 30 secondi per convalidare
-            if (secondiPassati >= 30) {
-                // Aggiornamento attività in tempo reale
-                let actTodaySpan = document.getElementById('activities-today-count'); 
-                
-                if(actTodaySpan) {
-                    // Incrementa il numero che l'utente vede nel quadratino bianco
-                    actTodaySpan.textContent = parseInt(actTodaySpan.textContent) + 1;
-                    
-                    // Prepariamo i dati per il database (questo rimane uguale, è perfetto)
-                    const params = new URLSearchParams({
-                        azione: 'attivita',
-                        id_att: attivitaCorrente.id,
-                        nome: attivitaCorrente.nome,
-                        categoria: attivitaCorrente.tipo,
-                        durata: attivitaCorrente.durata
-                    });
-
-                    // Invio al server: il PHP si occuperà di aumentare sia il totale nel DB 
-                    // sia la variabile $_SESSION['attivita_oggi']
-                    fetch('salva_dati.php?' + params.toString());
-                }
-            }   
-
             modal.style.display = 'none';
             iframe.src = ''; 
         }

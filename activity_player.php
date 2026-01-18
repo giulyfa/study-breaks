@@ -127,20 +127,34 @@ if (!$attivita) {
     </div>
 
     <script>
-        // Passiamo lo slug a JS
+        
         const ACTIVITY_SLUG = "<?php echo $attivita['slug']; ?>";
+        const ACTIVITY_ID = <?php echo $attivita['id']; ?>;
+        const ACTIVITY_NAME = "<?php echo addslashes($attivita['titolo']); ?>"; 
+        const ACTIVITY_TYPE = "<?php echo $attivita['tipo']; ?>"; 
+        const ACTIVITY_DURATION = <?php echo $attivita['durata']; ?>;
 
         // Gestione del click su "INIZIA"
         document.getElementById('btn-start').addEventListener('click', function() {
             document.getElementById('start-screen').style.display = 'none';
-            
             document.getElementById('game-wrapper').style.display = 'flex';
             
             var script = document.createElement('script');
             script.src = "js/activities/" + ACTIVITY_SLUG + ".js";
             document.body.appendChild(script);
+
+            // Salva i dati nel DB all'avvio
+            const params = new URLSearchParams({
+                azione: 'attivita',
+                id_att: ACTIVITY_ID,
+                nome: ACTIVITY_NAME,
+                categoria: ACTIVITY_TYPE, 
+                durata: ACTIVITY_DURATION
+            });
+
+            fetch('salva_dati.php?' + params.toString());
         });
     </script>
-    
+
     </body>
 </html>
