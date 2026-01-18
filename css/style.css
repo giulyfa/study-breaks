@@ -1492,7 +1492,7 @@ footer.footer-home {
 .card-green { background-color: #F1DEB7; }
 .card-yellow { background-color: #F4ECBE; }
 
-/* MEDIA QUERY PER PROPOSTA (Desktop) */
+/* --- MEDIA QUERY PER PROPOSTA (Desktop) --- */
 @media (min-width: 1024px) {
     .proposal-content-wrapper {
         display: flex;
@@ -1613,6 +1613,7 @@ footer.footer-home {
     color: #d3896c;
     border-bottom: 2px solid #E49A7D;
 }
+
 
 /* -------------------------------------- 
 ---------- AREA AMMINISTRATORE ----------

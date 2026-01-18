@@ -25,8 +25,7 @@ if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso']
     $_SESSION['data_ultimo_accesso'] = $oggi;
 }
 
-// RECUPERO ATTIVITÀ
-// --- 3. ATTIVITÀ PIÙ SVOLTE (Con JOIN per prendere lo slug della foto) ---
+// RECUPERO ATTIVITÀ PREFERITE
 $stmtFav = $pdo->prepare("
     SELECT asv.nome_attivita, COUNT(*) as totale, a.slug 
     FROM attivita_svolte asv
