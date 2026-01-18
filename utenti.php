@@ -55,14 +55,11 @@ $utenti = $stmt->fetchAll();
     <title>Gestione Utenti - Study Breaks</title>
 </head>
 <body>
+    <?php include 'includes/header.php'; ?>
 
-    <?php include 'includes/sidebar.php'; ?>
+    <?php include 'includes/sidebar_admin.php'; ?>
 
     <div class="admin-page">
-        <header>
-            <button class="menu-btn" onclick="toggleSidebar()">&#9776;</button>
-            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
-        </header>
 
         <main class="admin-container">
             <section class="admin-intro">
@@ -133,20 +130,9 @@ $utenti = $stmt->fetchAll();
             </section>
         </main>
 
-        <div class="admin-footer-bg">
-            <span>© 2025 - Study Breaks. Tutti i diritti riservati.</span>
-        </div>
+        <?php include 'includes/footer_simple.php'; ?>
     </div>
 
-    <script src="js/global.js"></script>
-    <script>
-        // Funzione inline nel caso global.js non fosse caricato correttamente
-        function toggleSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            if (sidebar) {
-                sidebar.classList.toggle('open');
-            }
-        }
-    </script>
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

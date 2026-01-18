@@ -30,19 +30,7 @@ $playlists = $stmtPlay->fetchAll();
     <div class="admin-page">
         <?php include 'includes/header.php'; ?>
 
-        <div id="sidebar-nav" class="sidebar">
-            <button class="close-btn">&times;</button>
-            <div class="sidebar-links">
-                <a href="admin_dashboard.php">Home</a>
-                <a href="utenti.php">Utenti</a>
-                <a href="proposta.php">Proposte</a>
-                <a href="statistiche.php">Statistiche</a>
-                <?php if(isset($_SESSION['user_id'])): ?>
-                    <br><br>
-                    <a href="logout.php">Logout</a>
-                <?php endif; ?>
-            </div>
-        </div>
+        <?php include 'includes/sidebar_admin.php'; ?>
 
         <main class="admin-container">
             <section class="admin-section">
