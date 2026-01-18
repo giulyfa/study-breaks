@@ -1,7 +1,6 @@
 <?php
 require_once 'config.php';
 
-// Recupera l'attività dal database tramite lo slug nell'URL
 $slug = isset($_GET['name']) ? $_GET['name'] : '';
 $slug = htmlspecialchars($slug);
 
@@ -111,7 +110,7 @@ if (!$attivita) {
             <?php
             echo !empty($attivita['descrizione']) 
                 ? htmlspecialchars($attivita['descrizione']) 
-                : "Rilassati e divertiti con questa attività!"; //scritta di default in caso manchi la descrizione nel db
+                : "Rilassati e divertiti con questa attività!"; 
             ?>
         </p>
         <button id="btn-start" class="btn-start">Inizia</button>
@@ -134,7 +133,6 @@ if (!$attivita) {
         const ACTIVITY_TYPE = "<?php echo $attivita['tipo']; ?>"; 
         const ACTIVITY_DURATION = <?php echo $attivita['durata']; ?>;
 
-        // Gestione del click su "INIZIA"
         document.getElementById('btn-start').addEventListener('click', function() {
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('game-wrapper').style.display = 'flex';
@@ -143,7 +141,6 @@ if (!$attivita) {
             script.src = "js/activities/" + ACTIVITY_SLUG + ".js";
             document.body.appendChild(script);
 
-            // Salva i dati nel DB all'avvio
             const params = new URLSearchParams({
                 azione: 'attivita',
                 id_att: ACTIVITY_ID,
@@ -154,7 +151,7 @@ if (!$attivita) {
 
             fetch('salva_dati.php?' + params.toString())
                 .then(() => {
-                    // 3. SE il quadratino esiste nella pagina madre, lo aggiorniamo
+                    // SE il quadratino esiste nella pagina madre, lo aggiorniamo
                     if (window.parent) {
                         let actTodaySpan = window.parent.document.getElementById('activities-today-count');
                         if (actTodaySpan) {
