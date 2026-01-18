@@ -152,7 +152,18 @@ if (!$attivita) {
                 durata: ACTIVITY_DURATION
             });
 
-            fetch('salva_dati.php?' + params.toString());
+            fetch('salva_dati.php?' + params.toString())
+                .then(() => {
+                    // 3. SE il quadratino esiste nella pagina madre, lo aggiorniamo
+                    if (window.parent) {
+                        let actTodaySpan = window.parent.document.getElementById('activities-today-count');
+                        if (actTodaySpan) {
+                            let valore = parseInt(actTodaySpan.textContent) || 0;
+                            actTodaySpan.textContent = valore + 1;
+                        }
+                    }
+                })
+                .catch(err => console.log("Salvataggio silenzioso fallito, ma il gioco parte"));
         });
     </script>
 
