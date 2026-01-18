@@ -24,8 +24,7 @@ const saveModalBtn = document.getElementById('save-modal');
 const closeModalBtn = document.getElementById('close-modal');
 const suggestionBox = document.getElementById('suggestion-message');
 
-// --- FUNZIONI DI SERVIZIO ---
-
+// FUNZIONI DI SERVIZIO 
 function showCustomAlert(message) {
     alertMessage.textContent = message;
     customAlert.classList.add('show');
@@ -48,8 +47,7 @@ function updateDisplay() {
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// --- LOGICA DI FINE SESSIONE ---
-
+// LOGICA DI FINE SESSIONE
 function handleTimerComplete() {
     if (currentMode === 'studio') {
         hideCustomAlert();
@@ -77,7 +75,6 @@ function handleTimerComplete() {
             })
             .catch(error => console.error("Errore nel salvataggio:", error));
             
-        
         showCustomAlert("SESSIONE COMPLETATA! Prenditi una pausa");
         suggestionBox.textContent = "Ottimo lavoro! Che ne pensi di un giochino per svagarti?";
         suggestionBox.style.display = "block";
@@ -106,8 +103,7 @@ function handleTimerComplete() {
     }
 }
 
-// --- GESTIONE EVENTI ---
-
+// GESTIONE EVENTI
 btnStudio.addEventListener('click', () => {
     currentMode = 'studio';
     setTimer(studioMinutes);
@@ -150,8 +146,7 @@ restartBtn.addEventListener('click', () => {
     hideCustomAlert();
 });
 
-// --- MODAL ---
-
+// MODALI
 if (settingsBtn) {
     settingsBtn.addEventListener('click', () => {
         modal.style.display = "block";
@@ -187,7 +182,7 @@ window.addEventListener('click', (e) => {
     if (e.target == modal) modal.style.display = "none";
 });
 
-// --- AVVIO ---
+// AVVIO - Impostazioni iniziali
 document.addEventListener('DOMContentLoaded', () => {
     setTimer(studioMinutes); 
     if (btnStudio) btnStudio.classList.add('active');

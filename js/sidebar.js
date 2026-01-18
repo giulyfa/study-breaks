@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (openBtn && sidebar) {
         openBtn.addEventListener('click', () => {
-            sidebar.classList.add('open'); // Usa 'open' come in timer.js
+            sidebar.classList.add('open'); 
         });
     }
 
