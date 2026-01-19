@@ -1161,8 +1161,9 @@ footer.footer-home {
 }
 
 .activities-wrapper p {
-   text-align:center;
-   padding: 10px;
+    color: white;
+    text-align: center;
+    padding: 10px;
 }
 
 .profile-page .section-title {
