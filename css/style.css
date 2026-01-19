@@ -1457,6 +1457,20 @@ footer.footer-home {
     100% { opacity: 1; }
 }
 
+.no-activities {
+    text-align: center;
+    padding: 20px 10px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+.no-activities p {
+    font-size: 0.85rem;
+    color: #4D7D72;
+    margin: 0;
+    font-weight: 600;
+}
+
 /* --- FORM PROPOSTA --- */
 .proposal-page .proposal-form {
     background-color: #E3E0D1; 

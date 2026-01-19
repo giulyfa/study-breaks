@@ -92,6 +92,10 @@ $in_arrivo = $stmtSoon->fetchAll();
                         </div>
                         <p class="community-hint">L'admin le sta preparando!</p>
                     </div>
+                <?php else: ?>
+                    <div class="no-activities">
+                        <p>Al momento non ci sono nuove attività in arrivo.</p>
+                    </div>
                 <?php endif; ?>
             </aside>
 
