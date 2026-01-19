@@ -1124,6 +1124,7 @@ footer.footer-home {
 
 .time-btn:hover, .time-btn.active {
     background: #E49A7D;
+    font-weight: bold;
 }
 
 /* --- GRIGLIA STATISTICHE --- */
@@ -1158,11 +1159,6 @@ footer.footer-home {
     padding: 20px;
     margin: 50px 0;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.activities-wrapper p {
-   text-align:center;
-   padding: 10px;
 }
 
 .profile-page .section-title {
@@ -1381,6 +1377,86 @@ footer.footer-home {
 .success-banner { background-color: #d4edda; color: #155724; }
 .error-banner { background-color: #f8d7da; color: #721c24; }
 
+/* --- ATTIVITA IN LAVORAZIONE --- */
+.coming-soon-box {
+    border-radius: 15px;
+    position: relative;
+}
+
+.coming-soon-box .example-title {
+    color: #E49A7D;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.coming-soon-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mini-soon-card {
+    background: white;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #eef2f1;
+    box-shadow: 0 4px 10px rgba(77, 125, 114, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.mini-soon-card:hover {
+    transform: scale(1.02);
+}
+
+.badge-new {
+    background: #E49A7D; 
+    color: white;
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 800;
+    display: inline-block;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    animation: pulseBadge 2s infinite;
+}
+
+.mini-soon-card strong {
+    display: block;
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.2;
+}
+
+.mini-soon-card small {
+    display: block;
+    color: #4D7D72;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.community-hint {
+    font-size: 0.75rem;
+    color: #7b7b7b;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+
+/* --- ANIMAZIONE BADGE 'IN LAVORAZIONE' --- */
+@keyframes pulseBadge {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
 /* --- FORM PROPOSTA --- */
 .proposal-page .proposal-form {
     background-color: #E3E0D1; 
@@ -1484,6 +1560,7 @@ footer.footer-home {
 .proposal-page .examples-section {
     background-color: #E3E0D1;
     padding: 25px;
+    margin-bottom: 30px;
     border-radius: 20px;
 }
 
