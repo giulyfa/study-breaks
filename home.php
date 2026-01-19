@@ -66,7 +66,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                             <p>Micro-attività da 1 a 5 minuti per rigenerare la mente senza perdere la concentrazione</p>
                         </section>
 
-                        <section class="stats-container">
+                        <div class="stats-container">
                             <div class="stat-box">
                                 <p>PAUSE OGGI</p>
                                 <span class="stat-number" id="pause-count"><?php echo $_SESSION['pause_oggi'] ?? 0; ?></span>                        
@@ -79,7 +79,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                                 <p>ATTIVITÀ OGGI</p>
                                 <span class="stat-number" id="activities-today-count"><?php echo $_SESSION['attivita_oggi'] ?? 0; ?></span>                        
                             </div>
-                        </section>
+                        </div>
                     </div>
 
                     <section class="timer-card"> 
@@ -142,9 +142,9 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                 <a href="attivita.php" class="btn primary-btn">Vai alle attività</a>
             </section>
             
-            <section class="playlist-section">
+            <div class="playlist-section">
                  <button onclick="togglePlaylist()" class="btn secondary-btn">Vai alle Playlist</button>
-            </section>
+            </div>
         </main>
         
         <?php include 'includes/footer.php'; ?>
@@ -153,7 +153,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
     <div id="activity-modal" class="modal activity-overlay">
         <div class="modal-content game-modal-content">
             <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
-            <iframe id="game-frame" src="" frameborder="0"></iframe>
+            <iframe id="game-frame" src="about:blank"></iframe>
         </div>
     </div>
 

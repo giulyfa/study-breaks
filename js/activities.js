@@ -21,7 +21,7 @@ function chiudiAttivita() {
     const iframe = document.getElementById('game-frame');
 
     modal.style.display = 'none';
-    iframe.src = ''; 
+    iframe.src = 'about:blank';
 }
 
 function togglePlaylist() {
