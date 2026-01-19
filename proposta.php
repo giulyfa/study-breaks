@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <main class="proposal-container">
             <div class="proposal-banner">
-                <h2>Proponi un’attività</h2>
+                <h2>Proponi un'attività</h2>
                 <p>Hai una nuova idea innovativa? Proponila!</p>
             </div>
 
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-section">
                         <form action="proposta.php" method="POST" class="proposal-form" id="form-proposta">
                             <div class="form-group">
-                                <label>Titolo dell’Attività</label>
+                                <label>Titolo dell'Attività</label>
                                 <input type="text" name="titolo" required placeholder="Es. Stretching per occhi per chi studia al PC">
                             </div>
 
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </p>
 
                         <button type="submit" class="submit-proposal-btn">Invia proposta</button>
-                        <p class="admin-note">L’admin esaminerà la tua proposta prima di pubblicarla</p>
+                        <p class="admin-note">L'admin esaminerà la tua proposta prima di pubblicarla</p>
                         </form>
                     </div>
 
@@ -115,19 +115,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="example-card card-orange">
                             <div class="ex-text">
                                 <strong>Rotazione polsi</strong>
-                                <span>2 min – Perfetto per chi scrive molto</span>
+                                <span>2 min - Perfetto per chi scrive molto</span>
                             </div>
                         </div>
                         <div class="example-card card-green">
                             <div class="ex-text">
                                 <strong>Quiz capitali del mondo</strong>
-                                <span>5 min – Cultura generale rilassante</span>
+                                <span>5 min - Cultura generale rilassante</span>
                             </div>
                         </div>
                         <div class="example-card card-yellow">
                             <div class="ex-text">
                                 <strong>Color match</strong>
-                                <span>2 min – Abbina i colori velocemente</span>
+                                <span>2 min - Abbina i colori velocemente</span>
                             </div>
                         </div>
                     </aside>

@@ -851,7 +851,7 @@ footer.footer-home {
 
     .home-page .activity-item {
         border-radius: 20px;
-        padding: 24px;
+        padding: 20px;
         text-align: center;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         aspect-ratio: 1;
@@ -882,6 +882,7 @@ footer.footer-home {
 
     .home-page .playlist-section .secondary-btn {
         padding: 20px 40px;
+        max-width: 1000px;
         font-size: 1.15rem;
         font-weight: 600;
     }
@@ -1022,7 +1023,7 @@ footer.footer-home {
 
 .activity-page .propose-btn:hover{ background-color: #B1553E; }
 
-/* --- MEDIA QUERY ATTIVITA (Desktop) --- */
+/* --- MEDIA QUERY ATTIVITA (DESKTOP) --- */
 @media (min-width: 1024px) {
     .activity-page .content-area {
         flex-direction: row; 
@@ -1084,8 +1085,8 @@ footer.footer-home {
 }
 
 /* --- STREAK CARD --- */
-.profile-page .streak-card {
-    background-image: url('../img/streak.jpg');
+.streak-card {
+    background-image: url('../img/streak2.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 15px;
@@ -1254,8 +1255,7 @@ footer.footer-home {
     background-position: center;
     border-radius: 20px;
     padding: 25px;
-    margin-top: 30px;
-    margin-bottom: 80px;
+    margin: 50px 0;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
@@ -1299,38 +1299,47 @@ footer.footer-home {
     stroke-width: 1;
 }
 
-/* --- MEDIA QUERY PER PROFILO --- */
+/* --- MEDIA QUERY PER PROFILO (MID LUNGHEZZA) --- */
 @media (min-width: 680px) {
     .welcome-card {
         padding: 20px;
         text-align: left;
     }
 
+    .streak-card {
+        background-image: url('../img/streak.jpg');
+    }
+
     .profile-page .content-profile {
         display: flex; 
         gap: 25px; 
-        padding: 20px;
+        padding: 0;
     }
 
     .profile-page .streak-card {
         flex: 1;
-        min-height: 220px; 
+        min-height: 280px; 
+        margin-bottom: 0;
     }
 
     .profile-page .stats-column { flex: 1.2; }
 }
 
-/* --- MEDIA QUERY PER PROFILO (Desktop) --- */
+/* --- MEDIA QUERY PER PROFILO (DESKTOP) --- */
 @media (min-width: 1024px) {
     .profile-page .left-column {
-        margin-top: 50px;
+        margin-top: 10px;
         display: flex;
         gap: 50px;
     }
 
+    .streak-card {
+        background-image: url('../img/streak2.jpg');
+    }
+
     .activities-history-container, .weekly-activity-container {
         flex: 1;
-        margin: 0; 
+        margin-bottom: 50px; 
         width: 50%; 
     }
 }
@@ -1492,7 +1501,7 @@ footer.footer-home {
 .card-green { background-color: #F1DEB7; }
 .card-yellow { background-color: #F4ECBE; }
 
-/* --- MEDIA QUERY PER PROPOSTA (Desktop) --- */
+/* --- MEDIA QUERY PER PROPOSTA (DESKTOP) --- */
 @media (min-width: 1024px) {
     .proposal-content-wrapper {
         display: flex;
@@ -1905,7 +1914,7 @@ footer.footer-home {
 .admin-btn.approve { background-color: #8EBAA3; color: white; }
 .admin-btn:hover { opacity: 0.6; transform: translateY(-1px); }
 
-/* --- MEDIA QUERY PER PAGINA GESTIONE PROPOSTE (Desktop) --- */
+/* --- MEDIA QUERY PER PAGINA GESTIONE PROPOSTE (DESKTOP) --- */
 @media (min-width: 768px) {
     .badge-count {
         padding: 12px 18px;
