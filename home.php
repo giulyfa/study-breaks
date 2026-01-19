@@ -1,13 +1,8 @@
 <?php
 require_once 'config.php';
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['user_ruolo'] !== 'studente') {
     header("Location: index.php"); 
-    exit;
-}
-
-if (isset($_SESSION['user_ruolo']) && strtolower($_SESSION['user_ruolo']) === 'admin') {
-    header("Location: admin_dashboard.php");
     exit;
 }
 
