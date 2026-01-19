@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php'; 
 
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user_id']) || $_SESSION['user_ruolo'] !== 'studente') {
     header("Location: index.php");
     exit;
 }
@@ -19,9 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($titolo) && !empty($tipo) && !empty($descrizione)) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO proposte (id_utente, nome_attivita, categoria, durata, descrizione, link_suggerito) VALUES (?, ?, ?, ?, ?, ?)");
-            if ($stmt->execute([$user_id, $titolo, $tipo, $durata, $descrizione, $istruzioni])) {
-                $successo = true;
+            // CONTROLLO DUPLICATO RECENTE
+            $check = $pdo->prepare("SELECT id FROM proposte 
+                                    WHERE id_utente = ? 
+                                    AND nome_attivita = ? 
+                                    AND data_proposta > DATE_SUB(NOW(), INTERVAL 2 MINUTE)");
+            $check->execute([$user_id, $titolo]);
+
+            if ($check->rowCount() > 0) {
+                $errore = "Hai già inviato questa proposta un momento fa. Controlla se è stata registrata!";
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO proposte (id_utente, nome_attivita, categoria, durata, descrizione, link_suggerito) VALUES (?, ?, ?, ?, ?, ?)");
+                if ($stmt->execute([$user_id, $titolo, $tipo, $durata, $descrizione, $istruzioni])) {
+                    $successo = true;
+                }
             }
         } catch (PDOException $e) {
             $errore = "Errore nel salvataggio: " . $e->getMessage();
@@ -49,14 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <main class="proposal-container">
             <div class="proposal-banner">
-                <h2>Proponi un’attività</h2>
+                <h2>Proponi un'attività</h2>
                 <p>Hai una nuova idea innovativa? Proponila!</p>
             </div>
 
             <?php if ($successo): ?>
                 <div class="success-banner">
                     <strong>Ottimo lavoro!</strong> La tua proposta è stata inviata all'admin per la revisione. <br><br>
-                    <a href="home.php" class="footer-link" style="text-decoration: underline;">Torna alla Home</a>
+                    <a href="home.php" class="footer-link" style="color: #155724;text-decoration: underline;">Torna alla Home</a>
                 </div>
             <?php else: ?>
                 <?php if ($errore): ?>
@@ -67,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="form-section">
                         <form action="proposta.php" method="POST" class="proposal-form" id="form-proposta">
                             <div class="form-group">
-                                <label>Titolo dell’Attività</label>
+                                <label>Titolo dell'Attività</label>
                                 <input type="text" name="titolo" required placeholder="Es. Stretching per occhi per chi studia al PC">
                             </div>
 
@@ -106,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </p>
 
                         <button type="submit" class="submit-proposal-btn">Invia proposta</button>
-                        <p class="admin-note">L’admin esaminerà la tua proposta prima di pubblicarla</p>
+                        <p class="admin-note">L'admin esaminerà la tua proposta prima di pubblicarla</p>
                         </form>
                     </div>
 
@@ -115,19 +126,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="example-card card-orange">
                             <div class="ex-text">
                                 <strong>Rotazione polsi</strong>
-                                <span>2 min – Perfetto per chi scrive molto</span>
+                                <span>2 min - Perfetto per chi scrive molto</span>
                             </div>
                         </div>
                         <div class="example-card card-green">
                             <div class="ex-text">
                                 <strong>Quiz capitali del mondo</strong>
-                                <span>5 min – Cultura generale rilassante</span>
+                                <span>5 min - Cultura generale rilassante</span>
                             </div>
                         </div>
                         <div class="example-card card-yellow">
                             <div class="ex-text">
                                 <strong>Color match</strong>
-                                <span>2 min – Abbina i colori velocemente</span>
+                                <span>2 min - Abbina i colori velocemente</span>
                             </div>
                         </div>
                     </aside>

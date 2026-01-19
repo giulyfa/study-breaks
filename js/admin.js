@@ -19,7 +19,7 @@ function apriModifica(dati) {
     document.getElementById('edit-durata').value = dati.durata;
     document.getElementById('edit-stato').value = dati.stato;
 
-    const campiDaBloccare = ['edit-titolo', 'edit-tipo', 'edit-durata'];
+    const campiDaBloccare = ['edit-tipo', 'edit-durata'];
     campiDaBloccare.forEach(id => {
         const el = document.getElementById(id);
         el.readOnly = true;
@@ -67,10 +67,11 @@ function apriModificaPlaylist(dati) {
 
 function apriNuovaPlaylist() {
     document.getElementById('edit-pl-id').value = ''; 
+    document.getElementById('edit-pl-attiva').value = '1'; 
     const titoloInput = document.getElementById('edit-pl-titolo');
     titoloInput.value = '';
     titoloInput.readOnly = false;
-    document.getElementById('edit-pl-attiva').value = '1'; 
+    titoloInput.style.background = "#fff";
 
     const urlInput = document.getElementById('edit-pl-url');
     urlInput.value = '';
