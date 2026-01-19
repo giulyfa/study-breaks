@@ -96,7 +96,7 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
             </section>
 
             <section class="admin-navigation">
-                <a href="approvazione_attivita.php" class="btn primary-btn">Vai alle proposte degli utenti</a>
+                <a href="gestione_proposte.php" class="btn primary-btn">Vai alle proposte degli utenti</a>
                 <a href="utenti.php" class="btn primary-btn">Vai alla gestione degli utenti</a>
                 <a href="statistiche.php" class="btn primary-btn">Vai alle statistiche degli utenti</a>
             </section>
