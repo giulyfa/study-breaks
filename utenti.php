@@ -1,32 +1,28 @@
 <?php
 require_once 'config.php';
 
-// 1. CONTROLLO ACCESSO: Solo Admin
 if (!isset($_SESSION['user_id']) || $_SESSION['user_ruolo'] !== 'admin') {
     header("Location: index.php");
     exit;
 }
 
-// 2. GESTIONE AZIONI (Blocca/Sblocca)
+// GESTIONE AZIONI (Blocca/Sblocca)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['toggle_user_id'])) {
     $id_utente = intval($_POST['toggle_user_id']);
     $stato_attuale = $_POST['current_status'];
     
-    // Se è attivo diventa bloccato, altrimenti attivo
     $nuovo_stato = ($stato_attuale === 'attivo') ? 'bloccato' : 'attivo';
     
     $stmt = $pdo->prepare("UPDATE utenti SET stato = ? WHERE id = ?");
     $stmt->execute([$nuovo_stato, $id_utente]);
     
-    // Ricarica la pagina per evitare invii doppi
     header("Location: utenti.php");
     exit;
 }
 
-// 3. GESTIONE RICERCA E LETTURA DATI
+// GESTIONE RICERCA E LETTURA DATI
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-// Query base: escludiamo l'admin stesso dalla lista per evitare che si blocchi da solo
 $sql = "SELECT * FROM utenti WHERE ruolo != 'admin'";
 $params = [];
 
@@ -42,7 +38,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $utenti = $stmt->fetchAll();
 ?>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -55,11 +50,9 @@ $utenti = $stmt->fetchAll();
     <title>Gestione Utenti - Study Breaks</title>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
-
-    <?php include 'includes/sidebar_admin.php'; ?>
-
     <div class="admin-page">
+        <?php include 'includes/header.php'; ?>
+        <?php include 'includes/sidebar_admin.php'; ?>
 
         <main class="admin-container">
             <section class="admin-intro">
@@ -87,7 +80,6 @@ $utenti = $stmt->fetchAll();
                         <?php if (count($utenti) > 0): ?>
                             <?php foreach ($utenti as $user): ?>
                                 <?php 
-                                    // Gestione visuale dello stato (se la colonna 'stato' non esiste nel DB, assume 'attivo')
                                     $stato = $user['stato'] ?: 'attivo';
                                     $badgeClass = ($stato === 'attivo') ? 'attivo' : 'bloccato';
                                     $testoBadge = ucfirst($stato);
@@ -126,14 +118,13 @@ $utenti = $stmt->fetchAll();
                 </table>
             </section>
 
-            <section class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
-                <a href="admin_dashboard.php" class="btn primary-btn" style="width: 100%; text-align: center; text-decoration: none;">Torna alla Dashboard</a>
+            <section class="admin-navigation">
+                <a href="admin_dashboard.php" class="btn primary-btn">Torna alla Dashboard</a>
             </section>
         </main>
 
         <?php include 'includes/footer_simple.php'; ?>
     </div>
-
     <?php include 'includes/scripts.php'; ?>
 </body>
 </html>
