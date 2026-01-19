@@ -76,10 +76,8 @@ $playlists = $stmt->fetchAll();
 </head>
 <body>
     <div class="admin-page">
-        <header>
-            <button class="menu-btn">&#9776;</button>
-            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo" />
-        </header>
+        <?php include 'includes/header.php'; ?>
+        <?php include 'includes/sidebar_admin.php'; ?>
 
         <main class="admin-container">
             <section class="admin-intro">
@@ -98,6 +96,13 @@ $playlists = $stmt->fetchAll();
                 <div class="table-container">
                     <h3>Attività più giocate</h3>
                     <table class="user-table-stats">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Attività</th>
+                                <th style="text-align: right;">Svolgimenti</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <?php if (count($attivita) > 0): ?>
                                 <?php $rank = 1; foreach ($attivita as $row): ?>
@@ -125,6 +130,13 @@ $playlists = $stmt->fetchAll();
                 <div class="table-container">
                     <h3>Playlist più ascoltate</h3>
                     <table class="user-table-stats">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Playlist</th>
+                                <th style="text-align: right;">Ascolti</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <?php if (count($playlists) > 0): ?>
                                 <?php $rank = 1; foreach ($playlists as $p): ?>
@@ -146,14 +158,14 @@ $playlists = $stmt->fetchAll();
                 </div>
             </section>
 
-            <section class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
+            <div class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
                 <a href="admin_dashboard.php" class="btn primary-btn" style="width: 100%; text-align: center; text-decoration: none;">Torna alla Dashboard</a>
-            </section>
+            </div>
         </main>
 
-        <div class="admin-footer-bg">
-            <span>2025 - Study Breaks. Tutti i diritti riservati.</span>
-        </div>
+        <?php include 'includes/footer_simple.php'?>
     </div>
+
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>
