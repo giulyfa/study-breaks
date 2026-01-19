@@ -95,7 +95,7 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
                 <button class="propose-btn" style="margin-top: 25px;" onclick="apriNuovaPlaylist()">+ Nuova Playlist</button>
             </section>
 
-            <section class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
+            <section class="admin-navigation">
                 <a href="approvazione_attivita.php" class="btn primary-btn">Vai alle proposte degli utenti</a>
                 <a href="utenti.php" class="btn primary-btn">Vai alla gestione degli utenti</a>
                 <a href="statistiche.php" class="btn primary-btn">Vai alle statistiche degli utenti</a>

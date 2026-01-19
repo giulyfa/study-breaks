@@ -1633,10 +1633,10 @@ footer.footer-home {
 
 .admin-section {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
-.admin-section h2 {
+.admin-section h2, .admin-intro h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1645,24 +1645,6 @@ footer.footer-home {
     color: #333;
     font-weight: 600;
     border-bottom: 2px solid #eee;
-}
-
-.admin-header-title {
-    color: #274c43;
-    font-weight: 700;
-    font-size: 1.2em;
-    margin-left: 15px;
-}
-
-.admin-intro {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-}
-
-.admin-intro h2{
-    font-weight: 600;
-    color: #333;
 }
 
 /* --- BARRA DI RICERCA --- */
@@ -1694,27 +1676,6 @@ footer.footer-home {
     background-color: #E2DDD1;
     border-radius: 10px;
     padding: 20px;
-}
-
-.user-table, .user-table-stats {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-.user-table th, .user-table-stats th {
-    padding: 12px;
-    border-bottom: 2px solid #C4C4C4;
-    color: #555;
-    font-size: 0.9em;
-    text-transform: uppercase;
-}
-
-.user-table td, .user-table-stats td {
-    padding: 15px 12px;
-    border-bottom: 1px solid #D1CEC1;
-    font-size: 0.9em;
-    color: #333;
 }
 
 .status-badge {
@@ -1762,39 +1723,31 @@ footer.footer-home {
     transform: translateY(-2px);
 }
 
-.admin-navigation {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+/* --- per tabella statistiche --- */
+.user-table, .user-table-stats {
     width: 100%;
-    max-width: 500px; 
-    margin: 50px auto 0; 
+    border-collapse: collapse;
+    text-align: left;
 }
 
-.admin-navigation .btn.primary-btn {
-    background: #84B59F; 
-    color: white;
-    padding: 16px;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-    border: none;
+.user-table th, .user-table-stats th {
+    padding: 12px;
+    border-bottom: 2px solid #C4C4C4;
+    color: #555;
+    font-size: 0.9em;
+    text-transform: uppercase;
 }
 
-.admin-navigation .btn.primary-btn:hover {
-    background: #679882;
-    transform: scale(1.02);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+.user-table td, .user-table-stats td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #D1CEC1;
+    font-size: 0.9em;
+    color: #333;
 }
 
-/* --- STATISTICHE --- */
+/* --- PAGINA STATISTICHE --- */
 .table-container h3 {
-    color: #69A297; /* Verde scuro della Dashboard */
+    color: #69A297; 
     font-size: 1.1em;
     margin: 0;
     padding-bottom: 10px;
@@ -1802,12 +1755,7 @@ footer.footer-home {
     text-align: center;
 }
 
-.stats-box .user-table-stats td {
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    padding: 12px 20px;
-}
-
-/* --- APPROVAZIONE PROPOSTE --- */
+/* --- PAGINA APPROVAZIONE PROPOSTE --- */
 .badge-count {
     background-color: #69A297;
     color: white;
@@ -1870,7 +1818,6 @@ footer.footer-home {
     color: #666;
 }
 
-/* Bottoni Admin */
 .admin-page .action-buttons {
     display: flex;
     width: 100%; /* I bottoni prendono tutta la larghezza */
@@ -1899,6 +1846,37 @@ footer.footer-home {
     opacity: 0.6;
 }
 
+/* --- NAVIGAZIONE ADMIN --- */
+.admin-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px; 
+    margin: 50px auto 0; 
+}
+
+.admin-navigation .btn.primary-btn {
+    background: #84B59F; 
+    color: white;
+    padding: 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.admin-navigation .btn.primary-btn:hover {
+    background: #679882;
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
 /* --- MEDIA QUERY TABELLE ADMIN (Mobile) --- */
 @media (max-width: 600px) {
     .user-table thead {
@@ -1919,8 +1897,7 @@ footer.footer-home {
     }
 
     .user-table td {
-        border: none;
-        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
         text-align: left;
         display: flex;
         justify-content: space-between; 
@@ -1928,7 +1905,7 @@ footer.footer-home {
     }
 
     .user-table td::before {
-        content: attr(data-label); /* Usa l'attributo data-label che aggiungeremo all'HTML */
+        content: attr(data-label); 
         font-weight: 700;
         color: #666;
         font-size: 0.85em;
@@ -1940,7 +1917,6 @@ footer.footer-home {
         font-weight: 700;
         border-bottom: 1px solid rgba(0,0,0,0.1);
         padding-bottom: 10px;
-        margin-bottom: 10px;
     }
 
     .user-management-table td:last-child {
@@ -1951,15 +1927,11 @@ footer.footer-home {
         display: flex;
         justify-content: flex-start; 
         text-align: left;
-        padding: 8px 0;
     }
-
     
     .admin-dashboard-table td:last-child {
         justify-content: center; 
         gap: 20px;
-        padding-top: 15px;
-        margin-top: 10px;
     }
 
     .admin-dashboard-table td:first-child::before {

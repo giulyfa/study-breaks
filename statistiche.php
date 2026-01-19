@@ -61,7 +61,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $playlists = $stmt->fetchAll();
 ?>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -85,14 +84,17 @@ $playlists = $stmt->fetchAll();
             </section>
 
             <form method="GET" action="statistiche.php" class="time-selector">
-                <button type="submit" name="periodo" value="sempre" class="time-btn <?php echo $btnSempre; ?>">Sempre</button>
-                <button type="submit" name="periodo" value="oggi" class="time-btn <?php echo $btnOggi; ?>">Oggi</button>
-                <button type="submit" name="periodo" value="settimana" class="time-btn <?php echo $btnSettimana; ?>">Settimana</button>
-                <button type="submit" name="periodo" value="mese" class="time-btn <?php echo $btnMese; ?>">Mese</button>
+                <?php 
+                $opzioni = ['sempre' => 'Sempre', 'oggi' => 'Oggi', 'settimana' => 'Settimana', 'mese' => 'Mese'];
+                foreach ($opzioni as $val => $label): ?>
+                    <button type="submit" name="periodo" value="<?= $val ?>" 
+                            class="time-btn <?= ($periodo === $val) ? 'active' : '' ?>">
+                        <?= $label ?>
+                    </button>
+                <?php endforeach; ?>
             </form>
 
-            
-            <section class="admin-section stats-box">
+            <section class="admin-section">
                 <div class="table-container">
                     <h3>Attività più giocate</h3>
                     <table class="user-table-stats">
@@ -114,9 +116,7 @@ $playlists = $stmt->fetchAll();
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="3" style="text-align: center; padding: 20px;">
-                                        Nessuna attività registrata in questo periodo.
-                                    </td>
+                                    <td colspan="3" style="text-align: center; padding: 20px;">Nessuna attività registrata in questo periodo.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -124,9 +124,7 @@ $playlists = $stmt->fetchAll();
                 </div>
             </section>
 
-            <hr style="border: 0; margin: 30px 0;">
-
-            <section class="admin-section stats-box">
+            <section class="admin-section">
                 <div class="table-container">
                     <h3>Playlist più ascoltate</h3>
                     <table class="user-table-stats">
@@ -158,14 +156,13 @@ $playlists = $stmt->fetchAll();
                 </div>
             </section>
 
-            <div class="admin-navigation" style="margin-top: 50px; display: flex; flex-direction: column; gap: 15px;">
-                <a href="admin_dashboard.php" class="btn primary-btn" style="width: 100%; text-align: center; text-decoration: none;">Torna alla Dashboard</a>
+            <div class="admin-navigation">
+                <a href="admin_dashboard.php" class="btn primary-btn">Torna alla Dashboard</a>
             </div>
         </main>
 
         <?php include 'includes/footer_simple.php'?>
     </div>
-
     <?php include 'includes/scripts.php'; ?>
 </body>
 </html>
