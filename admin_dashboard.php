@@ -95,11 +95,11 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
                 <button class="propose-btn" style="margin-top: 25px;" onclick="apriNuovaPlaylist()">+ Nuova Playlist</button>
             </section>
 
-            <section class="admin-navigation">
+            <div class="admin-navigation">
                 <a href="gestione_proposte.php" class="btn primary-btn">Vai alle proposte degli utenti</a>
                 <a href="utenti.php" class="btn primary-btn">Vai alla gestione degli utenti</a>
                 <a href="statistiche.php" class="btn primary-btn">Vai alle statistiche degli utenti</a>
-            </section>
+            </div>
         </main>
 
         <?php include 'includes/footer_simple.php'; ?>
@@ -119,6 +119,7 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
                 <div class="form-group">
                     <label>Tipo</label>
                     <select name="tipo" id="edit-tipo" required>
+                        <option value="" disabled selected>Seleziona un tipo</option>
                         <option value="gioco">Gioco</option>
                         <option value="relax">Relax</option>
                         <option value="fisico">Fisico</option>

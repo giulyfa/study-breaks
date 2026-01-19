@@ -130,9 +130,9 @@ $totale_attesa = count($proposte);
                 <?php endforeach; ?>
             <?php endif; ?>
 
-            <section class="admin-navigation">
+            <div class="admin-navigation">
                 <a href="admin_dashboard.php" class="btn primary-btn">Torna alla Dashboard</a>
-            </section>
+            </div>
         </main>
         <?php include 'includes/footer_simple.php'?>
     </div>
