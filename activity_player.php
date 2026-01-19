@@ -53,14 +53,14 @@ if (!$attivita) {
 
         canvas {
             background-color: #f4f4f4;
-            border: 2px solid #4D7D72; 
+            border: 2px solid #4D7D72;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: block;
-            
-            /* REGOLE FONDAMENTALI PER IL RIDIMENSIONAMENTO */
-            width: 100% !important; /* Si adatta alla larghezza del contenitore */
-            height: auto !important; /* Mantiene le proporzioni (aspect-ratio) */
-            max-height: 70vh; /* Non occupare più del 70% dell'altezza schermo */
+            aspect-ratio: 1 / 1;
+            width: auto;
+            height: auto;
+            max-width: 90%;
+            max-height: 75vh;
             object-fit: contain;
         }
 
@@ -158,7 +158,7 @@ if (!$attivita) {
     </div>
 
     <div id="game-wrapper">
-        <canvas id="gameCanvas" width="500" height="400"></canvas>
+        <canvas id="gameCanvas" width="500" height="500"></canvas>
         
         <div class="game-ui">
             <p>Tempo stimato: <?php echo htmlspecialchars($attivita['durata']); ?> min</p>

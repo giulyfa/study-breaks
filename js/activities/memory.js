@@ -7,9 +7,25 @@ const ROWS = 4;
 const MARGIN = 20;
 const TOTAL_CARDS = COLS * ROWS;
 
+// --- CALCOLO PER CARTE QUADRATE ---
+// 1. Calcoliamo la dimensione massima possibile per larghezza e altezza rispettando i margini
+const maxW = (cvs.width - (COLS + 1) * MARGIN) / COLS;
+const maxH = (cvs.height - (ROWS + 1) * MARGIN) / ROWS;
 
-const CARD_W = (cvs.width - (COLS + 1) * MARGIN) / COLS;
-const CARD_H = (cvs.height - (ROWS + 1) * MARGIN) / ROWS;
+// 2. Prendiamo il valore più piccolo tra i due per garantire che la carta sia quadrata
+// e stia dentro lo schermo sia in orizzontale che in verticale
+const CARD_SIZE = Math.min(maxW, maxH);
+const CARD_W = CARD_SIZE;
+const CARD_H = CARD_SIZE;
+
+// 3. Calcoliamo l'offset (spazio vuoto iniziale) per centrare la griglia nel canvas
+// Offset X = (Larghezza Canvas - Larghezza Totale Griglia) / 2
+const GRID_W = COLS * CARD_W + (COLS - 1) * MARGIN;
+const GRID_H = ROWS * CARD_H + (ROWS - 1) * MARGIN;
+
+const OFFSET_X = (cvs.width - GRID_W) / 2;
+const OFFSET_Y = (cvs.height - GRID_H) / 2;
+
 
 // Percorsi immagini (assumiamo siano in img/memory/)
 const IMG_PATH = "img/memory/";
@@ -91,9 +107,13 @@ function initGame() {
     let index = 0;
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
+            // Calcolo posizione X e Y usando OFFSET e indici riga/colonna
+            let posX = OFFSET_X + c * (CARD_W + MARGIN);
+            let posY = OFFSET_Y + r * (CARD_H + MARGIN);
+
             cards.push({
-                x: MARGIN + c * (CARD_W + MARGIN),
-                y: MARGIN + r * (CARD_H + MARGIN),
+                x: posX,
+                y: posY,
                 w: CARD_W,
                 h: CARD_H,
                 id: ids[index],      // ID dell'immagine (1-8)
@@ -201,11 +221,27 @@ function drawWinScreen() {
 
 // --- LOGICA DI GIOCO ---
 cvs.addEventListener("mousedown", onInput);
+// Aggiungo anche touchstart per il supporto mobile migliore
+cvs.addEventListener("touchstart", function(e) {
+    e.preventDefault(); // Evita scroll
+    let touch = e.touches[0];
+    let mouseEvent = new MouseEvent("mousedown", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    cvs.dispatchEvent(mouseEvent);
+}, {passive: false});
+
 
 function onInput(e) {
     const rect = cvs.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    // Calcolo coordinate relative al canvas
+    // È importante usare la scala se il CSS ridimensiona il canvas
+    const scaleX = cvs.width / rect.width;
+    const scaleY = cvs.height / rect.height;
+
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const mouseY = (e.clientY - rect.top) * scaleY;
 
     if (gameState === "WIN") {
         resetGame();
