@@ -15,15 +15,13 @@ $userData = $stmtUser->fetch();
 
 // RESET GIORNALIERO
 if ($userData['ultimo_accesso'] !== $oggi) {
-    $stmtReset = $pdo->prepare("UPDATE utenti SET pause_oggi = 0, attivita_oggi = 0, sessioni_oggi = 0 WHERE id = ?");
-    $stmtReset->execute([$user_id]);
+    $stmtReset = $pdo->prepare("UPDATE utenti SET pause_oggi = 0, attivita_oggi = 0, sessioni_oggi = 0, ultimo_accesso = ? WHERE id = ?");
+    $stmtReset->execute([$oggi, $user_id]);
 
     $_SESSION['pause_oggi'] = 0;
     $_SESSION['attivita_oggi'] = 0;
     $_SESSION['sessioni_oggi'] = 0;
-    $_SESSION['data_ultimo_accesso'] = $oggi;
 } else {
-    // È lo stesso giorno: carichiamo i dati dal DB nella Sessione per sicurezza
     $_SESSION['pause_oggi'] = $userData['pause_oggi'];
     $_SESSION['attivita_oggi'] = $userData['attivita_oggi'];
     $_SESSION['sessioni_oggi'] = $userData['sessioni_oggi'];
