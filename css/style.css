@@ -1568,9 +1568,10 @@ footer.footer-home {
     border-radius: 50%;      
 }
 
-.about-card h3 {
+.about-card h2 {
     color: #E49A7D;
     margin-bottom: 15px;
+    font-size: 1.2em;
 }
 
 .team-section {
