@@ -41,6 +41,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errore = "Per favore, compila tutti i campi obbligatori.";
     }
 }
+
+// RECUPERO ATTIVITÀ APPROVATE "IN ARRIVO"
+$stmtSoon = $pdo->prepare("
+    SELECT a.titolo, a.tipo 
+    FROM attivita a
+    INNER JOIN proposte p ON a.titolo = p.nome_attivita COLLATE utf8mb4_unicode_ci
+    WHERE a.stato = 'disattivata' 
+    AND p.stato = 'approvata'
+    ORDER BY a.id DESC 
+    LIMIT 2
+");
+$stmtSoon->execute();
+$in_arrivo = $stmtSoon->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -63,6 +76,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h2>Proponi un'attività</h2>
                 <p>Hai una nuova idea innovativa? Proponila!</p>
             </div>
+
+            <aside class="examples-section">
+                <?php if (!empty($in_arrivo)): ?>
+                    <div class="coming-soon-box">
+                        <h3 class="example-title">Approvate di recente:</h3>
+                        <div class="coming-soon-wrapper">
+                            <?php foreach($in_arrivo as $pro): ?>
+                                <div class="mini-soon-card">
+                                    <span class="badge-new">In lavorazione</span>
+                                    <strong><?= htmlspecialchars($pro['titolo']) ?></strong>
+                                    <small><?= htmlspecialchars($pro['tipo']) ?></small>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <p class="community-hint">L'admin le sta preparando!</p>
+                    </div>
+                <?php endif; ?>
+            </aside>
 
             <?php if ($successo): ?>
                 <div class="success-banner">
