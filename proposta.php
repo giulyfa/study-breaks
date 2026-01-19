@@ -19,9 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($titolo) && !empty($tipo) && !empty($descrizione)) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO proposte (id_utente, nome_attivita, categoria, durata, descrizione, link_suggerito) VALUES (?, ?, ?, ?, ?, ?)");
-            if ($stmt->execute([$user_id, $titolo, $tipo, $durata, $descrizione, $istruzioni])) {
-                $successo = true;
+            // CONTROLLO DUPLICATO RECENTE
+            $check = $pdo->prepare("SELECT id FROM proposte 
+                                    WHERE id_utente = ? 
+                                    AND nome_attivita = ? 
+                                    AND data_proposta > DATE_SUB(NOW(), INTERVAL 2 MINUTE)");
+            $check->execute([$user_id, $titolo]);
+
+            if ($check->rowCount() > 0) {
+                $errore = "Hai già inviato questa proposta un momento fa. Controlla se è stata registrata!";
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO proposte (id_utente, nome_attivita, categoria, durata, descrizione, link_suggerito) VALUES (?, ?, ?, ?, ?, ?)");
+                if ($stmt->execute([$user_id, $titolo, $tipo, $durata, $descrizione, $istruzioni])) {
+                    $successo = true;
+                }
             }
         } catch (PDOException $e) {
             $errore = "Errore nel salvataggio: " . $e->getMessage();
@@ -56,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if ($successo): ?>
                 <div class="success-banner">
                     <strong>Ottimo lavoro!</strong> La tua proposta è stata inviata all'admin per la revisione. <br><br>
-                    <a href="home.php" class="footer-link" style="text-decoration: underline;">Torna alla Home</a>
+                    <a href="home.php" class="footer-link" style="color: #155724;text-decoration: underline;">Torna alla Home</a>
                 </div>
             <?php else: ?>
                 <?php if ($errore): ?>
