@@ -18,10 +18,10 @@ if (!$attivita) {
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($attivita['titolo']); ?> - Study Breaks</title>
     <style>
-        /* CSS specifico per centrare il gioco dentro l'iframe */
+        /* CSS RESET & BODY */
         body {
             margin: 0;
-            padding: 0;
+            padding: 10px; /* Un po' di padding per non attaccarsi ai bordi */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -29,21 +29,45 @@ if (!$attivita) {
             height: 100vh;
             background-color: #ffffff;
             font-family: 'Quicksand', sans-serif;
-            overflow: hidden; 
+            overflow: hidden; /* Evita scrollbar indesiderate */
+            box-sizing: border-box;
         }
         
-        h2 { margin-bottom: 15px; color: #333; }
+        h2 { 
+            margin-bottom: 15px; 
+            color: #333; 
+            text-align: center;
+            font-size: 1.5rem;
+            flex-shrink: 0; /* Impedisce al titolo di schiacciarsi troppo */
+        }
         
+        /* --- STILI RESPONSIVE PER IL CANVAS (GIOCO) --- */
+        #game-wrapper {
+            display: none; /* Nascosto all'inizio */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px; /* Non diventare più largo del gioco originale */
+            max-height: 100%;
+        }
+
         canvas {
             background-color: #f4f4f4;
             border: 2px solid #4D7D72; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: block;
+            
+            /* REGOLE FONDAMENTALI PER IL RIDIMENSIONAMENTO */
+            width: 100% !important; /* Si adatta alla larghezza del contenitore */
+            height: auto !important; /* Mantiene le proporzioni (aspect-ratio) */
+            max-height: 70vh; /* Non occupare più del 70% dell'altezza schermo */
+            object-fit: contain;
         }
 
         .game-ui {
-            margin-top: 15px;
+            margin-top: 10px;
             text-align: center;
+            width: 100%;
         }
 
         .btn-exit {
@@ -61,11 +85,13 @@ if (!$attivita) {
         /* --- STILI PER LA SCHERMATA DI AVVIO --- */
         #start-screen {
             text-align: center;
+            width: 90%;
             max-width: 400px;
             padding: 20px;
             background-color: #f9f9f9;
             border-radius: 15px;
             border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .description-text {
@@ -76,7 +102,7 @@ if (!$attivita) {
         }
 
         .btn-start {
-            background-color: #4D7D72; /* Verde del tema */
+            background-color: #4D7D72;
             color: white;
             border: none;
             padding: 12px 30px;
@@ -93,11 +119,26 @@ if (!$attivita) {
             transform: scale(1.05);
         }
 
-        /* Contenitore del gioco nascosto all'inizio */
-        #game-wrapper {
-            display: none;
-            flex-direction: column;
-            align-items: center;
+        @media (max-height: 600px) {
+            h2 {
+                font-size: 1.2rem; /* Titolo più piccolo */
+                margin-bottom: 5px;
+            }
+            .game-ui p {
+                display: none; /* Nascondi "Tempo stimato" per salvare spazio */
+            }
+            canvas {
+                max-height: 80vh; /* Dai più spazio al canvas */
+            }
+        }
+
+        @media (max-height: 450px) {
+            h2 {
+                display: none; 
+            }
+            body {
+                padding: 5px;
+            }
         }
     </style>
 </head>

@@ -88,7 +88,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
     <div id="activity-modal" class="modal activity-overlay">
         <div class="modal-content game-modal-content">
             <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
-            <iframe id="game-frame" src="" frameborder="0"></iframe>
+            <iframe id="game-frame" src="about:blank"></iframe>
         </div>
     </div>
 
