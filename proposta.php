@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endif; ?>
 
                 <div class="proposal-content-wrapper">
-                    <section class="form-section">
+                    <div class="form-section">
                         <form action="proposta.php" method="POST" class="proposal-form" id="form-proposta">
                             <div class="form-group">
                                 <label>Titolo dell’Attività</label>
@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button type="submit" class="submit-proposal-btn">Invia proposta</button>
                         <p class="admin-note">L’admin esaminerà la tua proposta prima di pubblicarla</p>
                         </form>
-                    </section>
+                    </div>
 
                     <aside class="examples-section">
                         <h3 class="example-title">Esempi attività</h3>

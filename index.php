@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <header>
         <a href="home.html" title="Torna alla Home Page">
-            <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo"/>
+        <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo">
         </a>
     </header>
 

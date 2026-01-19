@@ -139,7 +139,7 @@ try {
                                         $img = !empty($fav['slug']) ? 'img/'.$fav['slug'].'.jpg' : 'img/logo.png';
                                         if(!file_exists($img)) $img = 'img/logo.png';
                                     ?>
-                                    <img src="<?php echo $img; ?>" class="activity-mini-logo"> 
+                                    <img src="<?php echo $img; ?>" class="activity-mini-logo" alt="<?php echo htmlspecialchars($fav['nome_attivita']); ?>"> 
                                     <span class="activity-name"><?php echo htmlspecialchars($fav['nome_attivita']); ?></span>
                                 </div>
                                 <div class="activity-stats-right">
