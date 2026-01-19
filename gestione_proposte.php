@@ -6,13 +6,38 @@ require_once 'config.php';
     exit;
 }*/
 
-// GESTIONE AZIONI (Approva/Rifiuta) 
+// GESTIONE AZIONI
 if (isset($_GET['azione']) && isset($_GET['id'])) {
     $id_proposta = intval($_GET['id']);
-    $nuovo_stato = ($_GET['azione'] === 'approvata') ? 'approvata' : 'rifiutata';
     
-    $stmt = $pdo->prepare("UPDATE proposte SET stato = ? WHERE id = ?");
-    $stmt->execute([$nuovo_stato, $id_proposta]);
+    if ($_GET['azione'] === 'approva') {
+        $stmt = $pdo->prepare("SELECT * FROM proposte WHERE id = ?");
+        $stmt->execute([$id_proposta]);
+        $p = $stmt->fetch();
+
+        if ($p) {
+            $upd = $pdo->prepare("UPDATE proposte SET stato = 'approvata' WHERE id = ?");
+            $upd->execute([$id_proposta]);
+
+            // Inseriamo l'attività nella tabella 'attivita' come DISATTIVATA (attiva = 0)
+            $ins = $pdo->prepare("INSERT INTO attivita (titolo, slug, tipo, durata, descrizione, stato, data_creazione) VALUES (?, ?, ?, ?, ?, 'disattivata', NOW())");
+            
+            // Creiamo uno slug provvisorio basato sul titolo
+            $slug_provvisorio = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $p['nome_attivita'])));
+            
+            $ins->execute([
+                $p['nome_attivita'], 
+                $p['categoria'], 
+                $p['durata'], 
+                $p['descrizione'],
+                $slug_provvisorio
+            ]);
+        }
+    } 
+    elseif ($_GET['azione'] === 'rifiuta') {
+        $del = $pdo->prepare("DELETE FROM proposte WHERE id = ?");
+        $del->execute([$id_proposta]);
+    }
     
     header("Location: gestione_proposte.php");
     exit;
