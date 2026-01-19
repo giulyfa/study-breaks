@@ -9,8 +9,12 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_ruolo'] !== 'studente') {
 $user_id = $_SESSION['user_id']; 
 $oggi = date('Y-m-d'); 
 
+$stmtUser = $pdo->prepare("SELECT ultimo_accesso, pause_oggi, attivita_oggi, sessioni_oggi FROM utenti WHERE id = ?");
+$stmtUser->execute([$user_id]);
+$userData = $stmtUser->fetch();
+
 // RESET GIORNALIERO
-if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso'] !== $oggi) {
+if ($userData['ultimo_accesso'] !== $oggi) {
     $stmtReset = $pdo->prepare("UPDATE utenti SET pause_oggi = 0, attivita_oggi = 0, sessioni_oggi = 0 WHERE id = ?");
     $stmtReset->execute([$user_id]);
 
@@ -18,6 +22,11 @@ if (!isset($_SESSION['data_ultimo_accesso']) || $_SESSION['data_ultimo_accesso']
     $_SESSION['attivita_oggi'] = 0;
     $_SESSION['sessioni_oggi'] = 0;
     $_SESSION['data_ultimo_accesso'] = $oggi;
+} else {
+    // È lo stesso giorno: carichiamo i dati dal DB nella Sessione per sicurezza
+    $_SESSION['pause_oggi'] = $userData['pause_oggi'];
+    $_SESSION['attivita_oggi'] = $userData['attivita_oggi'];
+    $_SESSION['sessioni_oggi'] = $userData['sessioni_oggi'];
 }
 
 // RECUPERO ATTIVITÀ PREFERITE

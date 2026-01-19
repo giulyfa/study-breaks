@@ -44,7 +44,6 @@ if ($azione == 'studio') {
     $stmtLogStudio->execute([$user_id, $durata_studio]);
     
     // AGGIORNAMENTO SESSIONI PHP PER DISPLAY IMMEDIATO
-    $_SESSION['sessioni_totali'] = ($_SESSION['sessioni_totali'] ?? 0) + 1;
     $_SESSION['sessioni_oggi'] = ($_SESSION['sessioni_oggi'] ?? 0) + 1;
     $_SESSION['streak'] = $nuova_streak;
 
