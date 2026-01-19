@@ -1,25 +1,18 @@
 const cvs = document.getElementById("gameCanvas");
 const ctx = cvs.getContext("2d");
 
-// --- CONFIGURAZIONE ---
 const COLS = 4;
 const ROWS = 4;
 const MARGIN = 20;
 const TOTAL_CARDS = COLS * ROWS;
 
-// --- CALCOLO PER CARTE QUADRATE ---
-// 1. Calcoliamo la dimensione massima possibile per larghezza e altezza rispettando i margini
 const maxW = (cvs.width - (COLS + 1) * MARGIN) / COLS;
 const maxH = (cvs.height - (ROWS + 1) * MARGIN) / ROWS;
 
-// 2. Prendiamo il valore più piccolo tra i due per garantire che la carta sia quadrata
-// e stia dentro lo schermo sia in orizzontale che in verticale
 const CARD_SIZE = Math.min(maxW, maxH);
 const CARD_W = CARD_SIZE;
 const CARD_H = CARD_SIZE;
 
-// 3. Calcoliamo l'offset (spazio vuoto iniziale) per centrare la griglia nel canvas
-// Offset X = (Larghezza Canvas - Larghezza Totale Griglia) / 2
 const GRID_W = COLS * CARD_W + (COLS - 1) * MARGIN;
 const GRID_H = ROWS * CARD_H + (ROWS - 1) * MARGIN;
 
@@ -27,40 +20,35 @@ const OFFSET_X = (cvs.width - GRID_W) / 2;
 const OFFSET_Y = (cvs.height - GRID_H) / 2;
 
 
-// Percorsi immagini (assumiamo siano in img/memory/)
 const IMG_PATH = "img/memory/";
-const TOTAL_IMAGES = 8; // 8 coppie
+const TOTAL_IMAGES = 8;
 
-// --- VARIABILI DI GIOCO ---
-let cards = [];       // Array oggetti carta
-let images = {};      // Cache immagini caricate
-let loadedCount = 0;  // Contatore immagini caricate
-let gameState = "LOADING"; // LOADING, PLAYING, BLOCKED (animazione in corso), WIN
+let cards = [];
+let images = {};
+let loadedCount = 0;
+let gameState = "LOADING";
 
-// Variabili per la logica di coppia
 let firstCard = null;
 let secondCard = null;
 let matchesFound = 0;
 let moves = 0;
 
-// --- COLORI THEME ---
-const COLOR_BG = "#274c43";    // Sfondo tavolo (Verde scuro)
-const COLOR_TEXT = "#FFFFFF";  // Testo
-const COLOR_ACCENT = "#E49A7D"; // Arancione
 
-// --- CARICAMENTO RISORSE ---
-const imageList = ["back.png"]; // Iniziamo con il retro
+const COLOR_BG = "#274c43";
+const COLOR_TEXT = "#FFFFFF";
+const COLOR_ACCENT = "#E49A7D";
+
+
+const imageList = ["back.png"];
 for (let i = 1; i <= TOTAL_IMAGES; i++) {
     imageList.push(i + ".png");
 }
 
-// Funzione per caricare tutte le immagini
 function loadImages() {
     imageList.forEach((fileName) => {
         let img = new Image();
         img.src = IMG_PATH + fileName;
-        
-        // Estrai il nome chiave (es. "1.png" -> "1", "back.png" -> "back")
+
         let key = fileName.split(".")[0];
         
         img.onload = () => {
@@ -68,11 +56,10 @@ function loadImages() {
             loadedCount++;
             checkLoading();
         };
-        
-        // Fallback in caso di immagine mancante (disegna un rettangolo colorato)
+
         img.onerror = () => {
             console.error("Immagine mancante: " + fileName);
-            images[key] = null; // Segna come mancante
+            images[key] = null;
             loadedCount++;
             checkLoading();
         };
@@ -87,27 +74,23 @@ function checkLoading() {
     }
 }
 
-// --- INIZIALIZZAZIONE ---
+
 function initGame() {
-    // 1. Crea le coppie di ID (da 1 a 8, due volte)
     let ids = [];
     for (let i = 1; i <= TOTAL_IMAGES; i++) {
         ids.push(i);
         ids.push(i);
     }
     
-    // 2. Mescola (Algoritmo Fisher-Yates)
     for (let i = ids.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [ids[i], ids[j]] = [ids[j], ids[i]];
     }
-    
-    // 3. Crea griglia carte
+
     cards = [];
     let index = 0;
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
-            // Calcolo posizione X e Y usando OFFSET e indici riga/colonna
             let posX = OFFSET_X + c * (CARD_W + MARGIN);
             let posY = OFFSET_Y + r * (CARD_H + MARGIN);
 
@@ -116,8 +99,8 @@ function initGame() {
                 y: posY,
                 w: CARD_W,
                 h: CARD_H,
-                id: ids[index],      // ID dell'immagine (1-8)
-                state: "HIDDEN"      // HIDDEN, FLIPPED, MATCHED
+                id: ids[index],
+                state: "HIDDEN"
             });
             index++;
         }
@@ -127,9 +110,7 @@ function initGame() {
     draw();
 }
 
-// --- DISEGNO ---
 function draw() {
-    // Sfondo
     ctx.fillStyle = COLOR_BG;
     ctx.fillRect(0, 0, cvs.width, cvs.height);
 
@@ -138,7 +119,6 @@ function draw() {
         return;
     }
 
-    // Disegna le carte
     cards.forEach(card => {
         if (card.state === "HIDDEN") {
             drawCardBack(card);
@@ -152,7 +132,6 @@ function drawCardBack(card) {
     if (images["back"]) {
         ctx.drawImage(images["back"], card.x, card.y, card.w, card.h);
     } else {
-        // Fallback grafico se manca l'immagine
         ctx.fillStyle = COLOR_ACCENT;
         ctx.fillRect(card.x, card.y, card.w, card.h);
         ctx.strokeStyle = "#fff";
@@ -173,7 +152,6 @@ function drawCardFace(card) {
     if (images[imgKey]) {
         ctx.drawImage(images[imgKey], card.x, card.y, card.w, card.h);
     } else {
-        // Fallback grafico
         ctx.fillStyle = "#fff";
         ctx.fillRect(card.x, card.y, card.w, card.h);
         
@@ -183,10 +161,9 @@ function drawCardFace(card) {
         ctx.textBaseline = "middle";
         ctx.fillText(card.id, card.x + card.w/2, card.y + card.h/2);
     }
-    
-    // Bordo verde per le carte risolte
+
     if (card.state === "MATCHED") {
-        ctx.strokeStyle = "#8EBAA3"; // Verde chiaro
+        ctx.strokeStyle = "#8EBAA3";
         ctx.lineWidth = 4;
         ctx.strokeRect(card.x, card.y, card.w, card.h);
     }
@@ -202,7 +179,6 @@ function drawLoading() {
 }
 
 function drawWinScreen() {
-    // Velo scuro
     ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
     ctx.fillRect(0, 0, cvs.width, cvs.height);
     
@@ -219,11 +195,11 @@ function drawWinScreen() {
     ctx.fillText("Clicca per rigiocare", cvs.width/2, cvs.height/2 + 60);
 }
 
-// --- LOGICA DI GIOCO ---
+
 cvs.addEventListener("mousedown", onInput);
-// Aggiungo anche touchstart per il supporto mobile migliore
+
 cvs.addEventListener("touchstart", function(e) {
-    e.preventDefault(); // Evita scroll
+    e.preventDefault();
     let touch = e.touches[0];
     let mouseEvent = new MouseEvent("mousedown", {
         clientX: touch.clientX,
@@ -235,8 +211,6 @@ cvs.addEventListener("touchstart", function(e) {
 
 function onInput(e) {
     const rect = cvs.getBoundingClientRect();
-    // Calcolo coordinate relative al canvas
-    // È importante usare la scala se il CSS ridimensiona il canvas
     const scaleX = cvs.width / rect.width;
     const scaleY = cvs.height / rect.height;
 
@@ -248,9 +222,8 @@ function onInput(e) {
         return;
     }
 
-    if (gameState === "BLOCKED") return; // Stiamo aspettando il timer
+    if (gameState === "BLOCKED") return;
 
-    // Trova quale carta è stata cliccata
     for (let card of cards) {
         if (
             mouseX >= card.x && mouseX <= card.x + card.w &&
@@ -263,10 +236,9 @@ function onInput(e) {
 }
 
 function handleCardClick(card) {
-    // Ignora se la carta è già girata o risolta
     if (card.state !== "HIDDEN") return;
 
-    // Gira la carta
+
     card.state = "FLIPPED";
     draw();
 
@@ -275,7 +247,7 @@ function handleCardClick(card) {
     } else {
         secondCard = card;
         moves++;
-        gameState = "BLOCKED"; // Blocca input mentre controlliamo
+        gameState = "BLOCKED";
 
         checkForMatch();
     }
@@ -300,7 +272,7 @@ function checkForMatch() {
             firstCard.state = "HIDDEN";
             secondCard.state = "HIDDEN";
             resetTurn();
-        }, 1000); // 1 secondo di attesa
+        }, 1000);
     }
 }
 
