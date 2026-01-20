@@ -226,48 +226,21 @@ function disegnaGameOver() {
     const w = canvas.width;
     const h = canvas.height;
 
-    ctx.fillStyle = '#FAF6EE';
+    ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
     ctx.fillRect(0, 0, w, h);
 
-    const cardW = w * 0.85;
-    const cardH = h * 0.6;
-    const cardX = (w - cardW) / 2;
-    const cardY = (h - cardH) / 2;
-    
-    ctx.save();
-    ctx.shadowColor = "rgba(0, 0, 0, 0.15)";
-    ctx.shadowBlur = 20;
-    ctx.shadowOffsetY = 10;
-    
-    ctx.fillStyle = '#FFFFFF';
-    roundRect(ctx, cardX, cardY, cardW, cardH, 20).fill();
-    ctx.restore();
-
-    ctx.fillStyle = '#E49A7D';
+    ctx.fillStyle = "#FFFFFF";
     ctx.font = `bold ${Math.floor(w * 0.1)}px Quicksand`;
-    ctx.textAlign = 'center';
-    ctx.fillText('GAME OVER', w / 2, cardY + cardH * 0.25);
+    ctx.textAlign = "center";
+    ctx.fillText("Quiz Finito!", w / 2, h / 2 - (h * 0.1));
 
-    ctx.fillStyle = '#4D7D72';
-    ctx.font = `bold ${Math.floor(w * 0.15)}px Quicksand`;
-    ctx.fillText(`${risposteCorrette}/${domande.length}`, w / 2, cardY + cardH * 0.5);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = `${Math.floor(w * 0.06)}px Quicksand`;
+    ctx.fillText(`Punteggio: ${risposteCorrette}/${domande.length}`, w / 2, h / 2 + (h * 0.05));
 
-    const percentuale = Math.round((risposteCorrette / domande.length) * 100);
-    ctx.font = `500 ${Math.floor(w * 0.05)}px Quicksand`;
-    ctx.fillStyle = '#666';
-    ctx.fillText(`Risposte corrette: ${percentuale}%`, w / 2, cardY + cardH * 0.65);
-
-    const btnW = cardW * 0.7;
-    const btnH = cardH * 0.15;
-    const btnX = (w - btnW) / 2;
-    const btnY = cardY + cardH * 0.78;
-    
-    ctx.fillStyle = '#69A297';
-    roundRect(ctx, btnX, btnY, btnW, btnH, 25).fill();
-    
-    ctx.fillStyle = '#FFFFFF';
+    ctx.fillStyle = "#E49A7D";
     ctx.font = `bold ${Math.floor(w * 0.05)}px Quicksand`;
-    ctx.fillText('Gioca Ancora', w / 2, btnY + btnH / 2 + (w * 0.015));
+    ctx.fillText("Clicca per rigiocare", w / 2, h / 2 + (h * 0.2));
 }
 
 function verificaRisposta(indice) {
