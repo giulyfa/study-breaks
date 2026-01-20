@@ -77,13 +77,13 @@ try {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Area Personale - Study Breaks</title>
 </head>
 <body>
     <div class="profile-page">
-        <?php include 'includes/header.php'; ?>
-        <?php include 'includes/sidebar.php'; ?>
+        <?php include '../includes/header.php'; ?>
+        <?php include '../includes/sidebar.php'; ?>
 
         <main class="profile-container">
             <section class="welcome-card">
@@ -174,7 +174,7 @@ try {
             </div>
         </main>
 
-        <?php include 'includes/footer.php'; ?>
+        <?php include '../includes/footer.php'; ?>
     </div>
 
     <script>
@@ -210,6 +210,6 @@ try {
             }
         }
     </script>
-    <?php include 'includes/scripts.php'; ?>
+    <?php include '../includes/scripts.php'; ?>
 </body>
 </html>

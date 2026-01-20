@@ -57,9 +57,9 @@ if ($mancanti > 0) {
     ");
     $altre_attivita = $stmtResto->fetchAll(PDO::FETCH_ASSOC);
 }
-
 $attivita_da_mostrare = array_merge($preferite, $altre_attivita);
 
+// RECUPERO PLAYLIST
 $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -71,13 +71,13 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Home - Study Breaks</title>
 </head>
 <body>
     <div class="home-page">
-        <?php include 'includes/header.php'; ?>
-        <?php include 'includes/sidebar.php'; ?>
+        <?php include '../includes/header.php'; ?>
+        <?php include '../includes/sidebar.php'; ?>
 
         <main>
             <div class="dashboard-top">
@@ -147,7 +147,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                 <h2>Attività consigliate</h2>
                 <div class="activity-grid">
                     <?php foreach ($attivita_da_mostrare as $row): 
-                        $imagePath = file_exists("img/{$row['slug']}.jpg") ? "img/{$row['slug']}.jpg" : "img/logo.png";
+                        $imagePath = file_exists("../img/{$row['slug']}.jpg") ? "../img/{$row['slug']}.jpg" : "../img/logo.png";
                         $isPreferita = isset($row['totale']) && $row['totale'] > 0;
                     ?>
 
@@ -168,7 +168,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
             </div>
         </main>
         
-        <?php include 'includes/footer.php'; ?>
+        <?php include '../includes/footer.php'; ?>
     </div> 
 
     <div id="activity-modal" class="modal activity-overlay">
@@ -204,7 +204,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
         const minutiSalvati = <?php echo $_SESSION['timer_scelto'] ?? 25; ?>;
         const pausaSalvata = <?php echo $_SESSION['pausa_scelta'] ?? 5; ?>;
     </script>
-    <script src="js/timer.js"></script>    
-    <script src="js/activities.js"></script><?php include 'includes/scripts.php'; ?>
+    <script src="../js/timer.js"></script>    
+    <script src="../js/activities.js"></script><?php include '../includes/scripts.php'; ?>
 </body>
 </html>

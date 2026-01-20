@@ -61,13 +61,13 @@ $totale_attesa = count($proposte);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>In attesa - Study Breaks</title>
 </head>
 <body>
     <div class="admin-page">
-        <?php include 'includes/header.php'; ?>
-        <?php include 'includes/sidebar_admin.php'; ?>
+        <?php include '../includes/header.php'; ?>
+        <?php include '../includes/sidebar_admin.php'; ?>
 
         <main class="admin-container">
             <section class="admin-intro">
@@ -134,8 +134,8 @@ $totale_attesa = count($proposte);
                 <a href="admin_dashboard.php" class="btn primary-btn">Torna alla Dashboard</a>
             </div>
         </main>
-        <?php include 'includes/footer_simple.php'?>
+        <?php include '../includes/footer_simple.php'?>
     </div>
-    <?php include 'includes/scripts.php'; ?>
+    <?php include '../includes/scripts.php'; ?>
 </body>
 </html>

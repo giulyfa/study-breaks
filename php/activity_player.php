@@ -177,7 +177,7 @@ if (!$attivita) {
             document.getElementById('game-wrapper').style.display = 'flex';
             
             var script = document.createElement('script');
-            script.src = "js/activities/" + ACTIVITY_SLUG + ".js";
+            script.src = "../js/activities/" + ACTIVITY_SLUG + ".js";
             document.body.appendChild(script);
 
             const params = new URLSearchParams({

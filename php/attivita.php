@@ -22,13 +22,13 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Attività - Study Breaks</title>
 </head>
 <body>
     <div class="activity-page">
-        <?php include 'includes/header.php'; ?>
-        <?php include 'includes/sidebar.php'; ?>
+        <?php include '../includes/header.php'; ?>
+        <?php include '../includes/sidebar.php'; ?>
 
         <div class="content-area">
             <section class="activity-section">
@@ -43,7 +43,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
 
                 <div class="activity-grid">
                     <?php foreach ($attivita as $row): 
-                        $imagePath = file_exists("img/{$row['slug']}.jpg") ? "img/{$row['slug']}.jpg" : "img/logo.png";
+                        $imagePath = file_exists("../img/{$row['slug']}.jpg") ? "../img/{$row['slug']}.jpg" : "../img/logo.png";
                     ?>
 
                     <div class="activity-item"
@@ -62,7 +62,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
                 <div class="suggestion-section">
                     <p>Hai un'idea per una nuova attività?</p>
                     <p class="small-text">Proponi la tua micro-attività e sarà valutata dall'admin</p>
-                    <button class="propose-btn" onclick="window.location.href='proposta.php'">Proponi nuova attività</button>
+                    <button class="propose-btn" onclick="window.location.href='../php/proposta.php'">Proponi nuova attività</button>
                     <p class="help">Aiutaci a migliorare!</p>
                 </div>
             </section>
@@ -82,7 +82,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
             </section>
         </div>
 
-        <?php include 'includes/footer.php'; ?>
+        <?php include '../includes/footer.php'; ?>
     </div>
 
     <div id="activity-modal" class="modal activity-overlay">
@@ -112,6 +112,6 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
             });
         });
     </script>
-    <script src="js/activities.js"></script><?php include 'includes/scripts.php'; ?>
+    <script src="../js/activities.js"></script><?php include '../includes/scripts.php'; ?>
 </body>
 </html>

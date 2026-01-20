@@ -9,13 +9,13 @@ require_once 'config.php';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Chi Siamo - Study Breaks</title>
 </head>
 <body>
     <div class="about-page">
-        <?php include 'includes/header.php'; ?>
-        <?php include 'includes/sidebar.php'; ?>
+        <?php include '../includes/header.php'; ?>
+        <?php include '../includes/sidebar.php'; ?>
 
         <main class="about-container">
             <section class="hero-about">
@@ -25,19 +25,19 @@ require_once 'config.php';
 
             <div class="about-grid">
                 <div class="about-card">
-                    <div class="icon"><img src="img/cervello.jpg" alt="Cervello"></div>
+                    <div class="icon"><img src="../img/cervello.jpg" alt="Cervello"></div>
                     <h2>Perché Study Breaks?</h2>
                     <p>Sappiamo quanto sia difficile mantenere la concentrazione. Study Breaks nasce dall'idea di fornire strumenti rapidi (1-5 min) per staccare il cervello senza perdere il ritmo.</p>
                 </div>
 
                 <div class="about-card">
-                    <div class="icon"><img src="img/bilancia.jpg" alt="Bilancia"></div>
+                    <div class="icon"><img src="../img/bilancia.jpg" alt="Bilancia"></div>
                     <h2>Equilibrio</h2>
                     <p>Integriamo giochi di logica, esercizi fisici e playlist rilassanti per offrirti un supporto a 360 gradi durante le tue giornate di studio.</p>
                 </div>
 
                 <div class="about-card">
-                    <div class="icon"><img src="img/utenti.jpg" alt="Utenti"></div>
+                    <div class="icon"><img src="../img/utenti.jpg" alt="Utenti"></div>
                     <h2>Community</h2>
                     <p>Crediamo nella condivisione. Grazie alla sezione "Proposta", ogni utente può contribuire a migliorare l'esperienza degli altri utenti.</p>
                 </div>
@@ -59,8 +59,8 @@ require_once 'config.php';
             </section>
         </main>
 
-        <?php include 'includes/footer.php'; ?>
+        <?php include '../includes/footer.php'; ?>
     </div>
-    <?php include 'includes/scripts.php'; ?>
+    <?php include '../includes/scripts.php'; ?>
 </body>
 </html>

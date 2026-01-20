@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'includes/functions.php'; 
+require_once '../includes/functions.php'; 
 
 // Funzione per il reindirizzamento 
 function redirectUser($role) {
@@ -57,13 +57,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css"> <title>Login - Study Breaks</title>
+    <link rel="stylesheet" href="../css/style.css"> <title>Login - Study Breaks</title>
 </head>
 <body>
     <header>
-        <a href="home.html" title="Torna alla Home Page">
-        <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo">
-        </a>
+        <img src="../img/logo.png" alt="STUDY BREAKS Logo" class="header-logo">
     </header>
 
     <div class="login-page">
@@ -104,6 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </main> 
     </div>
     
-    <?php include 'includes/footer_simple.php'; ?>
+    <?php include '../includes/footer_simple.php'; ?>
 </body>
 </html>

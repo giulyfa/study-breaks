@@ -63,13 +63,13 @@ $in_arrivo = $stmtSoon->fetchAll();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Proposta - Study Breaks</title>
 </head>
 <body>
     <div class="proposal-page">
-        <?php include 'includes/header.php'; ?>
-        <?php include 'includes/sidebar.php'; ?>
+        <?php include '../includes/header.php'; ?>
+        <?php include '../includes/sidebar.php'; ?>
 
         <main class="proposal-container">
             <div class="proposal-banner">
@@ -102,7 +102,7 @@ $in_arrivo = $stmtSoon->fetchAll();
             <?php if ($successo): ?>
                 <div class="success-banner">
                     <strong>Ottimo lavoro!</strong> La tua proposta è stata inviata all'admin per la revisione. <br><br>
-                    <a href="home.php" class="footer-link" style="color: #155724;text-decoration: underline;">Torna alla Home</a>
+                    <a href="../php/home.php" class="footer-link" style="color: #155724;text-decoration: underline;">Torna alla Home</a>
                 </div>
             <?php else: ?>
                 <?php if ($errore): ?>
@@ -180,7 +180,7 @@ $in_arrivo = $stmtSoon->fetchAll();
                 </div>
             <?php endif; ?>
         </main>
-        <?php include 'includes/footer.php'; ?>
+        <?php include '../includes/footer.php'; ?>
     </div>
 
     <script>
@@ -197,6 +197,6 @@ $in_arrivo = $stmtSoon->fetchAll();
 
         document.querySelector('.dur-btn[data-val="3"]').classList.add('active');
     </script>
-    <?php include 'includes/scripts.php'; ?>
+    <?php include '../includes/scripts.php'; ?>
 </body>
 </html>

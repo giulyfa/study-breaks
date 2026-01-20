@@ -51,14 +51,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Registrazione - Study Breaks</title>
 </head>
 <body>
     <header>
-        <a href="home.html" title="Torna alla Home Page">
-        <img src="img/logo.png" alt="STUDY BREAKS Logo" class="header-logo">
-        </a>
+        <img src="../img/logo.png" alt="STUDY BREAKS Logo" class="header-logo">
     </header>
 
     <div class="register-page">  
@@ -104,6 +102,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
     
-    <?php include 'includes/footer_simple.php'; ?>
+    <?php include '../includes/footer_simple.php'; ?>
 </body>
 </html>
