@@ -126,7 +126,7 @@ footer.footer-home {
     width: 100%;
 }
 
-.login-page h2, .register-page h2 {
+.login-page h1, .register-page h1 {
     color: #333;
     font-weight: 400;
     font-size: 2em;
@@ -160,7 +160,7 @@ footer.footer-home {
     font-family: 'Quicksand', sans-serif;
     width: 100%;
     padding: 14px;
-    background: #5a9185;
+    background: #4D7A73;
     color: white;
     border: none;
     border-radius: 8px;
@@ -181,7 +181,7 @@ footer.footer-home {
 }
 
 .register-link a, .login-link a {
-    color: #5a9185;
+    color: #4D7A73;
     text-decoration: none;
     font-weight: bold;
 }
@@ -214,7 +214,7 @@ footer.footer-home {
 /* --- LOGIN --- */
 .tagline {
     font-family: 'Nothing You Could Do', cursive;
-    color: #5a9185;
+    color: #4D7A73;
     font-size: 18px;
     margin-top: 50px;
     text-align: center;
