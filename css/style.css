@@ -693,7 +693,7 @@ footer.footer-home {
 
 .activity-page .activity-section h1 {
     margin: 5px 0 10px;
-    color: #CB572A;
+    color: #C9663B;
     font-size: 1.8em;
     font-weight: 700;
 }
@@ -747,7 +747,7 @@ footer.footer-home {
 .activity-item p {
     font-family: 'Quicksand', sans-serif;
     font-size: 1.0em;
-    font-weight: 500;
+    font-weight: 600;
     padding-bottom: 3px;
 }
 
@@ -975,6 +975,7 @@ footer.footer-home {
 
 .activity-page .spotify-card span {
     font-family: 'Quicksand', sans-serif;
+    font-size: 1.2em;
 }
 
 .activity-page .spotify-card:hover { transform: translateY(-2px); }
