@@ -80,7 +80,7 @@ $playlists = $stmt->fetchAll();
 
         <main class="admin-container">
             <section class="admin-intro">
-                <h2>Statistiche generali attività</h2>
+                <h2>Statistiche generali</h2>
             </section>
 
             <form method="GET" action="statistiche.php" class="time-selector">
