@@ -100,11 +100,12 @@ footer.footer-home {
     }
 
     .footer-link {
-        color: #010E0B;
+        color: #034231;
         font-weight: 500;
     }
 
     .footer-link:hover {
+        color: #034231;
         font-weight: bold;
     }
 }
@@ -1523,7 +1524,7 @@ footer.footer-home {
     border-radius: 5px;
     border: none;
     background-color: #C4C2B4;
-    color: #404040;
+    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -1532,13 +1533,14 @@ footer.footer-home {
 
 .dur-btn.active {
     background-color: #E49A7D;
+    color: white ;
     transform: scale(1.1);
 }
 
 /* --- AREA INVIO PROPOSTA --- */
 .proposal-page .form-disclaimer {
     font-size: 0.85em;
-    color: #595959;
+    color: #666;
     line-height: 1.4;
     margin-top: 25px;
     margin-bottom: 20px;
@@ -1563,7 +1565,7 @@ footer.footer-home {
 
 .proposal-page .admin-note {
     font-size: 0.8em;
-    color: #595959;
+    color: #888;
     text-align: center;
     margin-top: 15px;
     font-style: italic;
