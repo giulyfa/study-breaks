@@ -745,7 +745,8 @@ footer.footer-home {
 }
 
 .activity-item p {
-    font-size: 0.85em;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.0em;
     font-weight: 500;
     padding-bottom: 3px;
 }
@@ -912,6 +913,11 @@ footer.footer-home {
     margin-right: auto;
 }
 
+.playlist-section h2 {
+    margin-top: 5px;
+    font-size: 1.4em;
+}
+
 /* --- FILTRI MINUTI --- */
 .activity-page .filters {
     display: flex;
@@ -961,9 +967,14 @@ footer.footer-home {
     padding: 12px 20px;
     border-radius: 12px;
     display: flex;
+    border: none;
     align-items: center;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.activity-page .spotify-card span {
+    font-family: 'Quicksand', sans-serif;
 }
 
 .activity-page .spotify-card:hover { transform: translateY(-2px); }
@@ -2136,13 +2147,17 @@ footer.footer-home {
     color: #333;
     cursor: pointer;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 0 10px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
+    background: none;       
+    border: none;            
+    border-radius: 0;        
+    padding: 0;              
+    width: auto;            
+    height: auto;            
+    line-height: normal;
+}
+
+.close-btn-activity:focus {
+    outline: 2px solid #007bff; 
 }
 
 /* Stile per l'iframe che conterrà il gioco */

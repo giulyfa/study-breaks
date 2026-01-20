@@ -46,7 +46,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
                         $imagePath = file_exists("../img/{$row['slug']}.jpg") ? "../img/{$row['slug']}.jpg" : "../img/logo.png";
                     ?>
 
-                    <div class="activity-item"
+                    <button type="button" class="activity-item"
                         data-durata="<?php echo $row['durata']; ?>"
                         onclick="apriAttivita(<?php echo $row['id']; ?>, '<?php echo $row['slug']; ?>', '<?php echo addslashes($row['titolo']); ?>', '<?php echo $row['tipo']; ?>', <?php echo $row['durata']; ?>)">
                         
@@ -54,7 +54,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
                             <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
                         </div>
                         <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
-                    </div>
+                    </button>
 
                     <?php endforeach; ?>
                 </div>
@@ -69,14 +69,14 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
 
             <section class="playlist-section">
                 <p class="playlist-intro">Oppure...</p>
-                <h3>Rilassati con una playlist!</h3>
+                <h2>Rilassati con una playlist!</h2>
                 
                 <div class="spotify-container">
                     <?php foreach ($playlists as $p): ?>
-                        <div class="spotify-card" onclick="registraAscolto(event, <?php echo $p['id']; ?>); window.open('<?php echo $p['url_spotify']; ?>', '_blank')">
+                        <button type="button" class="spotify-card" onclick="registraAscolto(event, <?php echo $p['id']; ?>); window.open('<?php echo $p['url_spotify']; ?>', '_blank')">
                             <div class="spotify-icon"></div>
                             <span><?php echo htmlspecialchars($p['titolo']); ?></span>
-                        </div>
+                        </button>
                     <?php endforeach; ?>
                 </div>
             </section>
@@ -87,8 +87,8 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll();
 
     <div id="activity-modal" class="modal activity-overlay">
         <div class="modal-content game-modal-content">
-            <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
-            <iframe id="game-frame" src="about:blank"></iframe>
+            <button type="button" class="close-btn-activity" onclick="chiudiAttivita()" aria-label="Chiudi attività">&times;</button>
+            <iframe id="game-frame" src="about:blank" title="Contenuto dell'attività selezionata"></iframe>
         </div>
     </div>
 
