@@ -73,14 +73,14 @@ $in_arrivo = $stmtSoon->fetchAll();
 
         <main class="proposal-container">
             <div class="proposal-banner">
-                <h2>Proponi un'attività</h2>
+                <h1>Proponi un'attività</h1>
                 <p>Hai una nuova idea innovativa? Proponila!</p>
             </div>
 
             <aside class="examples-section">
                 <?php if (!empty($in_arrivo)): ?>
                     <div class="coming-soon-box">
-                        <h3 class="example-title">Approvate di recente:</h3>
+                        <h2 class="example-title">Approvate di recente:</h2>
                         <div class="coming-soon-wrapper">
                             <?php foreach($in_arrivo as $pro): ?>
                                 <div class="mini-soon-card">
@@ -113,46 +113,54 @@ $in_arrivo = $stmtSoon->fetchAll();
                     <div class="form-section">
                         <form action="proposta.php" method="POST" class="proposal-form" id="form-proposta">
                             <div class="form-group">
-                                <label>Titolo dell'Attività</label>
-                                <input type="text" name="titolo" required placeholder="Es. Stretching per occhi per chi studia al PC">
+                                <label for="titolo_attività">Titolo dell'Attività</label>
+                                <input type="text" name="titolo" id="titolo_attività" required placeholder="Es. Stretching per occhi per chi studia al PC">
                             </div>
 
-                        <div class="form-group">
-                            <label>Tipo di Attività</label>
-                            <select name="tipo" required>
-                                <option value="" disabled selected>Seleziona un tipo</option>
-                                <option value="gioco">Gioco</option>
-                                <option value="relax">Relax</option>
-                                <option value="fisico">Esercizio Fisico</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Durata (minuti)</label>
-                            <div class="duration-selector">
-                                <?php foreach([1,2,3,4,5] as $m): ?>
-                                    <button type="button" class="dur-btn" data-val="<?= $m ?>"><?= $m ?></button>
-                                <?php endforeach; ?>
+                            <div class="form-group">
+                                <label for="tipo">Tipo di Attività</label>
+                                <select name="tipo" id="tipo" required>
+                                    <option value="" disabled selected>Seleziona un tipo</option>
+                                    <option value="gioco">Gioco</option>
+                                    <option value="relax">Relax</option>
+                                    <option value="fisico">Esercizio Fisico</option>
+                                </select>
                             </div>
-                            <input type="hidden" name="durata_selezionata" id="durata_input" value="3">
-                        </div>
 
-                        <div class="form-group">
-                            <label>Descrizione breve</label>
-                            <textarea name="descrizione" required placeholder="Spiega in poche parole di cosa si tratta"></textarea>
-                        </div>
+                            <div class="form-group">
+                                <span id="label-durata">Durata (minuti)</span> 
+                                <div class="duration-selector" role="radiogroup" aria-labelledby="label-durata">
+                                    <?php foreach([1,2,3,4,5] as $m): ?>
+                                        <button type="button" 
+                                                class="dur-btn" 
+                                                data-val="<?= $m ?>"
+                                                role="radio" 
+                                                aria-checked="<?= ($m == 3) ? 'true' : 'false' ?>"
+                                                aria-label="<?= $m ?> minuti">
+                                            <?= $m ?>
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+                                
+                                <input type="hidden" name="durata_selezionata" id="durata_input" value="3">
+                            </div>
 
-                        <div class="form-group">
-                            <label>Dettagli/Istruzioni (opzionale)</label>
-                            <textarea name="istruzioni" placeholder="Aggiungi istruzioni, link o altre informazioni utili"></textarea>
-                        </div>
+                            <div class="form-group">
+                                <label for="descrizione">Descrizione breve</label>
+                                <textarea name="descrizione" id="descrizione" required placeholder="Spiega in poche parole di cosa si tratta"></textarea>
+                            </div>
 
-                        <p class="form-disclaimer">
-                            Suggerimento: Le attività più apprezzate sono semplici e veloci. Pensa a qualcosa che faresti durante una pausa dallo studio!
-                        </p>
+                            <div class="form-group">
+                                <label for="istruzioni_aggiuntive">Dettagli/Istruzioni (opzionale)</label>
+                                <textarea name="istruzioni" id="istruzioni_aggiuntive" placeholder="Aggiungi istruzioni, link o altre informazioni utili"></textarea>
+                            </div>
 
-                        <button type="submit" class="submit-proposal-btn">Invia proposta</button>
-                        <p class="admin-note">L'admin esaminerà la tua proposta prima di pubblicarla</p>
+                            <p class="form-disclaimer">
+                                Suggerimento: Le attività più apprezzate sono semplici e veloci. Pensa a qualcosa che faresti durante una pausa dallo studio!
+                            </p>
+
+                            <button type="submit" class="submit-proposal-btn">Invia proposta</button>
+                            <p class="admin-note">L'admin esaminerà la tua proposta prima di pubblicarla</p>
                         </form>
                     </div>
 
@@ -189,13 +197,23 @@ $in_arrivo = $stmtSoon->fetchAll();
 
         durBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                durBtns.forEach(b => b.classList.remove('active'));
+                durBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-checked', 'false');
+                });
+
                 this.classList.add('active');
+                this.setAttribute('aria-checked', 'true');
+                
                 durInput.value = this.getAttribute('data-val');
             });
         });
 
-        document.querySelector('.dur-btn[data-val="3"]').classList.add('active');
+        const defaultBtn = document.querySelector('.dur-btn[data-val="3"]');
+        if (defaultBtn) {
+            defaultBtn.classList.add('active');
+            defaultBtn.setAttribute('aria-checked', 'true');
+        }
     </script>
     <?php include '../includes/scripts.php'; ?>
 </body>

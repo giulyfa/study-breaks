@@ -1365,6 +1365,11 @@ footer.footer-home {
     margin-bottom: 30px;
 }
 
+.proposal-page .proposal-banner h1 {
+    font-size: 1.5em;
+}
+
+
 .proposal-page .proposal-banner p {
     font-weight: 600;
 }
@@ -1488,7 +1493,7 @@ footer.footer-home {
     flex-direction: column;
 }
 
-.proposal-page .form-group label {
+.proposal-page .form-group label, .proposal-page .form-group span {
     font-weight: 600;
     margin-bottom: 8px;
     color: #333;
@@ -1671,7 +1676,7 @@ footer.footer-home {
 }
 
 .about-card h2 {
-    color: #E49A7D;
+    color: #CB572A;
     margin-bottom: 15px;
     font-size: 1.2em;
 }
@@ -1705,7 +1710,7 @@ footer.footer-home {
 }
 
 .contact-section a {
-    color: #E49A7D; 
+    color: #BE5227; 
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -1714,7 +1719,7 @@ footer.footer-home {
 
 .contact-section a:hover {
     color: #d3896c;
-    border-bottom: 2px solid #E49A7D;
+    border-bottom: 2px solid #BE5227;
 }
 
 
