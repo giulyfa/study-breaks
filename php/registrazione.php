@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <p style="color:red"><?= htmlspecialchars($errore) ?></p>
             <?php endif; ?>
 
-            <h2>Registrazione</h2>
+            <h1>Registrazione</h1>
             
             <form method="POST" action="registrazione.php">
                 <div class="form-group">

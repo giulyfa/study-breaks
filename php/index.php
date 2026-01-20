@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </svg>
                 </div>   
 
-                <h2>Login</h2>
+                <h1>Login</h1>
 
                 <?php if($errore): ?>
                     <p class="error-message" style="color:red; margin-bottom: 15px;"><?= htmlspecialchars($errore) ?></p>

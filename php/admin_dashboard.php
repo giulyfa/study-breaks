@@ -28,7 +28,7 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
 
         <main class="admin-container">
             <section class="admin-section">
-                <h2>Micro-attività</h2>
+                <h1>Micro-attività</h1>
                 <div class="table-container">
                     <table class="user-table admin-dashboard-table">
                         <thead>
@@ -113,11 +113,11 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
                 <input type="hidden" name="id_attivita" id="edit-id">
                 
                 <div class="form-group">
-                    <label>Attività</label>
+                    <label for="edit-titolo">Attività</label>
                     <input type="text" name="titolo" id="edit-titolo" required>
                 </div>
                 <div class="form-group">
-                    <label>Tipo</label>
+                    <label for="edit-tipo">Tipo</label>
                     <select name="tipo" id="edit-tipo" required>
                         <option value="" disabled selected>Seleziona un tipo</option>
                         <option value="gioco">Gioco</option>
@@ -126,11 +126,11 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Durata (min)</label>
+                    <label for="edit-durata">Durata (min)</label>
                     <input type="number" name="durata" id="edit-durata" required>
                 </div>
                 <div class="form-group">
-                    <label>Stato</label>
+                    <label for="edit-stato">Stato</label>
                     <select name="stato" id="edit-stato">
                         <option value="attiva">Attiva</option>
                         <option value="disattivata">Disattivata</option>
@@ -152,15 +152,15 @@ $playlists = $pdo->query("SELECT * FROM playlist ORDER BY id DESC")->fetchAll();
                 <input type="hidden" name="id_playlist" id="edit-pl-id">
 
                 <div class="form-group">
-                    <label>Titolo Playlist</label>
+                    <label for="edit-pl-titolo">Titolo Playlist</label>
                     <input type="text" name="titolo" id="edit-pl-titolo" required>
                 </div>
                 <div class="form-group">
-                    <label>URL Spotify</label>
+                    <label for="edit-pl-url">URL Spotify</label>
                     <input type="text" name="url" id="edit-pl-url" required>
                 </div>
                 <div class="form-group">
-                    <label>Stato</label>
+                    <label for="edit-pl-attiva">Stato</label>
                     <select name="attiva" id="edit-pl-attiva">
                         <option value="1">Attiva</option>
                         <option value="0">Disattivata</option>

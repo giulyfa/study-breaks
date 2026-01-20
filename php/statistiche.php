@@ -80,7 +80,7 @@ $playlists = $stmt->fetchAll();
 
         <main class="admin-container">
             <section class="admin-intro">
-                <h2>Statistiche generali</h2>
+                <h1>Statistiche generali</h1>
             </section>
 
             <form method="GET" action="statistiche.php" class="time-selector">
@@ -96,7 +96,7 @@ $playlists = $stmt->fetchAll();
 
             <section class="admin-section">
                 <div class="table-container">
-                    <h3>Attività più giocate</h3>
+                    <h2>Attività più giocate</h2>
                     <table class="user-table-stats">
                         <thead>
                             <tr>
@@ -126,7 +126,7 @@ $playlists = $stmt->fetchAll();
 
             <section class="admin-section">
                 <div class="table-container">
-                    <h3>Playlist più ascoltate</h3>
+                    <h2>Playlist più ascoltate</h2>
                     <table class="user-table-stats">
                         <thead>
                             <tr>
