@@ -68,7 +68,7 @@ footer.footer-home {
 }
 
 .footer-link {
-    color: #CCE2DC;
+    color: white;
     text-decoration: none;
     margin-left: 10px;
     margin-bottom: 5px;
@@ -77,7 +77,6 @@ footer.footer-home {
 }
 
 .footer-link:hover {
-    color: white;
     font-weight: bold;
 }
 
@@ -1359,11 +1358,15 @@ footer.footer-home {
 /* --- BANNER E  AVVISI --- */
 .proposal-page .proposal-banner {
     background-color: #E49A7D;
-    color: white;
+    color: #333;
     text-align: center;
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 30px;
+}
+
+.proposal-page .proposal-banner p {
+    font-weight: 600;
 }
 
 .success-banner, .error-banner {
@@ -1384,7 +1387,7 @@ footer.footer-home {
 }
 
 .coming-soon-box .example-title {
-    color: #E49A7D;
+    color: #A14521;
     font-size: 1rem;
     margin-top: 0;
     margin-bottom: 15px;
@@ -1413,9 +1416,9 @@ footer.footer-home {
 }
 
 .badge-new {
-    background: #E49A7D; 
+    background: #A14521; 
     color: white;
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     padding: 3px 8px;
     border-radius: 5px;
     text-transform: uppercase;
@@ -1455,7 +1458,7 @@ footer.footer-home {
     0% { opacity: 1; }
     50% { opacity: 0.7; }
     100% { opacity: 1; }
-}
+} 
 
 .no-activities {
     text-align: center;
@@ -1547,7 +1550,7 @@ footer.footer-home {
 .proposal-page .submit-proposal-btn {
     width: 100%; 
     background-color: #E49A7D; 
-    color: white;
+    color: #333;
     border: none;
     padding: 15px;
     border-radius: 12px;
