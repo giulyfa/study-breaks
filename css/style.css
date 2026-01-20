@@ -460,7 +460,7 @@ footer.footer-home {
 
 .home-page .hero-section p {
     font-size: 0.9em;
-    color: #888;
+    color: #666666;
     padding-bottom: 20px;
 }
 
@@ -579,7 +579,7 @@ footer.footer-home {
 .home-page .mode-btn {
     font-family: 'Quicksand', sans-serif;
     background: white;
-    color: #4D7D72; 
+    color: #446F62; 
     border: none;
     padding: 8px 18px;
     font-size: 0.9em;
@@ -619,7 +619,7 @@ footer.footer-home {
 .home-page .control-btn {
     font-family: 'Quicksand', sans-serif;
     background: none; 
-    color: white;
+    color: 303030;
     border: none;
     padding: 5px;
     flex-grow: 1;
@@ -659,7 +659,7 @@ footer.footer-home {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     margin: 10px;
     background: #84B59F; 
-    color: white;
+    color: #3D3D3D;
 }
 
 .home-page .primary-btn:hover, .home-page .secondary-btn:hover {
@@ -684,19 +684,18 @@ footer.footer-home {
     margin: 0 auto 25px;
 }
 
-.activity-section h2 {
+.home-page .activity-section h2 {
+    color: #4D7D72;
+    margin-bottom: 30px;
     font-size: 1.8em;
     font-weight: 700;
 }
 
-.home-page .activity-section h2 {
-    color: #4D7D72;
-    margin-bottom: 30px;
-}
-
-.activity-page .activity-section h2 {
+.activity-page .activity-section h1 {
     margin: 5px 0 10px;
-    color: #D17A55;
+    color: #CB572A;
+    font-size: 1.8em;
+    font-weight: 700;
 }
 
 .activity-section .activity-item {
@@ -708,16 +707,17 @@ footer.footer-home {
     transition: 0.3s ease;
     cursor: pointer;
     border: none;
-    color: white;
     padding: 10px;
 }
 
 .home-page .activity-section .activity-item {
     background-color: #4D7D72; 
+    color: #ffffff;
 }
 
 .activity-page .activity-section .activity-item {
     background-color: #D17A55; 
+    color: #292929;
 }
 
 .activity-item:hover {
@@ -927,7 +927,7 @@ footer.footer-home {
     border-radius: 20px;
     border: none;
     background-color: #fdfcf5; 
-    color: #D17A55;
+    color: #292929;
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
     cursor: pointer;
@@ -936,7 +936,7 @@ footer.footer-home {
 
 .activity-page .filter-btn:hover, .activity-page .filter-btn.active {
     background-color: #D17A55; 
-    color: white;
+    color: 292929;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -995,20 +995,20 @@ footer.footer-home {
 .activity-page .suggestion-section .help {
     font-size: 0.9em;
     font-weight: 500;
-    color: #D17A55;
+    color: #A04F2C;
     margin-top: 5px;
 }
 
 .activity-page .suggestion-section .small-text {
     font-size: 0.8em;
     font-weight: 400;
-    color: #888;
+    color: #666666;
     margin-bottom: 15px;
 }
 
 .activity-page .propose-btn {
     background-color: #D17A55;
-    color: white;
+    color: 292929;
     border: none;
     padding: 12px 25px;
     border-radius: 25px;
@@ -1116,7 +1116,7 @@ footer.footer-home {
     border-radius: 20px;
     border: none;
     background: #E2DDD1;
-    color: white;
+    color: #404040;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -1137,7 +1137,7 @@ footer.footer-home {
     padding: 20px;
     border-radius: 15px;
     text-align: center;
-    color: white;
+    color: #404040;
     transition: all 0.3s ease;
 }
 
@@ -1231,7 +1231,7 @@ footer.footer-home {
     margin: 15px auto 0;
     padding: 8px 25px;
     background-color: #8EBAA3;
-    color: white;
+    color: #242424;
     border: none;
     border-radius: 20px;
     cursor: pointer;
@@ -1273,7 +1273,7 @@ footer.footer-home {
     flex: 1;
     text-align: center;
     font-size: 0.8em;
-    color: #888;
+    color: #757575;
 }
 
 .profile-page .weekly-title {
