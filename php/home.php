@@ -115,6 +115,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                                 <div class="modal-content">
                                     <h2>Impostazioni Timer</h2>
                                     <p>Inserisci i minuti per la sessione:</p>
+                                    <label for="new-minutes">Scegli la durata in minuti della sessione:</label>
                                     <input type="number" id="new-minutes" placeholder="Es. 25">
                                     <div class="modal-buttons">
                                         <button id="save-modal" class="save-btn">Salva</button>
@@ -151,12 +152,13 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                         $isPreferita = isset($row['totale']) && $row['totale'] > 0;
                     ?>
 
-                    <div class="activity-item <?php echo $isPreferita ? 'is-fav' : ''; ?>"onclick="apriAttivita(<?= $row['id'] ?>, '<?= $row['slug'] ?>', '<?= addslashes($row['titolo']) ?>', '<?= $row['tipo'] ?>', <?= $row['durata'] ?>)">
+                    <button class="activity-item <?php echo $isPreferita ? 'is-fav' : ''; ?>"
+                    onclick="apriAttivita(<?= $row['id'] ?>, '<?= $row['slug'] ?>', '<?= addslashes($row['titolo']) ?>', '<?= $row['tipo'] ?>', <?= $row['durata'] ?>); return false;">
                         <div class="activity-icon">
                             <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
                         </div>
                         <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
-                    </div>
+                    </button>
 
                     <?php endforeach; ?>
                 </div>
@@ -173,14 +175,14 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
 
     <div id="activity-modal" class="modal activity-overlay">
         <div class="modal-content game-modal-content">
-            <span class="close-btn-activity" onclick="chiudiAttivita()">&times;</span>
+            <button class="close-btn-activity" onclick="chiudiAttivita()">&times;</button>
             <iframe id="game-frame" src="about:blank"></iframe>
         </div>
     </div>
 
     <div id="playlist-selector-overlay" class="modal" style="display:none;">
         <div class="modal-content playlist-modal">
-            <span class="close-btn" onclick="togglePlaylist()">&times;</span>
+            <button class="close-btn" onclick="togglePlaylist()">&times;</button>
             <h2>Scegli la tua musica</h2>
             <div class="playlist-list">
                 <?php foreach ($playlists as $p): ?>
