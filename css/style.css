@@ -488,11 +488,12 @@ footer.footer-home {
 .home-page .stat-box:hover { transform: scale(1.02); }
 
 .home-page .stat-box p {
+    color: #40685F;
     font-size: 0.7em;
     margin-bottom: 5px;
 }
 
-.home-page .stat-number { font-size: 1.5em; }
+.home-page .stat-number { font-size: 1.5em; color: #40685F }
 
 /* --- TIMER CARD --- */
 .home-page .timer-card {
