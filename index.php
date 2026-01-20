@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+require_once 'includes/functions.php'; 
 
 // Funzione per il reindirizzamento 
 function redirectUser($role) {
