@@ -16,12 +16,13 @@ if (!$attivita) {
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?php echo htmlspecialchars($attivita['titolo']); ?> - Study Breaks</title>
     <style>
         /* CSS RESET & BODY */
         body {
             margin: 0;
-            padding: 10px; /* Un po' di padding per non attaccarsi ai bordi */
+            padding: 0; /* Rimuoviamo padding body su mobile */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -29,43 +30,43 @@ if (!$attivita) {
             height: 100vh;
             background-color: #ffffff;
             font-family: 'Quicksand', sans-serif;
-            overflow: hidden; /* Evita scrollbar indesiderate */
-            box-sizing: border-box;
+            overflow: hidden;
+            touch-action: none; /* Disabilita zoom e scroll browser */
         }
         
         h2 { 
-            margin-bottom: 15px; 
+            margin: 10px 0; 
             color: #333; 
             text-align: center;
             font-size: 1.5rem;
-            flex-shrink: 0; /* Impedisce al titolo di schiacciarsi troppo */
+            flex-shrink: 0;
         }
         
         #game-wrapper {
             display: none;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             width: 100%;
-            max-width: 500px;
-            max-height: 100%;
-
+            height: 100%; /* Occupa tutto lo spazio disponibile */
         }
 
         #gameCanvas {
-            background-color: #f4f4f4;
+            background-color: #274c43; /* Colore di sfondo del canvas */
             border: 2px solid #4D7D72;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: block;
-            aspect-ratio: 1 / 1;
-            width: auto;
-            height: auto;
-            touch-action: none;
+            /* Le dimensioni saranno gestite da JS, qui mettiamo solo max-width per sicurezza */
+            max-width: 95vw;
+            max-height: 80vh;
         }
 
         .game-ui {
             margin-top: 10px;
             text-align: center;
             width: 100%;
+            flex-shrink: 0;
+            padding-bottom: 20px;
         }
 
         .btn-exit {
