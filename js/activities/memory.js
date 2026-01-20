@@ -20,7 +20,7 @@ const OFFSET_X = (cvs.width - GRID_W) / 2;
 const OFFSET_Y = (cvs.height - GRID_H) / 2;
 
 
-const IMG_PATH = "img/memory/";
+const IMG_PATH = "./../img/memory/";
 const TOTAL_IMAGES = 8;
 
 let cards = [];
