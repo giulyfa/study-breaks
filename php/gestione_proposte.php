@@ -71,7 +71,7 @@ $totale_attesa = count($proposte);
 
         <main class="admin-container">
             <section class="admin-intro">
-                <h2>Contenuti in attesa di approvazione</h2>
+                <h1>Contenuti in attesa di approvazione</h1>
             </section>
 
             <div class="badge-count">In attesa: <?php echo $totale_attesa; ?></div>
@@ -82,7 +82,7 @@ $totale_attesa = count($proposte);
                 <?php foreach ($proposte as $p): ?>
                     <article class="approval-card">
                         <div class="approval-header">
-                            <h3><?php echo htmlspecialchars($p['nome_attivita']); ?> - <?php echo $p['durata']; ?> min</h3>
+                            <h2><?php echo htmlspecialchars($p['nome_attivita']); ?> - <?php echo $p['durata']; ?> min</h2>
                             
                             <p class="meta-info">
                                 Inviata da: <strong><?php echo htmlspecialchars($p['autore']); ?></strong> 

@@ -48,7 +48,7 @@ header {
 footer, .footer-minimal {
     width: 100%; 
     background-color: #69A297;
-    color: white;
+    color: #303030;
 }
 
 footer.footer-home {
@@ -1116,7 +1116,7 @@ footer.footer-home {
     border-radius: 20px;
     border: none;
     background: #E2DDD1;
-    color: white;
+    color: #3B3B3B;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -1744,7 +1744,7 @@ footer.footer-home {
     margin-bottom: 40px;
 }
 
-.admin-section h2, .admin-intro h2 {
+.admin-section h2, .admin-section h1, .admin-intro h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1752,6 +1752,7 @@ footer.footer-home {
     padding-bottom: 10px;
     color: #333;
     font-weight: 600;
+    font-size: 1.5em;
     border-bottom: 2px solid #eee;
 }
 
@@ -1791,7 +1792,7 @@ footer.footer-home {
     border-radius: 20px;
     font-size: 0.8em;
     font-weight: bold;
-    color: white;
+    color: #3D3D3D;
 }
 
 .status-badge.attiva, .status-badge.attivo { background-color: #8EBAA3; }
@@ -1811,7 +1812,7 @@ footer.footer-home {
 }
 
 .admin-page .propose-btn {
-    background-color: #69A297; 
+    background-color: #4F7D75; 
     color: white;
     border: none;
     padding: 10px 20px;
@@ -1916,19 +1917,21 @@ footer.footer-home {
 }
 
 /* --- PAGINA STATISTICHE --- */
-.table-container h3 {
-    color: #69A297; 
+.table-container h2 {
+    color: #416862; 
     font-size: 1.1em;
+    font-weight: 700;
     margin: 0;
     padding-bottom: 10px;
     border-bottom: 1px solid #C4C2B4;
+    justify-content: center;
     text-align: center;
 }
 
 /* --- PAGINA APPROVAZIONE PROPOSTE --- */
 .badge-count {
     background-color: #69A297;
-    color: white;
+    color: #2E2E2E;
     padding: 10px 12px;
     border-radius: 8px;
     font-size: 0.85em;
@@ -1946,7 +1949,7 @@ footer.footer-home {
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.approval-header h3 {
+.approval-header h2 {
     font-size: 1.1em;
     color: #333;
     margin-bottom: 5px;
@@ -1954,7 +1957,7 @@ footer.footer-home {
 
 .meta-info {
     font-size: 0.8em;
-    color: #777;
+    color: #5C5C5C;
     margin-bottom: 15px;
 }
 
@@ -1983,7 +1986,7 @@ footer.footer-home {
 
 .steps-info {
     font-size: 0.85em;
-    color: #666;
+    color: #5C5C5C;
 }
 
 .admin-page .action-buttons {
@@ -2008,8 +2011,8 @@ footer.footer-home {
     transition: all 0.3s ease;
 }
 
-.admin-btn.reject { background-color: #E49A7D; color: white; }
-.admin-btn.approve { background-color: #8EBAA3; color: white; }
+.admin-btn.reject { background-color: #E49A7D; color: #333; }
+.admin-btn.approve { background-color: #8EBAA3; color: #333; }
 .admin-btn:hover { opacity: 0.6; transform: translateY(-1px); }
 
 /* --- MEDIA QUERY PER PAGINA GESTIONE PROPOSTE (DESKTOP) --- */
@@ -2032,7 +2035,7 @@ footer.footer-home {
         box-shadow: 0 8px 16px rgba(0,0,0,0.12);
     }
 
-    .approval-header h3 {
+    .approval-header h2 {
         font-size: 1.4em;
         margin-bottom: 8px;
     }
@@ -2089,7 +2092,7 @@ footer.footer-home {
 
 .admin-navigation .btn.primary-btn {
     background: #84B59F; 
-    color: white;
+    color: #2E2E2E;
     padding: 16px;
     border-radius: 20px;
     font-size: 16px;
