@@ -29,16 +29,36 @@ if ($userData['ultimo_accesso'] !== $oggi) {
 
 // RECUPERO ATTIVITÀ PREFERITE
 $stmtFav = $pdo->prepare("
-    SELECT asv.nome_attivita, COUNT(*) as totale, a.slug 
+    SELECT a.id, a.titolo, a.slug, a.tipo, a.durata, COUNT(asv.id) as totale
     FROM attivita_svolte asv
-    LEFT JOIN attivita a ON asv.id_attivita = a.id
+    JOIN attivita a ON asv.id_attivita = a.id
     WHERE asv.id_utente = ? AND asv.id_attivita > 0 AND a.stato = 'attiva'
-    GROUP BY asv.id_attivita 
+    GROUP BY a.id, a.titolo, a.slug, a.tipo, a.durata
     ORDER BY totale DESC 
-    LIMIT 2
+    LIMIT 4
 ");
 $stmtFav->execute([$user_id]);
 $preferite = $stmtFav->fetchAll(PDO::FETCH_ASSOC);
+
+$ids_visualizzati = array_column($preferite, 'id');
+
+// QUERY CASUALI SE NON CI SONO ABBASTANZA PREFERITE
+$altre_attivita = [];
+$mancanti = 4 - count($preferite);
+
+if ($mancanti > 0) {
+    $notIn = !empty($ids_visualizzati) ? "AND id NOT IN (" . implode(',', $ids_visualizzati) . ")" : "";
+    $stmtResto = $pdo->query("
+        SELECT id, titolo, slug, tipo, durata 
+        FROM attivita 
+        WHERE stato = 'attiva' $notIn 
+        ORDER BY RAND() 
+        LIMIT $mancanti
+    ");
+    $altre_attivita = $stmtResto->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$attivita_da_mostrare = array_merge($preferite, $altre_attivita);
 
 $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -126,20 +146,19 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
             <section class="activity-section">
                 <h2>Attività consigliate</h2>
                 <div class="activity-grid">
-                    <?php
-                    $stmt = $pdo->query("SELECT * FROM attivita WHERE stato = 'attiva' LIMIT 4");
-                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)):
+                    <?php foreach ($attivita_da_mostrare as $row): 
                         $imagePath = file_exists("img/{$row['slug']}.jpg") ? "img/{$row['slug']}.jpg" : "img/logo.png";
+                        $isPreferita = isset($row['totale']) && $row['totale'] > 0;
                     ?>
 
-                    <div class="activity-item" onclick="apriAttivita(<?= $row['id'] ?>, '<?= $row['slug'] ?>', '<?= addslashes($row['titolo']) ?>', '<?= $row['tipo'] ?>', <?= $row['durata'] ?>)">
+                    <div class="activity-item <?php echo $isPreferita ? 'is-fav' : ''; ?>"onclick="apriAttivita(<?= $row['id'] ?>, '<?= $row['slug'] ?>', '<?= addslashes($row['titolo']) ?>', '<?= $row['tipo'] ?>', <?= $row['durata'] ?>)">
                         <div class="activity-icon">
                             <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['titolo']); ?>">
                         </div>
                         <p><?php echo htmlspecialchars($row['titolo']); ?> - <?php echo $row['durata']; ?> min</p>
                     </div>
 
-                    <?php endwhile; ?>
+                    <?php endforeach; ?>
                 </div>
                 <a href="attivita.php" class="btn primary-btn">Vai alle attività</a>
             </section>
