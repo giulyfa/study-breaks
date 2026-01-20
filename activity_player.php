@@ -41,17 +41,17 @@ if (!$attivita) {
             flex-shrink: 0; /* Impedisce al titolo di schiacciarsi troppo */
         }
         
-        /* --- STILI RESPONSIVE PER IL CANVAS (GIOCO) --- */
         #game-wrapper {
-            display: none; /* Nascosto all'inizio */
+            display: none;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 500px; /* Non diventare più largo del gioco originale */
+            max-width: 500px;
             max-height: 100%;
+
         }
 
-        canvas {
+        #gameCanvas {
             background-color: #f4f4f4;
             border: 2px solid #4D7D72;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -59,9 +59,7 @@ if (!$attivita) {
             aspect-ratio: 1 / 1;
             width: auto;
             height: auto;
-            max-width: 90%;
-            max-height: 75vh;
-            object-fit: contain;
+            touch-action: none;
         }
 
         .game-ui {

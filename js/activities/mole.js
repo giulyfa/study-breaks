@@ -117,9 +117,15 @@ cvs.addEventListener("mousedown", (e) => {
         return;
     }
 
-    const rect = cvs.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const rect = canvas.getBoundingClientRect();
+
+    // Calcolo dei fattori di scala (rapporto tra dimensione interna e dimensione visiva)
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    // Applica il fattore di scala alle coordinate
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const mouseY = (e.clientY - rect.top) * scaleY;
 
     holes.forEach(hole => {
         if (hole.active && !hole.hit) {
