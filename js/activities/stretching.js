@@ -8,20 +8,20 @@ if (!ctx) {
     const DURATA_POSA = 30000;
     const pose = [
         {
-            titolo: "1. Rotazione del Collo",
-            descrizione: "Inizia rilassando le spalle. Ruota lentamente la testa in senso orario facendo cerchi ampi, poi cambia senso. Respira profondamente."
+            titolo: "1. Apertura Spalle",
+            descrizione: "Intreccia le dita dietro la schiena. Stendi le braccia allontanandole dal corpo aprendo il petto. Guarda leggermente in alto."
         },
         {
-            titolo: "2. Apertura Spalle",
-            descrizione: "Intreccia le dita dietro la schiena. Stendi le braccia allontanandole dal corpo aprendo il petto. Guarda leggermente in alto."
+            titolo: "2. Allungamento Laterale",
+            descrizione: "Alza un braccio sopra la testa e piegati verso il lato opposto. Senti l'allungamento sul fianco. Tieni i glutei ben appoggiati alla sedia."
         },
         {
             titolo: "3. Torsione Spinale",
             descrizione: "Mano sinistra sul ginocchio destro. Ruota il busto verso destra guardando oltre la spalla. Tieni la schiena dritta. (Poi cambia lato)."
         },
         {
-            titolo: "4. Allungamento Laterale",
-            descrizione: "Alza un braccio sopra la testa e piegati verso il lato opposto. Senti l'allungamento sul fianco. Tieni i glutei ben appoggiati alla sedia."
+            titolo: "4. Rotazione del Collo",
+            descrizione: "Inizia rilassando le spalle. Ruota lentamente la testa in senso orario facendo cerchi ampi, poi cambia senso. Respira profondamente."
         }
     ];
 
