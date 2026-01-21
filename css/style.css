@@ -633,7 +633,7 @@ footer.footer-home {
 .home-page .control-btn:hover { background-color: rgba(255, 255, 255, 0.1); }
 
 .home-page .next-break {
-    font-size: 0.8em;
+    font-size: 1.0em;
     color: #000000;
     margin-top: 20px;
     width: 100%;
