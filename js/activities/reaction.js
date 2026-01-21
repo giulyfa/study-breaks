@@ -116,7 +116,6 @@ function handleInput() {
     }
 }
 
-cvs.addEventListener("mousedown", handleInput);
-cvs.addEventListener("touchstart", handleInput);
+cvs.addEventListener("pointerdown", handleInput);
 
 draw();

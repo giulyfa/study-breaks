@@ -310,7 +310,7 @@ canvas.addEventListener('touchstart', (e) => {
     
     for (let opzione of opzioniRects) {
         if (x >= opzione.x && x <= opzione.x + opzione.width &&
-            y >= opzione.y && y <= opzione.y + opzione.height) {
+            y >= opzione.currentY && y <= opzione.currentY + opzione.height) {  // Cambiato da opzione.y a opzione.currentY
             verificaRisposta(opzione.indice);
             break;
         }
