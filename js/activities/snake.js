@@ -98,18 +98,25 @@ function spawnFood() {
 }
 
 function draw() {
-    ctx.fillStyle = "#274c43"; 
+
+    ctx.fillStyle = "#274c43";
     ctx.fillRect(0, 0, cvs.width, cvs.height);
 
     for( let i = 0; i < snake.length; i++){
-        ctx.fillStyle = ( i == 0 ) ? "#8EBAA3" : "#69A297"; 
+        ctx.fillStyle = ( i == 0 ) ? "#69A297" : "#8EBAA3"; 
+        ctx.beginPath();
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
-        ctx.strokeStyle = "#274c43";
-        ctx.strokeRect(snake[i].x, snake[i].y, box, box);
     }
 
+    ctx.shadowColor = "rgba(0, 0, 0, 0.2)";
+    ctx.shadowBlur = 8;
+    ctx.shadowOffsetX = 2;
+    ctx.shadowOffsetY = 2;
     ctx.fillStyle = "#E49A7D";
-    ctx.fillRect(food.x, food.y, box, box);
+    ctx.beginPath();
+    ctx.roundRect(food.x, food.y, box, box, 6);
+    ctx.fill();
+    ctx.shadowBlur = 0;
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
@@ -136,9 +143,12 @@ function draw() {
 
     snake.unshift(newHead);
 
-    ctx.fillStyle = "white";
-    ctx.font = "20px Quicksand";
-    ctx.fillText("Punti: " + score, 10, 25);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "20px bold Quicksand";
+    ctx.shadowColor = "rgba(0, 0, 0, 0.1)";
+    ctx.shadowBlur = 4;
+    ctx.fillText("Punti: " + score, 15, 30);
+    ctx.shadowBlur = 0;
 }
 
 function collision(head, array){

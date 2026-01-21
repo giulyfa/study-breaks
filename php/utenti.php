@@ -60,7 +60,8 @@ $utenti = $stmt->fetchAll();
             </section>
 
             <form action="utenti.php" method="GET" class="search-bar">
-                <input type="text" name="search" aria-label="Cerca utenti per nome o email" placeholder="Cerca per nome o email..." value="<?php echo htmlspecialchars($search); ?>">
+                <label for="search-input" class="sr-only">Barra che permette la ricerca di utenti per nome o email</label>
+                <input type="text" name="search" id="search-input" placeholder="Cerca per nome o email..." value="<?php echo htmlspecialchars($search); ?>">
                 <?php if($search): ?>
                     <a href="utenti.php" aria-label="Cancella ricerca" style="margin-left: 10px; text-decoration: none; color: #333; display: flex; align-items: center;">✕</a>
                 <?php endif; ?>

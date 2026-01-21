@@ -25,13 +25,11 @@ if (!ctx) {
         }
     ];
 
-    // --- 2. VARIABILI DI STATO ---
     let indicePosa = 0;
     let tempoInizioPosa = Date.now();
     let isRunning = true;
     let animazioneId;
 
-    // --- 3. GESTIONE TESTO (Wrap Text) ---
     function wrapText(context, text, x, y, maxWidth, lineHeight) {
         let words = text.split(' ');
         let line = '';
@@ -51,19 +49,16 @@ if (!ctx) {
         context.fillText(line, x, y);
     }
 
-    // --- 4. LOOP PRINCIPALE ---
     function cicloStretching() {
         if (!isRunning) return;
 
         const ora = Date.now();
         const tempoTrascorso = ora - tempoInizioPosa;
 
-        // Controllo fine tempo posa
         if (tempoTrascorso >= DURATA_POSA) {
             indicePosa++;
             tempoInizioPosa = ora; 
 
-            // Fine di tutti gli esercizi
             if (indicePosa >= pose.length) {
                 mostraSchermataFinale();
                 return;
@@ -74,77 +69,83 @@ if (!ctx) {
         animazioneId = requestAnimationFrame(cicloStretching);
     }
 
-    // --- 5. FUNZIONE DI DISEGNO ---
     function disegna(tempoTrascorso) {
-        // Pulisci schermo
         ctx.clearRect(0, 0, cvs.width, cvs.height);
-        
-        // Sfondo chiaro
-        ctx.fillStyle = "#ffffff"; 
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, cvs.height);
+        gradient.addColorStop(0, "#ECE7D9");
+        gradient.addColorStop(1, "#faf6ee");
+        ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, cvs.width, cvs.height);
 
         const posaCorrente = pose[indicePosa];
-        
-        // Calcoli
         const percentuale = Math.min(tempoTrascorso / DURATA_POSA, 1);
         const secondiRimanenti = Math.ceil((DURATA_POSA - tempoTrascorso) / 1000);
 
-        // -- DISEGNO UI --
-
-        // 1. Numero Posa
-        ctx.fillStyle = "#8EBAA3";
-        ctx.font = "bold 16px Quicksand";
+        ctx.fillStyle = "#69A297";
+        ctx.beginPath();
+        ctx.roundRect(cvs.width / 2 - 100, 15, 200, 35, 20);
+        ctx.fill();
+        
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 14px Quicksand";
         ctx.textAlign = "center";
-        ctx.fillText(`Esercizio ${indicePosa + 1} di ${pose.length}`, cvs.width / 2, 40);
+        ctx.fillText(`Esercizio ${indicePosa + 1} di ${pose.length}`, cvs.width / 2, 37);
 
-        // 2. Titolo Posa
-        ctx.fillStyle = "#274c43"; 
-        ctx.font = "bold 26px Quicksand";
-        ctx.fillText(posaCorrente.titolo, cvs.width / 2, 80);
+        ctx.fillStyle = "#4D7D72"; 
+        ctx.font = "bold 24px Quicksand";
+        ctx.fillText(posaCorrente.titolo, cvs.width / 2, 105);
 
-        // 3. Descrizione
         ctx.fillStyle = "#555";
-        ctx.font = "18px Quicksand";
-        wrapText(ctx, posaCorrente.descrizione, cvs.width / 2, 130, cvs.width - 60, 25);
+        ctx.font = "17px Quicksand";
+        wrapText(ctx, posaCorrente.descrizione, cvs.width / 2, 170, cvs.width - 60, 24);
 
-        // 4. Timer Circolare
         const centerX = cvs.width / 2;
-        const centerY = 280;
-        const radius = 50;
+        const centerY = 350;
+        const radius = 55;
 
-        // Cerchio sfondo
+        ctx.shadowColor = "rgba(0, 0, 0, 0.15)";
+        ctx.shadowBlur = 15;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 5;
+
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-        ctx.lineWidth = 10;
-        ctx.strokeStyle = "#eee";
+        ctx.lineWidth = 12;
+        ctx.strokeStyle = "#E2DDD1";
         ctx.stroke();
 
-        // Cerchio progresso (Arancione)
+        ctx.shadowColor = "transparent";
+        ctx.shadowBlur = 0;
+
         ctx.beginPath();
         const endAngle = (2 * Math.PI) * (1 - percentuale) - (0.5 * Math.PI);
         ctx.arc(centerX, centerY, radius, -0.5 * Math.PI, endAngle, false); 
         ctx.strokeStyle = "#E49A7D"; 
+        ctx.lineCap = "round";
         ctx.stroke();
 
-        // Testo Secondi
-        ctx.fillStyle = "#274c43";
-        ctx.font = "bold 24px Quicksand";
+        ctx.fillStyle = "#4D7D72";
+        ctx.font = "bold 32px Quicksand";
         ctx.textBaseline = "middle"; 
         ctx.fillText(secondiRimanenti, centerX, centerY);
         ctx.textBaseline = "alphabetic"; 
 
-        // 5. Barra di progresso totale (opzionale, sotto)
-        const barraHeight = 6;
-        ctx.fillStyle = "#eee";
-        ctx.fillRect(0, cvs.height - barraHeight, cvs.width, barraHeight);
+        const barraHeight = 8;
+        const barraY = cvs.height - barraHeight - 5;
         
-        // Calcolo progresso totale sessione
+        ctx.fillStyle = "#E2DDD1";
+        ctx.beginPath();
+        ctx.roundRect(10, barraY, cvs.width - 20, barraHeight, 4);
+        ctx.fill();
+
         const progressoTotale = ((indicePosa * DURATA_POSA) + tempoTrascorso) / (pose.length * DURATA_POSA);
         ctx.fillStyle = "#69A297"; 
-        ctx.fillRect(0, cvs.height - barraHeight, cvs.width * progressoTotale, barraHeight);
+        ctx.beginPath();
+        ctx.roundRect(10, barraY, (cvs.width - 20) * progressoTotale, barraHeight, 4);
+        ctx.fill();
     }
 
-    // --- 6. SCHERMATA FINALE ---
     function mostraSchermataFinale() {
         isRunning = false;
         ctx.clearRect(0, 0, cvs.width, cvs.height);
@@ -174,6 +175,5 @@ if (!ctx) {
         cvs.addEventListener("click", riavviaHandler);
     }
 
-    // Avvio iniziale
     cicloStretching();
 }

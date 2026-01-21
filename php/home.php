@@ -115,7 +115,7 @@ $playlists = $pdo->query("SELECT * FROM playlist WHERE attiva = 1")->fetchAll(PD
                                 <div class="modal-content">
                                     <h2>Impostazioni Timer</h2>
                                     <p>Inserisci i minuti per la sessione:</p>
-                                    <label for="new-minutes">Scegli la durata in minuti della sessione:</label>
+                                    <label for="new-minutes" class="sr-only">Scegli la durata in minuti della sessione:</label>
                                     <input type="number" id="new-minutes" placeholder="Es. 25">
                                     <div class="modal-buttons">
                                         <button id="save-modal" class="save-btn">Salva</button>

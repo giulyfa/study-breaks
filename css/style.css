@@ -1792,6 +1792,18 @@ footer.footer-home {
     box-shadow: 0 0 5px rgba(105, 162, 151, 0.5);
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 /* --- TABELLE --- */
 .admin-page .table-container {
     overflow-x: auto;
