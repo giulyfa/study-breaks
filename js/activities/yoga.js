@@ -9,12 +9,12 @@ if (!ctx) {
 
     const pose = [
         {
-            titolo: "1. Apertura Spalle",
-            descrizione: "Intreccia le dita dietro la schiena. Stendi le braccia allontanandole dal corpo aprendo il petto. Guarda leggermente in alto."
+            titolo: "1. Rotazione del Collo",
+            descrizione: "Inizia rilassando le spalle. Ruota lentamente la testa in senso orario facendo cerchi ampi, poi cambia senso. Respira profondamente."
         },
         {
-            titolo: "2. Rotazione del Collo",
-            descrizione: "Inizia rilassando le spalle. Ruota lentamente la testa in senso orario facendo cerchi ampi, poi cambia senso. Respira profondamente."
+            titolo: "2. Apertura Spalle",
+            descrizione: "Intreccia le dita dietro la schiena. Stendi le braccia allontanandole dal corpo aprendo il petto. Guarda leggermente in alto."
         },
         {
             titolo: "3. Torsione Spinale",
