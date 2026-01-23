@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+require_once '../includes/functions.php'; 
 
 if (!isset($_SESSION['user_id']) || $_SESSION['user_ruolo'] !== 'studente') {
     header("Location: index.php"); 
@@ -7,6 +8,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_ruolo'] !== 'studente') {
 }
 
 $user_id = $_SESSION['user_id']; 
+$_SESSION['streak'] = checkAndResetStreak($pdo, $user_id);
 $oggi = date('Y-m-d'); 
 
 $stmtUser = $pdo->prepare("SELECT ultimo_accesso, pause_oggi, attivita_oggi, sessioni_oggi FROM utenti WHERE id = ?");
